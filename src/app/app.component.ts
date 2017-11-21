@@ -1,10 +1,15 @@
 import { Component } from '@angular/core';
+import {UserService} from "./core/services/user-service";
+import {Globals} from "./core/services/globals";
 
 @Component({
-  selector: 'app-root',
+  selector: 'dk-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app';
+
+  constructor(protected globals: Globals) {
+  }
+
 }

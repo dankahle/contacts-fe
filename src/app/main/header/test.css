@@ -1,0 +1,14 @@
+
+:host {
+  height: 30px;
+  color: red;
+}
+
+:host {
+  display: block;
+  border: 1px solid red;
+}
+
+.test-lala {
+  width: 2px;
+}
