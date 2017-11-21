@@ -6,12 +6,14 @@
   </div>
 
   <div *ngIf="path === 'login'">
-    <button (click)="login()">login</button><br>
+    <button (click)="login()">login</button>
+    <br>
     <a routerLink="/register">register</a>
   </div>
 
   <div *ngIf="path === 'register'">
-    <button (click)="register()">register</button><br>
+    <button (click)="register()">register</button>
+    <br>
     <a routerLink="/login">login</a>
   </div>
 

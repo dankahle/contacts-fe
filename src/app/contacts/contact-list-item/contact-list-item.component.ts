@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {Contact} from "../contacts.model";
+import {Contact} from '../contacts.model';
 
 @Component({
   selector: 'dk-contact-list-item',
@@ -8,5 +8,5 @@ import {Contact} from "../contacts.model";
   encapsulation: ViewEncapsulation.None
 })
 export class ContactListItemComponent {
-@Input() contact: Contact
+  @Input() contact: Contact
 }

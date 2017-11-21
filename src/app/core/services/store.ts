@@ -1,9 +1,8 @@
-
-import {Injectable} from "@angular/core";
-import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {environment} from '../../../environments/environment';
-import {INITIAL_STATE, InitialState} from "../models/initial-state";
-import {User} from "../models/user";
+import {INITIAL_STATE, InitialState} from '../models/initial-state';
+import {User} from '../models/user';
 
 @Injectable()
 /**
@@ -17,7 +16,7 @@ import {User} from "../models/user";
  * different providers.
  */
 export class Store {
-  state:InitialState = INITIAL_STATE;
+  state: InitialState = INITIAL_STATE;
   state$ = new BehaviorSubject(this.state);
   subscribe = this.state$.subscribe.bind(this.state$);
   logState = environment.logState;
@@ -32,6 +31,7 @@ export class Store {
     this.state.user = user;
     this.publish();
   }
+
   publish() {
     this.state$.next(this.state);
     if (this.logState === true) {

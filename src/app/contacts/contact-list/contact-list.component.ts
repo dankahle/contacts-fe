@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import {Store} from "../../core/services/store";
-import {ActivatedRoute} from "@angular/router";
-import {Contact} from "../contacts.model";
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Store} from '../../core/services/store';
+import {ActivatedRoute} from '@angular/router';
+import {Contact} from '../contacts.model';
 
 @Component({
   selector: 'dk-contact-list',
@@ -10,7 +10,7 @@ import {Contact} from "../contacts.model";
   encapsulation: ViewEncapsulation.None
 })
 export class ContactListComponent {
-  contacts:Contact[];
+  contacts: Contact[];
   messageCount: number;
 
   constructor(route: ActivatedRoute) {

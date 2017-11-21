@@ -1,5 +1,5 @@
-import {Injectable} from "@angular/core";
-import {User} from "../models/user";
+import {Injectable} from '@angular/core';
+import {User} from '../models/user';
 
 @Injectable()
 export class Globals {

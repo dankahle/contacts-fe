@@ -1,27 +1,27 @@
-import {Injectable} from "@angular/core";
+import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import {
   HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest,
   HttpResponse
-} from "@angular/common/http";
-import {Observable} from "rxjs/Observable";
-import {ProgressService} from "../services/progress.service";
-import {MatDialog, MatDialogConfig} from "@angular/material";
-import {ErrorModalComponent} from "../../shared/components/error-modal/error-modal.component";
-import {Router} from "@angular/router";
-import {errorCodes} from "../services/error-codes";
+} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
+import {ProgressService} from '../services/progress.service';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+import {ErrorModalComponent} from '../../shared/components/error-modal/error-modal.component';
+import {Router} from '@angular/router';
+import {errorCodes} from '../services/error-codes';
 import * as _ from 'lodash';
-import {environment} from "../../../environments/environment";
+import {environment} from '../../../environments/environment';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
   // if in this list, then no error modal
   whiteList = [
-    {status: 404, methods: ['GET', 'POST'],  url: new RegExp(`^${environment.apiUrl}api/login`)},
-    {status: 400, methods: ['POST'],  url: new RegExp(`^${environment.apiUrl}api/register`)},
+    {status: 404, methods: ['GET', 'POST'], url: new RegExp(`^${environment.apiUrl}api/login`)},
+    {status: 400, methods: ['POST'], url: new RegExp(`^${environment.apiUrl}api/register`)},
   ];
 
   constructor(private progressService: ProgressService, public dialog: MatDialog, private router: Router) {
@@ -39,17 +39,18 @@ export class ErrorInterceptor implements HttpInterceptor {
         if (resp.error && resp.error.errorCode) {
           err = resp.error;
         } else if (resp.error && resp.error.error) {
-            err = resp.error.error;
-            if (!resp.error.error.errorCode) {
-              err.errorCode = errorCodes.server_prefix + errorCodes.server_unknown_error;
-            }
+          err = resp.error.error;
+          if (!resp.error.error.errorCode) {
+            err.errorCode = errorCodes.server_prefix + errorCodes.server_unknown_error;
+          }
         } else {
-          err ={
+          err = {
             message: 'Unknown server error',
-              data: {
+            data: {
               message: resp.message,
-                url: resp.url,
-                status: resp.status},
+              url: resp.url,
+              status: resp.status
+            },
             errorCode: errorCodes.server_prefix + errorCodes.server_unknown_error
           }
         }

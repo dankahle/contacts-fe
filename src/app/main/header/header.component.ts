@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import {Globals} from "../../core/services/globals";
-import {UserService} from "../../core/services/user-service";
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Globals} from '../../core/services/globals';
+import {UserService} from '../../core/services/user-service';
 
 @Component({
   selector: 'dk-header',

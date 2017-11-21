@@ -1,4 +1,3 @@
-
 export const errorCodes = {
 
   server_prefix: '000-',

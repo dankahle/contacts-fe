@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {ContactsService} from "../contacts.service";
-import {Store} from "../../core/services/store";
-import {Contact} from "../contacts.model";
+import {Component, OnInit} from '@angular/core';
+import {ContactsService} from '../contacts.service';
+import {Store} from '../../core/services/store';
+import {Contact} from '../contacts.model';
 
 @Component({
   selector: 'dk-contacts',
@@ -10,9 +10,10 @@ import {Contact} from "../contacts.model";
   providers: []
 })
 export class ContactsComponent {
-  contacts:Contact[];
+  contacts: Contact[];
 
-  constructor(contactsService:ContactsService) {}
+  constructor(contactsService: ContactsService) {
+  }
 
 }
 

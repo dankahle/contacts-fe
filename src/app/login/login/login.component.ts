@@ -1,7 +1,7 @@
 import {Component, ViewEncapsulation} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {UserService} from "../../core/services/user-service";
-import {errorCodes} from "../../core/services/error-codes";
+import {ActivatedRoute, Router} from '@angular/router';
+import {UserService} from '../../core/services/user-service';
+import {errorCodes} from '../../core/services/error-codes';
 
 @Component({
   selector: 'dk-login',

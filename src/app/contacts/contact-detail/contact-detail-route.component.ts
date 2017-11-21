@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {ActivatedRoute, ActivatedRouteSnapshot, Router} from "@angular/router";
-import {MatDialog, MatDialogConfig} from "@angular/material";
-import {ContactDetailComponent} from "./contact-detail.component";
-import {ProgressService} from "../../core/services/progress.service";
-import {ValidateService} from "../../core/services/validate.service";
+import {ActivatedRoute, ActivatedRouteSnapshot, Router} from '@angular/router';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+import {ContactDetailComponent} from './contact-detail.component';
+import {ProgressService} from '../../core/services/progress.service';
+import {ValidateService} from '../../core/services/validate.service';
 
 @Component({
   selector: 'dk-contact-detail-route',

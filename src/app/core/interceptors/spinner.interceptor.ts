@@ -1,14 +1,14 @@
-
-import {Injectable} from "@angular/core";
+import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/do';
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from "@angular/common/http";
-import {Observable} from "rxjs/Observable";
-import {ProgressService} from "../services/progress.service";
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
+import {ProgressService} from '../services/progress.service';
 
 
 @Injectable()
 export class SpinnerInterceptor implements HttpInterceptor {
-  constructor(private progressService: ProgressService) {}
+  constructor(private progressService: ProgressService) {
+  }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (req.params.get('hideSpinner') !== 'true') {

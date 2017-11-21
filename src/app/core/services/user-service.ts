@@ -1,13 +1,13 @@
-import {Injectable} from "@angular/core";
-import {HttpClient, HttpResponse} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
-import {Observable} from "rxjs/Observable";
-import {User} from "../models/user";
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
+import {Observable} from 'rxjs/Observable';
+import {User} from '../models/user';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
-import {Http} from "@angular/http";
-import {Router} from "@angular/router";
-import {Globals} from "./globals";
+import {Http} from '@angular/http';
+import {Router} from '@angular/router';
+import {Globals} from './globals';
 
 
 @Injectable()

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import {UserService} from "./core/services/user-service";
-import {Globals} from "./core/services/globals";
+import {Component} from '@angular/core';
+import {UserService} from './core/services/user-service';
+import {Globals} from './core/services/globals';
 
 @Component({
   selector: 'dk-root',

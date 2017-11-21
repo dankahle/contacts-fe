@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {ProgressService} from "../../../core/services/progress.service";
+import {Component, OnInit} from '@angular/core';
+import {ProgressService} from '../../../core/services/progress.service';
 
 @Component({
   selector: 'dk-progress',
@@ -7,9 +7,9 @@ import {ProgressService} from "../../../core/services/progress.service";
   styleUrls: ['./progress.component.scss']
 })
 export class ProgressComponent {
-show = false;
-value = 0;
-timer = null;
+  show = false;
+  value = 0;
+  timer = null;
 
   constructor(progressService: ProgressService) {
     progressService.showProgress$.subscribe(show => {
