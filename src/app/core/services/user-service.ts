@@ -18,43 +18,43 @@ export class UserService {
   }
 
   isAuthenticated() {
-    return !!this.globals.user;
+    return !!this.globals.state.user;
   }
 
   getCurrentUser() {
-    return this.globals.user;
+    return this.globals.state.user;
   }
 
   getUserFromServer() {
     return this.http.get<User>(environment.apiUrl + 'api/login/current')
       .map(user => {
-        this.globals.user = user;
+        this.globals.setVal('user', user);
         return user;
-      })
+      });
   }
 
   login(_user) {
     return this.http.post<any>(environment.apiUrl + 'api/login', _user)
       .map(user => {
-        this.globals.user = user;
+        this.globals.setVal('user', user);
         return user;
-      })
+      });
   }
 
   logout() {
     return this.http.delete<any>(environment.apiUrl + 'api/login')
       .map(() => {
-        this.globals.user = undefined;
+        this.globals.deleteVal('user');
         this.router.navigateByUrl('/login');
-      })
+      });
   }
 
   register(_user) {
     return this.http.post<any>(environment.apiUrl + 'api/register', _user)
       .map(user => {
-        this.globals.user = user;
+        this.globals.setVal('user', user);
         return user;
-      })
+      });
   }
 
 }

@@ -1,8 +1,8 @@
 <div fxFlex="row" fxFlexLayoutAlign="space-between center">
   <div>
-    <button (click)="store.setVal('leftNavClosed', !store.getVal('leftNavClosed'))">toggle nav</button>{{leftNavClosed}}
+    <button (click)="globals.setVal('leftNavClosed', !globals.getVal('leftNavClosed'))">toggle nav</button>{{leftNavClosed}}
   </div>
-  <div *ngIf="!!globals.user" class="" fxFlex>
-    Welcome: {{globals.user.name}} <a href="javascript:void(0)" (click)="logout()">logout</a>
+  <div *ngIf="!!globals.state.user" class="" fxFlex>
+    Welcome: {{globals.state.user.name}} <a href="javascript:void(0)" (click)="logout()">logout</a>
   </div>
 </div>

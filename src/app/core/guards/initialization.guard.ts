@@ -20,7 +20,7 @@ export class InitializationGuard implements CanActivate {
               private init2: Init2,
               private init3: Init3,
               private init4: Init4,
-              private init5: Init5,) {
+              private init5: Init5) {
   }
 
   canActivate(next: ActivatedRouteSnapshot,
@@ -34,7 +34,7 @@ export class InitializationGuard implements CanActivate {
   }
 
   init() {
-    if (this.globals.initialized) {
+    if (this.globals.state.initialized) {
       return true;
     }
     // console.log('init guard start');
@@ -48,7 +48,7 @@ export class InitializationGuard implements CanActivate {
       })
       .map(x => {
         // console.log('init guard end');
-        this.globals.initialized = true;
+        this.globals.setVal('initialized', true);
         return true;
       });
   }

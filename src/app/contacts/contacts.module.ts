@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ContactsComponent} from './contacts/contacts.component';
 import {ContactsService} from './contacts.service';
 import {CoreModule} from '../core/core.module';
 import {RouterModule, Routes} from '@angular/router';
@@ -31,9 +30,9 @@ export const contactRoutes: Routes = [
     SharedModule,
     CoreModule
   ],
-  declarations: [ContactsComponent, ContactListComponent, ContactDetailRouteComponent, ContactDetailComponent, ContactListItemComponent],
+  declarations: [ContactListComponent, ContactDetailRouteComponent, ContactDetailComponent, ContactListItemComponent],
   entryComponents: [ContactDetailComponent],
-  exports: [ContactsComponent, RouterModule],
+  exports: [RouterModule],
   providers: [ContactsService, ContactListResolve]
 })
 export class ContactsModule {
