@@ -50,4 +50,10 @@ export class Store {
     }
   }
 
+  subscribePath(path: string, next?: (value: State) => void, error?: (error: any) => void, complete?: () => void) {
+    this.state$
+      .map(state => _.get(state, path))
+      .subscribe(next, error, complete);
+  }
+
 }
