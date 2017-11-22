@@ -1,0 +1,14 @@
+
+
+:host {
+  transition: margin-left 1s;
+  width: 260px;
+  margin-left:-260px;
+  padding-top: 15px;
+}
+
+:host(.open) {
+  margin-left: 0;
+}
+
+

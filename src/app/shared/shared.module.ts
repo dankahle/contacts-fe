@@ -19,7 +19,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
   ],
   declarations: [PageNotFoundComponent, ForbiddenNameValidator, MinValidator, MaxValidator, ProgressComponent, ErrorModalComponent],
   exports: [
-    MaterialIndexModule,
+    MaterialIndexModule, FlexLayoutModule,
     PageNotFoundComponent, ForbiddenNameValidator, MinValidator, MaxValidator, ProgressComponent, ErrorModalComponent],
   entryComponents: [ErrorModalComponent],
   providers: []

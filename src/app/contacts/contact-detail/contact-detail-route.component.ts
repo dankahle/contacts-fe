@@ -9,7 +9,7 @@ import {ValidateService} from '../../core/services/validate.service';
   selector: 'dk-contact-detail-route',
   template: '<router-outlet></router-outlet>',
   styles: [],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class ContactDetailRouteComponent {
 

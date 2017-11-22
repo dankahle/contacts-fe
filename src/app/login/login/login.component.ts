@@ -7,7 +7,7 @@ import {errorCodes} from '../../core/services/error-codes';
   selector: 'dk-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class LoginComponent {
   user = {};

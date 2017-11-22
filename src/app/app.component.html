@@ -1,10 +1,10 @@
-<div style="height:100%;">
-  <dk-progress></dk-progress>
-  <div style="height:100%;">
-    <dk-header></dk-header>
-    <div fxLayout fxLayoutAlign="space-between stretch">
-      <dk-leftnav *ngIf="globals.user"></dk-leftnav>
-      <router-outlet></router-outlet>
-    </div>
+<div style="height:100%;" fxLayout="column">
+  <dk-progress fxFlex="0 0 auto"></dk-progress>
+  <dk-header fxFlex="0 0 auto"></dk-header>
+  <div fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="start stretch" class="outline-red">
+      <dk-leftnav *ngIf="globals.user" fxFlex="0 0 auto" [class.open]="globals.openLeftNav"></dk-leftnav>
+      <div fxFlex="1 1 auto" fxLayout="column">
+        <router-outlet class="outline"></router-outlet>
+      </div>
   </div>
 </div>

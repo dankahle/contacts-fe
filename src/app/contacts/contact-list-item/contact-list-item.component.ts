@@ -5,7 +5,7 @@ import {Contact} from '../contacts.model';
   selector: 'dk-contact-list-item',
   templateUrl: './contact-list-item.component.html',
   styleUrls: ['./contact-list-item.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class ContactListItemComponent {
   @Input() contact: Contact
