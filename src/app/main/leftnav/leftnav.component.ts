@@ -1,4 +1,6 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, HostBinding, OnInit, ViewEncapsulation} from '@angular/core';
+import {Globals} from '../../core/services/globals';
+import {Store} from '../../core/services/store';
 
 @Component({
   selector: 'dk-leftnav',
@@ -6,12 +8,14 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
   styleUrls: ['./leftnav.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class LeftnavComponent implements OnInit {
+export class LeftnavComponent {
 
-  constructor() {
+  @HostBinding('class.closed') leftNavClosed;
+
+  constructor(private store: Store) {
+    // store.subscribe(state => this.leftNavClosed = state.leftNavClosed);
+    store.subscribe(state => this.leftNavClosed = state.getVal('leftNavClosed'));
   }
 
-  ngOnInit() {
-  }
 
 }

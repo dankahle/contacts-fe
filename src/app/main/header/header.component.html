@@ -1,6 +1,6 @@
 <div fxFlex="row" fxFlexLayoutAlign="space-between center">
   <div>
-    <button (click)="globals.openLeftNav = !globals.openLeftNav">open menu</button>{{globals.openLeftNav}}
+    <button (click)="store.setVal('leftNavClosed', !store.getVal('leftNavClosed'))">toggle nav</button>{{leftNavClosed}}
   </div>
   <div *ngIf="!!globals.user" class="" fxFlex>
     Welcome: {{globals.user.name}} <a href="javascript:void(0)" (click)="logout()">logout</a>

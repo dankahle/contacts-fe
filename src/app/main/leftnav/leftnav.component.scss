@@ -3,12 +3,12 @@
 :host {
   transition: margin-left 1s;
   width: 260px;
-  margin-left:-260px;
+  margin-left: 0;
   padding-top: 15px;
 }
 
-:host(.open) {
-  margin-left: 0;
+:host(.closed) {
+  margin-left: -260px;
 }
 
 

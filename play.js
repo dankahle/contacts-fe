@@ -1,7 +1,10 @@
 
 
+const _ = require('lodash');
 
-JSON.parse(null);
+let obj = {};
+_.set(obj, 'addr.street', 'lovell')
+console.log(obj)
 
 
 
