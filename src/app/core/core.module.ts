@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {Globals} from './services/globals';
+import {Store} from '../store/store';
 import {ProgressService} from './services/progress.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {SpinnerInterceptor} from './interceptors/spinner.interceptor';
@@ -21,7 +21,7 @@ import {RouterModule} from '@angular/router';
     RouterModule
   ],
   exports: [HttpClientModule],
-  providers: [Globals, Init1, Init2, Init3, Init4, Init5, ProgressService, UserService,
+  providers: [Store, Init1, Init2, Init3, Init4, Init5, ProgressService, UserService,
     {provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: TimingInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

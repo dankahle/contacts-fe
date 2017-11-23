@@ -6,7 +6,8 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/map';
 import {Init1, Init2, Init3, Init4, Init5} from '../services/init-service';
 import {merge} from 'rxjs/observable/merge';
-import {Globals} from '../services/globals';
+import {Store} from '../../store/store';
+import {ContactsService} from '../../contacts/main/contacts.service';
 
 @Injectable()
 /**
@@ -15,7 +16,8 @@ import {Globals} from '../services/globals';
  */
 export class InitializationGuard implements CanActivate {
 
-  constructor(private globals: Globals,
+  constructor(private store: Store,
+              private contactsService: ContactsService,
               private init1: Init1,
               private init2: Init2,
               private init3: Init3,
@@ -34,13 +36,14 @@ export class InitializationGuard implements CanActivate {
   }
 
   init() {
-    if (this.globals.state.initialized) {
+    if (this.store.state.initialized) {
       return true;
     }
     // console.log('init guard start');
     // an example of a complex initialization flow with dependencies of dependencies
-    return Observable.forkJoin(this.init1.get(), this.init2.get())
+    return Observable.forkJoin(this.contactsService.getAll(), this.init1.get(), this.init2.get())
       .mergeMap(x => {
+        this.store.setContacts(x[0]);
         return Observable.forkJoin(this.init3.get(), this.init4.get());
       })
       .mergeMap(x => {
@@ -48,7 +51,7 @@ export class InitializationGuard implements CanActivate {
       })
       .map(x => {
         // console.log('init guard end');
-        this.globals.setVal('initialized', true);
+        this.store.setVal('initialized', true);
         return true;
       });
   }

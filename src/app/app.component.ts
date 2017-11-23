@@ -1,5 +1,5 @@
 import {Component, ViewEncapsulation} from '@angular/core';
-import {Globals} from './core/services/globals';
+import {Store} from './store/store';
 
 @Component({
   selector: 'dk-root',
@@ -9,7 +9,7 @@ import {Globals} from './core/services/globals';
 })
 export class AppComponent {
 
-  constructor(protected globals: Globals) {
+  constructor(protected store: Store) {
   }
 
 }

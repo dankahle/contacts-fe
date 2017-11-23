@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
-import {environment} from '../../environments/environment';
+import {environment} from '../../../environments/environment';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {Contact} from './contacts.model';
+import {Contact} from '../../store/models/contact';
+import {Store} from '../../store/store';
 
 @Injectable()
 export class ContactsService {
   apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private store: Store) {
   }
 
   getAll() {

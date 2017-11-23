@@ -2,59 +2,39 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs/Observable';
-import {User} from '../models/user';
+import {User} from '../../store/models/user';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
 import {Http} from '@angular/http';
 import {Router} from '@angular/router';
-import {Globals} from './globals';
+import {Store} from '../../store/store';
+import {State} from '../../store/models/state';
 
 
 @Injectable()
 export class UserService {
-  user: User;
 
-  constructor(private http: HttpClient, private globals: Globals, private router: Router) {
+  constructor(private http: HttpClient, private store: Store, private router: Router) {
+    // we want to update the counts only when user or contacts change, not whenever anything changes.
+    store.subscribeUser(user => this.updateLabelCounts(store.state));
+    store.subscribeContacts(contacts => this.updateLabelCounts(store.state));
   }
 
   isAuthenticated() {
-    return !!this.globals.state.user;
+    return !!this.store.state.user;
   }
 
-  getCurrentUser() {
-    return this.globals.state.user;
-  }
-
-  getUserFromServer() {
+  getUser() {
     return this.http.get<User>(environment.apiUrl + 'api/login/current')
       .map(user => {
-        this.globals.setVal('user', user);
+        this.store.setUser(user);
         return user;
       });
   }
 
-  login(_user) {
-    return this.http.post<any>(environment.apiUrl + 'api/login', _user)
-      .map(user => {
-        this.globals.setVal('user', user);
-        return user;
-      });
-  }
-
-  logout() {
-    return this.http.delete<any>(environment.apiUrl + 'api/login')
-      .map(() => {
-        this.globals.deleteVal('user');
-        this.router.navigateByUrl('/login');
-      });
-  }
-
-  register(_user) {
-    return this.http.post<any>(environment.apiUrl + 'api/register', _user)
-      .map(user => {
-        this.globals.setVal('user', user);
-        return user;
-      });
+  updateLabelCounts(state: State) {
+    // foreach state.contacts, inc appropriate label counts
+    console.log('updatelabelcounts');
   }
 
 }

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, RouterStateSnapshot, Resolve} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {ContactsService} from '../contacts.service';
-import {Contact} from '../contacts.model';
+import {Contact} from '../../../store/models/contact';
 
 @Injectable()
 export class ContactListResolve implements Resolve<Contact[]> {

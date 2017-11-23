@@ -1,9 +1,11 @@
 import * as _ from 'lodash';
 import {User} from './user';
+import {Contact} from './contact';
 
 export class State {
   user?: User;
-  initialized: boolean;
+  contacts: Contact[] = [];
+  initialized = false;
   leftNavClosed = true;
 
   getVal(path) {

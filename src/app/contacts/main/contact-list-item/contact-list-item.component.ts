@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {Contact} from '../contacts.model';
+import {Contact} from '../../../store/models/contact';
 
 @Component({
   selector: 'dk-contact-list-item',

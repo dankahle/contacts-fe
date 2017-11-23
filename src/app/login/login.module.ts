@@ -6,6 +6,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {SharedModule} from '../shared/shared.module';
 import {CoreModule} from '../core/core.module';
+import {LoginService} from './login.service';
 
 export const loginRoutes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -24,7 +25,8 @@ export const loginRoutes: Routes = [
     CoreModule
   ],
   declarations: [LoginComponent],
-  exports: [LoginComponent]
+  exports: [LoginComponent],
+  providers: [LoginService]
 })
 export class LoginModule {
 }

@@ -2,7 +2,7 @@
   <dk-progress fxFlex="0 0 auto"></dk-progress>
   <dk-header fxFlex="0 0 auto"></dk-header>
   <div fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="start stretch">
-      <dk-leftnav *ngIf="globals.state.user" fxFlex="0 0 auto"></dk-leftnav>
+      <dk-leftnav *ngIf="store.state.user" fxFlex="0 0 auto"></dk-leftnav>
       <div fxFlex="1 1 auto" fxLayout="column">
         <router-outlet></router-outlet>
       </div>

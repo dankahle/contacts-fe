@@ -1,0 +1,8 @@
+<div fxFlex="row" fxFlexLayoutAlign="space-between center">
+  <div>
+    <button (click)="store.setVal('leftNavClosed', !store.getVal('leftNavClosed'))">toggle nav</button>{{leftNavClosed}}
+  </div>
+  <div *ngIf="!!store.state.user" class="" fxFlex>
+    Welcome: {{store.state.user.name}} <a href="javascript:void(0)" (click)="logout()">logout</a>
+  </div>
+</div>

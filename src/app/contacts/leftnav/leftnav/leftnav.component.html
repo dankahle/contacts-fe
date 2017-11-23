@@ -1,0 +1,10 @@
+
+
+
+
+<dk-leftnav-label [label]="staticLabels.contacts"></dk-leftnav-label>
+
+
+<div *ngFor="let label of store.state.user.labels">
+  <dk-leftnav-label [label]="label"></dk-leftnav-label>
+</div>

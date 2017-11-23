@@ -7,10 +7,8 @@ import {SharedModule} from './shared/shared.module';
 import {RouterModule, Routes} from '@angular/router';
 import {PageNotFoundComponent} from './shared/components/page-not-found/page-not-found.component';
 import 'hammerjs';
-import {LoginComponent} from './login/login/login.component';
 import {LoginModule} from './login/login.module';
-import {Globals} from './core/services/globals';
-import {MainModule} from './main/main.module';
+import {Store} from './store/store';
 
 const appRoutes: Routes = [
   {path: '**', component: PageNotFoundComponent}
@@ -21,10 +19,9 @@ const appRoutes: Routes = [
     BrowserModule,
     RouterModule.forRoot(appRoutes, {enableTracing: false}),
     LoginModule,
-    ContactsModule,
     CoreModule,
     SharedModule,
-    MainModule
+    ContactsModule
   ],
   declarations: [
     AppComponent
@@ -35,6 +32,6 @@ const appRoutes: Routes = [
 export class AppModule {
 
   // initialize the Store
-  constructor(globals: Globals) {
+  constructor(store: Store) {
   }
 }

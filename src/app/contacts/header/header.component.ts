@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {Globals} from '../../core/services/globals';
-import {UserService} from '../../core/services/user-service';
+import {Store} from '../../store/store';
+import {LoginService} from '../../login/login.service';
 
 @Component({
   selector: 'dk-header',
@@ -10,10 +10,10 @@ import {UserService} from '../../core/services/user-service';
 })
 export class HeaderComponent {
 
-  constructor(private userService: UserService, protected globals: Globals) {}
+  constructor(private loginService: LoginService, protected store: Store) {}
 
   logout() {
-    this.userService.logout()
+    this.loginService.logout()
       .subscribe(x => x);
   }
 
