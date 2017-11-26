@@ -5,11 +5,13 @@
 <dk-leftnav-label [label]="staticLabels.contacts" (click)="handleLabel(staticLabels.contacts)"
                   [class.active]="selectedLabel === staticLabels.contacts"></dk-leftnav-label>
 
+<hr>
 
 <div *ngFor="let label of store.state.user.labels">
   <dk-leftnav-label [label]="label" (click)="handleLabel(label)" [class.active]="selectedLabel === label"></dk-leftnav-label>
 </div>
 
+<hr>
 
 <div *ngFor="let label of staticLabels.extras">
   <dk-leftnav-label [label]="label" (click)="handleLabel(label)"></dk-leftnav-label>

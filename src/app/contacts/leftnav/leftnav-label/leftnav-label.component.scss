@@ -8,14 +8,17 @@
   color: $gray-link;
   white-space: nowrap;
   overflow: hidden;
+  //outline: 0;
   * {
     vertical-align: middle;
     color: $gray-link;
   }
   i {
     margin-right: 14px;
+  }
+  .text {
     position: relative;
-    top: -2px;
+    top: 1px;
   }
   &:hover, :host.active > & {
     background: $light-gray-bg;
