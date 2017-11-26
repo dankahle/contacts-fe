@@ -2,6 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Contact} from '../../../store/models/contact';
 import {Store} from '../../../store/store';
+import {Util} from '../../../core/services/util';
 
 @Component({
   selector: 'dk-contact-list',
@@ -21,4 +22,15 @@ export class ContactListComponent {
     this.store.state.contacts.pop();
     this.store.publishContacts();
   }
+
+  editContact(contact) {
+    console.log('editcontact', contact.name);
+  }
+
+  keydown(event, contact) { // Trigger the click event from the keyboard
+    if (Util.isKeydown(event)) {
+      this.editContact(contact);
+    }
+  }
+
 }

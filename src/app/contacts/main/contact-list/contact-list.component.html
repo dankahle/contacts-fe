@@ -1,5 +1,5 @@
 
 <button (click)="updateSomething()">update something</button>
 <div *ngFor="let contact of contacts">
-  <dk-contact-list-item [contact]="contact"></dk-contact-list-item>
+  <dk-contact-list-item [contact]="contact" (click)="editContact(contact)" (keydown)="keydown($event, contact)"></dk-contact-list-item>
 </div>

@@ -4,6 +4,7 @@ import {Label} from '../../../store/models/label';
 import {Router} from '@angular/router';
 import {Util} from '../../../core/services/util';
 
+
 @Component({
   selector: 'dk-leftnav',
   templateUrl: './leftnav.component.html',
@@ -54,4 +55,9 @@ export class LeftnavComponent {
     }
   }
 
+  keydown(event, label) { // Trigger the click event from the keyboard
+    if (Util.isKeydown(event)) {
+      this.handleLabel(label);
+    }
+  }
 }

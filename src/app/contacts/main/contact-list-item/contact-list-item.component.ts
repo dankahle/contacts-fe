@@ -1,5 +1,6 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {Contact} from '../../../store/models/contact';
+import {ContactListComponent} from '../contact-list/contact-list.component';
 
 @Component({
   selector: 'dk-contact-list-item',
@@ -8,5 +9,8 @@ import {Contact} from '../../../store/models/contact';
   encapsulation: ViewEncapsulation.Emulated
 })
 export class ContactListItemComponent {
-  @Input() contact: Contact
+  @Input() contact: Contact;
+
+  constructor(protected parent: ContactListComponent) {
+  }
 }

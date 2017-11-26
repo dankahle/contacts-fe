@@ -8,7 +8,7 @@
   color: $gray-link;
   white-space: nowrap;
   overflow: hidden;
-  //outline: 0;
+  outline: 0;
   * {
     vertical-align: middle;
     color: $gray-link;
@@ -20,8 +20,10 @@
     position: relative;
     top: 1px;
   }
-  &:hover, :host.active > & {
+  &:hover, &:focus, :host.active > & {
     background: $light-gray-bg;
+  }
+  :host.active > & {
     * {
       color: $active-link;
     }

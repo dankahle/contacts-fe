@@ -10,6 +10,7 @@ import {LeftnavComponent} from '../leftnav/leftnav.component';
 })
 export class LeftnavLabelComponent {
   @Input() label: Label;
+  log = console.log;
 
   constructor(protected elemRef: ElementRef, protected leftnav: LeftnavComponent) {}
 
