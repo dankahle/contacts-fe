@@ -20,4 +20,11 @@ export class ContactsService {
     return this.http.get<Contact>(`${this.apiUrl}api/contacts/${id}`);
   }
 
+  /**
+   * init
+   * @desc - called when app initialization is complete
+   */
+  init() {
+  }
+
 }

@@ -1,0 +1,27 @@
+@import '../../../../styles/variables';
+
+.label {
+  width: 259px;
+  height: 41px;
+  cursor: pointer;
+  padding: 0 24px;
+  color: $gray-link;
+  white-space: nowrap;
+  overflow: hidden;
+  * {
+    vertical-align: middle;
+    color: $gray-link;
+  }
+  i {
+    margin-right: 14px;
+    position: relative;
+    top: -2px;
+  }
+  &:hover, :host.active > & {
+    background: $light-gray-bg;
+    * {
+      color: $active-link;
+    }
+  }
+}
+

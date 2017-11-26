@@ -6,7 +6,7 @@ export class State {
   user?: User;
   contacts: Contact[] = [];
   initialized = false;
-  leftNavClosed = true;
+  leftNavClosed = false;
 
   getVal(path) {
     return _.get(this, path);

@@ -1,14 +1,16 @@
 
+@import '../../../../styles/comp-index';
 
 :host {
   transition: margin-left 200ms;
-  width: 260px;
+  width: 259px;
   margin-left: 0;
   padding-top: 15px;
+  border-right: 1px solid $gray-border;
 }
 
 :host(.closed) {
-  margin-left: -260px;
+  margin-left: -259px;
 }
 
 

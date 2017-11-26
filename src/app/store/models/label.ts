@@ -1,6 +1,7 @@
 
 export interface Label {
-  id: string;
+  id?: string;
   name: string;
   numContacts: number;
+  handle?: string;
 }

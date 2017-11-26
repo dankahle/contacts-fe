@@ -1,5 +1,6 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {Label} from '../../../store/models/label';
+import {LeftnavComponent} from '../leftnav/leftnav.component';
 
 @Component({
   selector: 'dk-leftnav-label',
@@ -10,5 +11,6 @@ import {Label} from '../../../store/models/label';
 export class LeftnavLabelComponent {
   @Input() label: Label;
 
+  constructor(protected elemRef: ElementRef, protected leftnav: LeftnavComponent) {}
 
 }

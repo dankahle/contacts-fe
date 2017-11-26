@@ -9,6 +9,7 @@ import {Http} from '@angular/http';
 import {Router} from '@angular/router';
 import {Store} from '../../store/store';
 import {State} from '../../store/models/state';
+import * as _ from 'lodash';
 
 
 @Injectable()
@@ -33,8 +34,27 @@ export class UserService {
   }
 
   updateLabelCounts(state: State) {
+    if (!state.initialized) {
+      return;
+    }
+
     // foreach state.contacts, inc appropriate label counts
-    console.log('updatelabelcounts');
+    state.user.labels.forEach(label => {
+      label.numContacts = 0;
+      state.contacts.forEach(contact => {
+        if (_.find(contact.labels, {id: label.id})) {
+          label.numContacts++;
+        }
+      });
+    });
+  }
+
+  /**
+   * init
+   * @desc - called when app initialization is complete
+   */
+  init() {
+    this.updateLabelCounts(this.store.state);
   }
 
 }

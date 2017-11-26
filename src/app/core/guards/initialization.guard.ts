@@ -7,7 +7,8 @@ import 'rxjs/add/operator/map';
 import {Init1, Init2, Init3, Init4, Init5} from '../services/init-service';
 import {merge} from 'rxjs/observable/merge';
 import {Store} from '../../store/store';
-import {ContactsService} from '../../contacts/main/contacts.service';
+import {ContactsService} from '../services/contacts.service';
+import {UserService} from '../services/user-service';
 
 @Injectable()
 /**
@@ -17,6 +18,7 @@ import {ContactsService} from '../../contacts/main/contacts.service';
 export class InitializationGuard implements CanActivate {
 
   constructor(private store: Store,
+              private userService: UserService,
               private contactsService: ContactsService,
               private init1: Init1,
               private init2: Init2,
@@ -52,6 +54,8 @@ export class InitializationGuard implements CanActivate {
       .map(x => {
         // console.log('init guard end');
         this.store.setVal('initialized', true);
+        this.userService.init();
+        this.contactsService.init();
         return true;
       });
   }

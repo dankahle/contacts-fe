@@ -11,7 +11,7 @@ export class Init1 {
       .do(() => {
         // return console.log('init1');
       })
-      .delay(200);
+      .delay(0);
   }
 }
 
@@ -22,7 +22,7 @@ export class Init2 {
       .do(() => {
         // return console.log('init2');
       })
-      .delay(200);
+      .delay(0);
   }
 }
 
@@ -33,7 +33,7 @@ export class Init3 {
       .do(() => {
         // return console.log('init3');
       })
-      .delay(200);
+      .delay(0);
   }
 }
 
@@ -44,7 +44,7 @@ export class Init4 {
       .do(() => {
         // return console.log('init4');
       })
-      .delay(200);
+      .delay(0);
   }
 }
 
@@ -55,7 +55,7 @@ export class Init5 {
       .do(() => {
         // return console.log('init5');
       })
-      .delay(200);
+      .delay(0);
   }
 }
 

@@ -30,9 +30,9 @@ export class ContactDetailRouteComponent {
       dialog.open(ContactDetailComponent, config)
         .afterClosed()
         .subscribe(result => {
-          //dankfix: update contact list with new value??
+          // dankfix: update contact list with new value??
           router.navigateByUrl('/');
-        })
+        });
     });
 
   }

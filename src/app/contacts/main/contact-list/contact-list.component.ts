@@ -17,9 +17,8 @@ export class ContactListComponent {
     store.subscribeContacts(contacts => this.contacts = contacts);
   }
 
-  updateDank() {
-    const user = this.store.state.user;
-    user.name = 'dank2';
-    this.store.setUser(user);
+  updateSomething() {
+    this.store.state.contacts.pop();
+    this.store.publishContacts();
   }
 }

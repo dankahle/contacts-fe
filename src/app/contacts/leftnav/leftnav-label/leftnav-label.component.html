@@ -1,4 +1,6 @@
-
-<div>
-  <i class="material-icons">label</i> {{label.name}}
+<div class="label text-ellipsis">
+  <span class="ghost"></span>
+  <i class="material-icons">label</i>
+  <span>{{label.name}}</span>
+  <span *ngIf="label.numContacts">({{label.numContacts}})</span>
 </div>

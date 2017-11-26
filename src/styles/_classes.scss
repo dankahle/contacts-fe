@@ -1,0 +1,35 @@
+@import '_variables';
+@import '_mixins';
+
+.ghost {
+  &:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+}
+
+.text-ellipsis {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.error-text {
+  color: red;
+}
+
+.outline {
+  @include outline;
+}
+.outline-red {
+  @include outline;
+  outline-color: red;
+}
+
+.oo2 {
+  outline-offset: -2px;
+}
+

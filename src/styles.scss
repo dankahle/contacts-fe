@@ -1,35 +1,15 @@
-@import "~normalize.css/normalize.css";
-@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import '~normalize.css/normalize.css';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
-html, body {
-  height: 100%;
-}
+@import 'styles/elements';
+@import 'styles/classes';
 
-body {
-  font-family: Roboto,sans-serif;
-  font-weight: 500;
-  font-size: 13px;
-}
-.error-text {
-  color: red;
-}
+/*
+styles.scss
+this is a global cascading stylesheet. The parial files in the scss directory are for importing into component files, except
+classes, which are global and imported here.
+ */
 
-@mixin outline {
-  outline: 1px solid;
-  outline-offset: -1px;
-}
-
-.outline {
-  @include outline;
-}
-.outline-red {
-  @include outline;
-  outline-color: red;
-}
-
-.oo2 {
-  outline-offset: -2px;
-}
 
 /*
 mat-form-field {
