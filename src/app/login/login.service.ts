@@ -17,7 +17,7 @@ export class LoginService {
   login(_user) {
     return this.http.post<any>(environment.apiUrl + 'api/login', _user)
       .map(user => {
-        this.store.setVal('user', user);
+        this.store.setUser(user);
         return user;
       });
   }
@@ -33,7 +33,7 @@ export class LoginService {
   register(_user) {
     return this.http.post<any>(environment.apiUrl + 'api/register', _user)
       .map(user => {
-        this.store.setVal('user', user);
+        this.store.setUser(user);
         return user;
       });
   }

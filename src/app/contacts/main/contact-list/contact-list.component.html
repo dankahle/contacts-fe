@@ -3,3 +3,11 @@
 <div *ngFor="let contact of contacts">
   <dk-contact-list-item [contact]="contact" (click)="editContact(contact)" (keydown)="keydown($event, contact)"></dk-contact-list-item>
 </div>
+
+<div  *ngIf="contacts.length === 0" class="no-contacts">
+  <div class="book-pic"><span>sometthing</span></div>
+  <div>no contacts labeled "{{store.state.selectedLabel.name}}"</div>
+  <button mat-button color="primary">Primary</button>
+</div>
+
+<button mat-fab color="accent">Accent</button>

@@ -21,13 +21,10 @@ export class LeftnavComponent {
       <Label>{id: 'help', name: 'Help'}
     ]
   };
-  selectedLabel = this.staticLabels.contacts;
 
 
   constructor(protected store: Store, protected router: Router) {
-    // multiple ways to go here, some times the val will be deep in the hierarchy, and a path method would help
-    // store.subscribe(state => this.leftNavClosed = state.leftNavClosed);
-    // store.subscribe(state => this.leftNavClosed = state.getVal('leftNavClosed'));
+    store.setVal('selectedLabel', this.staticLabels.contacts);
 
     store.subscribe(state => {
       this.leftNavClosed = state.leftNavClosed;
@@ -41,17 +38,17 @@ export class LeftnavComponent {
 
     if (Util.isGuid(label.id)) {
       this.router.navigate(['/', label.id]);
-      this.selectedLabel = label;
-    }
-
-    switch (label.id) {
-      case 'contacts':
-        this.router.navigateByUrl('/');
-        this.selectedLabel = label;
-        break;
-      default:
-        console.log(label.id);
-        break;
+      this.store.setVal('selectedLabel', label);
+    } else {
+      switch (label.id) {
+        case 'contacts':
+          this.router.navigateByUrl('/');
+          this.store.setVal('selectedLabel', label);
+          break;
+        default:
+          console.log(label.id);
+          break;
+      }
     }
   }
 

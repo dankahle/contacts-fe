@@ -16,9 +16,12 @@ export class ContactListComponent {
 
   constructor(route: ActivatedRoute, protected store: Store) {
     store.subscribeContacts(contacts => this.contacts = contacts);
+    route.data.subscribe(data => {
+      return this.contacts = data.contacts;
+    });
   }
 
-  updateSomething() {
+    updateSomething() {
     this.store.state.contacts.pop();
     this.store.publishContacts();
   }

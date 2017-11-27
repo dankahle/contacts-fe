@@ -11,9 +11,14 @@ export class ContactsService {
   constructor(private http: HttpClient, private store: Store) {
   }
 
-  getAll() {
-    const params = new HttpParams().set('hideSpinner', 'true');
-    return this.http.get<Contact[]>(`${this.apiUrl}api/contacts`, {params: params})
+  getAll(id?: string) {
+    // const params = new HttpParams().set('hideSpinner', 'true');
+    // return this.http.get<Contact[]>(`${this.apiUrl}api/contacts`, {params: params});
+    let params = new HttpParams();
+    if (id) {
+      params = params.set('label', id);
+    }
+    return this.http.get<Contact[]>(`${this.apiUrl}api/contacts`, {params: params});
   }
 
   getOne(id: number) {

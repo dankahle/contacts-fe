@@ -9,17 +9,19 @@ import {MaterialIndexModule} from './material-index/material-index.module';
 import {ProgressComponent} from './components/progress/progress.component';
 import {ErrorModalComponent} from './components/error-modal/error-modal.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
     MaterialIndexModule,
     FlexLayoutModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   declarations: [PageNotFoundComponent, ForbiddenNameValidator, MinValidator, MaxValidator, ProgressComponent, ErrorModalComponent],
   exports: [
-    MaterialIndexModule, FlexLayoutModule,
+    MaterialIndexModule, FlexLayoutModule, RouterModule,
     PageNotFoundComponent, ForbiddenNameValidator, MinValidator, MaxValidator, ProgressComponent, ErrorModalComponent],
   entryComponents: [ErrorModalComponent],
   providers: []

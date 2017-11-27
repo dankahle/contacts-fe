@@ -3,3 +3,17 @@
   flex: 1 1 auto;
   overflow-y: auto;
 }
+
+.book-pic {
+  background-image: url(//ssl.gstatic.com/social/contactsui/images/labels/emptylabelicon_1x.png);
+  background-repeat: no-repeat;
+  height: 182px;
+  margin: auto;
+  width: 230px;
+}
+
+  .mat-button.mat-primary:hover /deep/ .mat-button-focus-overlay {
+    opacity: 0;
+  }
+
+

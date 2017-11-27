@@ -17,8 +17,8 @@ export class UserService {
 
   constructor(private http: HttpClient, private store: Store, private router: Router) {
     // we want to update the counts only when user or contacts change, not whenever anything changes.
-    store.subscribeUser(user => this.updateLabelCounts(store.state));
-    store.subscribeContacts(contacts => this.updateLabelCounts(store.state));
+    store.subscribeUser(user => this.updateLabelCounts());
+    store.subscribeContacts(contacts => this.updateLabelCounts());
   }
 
   isAuthenticated() {
@@ -33,7 +33,8 @@ export class UserService {
       });
   }
 
-  updateLabelCounts(state: State) {
+  updateLabelCounts() {
+    const state = this.store.state;
     if (!state.initialized) {
       return;
     }
@@ -54,7 +55,10 @@ export class UserService {
    * @desc - called when app initialization is complete
    */
   init() {
-    this.updateLabelCounts(this.store.state);
+  }
+
+  getLabelById(id) {
+    return _.find(this.store.state.user.labels, {id: id});
   }
 
 }

@@ -9,8 +9,8 @@ import {ErrorInterceptor} from './interceptors/error.interceptor';
 import {Init1, Init2, Init3, Init4, Init5} from './services/init-service';
 import {ValidateService} from './services/validate.service';
 import {ModifyRequestInterceptor} from './interceptors/modify-request.interceptor';
-import {InitializationGuard} from './guards/initialization.guard';
-import {AuthGuard} from './guards/auth.guard';
+import {InitializationGuard} from '../routing/guards/initialization.guard';
+import {AuthGuard} from '../routing/guards/auth.guard';
 import {UserService} from './services/user-service';
 import {RouterModule} from '@angular/router';
 

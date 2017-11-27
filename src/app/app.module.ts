@@ -9,19 +9,19 @@ import {PageNotFoundComponent} from './shared/components/page-not-found/page-not
 import 'hammerjs';
 import {LoginModule} from './login/login.module';
 import {Store} from './store/store';
-
-const appRoutes: Routes = [
-  {path: '**', component: PageNotFoundComponent}
-];
+import {InitializationGuard} from './routing/guards/initialization.guard';
+import {AuthGuard} from './routing/guards/auth.guard';
+import {ContactListComponent} from './contacts/main/contact-list/contact-list.component';
+import {RoutingModule} from './routing/routing.module';
 
 @NgModule({
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes, {enableTracing: false}),
     LoginModule,
     CoreModule,
     SharedModule,
-    ContactsModule
+    ContactsModule,
+    RoutingModule
   ],
   declarations: [
     AppComponent
