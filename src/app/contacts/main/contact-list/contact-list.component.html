@@ -1,4 +1,10 @@
 
+<div *ngIf="store.state.selectedLabel && store.state.selectedLabel.id !== 'contacts'">
+  <span class="ghost"></span>
+  <span>{{store.state.selectedLabel.name}}</span>
+  <span *ngIf="store.state.selectedLabel.numContacts">({{store.state.selectedLabel.numContacts}})</span>
+</div>
+
 <button (click)="updateSomething()">update something</button>
 <div *ngFor="let contact of contacts">
   <dk-contact-list-item [contact]="contact" (click)="editContact(contact)" (keydown)="keydown($event, contact)"></dk-contact-list-item>
@@ -10,4 +16,4 @@
   <button mat-button color="primary">Primary</button>
 </div>
 
-<button mat-fab color="accent">Accent</button>
+<button mat-fab color="warn">Accent</button>

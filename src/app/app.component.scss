@@ -1,4 +1,14 @@
 
+@import "../styles/comp-index";
+
+// Custom header that uses only the Material `font-size` and `font-family`.
+.head {
+  font-size: mat-font-size($config, headline);
+  font-family: mat-font-family($config);
+}
 :host {
   height: 100%;
 }
+
+
+

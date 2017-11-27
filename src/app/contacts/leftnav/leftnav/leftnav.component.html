@@ -1,19 +1,33 @@
 
 
 
-
 <dk-leftnav-label [label]="staticLabels.contacts" (click)="handleLabel(staticLabels.contacts)" (keydown)="keydown($event, staticLabels.contacts)"
-                  [class.active]="selectedLabel === staticLabels.contacts"></dk-leftnav-label>
+                  [class.active]="store.state.selectedLabel === staticLabels.contacts"></dk-leftnav-label>
 
-<hr>
+<mat-expansion-panel [expanded]="true" class="labels">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Labels
+    </mat-panel-title>
+  </mat-expansion-panel-header>
 
-<div *ngFor="let label of store.state.user.labels">
-  <dk-leftnav-label [label]="label" (click)="handleLabel(label)" (keydown)="keydown($event, label)"
-                    [class.active]="selectedLabel === label"></dk-leftnav-label>
-</div>
+  <div *ngFor="let label of store.state.user.labels">
+    <dk-leftnav-label [label]="label" (click)="handleLabel(label)" (keydown)="keydown($event, label)"
+                      [class.active]="store.state.selectedLabel === label"></dk-leftnav-label>
+  </div>
+</mat-expansion-panel>
 
-<hr>
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Extras
+    </mat-panel-title>
+  </mat-expansion-panel-header>
 
-<div *ngFor="let label of staticLabels.extras">
-  <dk-leftnav-label [label]="label" (click)="handleLabel(label)" (keydown)="keydown($event, label)"></dk-leftnav-label>
-</div>
+  <div *ngFor="let label of staticLabels.arrExtras">
+    <dk-leftnav-label [label]="label" (click)="handleLabel(label)" (keydown)="keydown($event, label)"></dk-leftnav-label>
+  </div>
+</mat-expansion-panel>
+
+
+
