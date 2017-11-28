@@ -3,8 +3,9 @@
 .label {
   width: 259px;
   height: 41px;
+  position: relative;
   cursor: pointer;
-  padding: 0 24px;
+  padding: 0 20px;
   color: $gray-link;
   white-space: nowrap;
   overflow: hidden;
@@ -14,12 +15,12 @@
     color: $gray-link;
   }
   i {
-    margin-right: 14px;
     font-size: 20px;
   }
   .text {
     position: relative;
     top: 1px;
+    margin-left: 14px;
   }
   &:hover, &:focus, :host.active > & {
     background: $light-gray-bg;
@@ -28,6 +29,27 @@
     * {
       color: $active-link;
     }
+  }
+
+  .icons {
+    display: none;
+    position: absolute;
+    top: 6px;
+    right: 3px;
+    padding-left: 3px;
+    z-index: 10;
+    background: $light-gray-bg;
+    div {
+      display: inline-block;
+      padding: 3px;
+      i {
+        font-size: 18px;
+      }
+    }
+  }
+
+  &:hover .icons {
+    display: block;
   }
 }
 

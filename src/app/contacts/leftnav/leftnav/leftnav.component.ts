@@ -14,7 +14,7 @@ import {Util} from '../../../core/services/util';
 export class LeftnavComponent {
   @HostBinding('class.closed') leftNavClosed;
   staticLabels = {
-    contacts: <Label>{id: 'contacts', name: 'Contacts', numContacts: 0},
+    contacts: <Label>{id: 'contacts', name: 'Contacts fsdfdsfadsfasdfasdfasdfsad', numContacts: 0},
     arrExtras: [
       <Label>{id: 'settings', name: 'Settings'},
       <Label>{id: 'sendFeedback', name: 'Send Feedback'},

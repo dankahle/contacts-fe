@@ -1,7 +1,11 @@
 <div role="button" tabindex="0" class="label text-ellipsis">
   <span class="ghost"></span>
-  <i class="material-icons" *ngIf="!label.accordion">label</i>
-  <i class="material-icons" *ngIf="label.accordion">keyboard_arrow_up</i>
+  <i class="material-icons">label</i>
   <span class="text">{{label.name}}</span>
   <span *ngIf="label.numContacts">({{label.numContacts}})</span>
+
+  <div class="icons">
+    <!--keep these together, no space between-->
+    <div><i class="material-icons">edit</i></div><div><i class="material-icons">delete</i></div>
+  </div>
 </div>
