@@ -12,6 +12,7 @@ export class LeftnavLabelComponent {
   @Input() label: Label;
   log = console.log;
 
-  constructor(protected elemRef: ElementRef, protected leftnav: LeftnavComponent) {}
+  constructor(protected elemRef: ElementRef, protected leftnav: LeftnavComponent, protected parent: LeftnavComponent) {
+  }
 
 }

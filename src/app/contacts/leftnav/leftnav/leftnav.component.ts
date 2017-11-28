@@ -16,9 +16,9 @@ export class LeftnavComponent {
   staticLabels = {
     contacts: <Label>{id: 'contacts', name: 'Contacts fsdfdsfadsfasdfasdfasdfsad', numContacts: 0},
     arrExtras: [
-      <Label>{id: 'settings', name: 'Settings'},
-      <Label>{id: 'sendFeedback', name: 'Send Feedback'},
-      <Label>{id: 'help', name: 'Help'}
+      <Label>{id: 'settings', name: 'Settings', noEdit: true},
+      <Label>{id: 'sendFeedback', name: 'Send Feedback', noEdit: true},
+      <Label>{id: 'help', name: 'Help', noEdit: true}
     ]
   };
 
@@ -35,7 +35,7 @@ export class LeftnavComponent {
   }
 
   handleLabel(label) {
-
+console.log('handle')
     if (Util.isGuid(label.id)) {
       this.router.navigate(['/', label.id]);
       this.store.setVal('selectedLabel', label);
@@ -57,4 +57,14 @@ export class LeftnavComponent {
       this.handleLabel(label);
     }
   }
+
+  editLabel(event, label) {
+    event.stopPropagation()
+    console.log('edit', label.name);
+  }
+  deleteLabel(event, label) {
+    event.stopPropagation()
+    console.log('delete', label.name);
+  }
+
 }
