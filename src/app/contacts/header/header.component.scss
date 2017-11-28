@@ -1,5 +1,16 @@
 
 :host {
-  height: 30px;
+
+  & /deep/ mat-toolbar {
+    align-items: center;
+  }
+}
+
+.menu {
+    height: 32px;
+    padding: 4px;
+  &:hover {
+    cursor: pointer
+  }
 }
 
