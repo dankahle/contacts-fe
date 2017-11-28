@@ -1,8 +1,8 @@
 
 
 
-<dk-leftnav-label [label]="staticLabels.contacts" (click)="handleLabel(staticLabels.contacts)" (keydown)="keydown($event, staticLabels.contacts)"
-                  [class.active]="store.state.selectedLabel === staticLabels.contacts"></dk-leftnav-label>
+<dk-leftnav-label [label]="labels.contacts" (click)="showAllContacts($event, labels.contacts)" (keydown)="showAllContacts($event, labels.contacts)"
+                  [class.active]="store.state.selectedLabel === labels.contacts"></dk-leftnav-label>
 
 <mat-expansion-panel [expanded]="true" class="labels">
   <mat-expansion-panel-header collapsedHeight="41px" expandedHeight="41px">
@@ -15,6 +15,8 @@
     <dk-leftnav-label [label]="label" (click)="handleLabel(label)" (keydown)="keydown($event, label)"
                       [class.active]="store.state.selectedLabel === label"></dk-leftnav-label>
   </div>
+
+  <dk-leftnav-label [label]="labels.addLabel" (click)="handleLabel(labels.addLabel)" (keydown)="keydown($event, labels.addLabel)"></dk-leftnav-label>
 </mat-expansion-panel>
 
 <mat-expansion-panel>
@@ -24,7 +26,7 @@
     </mat-panel-title>
   </mat-expansion-panel-header>
 
-  <div *ngFor="let label of staticLabels.arrExtras">
+  <div *ngFor="let label of labels.arrExtras">
     <dk-leftnav-label [label]="label" (click)="handleLabel(label)" (keydown)="keydown($event, label)"></dk-leftnav-label>
   </div>
 </mat-expansion-panel>

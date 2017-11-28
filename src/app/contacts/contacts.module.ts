@@ -13,6 +13,8 @@ import {ContactListItemComponent} from './main/contact-list-item/contact-list-it
 import {HeaderComponent} from './header/header.component';
 import {LeftnavComponent} from './leftnav/leftnav/leftnav.component';
 import {LeftnavLabelComponent} from './leftnav/leftnav-label/leftnav-label.component';
+import { EditLabelComponent } from './leftnav/edit-label/edit-label.component';
+import { AddLabelComponent } from './leftnav/add-label/add-label.component';
 
 @NgModule({
   imports: [
@@ -21,7 +23,7 @@ import {LeftnavLabelComponent} from './leftnav/leftnav-label/leftnav-label.compo
     CoreModule
   ],
   declarations: [ContactListComponent, ContactDetailRouteComponent, ContactDetailComponent, ContactListItemComponent,
-    LeftnavComponent, HeaderComponent, LeftnavLabelComponent],
+    LeftnavComponent, HeaderComponent, LeftnavLabelComponent, EditLabelComponent, AddLabelComponent],
   exports: [RouterModule, LeftnavComponent, HeaderComponent],
   entryComponents: [ContactDetailComponent],
   providers: [ContactsService]

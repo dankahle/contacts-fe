@@ -21,7 +21,7 @@ import {RouterModule} from '@angular/router';
   ],
   declarations: [PageNotFoundComponent, ForbiddenNameValidator, MinValidator, MaxValidator, ProgressComponent, ErrorModalComponent],
   exports: [
-    MaterialIndexModule, FlexLayoutModule, RouterModule,
+    MaterialIndexModule, FlexLayoutModule, RouterModule, FormsModule,
     PageNotFoundComponent, ForbiddenNameValidator, MinValidator, MaxValidator, ProgressComponent, ErrorModalComponent],
   entryComponents: [ErrorModalComponent],
   providers: []

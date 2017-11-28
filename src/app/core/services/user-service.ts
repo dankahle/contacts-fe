@@ -33,6 +33,14 @@ export class UserService {
       });
   }
 
+  updateUser(user) {
+    return this.http.put<User>(`${environment.apiUrl}api/user/${user.id}`, user)
+      .map(_user => {
+        this.store.setUser(_user);
+        return _user;
+      });
+  }
+
   updateLabelCounts() {
     const state = this.store.state;
     if (!state.initialized) {
