@@ -33,8 +33,16 @@ export class UserService {
       });
   }
 
+  addUser(user) {
+    return this.http.post<User>(`${environment.apiUrl}api/users`, user)
+      .map(_user => {
+        this.store.setUser(_user);
+        return _user;
+      });
+  }
+
   updateUser(user) {
-    return this.http.put<User>(`${environment.apiUrl}api/user/${user.id}`, user)
+    return this.http.put<User>(`${environment.apiUrl}api/users/${user.id}`, user)
       .map(_user => {
         this.store.setUser(_user);
         return _user;

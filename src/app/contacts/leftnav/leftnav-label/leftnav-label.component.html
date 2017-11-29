@@ -6,6 +6,8 @@
 
   <div *ngIf="label.icon === 'label'" class="icons">
     <!--keep these together, no space between-->
-    <div><i class="material-icons" (click)="parent.editLabel($event, label)">edit</i></div><div><i class="material-icons" (click)="parent.deleteLabel($event, label)">delete</i></div>
+    <div><i class="material-icons" (click)="parent.editLabel($event, label)"
+            (keydown)="parent.editLabel($event, label, 'edit')"
+    >edit</i></div><div><i class="material-icons" (click)="parent.deleteLabel($event, label)">delete</i></div>
   </div>
 </div>

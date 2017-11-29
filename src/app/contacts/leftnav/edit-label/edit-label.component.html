@@ -1,12 +1,18 @@
 <div mat-dialog-content>
 
-  <mat-form-field>
-    <input matInput [(ngModel)]="data.label" placeholder="street" tabindex="1">
-  </mat-form-field><br>
+  <h3 *ngIf="data.mode === 'edit'" mat-dialog-title>Rename label</h3><br>
+
+  <form id="form1" name="form" #form="ngForm" (submit)="submit(form, data)">
+    <mat-form-field>
+      <input name="name" matInput #name="ngModel" [(ngModel)]="data.label.name" [placeholder]="placeholder" tabindex="1" autocomplete="off">
+      <mat-error *ngIf="name.invalid && name.errors.required">Required!</mat-error>
+      <mat-error *ngIf="name.invalid && name.errors.nameAlreadyExists">Name already exists</mat-error>
+    </mat-form-field>
+  </form>
 
 </div>
 
-<div mat-dialog-actions="">
-  <button mat-button mat-dialog-close tabindex="-1">cancel</button>
-  <button mat-button [mat-dialog-close]="addr" tabindex="3">ok</button>
+<div mat-dialog-actions>
+  <button type="submit" form="form1" mat-button [mat-dialog-close]="data" tabindex="3" [disabled]="form.invalid">OK</button>
+  <button mat-button mat-dialog-close tabindex="-1">Cancel</button>
 </div>

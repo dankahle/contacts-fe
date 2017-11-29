@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddLabelComponent } from './add-label.component';
+import { NotImplementedComponent } from './not-implemented.component';
 
-describe('AddLabelComponent', () => {
-  let component: AddLabelComponent;
-  let fixture: ComponentFixture<AddLabelComponent>;
+describe('NotImplementedComponent', () => {
+  let component: NotImplementedComponent;
+  let fixture: ComponentFixture<NotImplementedComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddLabelComponent ]
+      declarations: [ NotImplementedComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddLabelComponent);
+    fixture = TestBed.createComponent(NotImplementedComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

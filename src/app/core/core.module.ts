@@ -13,6 +13,8 @@ import {InitializationGuard} from '../routing/guards/initialization.guard';
 import {AuthGuard} from '../routing/guards/auth.guard';
 import {UserService} from './services/user-service';
 import {RouterModule} from '@angular/router';
+import {ErrorStateMatcher} from '@angular/material';
+import {CustomErrorStateMatcher} from './custom-error-state-matcher';
 
 @NgModule({
   imports: [
@@ -27,7 +29,8 @@ import {RouterModule} from '@angular/router';
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ModifyRequestInterceptor, multi: true},
     ValidateService,
-    InitializationGuard, AuthGuard
+    InitializationGuard, AuthGuard,
+    {provide: ErrorStateMatcher, useClass: CustomErrorStateMatcher}
   ]
 })
 export class CoreModule {

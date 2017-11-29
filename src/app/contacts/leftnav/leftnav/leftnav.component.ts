@@ -4,9 +4,10 @@ import {Label} from '../../../store/models/label';
 import {Router} from '@angular/router';
 import {Util} from '../../../core/services/util';
 import {MatDialog, MatDialogConfig} from '@angular/material';
-import {AddLabelComponent} from '../add-label/add-label.component';
 import {UserService} from '../../../core/services/user-service';
-
+import {NotImplementedComponent} from '../../../shared/components/not-implemented/not-implemented.component';
+import {EditLabelComponent} from '../edit-label/edit-label.component';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'dk-leftnav',
@@ -82,30 +83,34 @@ export class LeftnavComponent {
     }
   }
 
-  editLabel(event, label) {
-    event.stopPropagation()
-    console.log('edit', label.name);
-  }
-
   deleteLabel(event, label) {
     event.stopPropagation()
     console.log('delete', label.name);
   }
 
-  addLabel(event) {
+  editLabel(event, label, mode) {
     if (Util.keydownAndNotEnterOrSpace(event)) {
       return;
     }
 
     const config = <MatDialogConfig>{
-      width: '400px',
-      height: '400px',
-      data: {labelNames: this.store.state.user.labels.map(label => label.name)}
+      width: '248px',
+      height: '193px',
+      data: {
+        mode: mode,
+        label: label,
+        labelNames:
+          this.store.state.user.labels.map(label => label.name)
+      }
     }
-    this.mdDialog.open(AddLabelComponent, config)
+    this.mdDialog.open(EditLabelComponent, config)
       .afterClosed().subscribe(results => {
-      if (results.label) {
-        this.store.state.user.labels.push(results.label);
+      if (results) {
+        if (mode === 'add') {
+          this.store.state.user.labels.push(results.label);
+        } else {
+          _.find(this.store.state.user.labels, {id: results.label.id}).name = results.label.name;
+        }
         this.store.state.user.labels.sort();
         this.userService.updateUser(this.store.state.user)
           .subscribe(user => user);
@@ -114,7 +119,15 @@ export class LeftnavComponent {
   }
 
   showNotImplemented() {
-
+    if (Util.keydownAndNotEnterOrSpace(event)) {
+      return;
+    }
+    const config = <MatDialogConfig>{
+      width: '248px',
+      height: '193px',
+      data: {}
+    }
+    this.mdDialog.open(NotImplementedComponent, config);
   }
 
 

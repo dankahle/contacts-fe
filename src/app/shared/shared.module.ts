@@ -10,6 +10,7 @@ import {ProgressComponent} from './components/progress/progress.component';
 import {ErrorModalComponent} from './components/error-modal/error-modal.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {RouterModule} from '@angular/router';
+import { NotImplementedComponent } from './components/not-implemented/not-implemented.component';
 
 @NgModule({
   imports: [
@@ -19,11 +20,13 @@ import {RouterModule} from '@angular/router';
     FormsModule,
     RouterModule
   ],
-  declarations: [PageNotFoundComponent, ForbiddenNameValidator, MinValidator, MaxValidator, ProgressComponent, ErrorModalComponent],
+  declarations: [PageNotFoundComponent, ForbiddenNameValidator, MinValidator, MaxValidator, ProgressComponent, ErrorModalComponent,
+    NotImplementedComponent],
   exports: [
     MaterialIndexModule, FlexLayoutModule, RouterModule, FormsModule,
-    PageNotFoundComponent, ForbiddenNameValidator, MinValidator, MaxValidator, ProgressComponent, ErrorModalComponent],
-  entryComponents: [ErrorModalComponent],
+    PageNotFoundComponent, ForbiddenNameValidator, MinValidator, MaxValidator, ProgressComponent, ErrorModalComponent,
+    NotImplementedComponent],
+  entryComponents: [ErrorModalComponent, NotImplementedComponent],
   providers: []
 })
 export class SharedModule {
