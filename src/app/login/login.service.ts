@@ -14,28 +14,22 @@ export class LoginService {
   constructor(private http: HttpClient, private store: Store, private router: Router) {
   }
 
-  login(_user) {
-    return this.http.post<any>(environment.apiUrl + 'api/login', _user)
-      .map(user => {
-        this.store.setUser(user);
-        return user;
-      });
+  login(user) {
+    return this.http.post<any>(environment.apiUrl + 'api/login', user)
+      .do(_user => this.store.setUser(_user));
   }
 
   logout() {
     return this.http.delete<any>(environment.apiUrl + 'api/login')
-      .map(() => {
+      .do(() => {
         this.store.deleteVal('user');
         this.router.navigateByUrl('/login');
       });
   }
 
-  register(_user) {
-    return this.http.post<any>(environment.apiUrl + 'api/register', _user)
-      .map(user => {
-        this.store.setUser(user);
-        return user;
-      });
+  register(user) {
+    return this.http.post<any>(environment.apiUrl + 'api/register', user)
+      .do(_user => this.store.setUser(_user));
   }
 
 }

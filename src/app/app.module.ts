@@ -1,18 +1,13 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
-import {ContactsModule} from './contacts-page/contacts.module';
 import {CoreModule} from './core/core.module';
 import {SharedModule} from './shared/shared.module';
-import {RouterModule, Routes} from '@angular/router';
-import {PageNotFoundComponent} from './shared/components/page-not-found/page-not-found.component';
 import 'hammerjs';
 import {LoginModule} from './login/login.module';
 import {Store} from './store/store';
-import {InitializationGuard} from './routing/guards/initialization.guard';
-import {AuthGuard} from './routing/guards/auth.guard';
-import {ContactListComponent} from './contacts-page/main/contact-list/contact-list.component';
 import {RoutingModule} from './routing/routing.module';
+import {ContactsPageModule} from './contacts-page/contacts-page.module';
 
 @NgModule({
   imports: [
@@ -20,7 +15,7 @@ import {RoutingModule} from './routing/routing.module';
     LoginModule,
     CoreModule,
     SharedModule,
-    ContactsModule,
+    ContactsPageModule,
     RoutingModule
   ],
   declarations: [

@@ -16,9 +16,6 @@ import * as _ from 'lodash';
 export class UserService {
 
   constructor(private http: HttpClient, private store: Store, private router: Router) {
-    // we want to update the counts only when user or contacts-page change, not whenever anything changes.
-    store.subscribeUser(user => this.updateLabelCounts());
-    store.subscribeContacts(contacts => this.updateLabelCounts());
   }
 
   isAuthenticated() {
@@ -27,45 +24,17 @@ export class UserService {
 
   getUser() {
     return this.http.get<User>(environment.apiUrl + 'api/login/current')
-      .map(user => {
-        this.store.setUser(user);
-        return user;
-      });
+      .do(user => this.store.setUser(user));
   }
 
   addUser(user) {
     return this.http.post<User>(`${environment.apiUrl}api/users`, user)
-      .map(_user => {
-        this.store.setUser(_user);
-        return _user;
-      });
+      .do(_user => this.store.setUser(_user));
   }
 
   updateUser(user) {
     return this.http.put<User>(`${environment.apiUrl}api/users/${user.id}`, user)
-      .map(_user => {
-        this.store.setUser(_user);
-        return _user;
-      });
-  }
-
-  updateLabelCounts() {
-    const state = this.store.state;
-    if (!state.initialized) {
-      return;
-    }
-
-
-
-    // foreach state.contacts-page, inc appropriate label counts
-    state.user.labels.forEach(label => {
-      label.numContacts = 0;
-      state.contacts.forEach(contact => {
-        if (_.find(contact.labels, {id: label.id})) {
-          label.numContacts++;
-        }
-      });
-    });
+      .do(_user => this.store.setUser(_user));
   }
 
   deleteLabel(user, label) {

@@ -2,7 +2,8 @@
   <span class="ghost"></span>
   <i class="material-icons">{{label.icon}}</i>
   <span class="text">{{label.name}}</span>
-  <span *ngIf="label.numContacts">({{label.numContacts}})</span>
+  <span *ngIf="label.id === 'contacts' && store.state.totalContacts">({{store.state.totalContacts}})</span>
+  <span *ngIf="label.id !== 'contacts' && label.numContacts">({{label.numContacts}})</span>
 
   <div *ngIf="!label.noEdit" class="icons">
     <!--keep these together, no space between-->

@@ -1,20 +1,18 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ContactsService} from '../core/services/contacts.service';
 import {CoreModule} from '../core/core.module';
-import {RouterModule, Routes} from '@angular/router';
-import {InitializationGuard} from '../routing/guards/initialization.guard';
+import {RouterModule} from '@angular/router';
 import {SharedModule} from '../shared/shared.module';
 import {ContactListComponent} from './main/contact-list/contact-list.component';
 import {ContactDetailComponent} from './main/contact-detail/contact-detail.component';
 import {ContactDetailRouteComponent} from './main/contact-detail/contact-detail-route.component';
-import {AuthGuard} from '../routing/guards/auth.guard';
 import {ContactListItemComponent} from './main/contact-list-item/contact-list-item.component';
 import {HeaderComponent} from './header/header.component';
 import {LeftnavComponent} from './leftnav/leftnav/leftnav.component';
 import {LeftnavLabelComponent} from './leftnav/leftnav-label/leftnav-label.component';
-import { EditLabelComponent } from './leftnav/edit-label/edit-label.component';
-import { DeleteLabelComponent } from './leftnav/delete-label/delete-label.component';
+import {EditLabelComponent} from './leftnav/edit-label/edit-label.component';
+import {DeleteLabelComponent} from './leftnav/delete-label/delete-label.component';
+import {ContactsPageService} from './contacts-page.service';
 
 @NgModule({
   imports: [
@@ -26,7 +24,8 @@ import { DeleteLabelComponent } from './leftnav/delete-label/delete-label.compon
     LeftnavComponent, HeaderComponent, LeftnavLabelComponent, EditLabelComponent, DeleteLabelComponent],
   exports: [RouterModule, LeftnavComponent, HeaderComponent],
   entryComponents: [ContactDetailComponent, EditLabelComponent, DeleteLabelComponent],
-  providers: [ContactsService]
+  providers: [ContactsPageService]
 })
-export class ContactsModule {
+export class ContactsPageModule {
+  constructor(contactsPageService: ContactsPageService) {}
 }

@@ -16,15 +16,18 @@ export class ContactsService {
 
   getAll(id?: string) {
     // const params = new HttpParams().set('hideSpinner', 'true');
-    // return this.http.get<Contact[]>(`${this.apiUrl}api/contacts-page`, {params: params});
+    // return this.http.get<Contact[]>(`${this.apiUrl}api/contacts`, {params: params});
     let params = new HttpParams();
     if (id) {
       params = params.set('label', id);
     }
     return this.http.get<Contact[]>(`${this.apiUrl}api/contacts`, {params: params})
-      .map(contacts => {
+      .do(contacts => {
         this.store.setContacts(contacts);
-        return contacts;
+        if (!id) {
+          // can only do this with "all" contacts
+          this.store.publishUpdateLabelCounts(contacts);
+        }
       });
   }
 
@@ -48,22 +51,19 @@ export class ContactsService {
       });
   }
 
-  updateLabelInContacts(contacts: Contact[], labelId) {
+  updateLabelInContacts(contacts: Contact[], label) {
     const updateContacts: Contact[] = [];
 
     contacts.forEach(contact => {
-      const index = _.findIndex(contact.labels, {id: labelId})
+      const index = _.findIndex(contact.labels, {id: label.id})
       if (index !== -1) {
-        contact.labels.splice(index, 1);
+        contact.labels[index].name = label.name;
         updateContacts.push(contact);
       }
     });
     if (updateContacts.length > 0) {
       return this.updateMany(updateContacts)
-        .map(resp => {
-          this.store.publishContacts();
-          return resp;
-        });
+        .do(resp => this.store.publishContacts());
     } else {
       return Observable.of(null);
     }
@@ -81,10 +81,7 @@ export class ContactsService {
     });
     if (updateContacts.length > 0) {
       return this.updateMany(updateContacts)
-        .map(resp => {
-          this.store.publishContacts();
-          return resp;
-        });
+        .do(resp => this.store.publishContacts());
     } else {
       return Observable.of(null);
     }

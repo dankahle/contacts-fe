@@ -1,4 +1,4 @@
-import {Component, HostBinding, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, HostBinding, ViewEncapsulation} from '@angular/core';
 import {Store} from '../../../store/store';
 import {Label} from '../../../store/models/label';
 import {Router} from '@angular/router';
@@ -38,9 +38,6 @@ export class LeftnavComponent {
 
     store.subscribe(state => {
       this.leftNavClosed = state.leftNavClosed;
-    });
-    store.subscribeContacts(contacts => {
-      this.labels.contacts.numContacts = contacts.length;
     });
   }
 
@@ -88,8 +85,7 @@ export class LeftnavComponent {
     }
 
     if (label.numContacts === 0) {
-      this.userService.deleteLabel(this.store.state.user, label)
-        .subscribe(x => x);
+      this._deleteLabel(label);
     } else {
 
       const config = <MatDialogConfig>{
@@ -104,23 +100,25 @@ export class LeftnavComponent {
         if (results.deleteMode) {
           if (results.deleteMode === DeleteLabelMode.keepContacts) {
             this.contactsService.removeLabelFromContacts(this.store.state.contacts, label.id)
-              .subscribe(() => {
-                this.userService.deleteLabel(this.store.state.user, label)
-                  .subscribe(x => x);
-              });
+              .subscribe(() => this._deleteLabel(label));
           } else if (results.deleteMode === DeleteLabelMode.deleteContacts) {
             this.contactsService.deleteAllWithLabel(this.store.state.contacts, label.id)
-              .subscribe(() => {
-                this.userService.deleteLabel(this.store.state.user, label)
-                  .subscribe(x => x);
-              });
+              .subscribe(() => this._deleteLabel(label));
           }
         }
       });
     }
   }
 
-
+  _deleteLabel(label) {
+    this.userService.deleteLabel(this.store.state.user, label)
+      .subscribe(x => {
+        // if we're deleting the selected label, set "contacts" to selected label
+        if (this.store.state.selectedLabel !== this.labels.contacts) {
+          this.showAllContacts({}, this.labels.contacts);
+        }
+      });
+  }
 
   editLabel(event, label, mode) {
     event.stopPropagation();

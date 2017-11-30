@@ -8,7 +8,8 @@ export class State {
   contacts: Contact[] = [];
   initialized = false;
   leftNavClosed = false;
-  selectedLabel?: Label
+  selectedLabel?: Label;
+  totalContacts = 0;
 
   getVal(path) {
     return _.get(this, path);
