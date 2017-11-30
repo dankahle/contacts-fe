@@ -10,5 +10,5 @@ import {Injectable} from '@angular/core';
  * to user another service, then it gets bumped up to this level that can see core without concern of cyclic dependency.
  */
 @Injectable()
-export class ContactsUiService {
+export class ContactsPageService {
 }
