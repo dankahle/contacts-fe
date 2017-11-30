@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {PageNotFoundComponent} from '../shared/components/page-not-found/page-not-found.component';
 import {InitializationGuard} from './guards/initialization.guard';
 import {AuthGuard} from './guards/auth.guard';
-import {ContactListComponent} from '../contacts/main/contact-list/contact-list.component';
+import {ContactListComponent} from '../contacts-page/main/contact-list/contact-list.component';
 import {RouterModule, Routes} from '@angular/router';
 import {ContactListResolve} from './resolves/contact-list.resolve';
 

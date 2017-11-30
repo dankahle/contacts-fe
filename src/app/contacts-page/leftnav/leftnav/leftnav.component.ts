@@ -148,7 +148,8 @@ export class LeftnavComponent {
         }
         this.store.state.user.labels = _.sortBy(this.store.state.user.labels, 'name');
         this.userService.updateUser(this.store.state.user)
-          .subscribe(user => user);
+          .mergeMap(() => this.contactsService.updateLabelInContacts(this.store.state.contacts, label))
+          .subscribe(x => x);
       }
     });
   }

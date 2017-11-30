@@ -16,7 +16,7 @@ import * as _ from 'lodash';
 export class UserService {
 
   constructor(private http: HttpClient, private store: Store, private router: Router) {
-    // we want to update the counts only when user or contacts change, not whenever anything changes.
+    // we want to update the counts only when user or contacts-page change, not whenever anything changes.
     store.subscribeUser(user => this.updateLabelCounts());
     store.subscribeContacts(contacts => this.updateLabelCounts());
   }
@@ -57,7 +57,7 @@ export class UserService {
 
 
 
-    // foreach state.contacts, inc appropriate label counts
+    // foreach state.contacts-page, inc appropriate label counts
     state.user.labels.forEach(label => {
       label.numContacts = 0;
       state.contacts.forEach(contact => {

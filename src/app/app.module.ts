@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
-import {ContactsModule} from './contacts/contacts.module';
+import {ContactsModule} from './contacts-page/contacts.module';
 import {CoreModule} from './core/core.module';
 import {SharedModule} from './shared/shared.module';
 import {RouterModule, Routes} from '@angular/router';
@@ -11,7 +11,7 @@ import {LoginModule} from './login/login.module';
 import {Store} from './store/store';
 import {InitializationGuard} from './routing/guards/initialization.guard';
 import {AuthGuard} from './routing/guards/auth.guard';
-import {ContactListComponent} from './contacts/main/contact-list/contact-list.component';
+import {ContactListComponent} from './contacts-page/main/contact-list/contact-list.component';
 import {RoutingModule} from './routing/routing.module';
 
 @NgModule({

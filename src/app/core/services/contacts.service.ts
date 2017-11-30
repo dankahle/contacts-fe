@@ -16,7 +16,7 @@ export class ContactsService {
 
   getAll(id?: string) {
     // const params = new HttpParams().set('hideSpinner', 'true');
-    // return this.http.get<Contact[]>(`${this.apiUrl}api/contacts`, {params: params});
+    // return this.http.get<Contact[]>(`${this.apiUrl}api/contacts-page`, {params: params});
     let params = new HttpParams();
     if (id) {
       params = params.set('label', id);
@@ -46,6 +46,27 @@ export class ContactsService {
           return this.getAll();
         }
       });
+  }
+
+  updateLabelInContacts(contacts: Contact[], labelId) {
+    const updateContacts: Contact[] = [];
+
+    contacts.forEach(contact => {
+      const index = _.findIndex(contact.labels, {id: labelId})
+      if (index !== -1) {
+        contact.labels.splice(index, 1);
+        updateContacts.push(contact);
+      }
+    });
+    if (updateContacts.length > 0) {
+      return this.updateMany(updateContacts)
+        .map(resp => {
+          this.store.publishContacts();
+          return resp;
+        });
+    } else {
+      return Observable.of(null);
+    }
   }
 
   removeLabelFromContacts(contacts: Contact[], labelId) {
