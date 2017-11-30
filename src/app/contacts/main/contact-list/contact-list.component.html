@@ -5,7 +5,6 @@
   <span *ngIf="store.state.selectedLabel.numContacts">({{store.state.selectedLabel.numContacts}})</span>
 </div>
 
-<button (click)="updateSomething()">update something</button>
 <div *ngFor="let contact of contacts">
   <dk-contact-list-item [contact]="contact" (click)="editContact(contact)" (keydown)="keydown($event, contact)"></dk-contact-list-item>
 </div>

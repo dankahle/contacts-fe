@@ -53,8 +53,6 @@ export class InitializationGuard implements CanActivate {
       .map(x => {
         // console.log('init guard end');
         this.store.setVal('initialized', true);
-        this.userService.init();
-        this.contactsService.init();
         return true;
       });
   }

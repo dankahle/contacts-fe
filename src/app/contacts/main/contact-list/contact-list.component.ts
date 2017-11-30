@@ -21,11 +21,6 @@ export class ContactListComponent {
     });
   }
 
-    updateSomething() {
-    this.store.state.contacts.pop();
-    this.store.publishContacts();
-  }
-
   editContact(contact) {
     console.log('editcontact', contact.name);
   }

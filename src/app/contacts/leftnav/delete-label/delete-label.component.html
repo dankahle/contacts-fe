@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Delete this label</h2>
+
+<div mat-dialog-content>
+
+  <div>
+    <ng-container *ngIf="data.label.numContacts === 1">
+      This label has 1 contact. Choose what to do with it.
+    </ng-container>
+    <ng-container *ngIf="data.label.numContacts > 1">
+      This label has {{data.label.numContacts}} contacts. Choose what to do with them.
+    </ng-container>
+  </div>
+
+  <form id="form1" #form="ngForm" (submit)="submit(form)">
+    <mat-radio-group name="deleteMode" class="example-radio-group" [(ngModel)]="data.deleteMode">
+      <mat-radio-button [value]="keepContacts">
+        Keep all contacts and delete this label
+      </mat-radio-button>
+      <mat-radio-button [value]="deleteContacts">
+        Delete all contacts and delete this label
+      </mat-radio-button>
+    </mat-radio-group>
+  </form>
+</div>
+
+<div mat-dialog-actions>
+  <button type="submit" form="form1" mat-button color="primary" (click)="submit(form)" tabindex="3"
+          [disabled]="form.invalid">Delete
+  </button>
+  <button mat-button mat-dialog-close tabindex="-1">Cancel</button>
+</div>
+

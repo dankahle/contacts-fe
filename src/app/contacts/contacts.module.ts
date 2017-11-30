@@ -14,6 +14,7 @@ import {HeaderComponent} from './header/header.component';
 import {LeftnavComponent} from './leftnav/leftnav/leftnav.component';
 import {LeftnavLabelComponent} from './leftnav/leftnav-label/leftnav-label.component';
 import { EditLabelComponent } from './leftnav/edit-label/edit-label.component';
+import { DeleteLabelComponent } from './leftnav/delete-label/delete-label.component';
 
 @NgModule({
   imports: [
@@ -22,9 +23,9 @@ import { EditLabelComponent } from './leftnav/edit-label/edit-label.component';
     CoreModule
   ],
   declarations: [ContactListComponent, ContactDetailRouteComponent, ContactDetailComponent, ContactListItemComponent,
-    LeftnavComponent, HeaderComponent, LeftnavLabelComponent, EditLabelComponent],
+    LeftnavComponent, HeaderComponent, LeftnavLabelComponent, EditLabelComponent, DeleteLabelComponent],
   exports: [RouterModule, LeftnavComponent, HeaderComponent],
-  entryComponents: [ContactDetailComponent, EditLabelComponent],
+  entryComponents: [ContactDetailComponent, EditLabelComponent, DeleteLabelComponent],
   providers: [ContactsService]
 })
 export class ContactsModule {

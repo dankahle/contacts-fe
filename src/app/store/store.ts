@@ -5,6 +5,7 @@ import {State} from './models/state';
 import {User} from './models/user';
 import * as _ from 'lodash';
 import {StoreBase} from './store-base';
+import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 /**
@@ -17,9 +18,11 @@ import {StoreBase} from './store-base';
 export class Store extends StoreBase {
 
   userState$ = new BehaviorSubject(this.state.user);
-  contactsState$ = new BehaviorSubject(this.state.contacts);
   subscribeUser = this.userState$.subscribe.bind(this.userState$);
+  contactsState$ = new BehaviorSubject(this.state.contacts);
   subscribeContacts = this.contactsState$.subscribe.bind(this.contactsState$);
+  updateLabelCounts$ = new Subject();
+  subscribeUpdateLabelCounts = this.updateLabelCounts$.subscribe.bind(this.updateLabelCounts$);
 
   constructor() {
     super();
@@ -45,4 +48,7 @@ export class Store extends StoreBase {
     super.publish();
   }
 
+  publishUpdateLabelCounts() {
+    this.updateLabelCounts$.next();
+  }
 }

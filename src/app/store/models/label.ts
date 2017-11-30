@@ -4,4 +4,5 @@ export interface Label {
   name: string;
   icon: string;
   numContacts?: number;
+  noEdit?: boolean;
 }

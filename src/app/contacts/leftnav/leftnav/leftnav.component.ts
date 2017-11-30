@@ -8,6 +8,9 @@ import {UserService} from '../../../core/services/user-service';
 import {NotImplementedComponent} from '../../../shared/components/not-implemented/not-implemented.component';
 import {EditLabelComponent} from '../edit-label/edit-label.component';
 import * as _ from 'lodash';
+import {DeleteLabelComponent} from '../delete-label/delete-label.component';
+import {DeleteLabelMode} from '../../../store/enums/deleteLabelMode.enum';
+import {ContactsService} from '../../../core/services/contacts.service';
 
 @Component({
   selector: 'dk-leftnav',
@@ -18,18 +21,19 @@ import * as _ from 'lodash';
 export class LeftnavComponent {
   @HostBinding('class.closed') leftNavClosed;
   labels = {
-    contacts: <Label>{id: 'contacts', name: 'Contacts fsdfdsfadsfasdfasdfasdfsad', icon: 'label'},
+    contacts: <Label>{id: 'contacts', name: 'Contacts', icon: 'label', noEdit: true},
     arrExtras: [
-      <Label>{id: 'settings', name: 'Settings', icon: 'settings'},
-      <Label>{id: 'sendFeedback', name: 'Send Feedback', icon: 'sms_failed'},
-      <Label>{id: 'help', name: 'Help', icon: 'help'}
+      <Label>{id: 'settings', name: 'Settings', icon: 'settings', noEdit: true},
+      <Label>{id: 'sendFeedback', name: 'Send Feedback', icon: 'sms_failed', noEdit: true},
+      <Label>{id: 'help', name: 'Help', icon: 'help', noEdit: true}
     ],
     addLabel: <Label>{id: 'addLabel', name: 'Create label', icon: 'add'},
 
   };
 
 
-  constructor(protected store: Store, protected router: Router, private mdDialog: MatDialog, private userService: UserService) {
+  constructor(protected store: Store, protected router: Router, private mdDialog: MatDialog,
+              private userService: UserService, private contactsService: ContactsService) {
     store.setVal('selectedLabel', this.labels.contacts);
 
     store.subscribe(state => {
@@ -77,18 +81,49 @@ export class LeftnavComponent {
     }
   }
 
-  keydown(event, label) { // Trigger the click event from the keyboard
-    if (Util.isKeydown(event)) {
-      this.handleLabel(label);
+  deleteLabel(event, label) {
+    event.stopPropagation();
+    if (Util.keydownAndNotEnterOrSpace(event)) {
+      return;
+    }
+
+    if (label.numContacts === 0) {
+      this.userService.deleteLabel(this.store.state.user, label)
+        .subscribe(x => x);
+    } else {
+
+      const config = <MatDialogConfig>{
+        width: '336px',
+        height: '281px',
+        data: {
+          label: {...label}
+        }
+      }
+      this.mdDialog.open(DeleteLabelComponent, config)
+        .afterClosed().subscribe(results => {
+        if (results.deleteMode) {
+          if (results.deleteMode === DeleteLabelMode.keepContacts) {
+            this.contactsService.removeLabelFromContacts(this.store.state.contacts, label.id)
+              .subscribe(() => {
+                this.userService.deleteLabel(this.store.state.user, label)
+                  .subscribe(x => x);
+              });
+          } else if (results.deleteMode === DeleteLabelMode.deleteContacts) {
+            this.contactsService.deleteAllWithLabel(this.store.state.contacts, label.id)
+              .subscribe(() => {
+                this.userService.deleteLabel(this.store.state.user, label)
+                  .subscribe(x => x);
+              });
+          }
+        }
+      });
     }
   }
 
-  deleteLabel(event, label) {
-    event.stopPropagation()
-    console.log('delete', label.name);
-  }
+
 
   editLabel(event, label, mode) {
+    event.stopPropagation();
     if (Util.keydownAndNotEnterOrSpace(event)) {
       return;
     }
@@ -98,7 +133,7 @@ export class LeftnavComponent {
       height: '193px',
       data: {
         mode: mode,
-        label: label,
+        label: {...label},
         labelNames:
           this.store.state.user.labels.map(label => label.name)
       }
@@ -111,7 +146,7 @@ export class LeftnavComponent {
         } else {
           _.find(this.store.state.user.labels, {id: results.label.id}).name = results.label.name;
         }
-        this.store.state.user.labels.sort();
+        this.store.state.user.labels = _.sortBy(this.store.state.user.labels, 'name');
         this.userService.updateUser(this.store.state.user)
           .subscribe(user => user);
       }

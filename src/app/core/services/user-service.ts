@@ -55,6 +55,8 @@ export class UserService {
       return;
     }
 
+
+
     // foreach state.contacts, inc appropriate label counts
     state.user.labels.forEach(label => {
       label.numContacts = 0;
@@ -66,11 +68,10 @@ export class UserService {
     });
   }
 
-  /**
-   * init
-   * @desc - called when app initialization is complete
-   */
-  init() {
+  deleteLabel(user, label) {
+    user.labels.splice(_.findIndex(user.labels, {id: label.id}), 1);
+    return this.updateUser(user);
+
   }
 
   getLabelById(id) {

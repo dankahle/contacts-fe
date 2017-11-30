@@ -1,6 +1,7 @@
-<div mat-dialog-content>
 
-  <h3 *ngIf="data.mode === 'edit'" mat-dialog-title>Rename label</h3><br>
+<h2 *ngIf="data.mode === 'edit'" mat-dialog-title>Rename label</h2>
+
+<div mat-dialog-content>
 
   <form id="form1" name="form" #form="ngForm" (submit)="submit(form, data)">
     <mat-form-field>
@@ -13,6 +14,7 @@
 </div>
 
 <div mat-dialog-actions>
-  <button type="submit" form="form1" mat-button [mat-dialog-close]="data" tabindex="3" [disabled]="form.invalid">OK</button>
+  <button type="submit" form="form1" mat-button color="primary" [mat-dialog-close]="data" tabindex="3" [disabled]="form.invalid">OK</button>
   <button mat-button mat-dialog-close tabindex="-1">Cancel</button>
 </div>
+
