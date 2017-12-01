@@ -1,0 +1,57 @@
+import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs/Observable';
+import {Contact} from '../../../store/models/contact';
+import 'rxjs/add/operator/startWith';
+import {Store} from '../../../store/store';
+
+@Component({
+  selector: 'dk-contact-search',
+  templateUrl: './contact-search.component.html',
+  styleUrls: ['./contact-search.component.scss'],
+  encapsulation: ViewEncapsulation.Emulated
+})
+export class ContactSearchComponent implements OnInit {
+  @ViewChild('searchCtrl') searchCtrl;
+  searchVal: string;
+
+  constructor(protected store: Store) {
+  }
+
+  myControl = new FormControl();
+
+  filteredContacts: Observable<Contact[]>;
+
+  ngOnInit() {
+    this.filteredContacts = this.searchCtrl.control.valueChanges
+      .startWith(null)
+      .map(contact => contact && typeof contact === 'object' ? contact.name : contact)
+      .map(name => name ? this.filter(name) : []);
+  }
+
+  filter(name: string): Contact[] {
+    return this.store.state.contacts.filter(option =>
+      option.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
+  }
+
+  getDisplayName(contact: Contact): string {
+    return contact ? contact.name || contact.company : '';
+  }
+
+  getDisplayNameAndEmail(contact: Contact): string {
+
+    let prefix = this.getDisplayName(contact);
+    if (contact.emails && contact.emails.length > 0) {
+      return prefix += ` - ${contact.emails[0].email}`;
+    } else {
+      return prefix;
+    }
+  }
+
+  displayContact(event) {
+    console.log(event.option.value.name);
+  }
+
+}
+
+

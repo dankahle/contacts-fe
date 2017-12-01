@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {Store} from '../../store/store';
-import {LoginService} from '../../login/login.service';
+import {Store} from '../../../store/store';
+import {LoginService} from '../../../login/login.service';
 
 @Component({
   selector: 'dk-header',
