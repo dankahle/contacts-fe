@@ -14,7 +14,7 @@ export class ContactsService {
   constructor(private http: HttpClient, private store: Store, private route: ActivatedRoute) {
   }
 
-  getAll(id?: string) {
+  getAll(id?: string, saveToState?: boolean) {
     // const params = new HttpParams().set('hideSpinner', 'true');
     // return this.http.get<Contact[]>(`${this.apiUrl}api/contacts`, {params: params});
     let params = new HttpParams();
@@ -23,7 +23,9 @@ export class ContactsService {
     }
     return this.http.get<Contact[]>(`${this.apiUrl}api/contacts`, {params: params})
       .do(contacts => {
-        this.store.setContacts(contacts);
+        if (saveToState) {
+          this.store.setContacts(contacts);
+        }
         if (!id) {
           // can only do this with "all" contacts
           this.store.publishUpdateLabelCounts(contacts);
@@ -44,9 +46,9 @@ export class ContactsService {
     return this.http.delete<any>(`${this.apiUrl}api/contacts`, {params: params})
       .mergeMap(resp => {
         if (this.route.snapshot.params.id) {
-          return this.getAll(this.route.snapshot.params.id);
+          return this.getAll(this.route.snapshot.params.id, true);
         } else {
-          return this.getAll();
+          return this.getAll(null, true);
         }
       });
   }

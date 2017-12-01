@@ -1,3 +1,3 @@
 <div tabindex="0" class="item">
-  {{contact.name}} <a href="javascript:void(0)" (click)="parent.editContact(this)">edit</a>
+  {{contact.name}} <a href="javascript:void(0)" (click)="parent.editContact($event, contact, 'edit')">edit</a>
 </div>

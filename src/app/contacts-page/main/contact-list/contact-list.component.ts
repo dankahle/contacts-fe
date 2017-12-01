@@ -21,14 +21,18 @@ export class ContactListComponent {
     });
   }
 
-  editContact(contact) {
-    console.log('editcontact', contact.name);
+  editContact(event, contact, mode) {
+    event.stopPropagation();
+    if (Util.keydownAndNotEnterOrSpace(event)) {
+      return;
+    }
+    console.log('edit', contact.name);
+
+    // put up editContactComponent data.mode = mode
+    // .do(contact => this.publishLabelContacts)
+    //  if add contactsService.addContact(contact) else contactsService.updateContact(contact)
+
   }
 
-  keydown(event, contact) { // Trigger the click event from the keyboard
-    if (Util.isKeydown(event)) {
-      this.editContact(contact);
-    }
-  }
 
 }

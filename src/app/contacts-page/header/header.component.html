@@ -4,6 +4,11 @@
     <div class="menu">
       <i class="material-icons" (click)="store.setVal('leftNavClosed', !store.state.leftNavClosed)">menu</i>
     </div>
+
+    <div>
+      <input (focus)="log('focus search')">
+    </div>
+
     <div *ngIf="!!store.state.user" class="" fxFlex>
       Welcome: {{store.state.user.name}} <a href="javascript:void(0)" (click)="logout()">logout</a>
     </div>

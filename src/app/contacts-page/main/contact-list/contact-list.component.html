@@ -6,7 +6,7 @@
 </div>
 
 <div *ngFor="let contact of contacts">
-  <dk-contact-list-item [contact]="contact" (click)="editContact(contact)" (keydown)="keydown($event, contact)"></dk-contact-list-item>
+  <dk-contact-list-item [contact]="contact" (click)="editContact($event, contact, 'edit')" (keydown)="editContact($event, contact, 'edit')"></dk-contact-list-item>
 </div>
 
 <div  *ngIf="contacts.length === 0" class="no-contacts">

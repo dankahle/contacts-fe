@@ -14,9 +14,9 @@ export class ContactListResolve implements Resolve<Contact[]> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Contact[]> {
     // console.log('contact resolve start');
     if (route.params.id) {
-      return this.contactsService.getAll(route.params.id);
+      return this.contactsService.getAll(route.params.id, true);
     } else {
-      return this.contactsService.getAll();
+      return this.contactsService.getAll(null, true);
     }
   }
 

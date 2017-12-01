@@ -9,6 +9,7 @@ import {LoginService} from '../../login/login.service';
   encapsulation: ViewEncapsulation.Emulated
 })
 export class HeaderComponent {
+  log = console.log;
 
   constructor(private loginService: LoginService, protected store: Store) {}
 
