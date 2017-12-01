@@ -9,7 +9,6 @@ export class State {
   initialized = false;
   leftNavClosed = false;
   selectedLabel?: Label;
-  totalContacts = 0;
 
   getVal(path) {
     return _.get(this, path);

@@ -18,11 +18,11 @@ export class ContactDetailComponent {
   }
 
   addLabel(label) {
-    this.store.publishUpdateLabelCounts(null);
+    this.store.publishUpdateLabelCounts();
   }
 
   deleteLabel(label) {
-    this.store.publishUpdateLabelCounts(null);
+    this.store.publishUpdateLabelCounts();
   }
 
 

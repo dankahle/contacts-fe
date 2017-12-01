@@ -1,7 +1,7 @@
 import {Component, HostBinding, ViewEncapsulation} from '@angular/core';
 import {Store} from '../../../store/store';
 import {Label} from '../../../store/models/label';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Util} from '../../../core/services/util';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {UserService} from '../../../core/services/user-service';
@@ -33,8 +33,18 @@ export class LeftnavComponent {
 
 
   constructor(protected store: Store, protected router: Router, private mdDialog: MatDialog,
-              private userService: UserService, private contactsService: ContactsService) {
-    store.setVal('selectedLabel', this.labels.contacts);
+              private userService: UserService, private contactsService: ContactsService,
+              private route: ActivatedRoute) {
+
+    this.route.params.subscribe(params => {
+      const id = params.id;
+    })
+
+    if (this.route.snapshot.params.id) {
+      this.store.setVal('selectedLabel', this.userService.getLabelById(this.route.snapshot.params.id));
+    } else {
+      this.store.setVal('selectedLabel', this.labels.contacts);
+    }
 
     store.subscribe(state => {
       this.leftNavClosed = state.leftNavClosed;
@@ -102,7 +112,7 @@ export class LeftnavComponent {
             this.contactsService.removeLabelFromContacts(this.store.state.contacts, label.id)
               .subscribe(() => this._deleteLabel(label));
           } else if (results.deleteMode === DeleteLabelMode.deleteContacts) {
-            this.contactsService.deleteAllWithLabel(this.store.state.contacts, label.id)
+            this.contactsService.deleteAllWithLabel(label.id)
               .subscribe(() => this._deleteLabel(label));
           }
         }

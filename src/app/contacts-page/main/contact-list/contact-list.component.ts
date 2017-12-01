@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Contact} from '../../../store/models/contact';
 import {Store} from '../../../store/store';
 import {Util} from '../../../core/services/util';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'dk-contact-list',
@@ -11,14 +12,20 @@ import {Util} from '../../../core/services/util';
   encapsulation: ViewEncapsulation.Emulated
 })
 export class ContactListComponent {
-  contacts: Contact[];
+  contacts: Contact[] = [];
   messageCount: number;
 
-  constructor(route: ActivatedRoute, protected store: Store) {
-    store.subscribeContacts(contacts => this.contacts = contacts);
-    route.data.subscribe(data => {
-      return this.contacts = data.contacts;
-    });
+  constructor(private route: ActivatedRoute, protected store: Store) {
+    store.subscribeContacts(contacts => this.contacts = this.filterByLabel(contacts));
+  }
+
+  filterByLabel(contacts) {
+    const labelId = this.route.snapshot.params.id;
+    if (labelId) {
+      return contacts.filter(contact => _.find(contact.labels, {id: labelId}));
+    } else {
+      return contacts; // contacts label chosen
+    }
   }
 
   editContact(event, contact, mode) {

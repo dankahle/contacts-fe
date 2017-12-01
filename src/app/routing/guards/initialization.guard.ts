@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
+import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/forkJoin';
 import 'rxjs/add/operator/mergeMap';
@@ -18,6 +18,7 @@ import {UserService} from '../../core/services/user-service';
 export class InitializationGuard implements CanActivate {
 
   constructor(private store: Store,
+              private route: ActivatedRoute,
               private userService: UserService,
               private contactsService: ContactsService,
               private init1: Init1,
@@ -43,8 +44,11 @@ export class InitializationGuard implements CanActivate {
     }
     // console.log('init guard start');
     // an example of a complex initialization flow with dependencies of dependencies
-    return Observable.forkJoin(this.init1.get(), this.init2.get())
-      .mergeMap(x => {
+    return Observable.forkJoin(this.contactsService.getAll(), this.init1.get(), this.init2.get())
+      .mergeMap(arr => {
+        this.store.setContacts(arr[0]);
+        this.store.publishUpdateLabelCounts();
+
         return Observable.forkJoin(this.init3.get(), this.init4.get());
       })
       .mergeMap(x => {
@@ -53,6 +57,9 @@ export class InitializationGuard implements CanActivate {
       .map(x => {
         // console.log('init guard end');
         this.store.setVal('initialized', true);
+        this.route.params.subscribe(params => {
+          const id = params.id;
+        })
         return true;
       });
   }

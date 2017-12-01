@@ -14,23 +14,8 @@ export class ContactsService {
   constructor(private http: HttpClient, private store: Store, private route: ActivatedRoute) {
   }
 
-  getAll(id?: string, saveToState?: boolean) {
-    // const params = new HttpParams().set('hideSpinner', 'true');
-    // return this.http.get<Contact[]>(`${this.apiUrl}api/contacts`, {params: params});
-    let params = new HttpParams();
-    if (id) {
-      params = params.set('label', id);
-    }
-    return this.http.get<Contact[]>(`${this.apiUrl}api/contacts`, {params: params})
-      .do(contacts => {
-        if (saveToState) {
-          this.store.setContacts(contacts);
-        }
-        if (!id) {
-          // can only do this with "all" contacts
-          this.store.publishUpdateLabelCounts(contacts);
-        }
-      });
+  getAll() {
+    return this.http.get<Contact[]>(`${this.apiUrl}api/contacts`);
   }
 
   getOne(id: number) {
@@ -41,16 +26,23 @@ export class ContactsService {
     return this.http.put<Contact>(`${this.apiUrl}api/contacts`, contacts);
   }
 
-  deleteAllWithLabel(contacts, labelId) {
+  deleteAllWithLabel(labelId) {
+
+    const contacts = this.store.state.contacts;
+    const deleteContacts = [];
+    contacts.forEach(contact => {
+      if (_.find(contact.labels, {id: labelId})) {
+        deleteContacts.push(contact);
+      }
+    });
+
+    deleteContacts.forEach(contact => {
+      contacts.splice(_.findIndex(contacts, {id: contact.id}), 1);
+    })
+
     const params = new HttpParams().set('label', labelId);
     return this.http.delete<any>(`${this.apiUrl}api/contacts`, {params: params})
-      .mergeMap(resp => {
-        if (this.route.snapshot.params.id) {
-          return this.getAll(this.route.snapshot.params.id, true);
-        } else {
-          return this.getAll(null, true);
-        }
-      });
+      .do(() => this.store.publishContacts());
   }
 
   updateLabelInContacts(contacts: Contact[], label) {
@@ -65,7 +57,7 @@ export class ContactsService {
     });
     if (updateContacts.length > 0) {
       return this.updateMany(updateContacts)
-        .do(resp => this.store.publishContacts());
+        .do(() => this.store.publishContacts());
     } else {
       return Observable.of(null);
     }

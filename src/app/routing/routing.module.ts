@@ -5,11 +5,10 @@ import {InitializationGuard} from './guards/initialization.guard';
 import {AuthGuard} from './guards/auth.guard';
 import {ContactListComponent} from '../contacts-page/main/contact-list/contact-list.component';
 import {RouterModule, Routes} from '@angular/router';
-import {ContactListResolve} from './resolves/contact-list.resolve';
 
 const appRoutes: Routes = [
-  { path: '', component: ContactListComponent, canActivate: [AuthGuard, InitializationGuard], resolve: {contacts: ContactListResolve}},
-  { path: ':id', component: ContactListComponent, canActivate: [AuthGuard, InitializationGuard], resolve: {contacts: ContactListResolve}},
+  { path: '', component: ContactListComponent, canActivate: [AuthGuard, InitializationGuard]},
+  { path: ':id', component: ContactListComponent, canActivate: [AuthGuard, InitializationGuard]},
   {path: '**', component: PageNotFoundComponent}
 ];
 
@@ -17,8 +16,8 @@ const appRoutes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forRoot(appRoutes, {enableTracing: false}),
+    RouterModule.forRoot(appRoutes, {enableTracing: true}),
   ],
-  providers: [ContactListResolve]
+  providers: []
 })
 export class RoutingModule { }

@@ -48,7 +48,7 @@ export class Store extends StoreBase {
     super.publish();
   }
 
-  publishUpdateLabelCounts(val) {
-    this.updateLabelCounts$.next(val);
+  publishUpdateLabelCounts() {
+    this.updateLabelCounts$.next();
   }
 }

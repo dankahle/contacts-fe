@@ -17,25 +17,13 @@ import 'rxjs/add/operator/do';
 export class ContactsPageService {
 
   constructor(private store: Store, private userService: UserService, private contactsService: ContactsService) {
-    store.subscribeUpdateLabelCounts(contacts => this.updateLabelCounts(contacts));
-  }
-
-  updateLabelCounts(contacts) {
-
-    // contacts.getAll will pass in contacts
-    if (contacts) {
-      this._updateLabelCounts(contacts);
-    } else {
-      this.contactsService.getAll()
-        .do(_contacts => this._updateLabelCounts(_contacts))
-        .subscribe(x => x);
-    }
+    store.subscribeUpdateLabelCounts(contacts => this.updateLabelCounts());
   }
 
   // add/delete contacts will pass null in here
-  _updateLabelCounts(contacts) {
+  updateLabelCounts() {
     const state = this.store.state;
-    state.totalContacts = contacts.length;
+    const contacts = state.contacts;
     state.user.labels.forEach(label => {
       label.numContacts = 0;
       contacts.forEach(contact => {
