@@ -4,7 +4,7 @@
   <mat-form-field floatPlaceholder="never">
     <span matPrefix style="margin-right:10px;"><i class="material-icons">search</i></span>
     <input name="search" type="text" placeholder="Search" matInput [(ngModel)]="searchVal" #searchCtrl="ngModel" [matAutocomplete]="auto">
-    <span matSuffix>gg</span>
+    <span matSuffix><i class="material-icons">close</i></span>
     <mat-autocomplete #auto="matAutocomplete" [displayWith]="getDisplayName" (optionSelected)="displayContact($event)">
       <mat-option *ngFor="let contact of filteredContacts | async" [value]="contact">
         {{ getDisplayNameAndEmail(contact) }}
