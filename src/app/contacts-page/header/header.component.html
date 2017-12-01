@@ -1,17 +1,31 @@
 
 <mat-toolbar color="primary">
-  <div fxFlex="row" fxFlexLayoutAlign="space-between center">
-    <div class="menu">
-      <i class="material-icons" (click)="store.setVal('leftNavClosed', !store.state.leftNavClosed)">menu</i>
+  <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="space-between center">
+
+    <div fxFlex="1 1 80%" class="left" fxLayout="row" fxLayoutAlign="flex-start center">
+
+      <div class="menu" fxFlex="0 0 auto">
+        <i class="material-icons" (click)="store.setVal('leftNavClosed', !store.state.leftNavClosed)">menu</i>
+      </div>
+
+      <div class="logo" fxFlex="0 0 auto">
+        <a href="javascript:void(0)">
+          <span class="logo1">DK</span> <span class="logo2">Contacts</span>
+        </a>
+      </div>
+
+      <div class="search-div" fxFlex="1 1 auto">
+        <input>
+      </div>
     </div>
 
-    <div>
-      <input (focus)="log('focus search')">
+    <div class="right" *ngIf="!!store.state.user" fxLayout="row" fxLayoutAlign="flex-end center">
+      <div>
+        <span class="user">user - {{store.state.user.name}}</span>
+        <a class="logout" href="javascript:void(0)" (click)="logout()">logout</a>
+      </div>
     </div>
 
-    <div *ngIf="!!store.state.user" class="" fxFlex>
-      Welcome: {{store.state.user.name}} <a href="javascript:void(0)" (click)="logout()">logout</a>
-    </div>
   </div>
 </mat-toolbar>
 
