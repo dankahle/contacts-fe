@@ -2,7 +2,7 @@
 
 
 <dk-leftnav-label [label]="labels.contacts" (click)="showAllContacts($event, labels.contacts)" (keydown)="showAllContacts($event, labels.contacts)"
-                  [class.active]="store.state.selectedLabel === labels.contacts"></dk-leftnav-label>
+                  [class.active]="!store.state.selectedLabel"></dk-leftnav-label>
 
 <mat-expansion-panel [expanded]="true" class="labels">
   <mat-expansion-panel-header collapsedHeight="41px" expandedHeight="41px">

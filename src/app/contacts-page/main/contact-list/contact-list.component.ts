@@ -4,6 +4,7 @@ import {Contact} from '../../../store/models/contact';
 import {Store} from '../../../store/store';
 import {Util} from '../../../core/services/util';
 import * as _ from 'lodash';
+import {UserService} from '../../../core/services/user-service';
 
 @Component({
   selector: 'dk-contact-list',
@@ -15,11 +16,22 @@ export class ContactListComponent {
   contacts: Contact[] = [];
   messageCount: number;
 
-  constructor(private route: ActivatedRoute, protected store: Store) {
+  constructor(private route: ActivatedRoute, protected store: Store, protected userService: UserService) {
     store.subscribeContacts(contacts => this.contacts = this.filterByLabel(contacts));
+
+    this.route.params.subscribe(params => {
+      const id = this.route.snapshot.params.id;
+      if (id) {
+        store.setVal('selectedLabel', userService.getLabelById(id));
+      } else {
+        store.deleteVal('selectedLabel');
+      }
+    });
+
   }
 
   filterByLabel(contacts) {
+
     const labelId = this.route.snapshot.params.id;
     if (labelId) {
       return contacts.filter(contact => _.find(contact.labels, {id: labelId}));

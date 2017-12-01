@@ -36,16 +36,6 @@ export class LeftnavComponent {
               private userService: UserService, private contactsService: ContactsService,
               private route: ActivatedRoute) {
 
-    this.route.params.subscribe(params => {
-      const id = params.id;
-    })
-
-    if (this.route.snapshot.params.id) {
-      this.store.setVal('selectedLabel', this.userService.getLabelById(this.route.snapshot.params.id));
-    } else {
-      this.store.setVal('selectedLabel', this.labels.contacts);
-    }
-
     store.subscribe(state => {
       this.leftNavClosed = state.leftNavClosed;
     });
@@ -56,7 +46,6 @@ export class LeftnavComponent {
       return;
     }
     this.router.navigateByUrl('/');
-    this.store.setVal('selectedLabel', label);
   }
 
   showLabelContacts(event, label) {
@@ -64,28 +53,6 @@ export class LeftnavComponent {
       return;
     }
     this.router.navigate(['/', label.id]);
-    this.store.setVal('selectedLabel', label);
-  }
-
-
-  handleLabel(label) {
-    if (Util.isGuid(label.id)) {
-      this.router.navigate(['/', label.id]);
-      this.store.setVal('selectedLabel', label);
-    } else {
-      switch (label.id) {
-        case 'contacts':
-          this.router.navigateByUrl('/');
-          this.store.setVal('selectedLabel', label);
-          break;
-        case 'addLabel':
-
-          break;
-        default:
-          console.log(label.id);
-          break;
-      }
-    }
   }
 
   deleteLabel(event, label) {
@@ -124,8 +91,8 @@ export class LeftnavComponent {
     this.userService.deleteLabel(this.store.state.user, label)
       .subscribe(x => {
         // if we're deleting the selected label, set "contacts" to selected label
-        if (this.store.state.selectedLabel !== this.labels.contacts) {
-          this.showAllContacts({}, this.labels.contacts);
+        if (this.store.state.selectedLabel) {
+          this.router.navigateByUrl('/');
         }
       });
   }
