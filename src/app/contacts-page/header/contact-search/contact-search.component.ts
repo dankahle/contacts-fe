@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import {Contact} from '../../../store/models/contact';
@@ -13,7 +13,10 @@ import {Store} from '../../../store/store';
 })
 export class ContactSearchComponent implements OnInit {
   @ViewChild('searchCtrl') searchCtrl;
-  searchVal: string;
+  @ViewChild('searchCtrl', {read: ElementRef}) searchElem;
+  searchVal = '';
+  log = console.log;
+  hideInput = true;
 
   constructor(protected store: Store) {
   }
@@ -50,6 +53,13 @@ export class ContactSearchComponent implements OnInit {
 
   displayContact(event) {
     console.log(event.option.value.name);
+    this.searchVal = '';
+    this.searchElem.nativeElement.blur();
+  }
+
+  clearText() {
+    this.searchVal = '';
+    this.searchElem.nativeElement.focus();
   }
 
 }

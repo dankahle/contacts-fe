@@ -1,14 +1,18 @@
 
 
-<form>
-  <mat-form-field floatPlaceholder="never">
-    <span matPrefix style="margin-right:10px;"><i class="material-icons">search</i></span>
-    <input name="search" type="text" placeholder="Search" matInput [(ngModel)]="searchVal" #searchCtrl="ngModel" [matAutocomplete]="auto">
-    <span matSuffix><i class="material-icons">close</i></span>
-    <mat-autocomplete #auto="matAutocomplete" [displayWith]="getDisplayName" (optionSelected)="displayContact($event)">
-      <mat-option *ngFor="let contact of filteredContacts | async" [value]="contact">
-        {{ getDisplayNameAndEmail(contact) }}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-</form>
+<div class="auto-comp-div" fxLayout="row" fxLayoutAlign="space-between center">
+
+  <div class="prefix" fxFlex="0 0 auto" (click)="searchElem.nativeElement.focus()"><i class="material-icons">search</i></div>
+
+  <input class="input blur" fxFlex="1 0 auto" name="search" type="text" [(ngModel)]="searchVal" #searchCtrl="ngModel" placeholder="Search"
+         [matAutocomplete]="auto" (focus)="hideInput = false" (blur)="hideInput = true" [class.hide-input]="hideInput">
+
+  <mat-autocomplete #auto="matAutocomplete" [displayWith]="getDisplayName" (optionSelected)="displayContact($event)">
+    <mat-option *ngFor="let contact of filteredContacts | async" [value]="contact">
+      {{ getDisplayNameAndEmail(contact) }}
+    </mat-option>
+  </mat-autocomplete>
+
+  <div class="suffix" fxFlex="0 0 auto" (click)="clearText()" [hidden]="searchVal.length === 0"><i class="material-icons">close</i></div>
+
+</div>
