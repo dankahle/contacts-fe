@@ -4,19 +4,17 @@ import {UserService} from '../core/services/user-service';
 import {ContactsService} from '../core/services/contacts.service';
 import * as _ from 'lodash';
 import 'rxjs/add/operator/do';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+import {ContactEditComponent} from './main/contact-edit/contact-edit.component';
+import {Util} from '../core/services/util';
+import {ContactDetailComponent} from './main/contact-detail/contact-detail.component';
+import {Observable} from 'rxjs/Observable';
 
-/**
- * ContactsUiService
- * @desc - we have a hierarchy of: store/routing << core << shared << comps << app
- * we'd like to put as much functionality in the services as possible, but always turns into a mess when
- * they need to "see" each other, the dreaded cyclic dependency issue. So we'll create services in the pages to answer
- * those issues. Some things would be more appropriate in the core (update labels on user), but if the userService needs
- * to user another service, then it gets bumped up to this level that can see core without concern of cyclic dependency.
- */
 @Injectable()
 export class ContactsPageService {
 
-  constructor(private store: Store, private userService: UserService, private contactsService: ContactsService) {
+  constructor(private store: Store, private userService: UserService, private contactsService: ContactsService,
+              private mdDialog: MatDialog) {
     store.subscribeUpdateLabelCounts(contacts => this.updateLabelCounts());
   }
 
@@ -33,5 +31,48 @@ export class ContactsPageService {
       });
     });
   }
+
+  openContactEdit(event, contact, mode) {
+    event.stopPropagation();
+    if (Util.keydownAndNotEnterOrSpace(event)) {
+      return;
+    }
+
+    const config = <MatDialogConfig>{
+      width: '248px',
+      height: '193px',
+      data: {
+        mode: mode,
+        contact: {...contact},
+      }
+    }
+    this.mdDialog.open(ContactEditComponent, config)
+      .afterClosed().subscribe(_contact => {
+      let api$: Observable<any>;
+      if (_contact) {
+        if (mode === 'add') {
+          api$ = this.contactsService.updateOne(_contact);
+        } else {
+          api$ = this.contactsService.addOne(_contact);
+        }
+        // we always open detail after add/edit
+        return api$.map(apiContact => {
+          this.openContactDetail(apiContact);
+        });
+      }
+    });
+  }
+
+  openContactDetail(contact) {
+    const config = <MatDialogConfig>{
+      width: '248px',
+      height: '193px',
+      data: {
+        contact: contact
+      }
+    }
+    this.mdDialog.open(ContactDetailComponent, config);
+  }
+
 
 }

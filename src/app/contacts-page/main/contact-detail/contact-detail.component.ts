@@ -1,7 +1,8 @@
-import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Inject, ViewEncapsulation} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Contact} from '../../../store/models/contact';
 import {Store} from '../../../store/store';
+import {ContactsPageService} from '../../contacts-page.service';
 
 @Component({
   selector: 'dk-contact-detail',
@@ -13,7 +14,7 @@ export class ContactDetailComponent {
   contact: Contact;
 
   constructor(public dialogRef: MatDialogRef<ContactDetailComponent>, @Inject(MAT_DIALOG_DATA) data: any,
-              protected store: Store) {
+              protected store: Store, protected contactsPageService: ContactsPageService) {
     this.contact = data.contact;
   }
 
@@ -24,6 +25,8 @@ export class ContactDetailComponent {
   deleteLabel(label) {
     this.store.publishUpdateLabelCounts();
   }
+
+
 
 
 }

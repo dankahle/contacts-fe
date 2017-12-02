@@ -4,6 +4,8 @@ import {Observable} from 'rxjs/Observable';
 import {Contact} from '../../../store/models/contact';
 import 'rxjs/add/operator/startWith';
 import {Store} from '../../../store/store';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+import {ContactDetailComponent} from '../../main/contact-detail/contact-detail.component';
 
 @Component({
   selector: 'dk-contact-search',
@@ -18,7 +20,7 @@ export class ContactSearchComponent implements OnInit {
   log = console.log;
   hideInput = true;
 
-  constructor(protected store: Store) {
+  constructor(protected store: Store, private mdDialog: MatDialog) {
   }
 
   myControl = new FormControl();
@@ -55,6 +57,7 @@ export class ContactSearchComponent implements OnInit {
     console.log(event.option.value.name);
     this.searchVal = '';
     this.searchElem.nativeElement.blur();
+    this.openContactDetail(event.option.value);
   }
 
   clearText() {
@@ -62,6 +65,15 @@ export class ContactSearchComponent implements OnInit {
     this.searchElem.nativeElement.focus();
   }
 
+  openContactDetail(contact) {
+    const config = <MatDialogConfig>{
+      width: '248px',
+      height: '193px',
+      data: {
+        contact: contact
+      }
+    }
+    this.mdDialog.open(ContactDetailComponent, config);
+  }
+
 }
-
-

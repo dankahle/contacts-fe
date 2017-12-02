@@ -22,6 +22,14 @@ export class ContactsService {
     return this.http.get<Contact>(`${this.apiUrl}api/contacts/${id}`);
   }
 
+  addOne(contact: Contact) {
+    return Observable.of(null);
+  }
+
+  updateOne(contact: Contact) {
+    return Observable.of(null);
+  }
+
   updateMany(contacts: Contact[]) {
     return this.http.put<Contact>(`${this.apiUrl}api/contacts`, contacts);
   }

@@ -6,7 +6,8 @@
 </h3>
 <br>
 <div *ngFor="let contact of contacts">
-  <dk-contact-list-item [contact]="contact" (click)="editContact($event, contact, 'edit')" (keydown)="editContact($event, contact, 'edit')"></dk-contact-list-item>
+  <dk-contact-list-item [contact]="contact" (click)="openContactDetail($event, contact)"
+                        (keydown)="openContactDetail($event, contact)"></dk-contact-list-item>
 </div>
 
 <!--
