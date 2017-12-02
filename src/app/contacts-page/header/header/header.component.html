@@ -21,7 +21,8 @@
 
     <div class="right" *ngIf="!!store.state.user" fxLayout="row" fxLayoutAlign="flex-end center">
       <div>
-        <span class="user">user - {{store.state.user.name}}</span>
+        <span class="pic">{{store.state.user.name[0].toUpperCase()}}</span>
+        <span class="user">{{store.state.user.name}}</span>
         <a class="logout" href="javascript:void(0)" (click)="logout()">logout</a>
       </div>
     </div>
