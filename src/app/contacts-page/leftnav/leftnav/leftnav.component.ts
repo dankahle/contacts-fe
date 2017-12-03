@@ -23,6 +23,7 @@ export class LeftnavComponent {
   lastWidth: number;
   wasClosed = false;
   leftNavCuttoff = 768;
+  hideLeftNav = false;
   labels = {
     contacts: <Label>{id: 'contacts', name: 'Contacts', icon: 'label', noEdit: true},
     arrExtras: [
@@ -34,7 +35,6 @@ export class LeftnavComponent {
 
   };
 
-
   constructor(protected store: Store, protected router: Router, private mdDialog: MatDialog,
               private userService: UserService, private contactsService: ContactsService,
               private route: ActivatedRoute, private appRef: ApplicationRef) {
@@ -45,7 +45,12 @@ export class LeftnavComponent {
     });
 
     if (window.innerWidth < this.leftNavCuttoff) {
-      store.setVal('leftNavClosed', true);
+      // hack: left nav transitions on entry, even though class is closed
+      this.hideLeftNav = true;
+      setTimeout(() => {
+        this.hideLeftNav = false;
+        appRef.tick();
+      }, 1000);
     }
     window.onresize = this.handleResize.bind(this);
   }
