@@ -5,6 +5,7 @@ import {InitializationGuard} from './guards/initialization.guard';
 import {AuthGuard} from './guards/auth.guard';
 import {ContactListComponent} from '../contacts-page/main/contact-list/contact-list.component';
 import {RouterModule, Routes} from '@angular/router';
+import {StoreModule} from '../store/store.module';
 
 const appRoutes: Routes = [
   { path: '', component: ContactListComponent, canActivate: [AuthGuard, InitializationGuard]},
@@ -17,6 +18,7 @@ const appRoutes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forRoot(appRoutes, {enableTracing: false}),
+    StoreModule
   ],
   providers: []
 })

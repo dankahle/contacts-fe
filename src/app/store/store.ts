@@ -5,6 +5,7 @@ import {StoreBase} from './store-base';
 import {Subject} from 'rxjs/Subject';
 import {Messages} from './models/messages';
 import {Message} from './models/message';
+import {State} from './models/state';
 
 @Injectable()
 /**
@@ -23,8 +24,8 @@ export class Store extends StoreBase {
   updateLabelCounts$ = new Subject();
   subscribeUpdateLabelCounts = this.updateLabelCounts$.subscribe.bind(this.updateLabelCounts$);
 
-  constructor() {
-    super();
+  constructor(state: State) {
+    super(state);
   }
 
   setUser(user: User) {

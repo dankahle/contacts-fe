@@ -10,13 +10,12 @@ import 'rxjs/add/operator/filter';
 
 @Injectable()
 export class StoreBase {
-  state = new State();
   state$ = new BehaviorSubject(this.state);
   subscribe = this.state$.subscribe.bind(this.state$);
   logState = environment.logState;
   messages$ = new Subject<Message>();
 
-  constructor() {
+  constructor(public state: State) {
     if (this.logState === true) {
       console.log(this.state);
     }

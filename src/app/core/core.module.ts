@@ -16,14 +16,16 @@ import {RouterModule} from '@angular/router';
 import {ErrorStateMatcher} from '@angular/material';
 import {CustomErrorStateMatcher} from './custom-error-state-matcher';
 import {ContactsService} from './services/contacts.service';
+import {StoreModule} from '../store/store.module';
 
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    StoreModule
   ],
-  exports: [HttpClientModule],
+  exports: [HttpClientModule, StoreModule],
   providers: [Store, Init1, Init2, Init3, Init4, Init5, ProgressService, UserService, ContactsService,
     {provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: TimingInterceptor, multi: true},

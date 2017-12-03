@@ -11,6 +11,7 @@ import * as _ from 'lodash';
 import {DeleteLabelComponent} from '../delete-label-modal/delete-label.component';
 import {DeleteLabelMode} from '../../../store/enums/deleteLabelMode.enum';
 import {ContactsService} from '../../../core/services/contacts.service';
+import {MediaChange, ObservableMedia} from '@angular/flex-layout';
 
 @Component({
   selector: 'dk-leftnav',
@@ -20,9 +21,7 @@ import {ContactsService} from '../../../core/services/contacts.service';
 })
 export class LeftnavComponent {
   @HostBinding('class.closed') leftNavClosed;
-  lastWidth: number;
   wasClosed = false;
-  leftNavCuttoff = 768;
   hideLeftNav = false;
   labels = {
     contacts: <Label>{id: 'contacts', name: 'Contacts', icon: 'label', noEdit: true},
@@ -37,21 +36,23 @@ export class LeftnavComponent {
 
   constructor(protected store: Store, protected router: Router, private mdDialog: MatDialog,
               private userService: UserService, private contactsService: ContactsService,
-              private route: ActivatedRoute, private appRef: ApplicationRef) {
+              private route: ActivatedRoute, private appRef: ApplicationRef, media: ObservableMedia) {
 
+    media.asObservable()
+      // .filter((change: MediaChange) => change.mqAlias === 'xs' || change.mqAlias === 'sm')
+      .subscribe(change => this.handleBreakpoints(change.mqAlias));
+
+    // hack: the @HostBinding above requires a local var, but we want to use global, so have to subscribe to global
+    // to get the local required.
     store.subscribe(state => {
       this.leftNavClosed = state.leftNavClosed;
     });
 
-    if (window.innerWidth < this.leftNavCuttoff) {
-      // hack: left nav transitions on entry, even though class is closed
-      this.hideLeftNav = true;
-      setTimeout(() => {
-        this.hideLeftNav = false;
-        appRef.tick();
-      }, 1000);
+    if (media.isActive('xs') || media.isActive('sm')) {
+      // hack: left nav transitions on entry, even though class is closed, if we go "open" class then probably transitions open
+      // initially. Not sure the answer to that then. Hide it on start for a sec if xs
+      this.hideLeftNavFast();
     }
-    window.onresize = this.handleResize.bind(this);
   }
 
   showAllContacts(event, label) {
@@ -154,32 +155,39 @@ export class LeftnavComponent {
     this.mdDialog.open(NotImplementedComponent, config);
   }
 
-  handleResize(event) {
-    const currentWidth = window.innerWidth;
-    // what we want is going to cutoff leftnav disappears if it's showing and going from cutoff to bigger, always open it
-    // hmmm we could save if they had it closed going to cutoff and not do it
-
-    if (this.lastWidth === undefined) {
-      if (currentWidth < this.leftNavCuttoff) {
-        this.leftNavClosed = true;
-      }
-    } else {
-      if (this.lastWidth > this.leftNavCuttoff && currentWidth < this.leftNavCuttoff) {
-        // to  cutoff from big !closed >> closed and closed stays closed
-        this.wasClosed = this.leftNavClosed;
-        this.store.setVal('leftNavClosed', true);
-        this.appRef.tick();
-        // if leftnav does not have closed class, add it
-      } else if (this.lastWidth < this.leftNavCuttoff && currentWidth > this.leftNavCuttoff) {
-        // to big from cutoff closed >> !closed (unless was closed going in) and open stays same
-        if (!this.wasClosed) {
+  handleBreakpoints(breakpoint) {
+console.log(`${this.store.state.lastBreakpoint} >> ${breakpoint}`);
+    switch (breakpoint) {
+      case 'sm':
+        // entering xs we close leftnav
+        if (this.store.state.lastBreakpoint === 'md') {
+          this.wasClosed = this.leftNavClosed;
+          this.store.setVal('leftNavClosed', true);
+          this.hideLeftNavFast();
+        }
+        break;
+      case 'md':
+        // entering
+        if (this.store.state.lastBreakpoint === 'sm' && !this.wasClosed) {
           this.wasClosed = false;
           this.store.setVal('leftNavClosed', false);
           this.appRef.tick();
         }
-      }
+        break;
     }
-    this.lastWidth = currentWidth;
+    this.store.setVal('lastBreakpoint', breakpoint);
+  }
+
+  /**
+   * hideLeftNavFast
+   * @desc - we have a couple times when we need to close left nav "now" not transition, this does the trick
+   */
+  hideLeftNavFast() {
+    this.hideLeftNav = true;
+    setTimeout(() => {
+      this.hideLeftNav = false;
+      this.appRef.tick();
+    }, 300);
   }
 
 }
