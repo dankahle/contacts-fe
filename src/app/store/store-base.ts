@@ -3,6 +3,10 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {environment} from '../../environments/environment';
 import {State} from './models/state';
 import * as _ from 'lodash';
+import {Message} from './models/message';
+import {Messages} from './models/messages';
+import {Subject} from 'rxjs/Subject';
+import 'rxjs/add/operator/filter';
 
 @Injectable()
 export class StoreBase {
@@ -10,6 +14,7 @@ export class StoreBase {
   state$ = new BehaviorSubject(this.state);
   subscribe = this.state$.subscribe.bind(this.state$);
   logState = environment.logState;
+  messages$ = new Subject<Message>();
 
   constructor() {
     if (this.logState === true) {
@@ -37,6 +42,14 @@ export class StoreBase {
     if (this.logState === true) {
       console.log(this.state);
     }
+  }
+
+  emit(messageName: Messages, payload: any) {
+    this.messages$.next({name: messageName, payload});
+  }
+
+  onMessage(messageName: Messages, callback: (message: Message) => void) {
+    this.messages$.filter(message => message.name === messageName).subscribe(callback);
   }
 
 }

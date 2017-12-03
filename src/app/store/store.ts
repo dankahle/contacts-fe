@@ -5,7 +5,6 @@ import {StoreBase} from './store-base';
 import {Subject} from 'rxjs/Subject';
 import {Messages} from './models/messages';
 import {Message} from './models/message';
-import 'rxjs/add/operator/filter';
 
 @Injectable()
 /**
@@ -23,8 +22,6 @@ export class Store extends StoreBase {
   subscribeContacts = this.contactsState$.subscribe.bind(this.contactsState$);
   updateLabelCounts$ = new Subject();
   subscribeUpdateLabelCounts = this.updateLabelCounts$.subscribe.bind(this.updateLabelCounts$);
-  messages$ = new Subject<Message>();
-  subscribeMessages = this.messages$.subscribe.bind(this.contactsState$);
 
   constructor() {
     super();
@@ -52,16 +49,6 @@ export class Store extends StoreBase {
 
   publishUpdateLabelCounts() {
     this.updateLabelCounts$.next();
-  }
-
-  emit(messageName: Messages, payload: any) {
-    this.messages$.next({name: messageName, payload});
-  }
-
-  onMessage(messageName: Messages, callback: (message: Message) => void) {
-    this.messages$.filter(message => message.name === messageName).subscribe(callback);
-    // this.messages$.subscribe(callback);
-    // this.subscribeMessages.filter(message => message.name === messageName).subscribe(callback);
   }
 
 }
