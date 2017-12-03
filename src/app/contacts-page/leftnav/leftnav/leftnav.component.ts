@@ -23,6 +23,7 @@ export class LeftnavComponent {
   @HostBinding('class.closed') leftNavClosed;
   wasClosed = false;
   hideLeftNav = false;
+  lastBreakpoint: string;
   labels = {
     contacts: <Label>{id: 'contacts', name: 'Contacts', icon: 'label', noEdit: true},
     arrExtras: [
@@ -40,7 +41,13 @@ export class LeftnavComponent {
 
     media.asObservable()
       // .filter((change: MediaChange) => change.mqAlias === 'xs' || change.mqAlias === 'sm')
-      .subscribe(change => this.handleBreakpoints(change.mqAlias));
+      .subscribe(change => {
+        if (this.lastBreakpoint === undefined) {
+          console.log('initlast', change.mqAlias);
+          this.lastBreakpoint = change.mqAlias;
+        }
+        this.handleBreakpoints(change.mqAlias);
+      });
 
     // hack: the @HostBinding above requires a local var, but we want to use global, so have to subscribe to global
     // to get the local required.
@@ -156,11 +163,11 @@ export class LeftnavComponent {
   }
 
   handleBreakpoints(breakpoint) {
-console.log(`${this.store.state.lastBreakpoint} >> ${breakpoint}`);
+console.log(`${this.lastBreakpoint} >> ${breakpoint}`);
     switch (breakpoint) {
       case 'sm':
         // entering xs we close leftnav
-        if (this.store.state.lastBreakpoint === 'md') {
+        if (this.lastBreakpoint === 'md') {
           this.wasClosed = this.leftNavClosed;
           this.store.setVal('leftNavClosed', true);
           this.hideLeftNavFast();
@@ -168,14 +175,14 @@ console.log(`${this.store.state.lastBreakpoint} >> ${breakpoint}`);
         break;
       case 'md':
         // entering
-        if (this.store.state.lastBreakpoint === 'sm' && !this.wasClosed) {
+        if (this.lastBreakpoint === 'sm' && !this.wasClosed) {
           this.wasClosed = false;
           this.store.setVal('leftNavClosed', false);
           this.appRef.tick();
         }
         break;
     }
-    this.store.setVal('lastBreakpoint', breakpoint);
+    this.lastBreakpoint = breakpoint;
   }
 
   /**
@@ -187,7 +194,7 @@ console.log(`${this.store.state.lastBreakpoint} >> ${breakpoint}`);
     setTimeout(() => {
       this.hideLeftNav = false;
       this.appRef.tick();
-    }, 300);
+    }, 400);
   }
 
 }

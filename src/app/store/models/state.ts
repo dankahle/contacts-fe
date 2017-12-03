@@ -13,7 +13,7 @@ export class State {
   initialized = false;
   leftNavClosed = false;
   selectedLabel?: Label;
-  lastBreakpoint: string;
+  initialBreakpoint: string;
 
   constructor(private media: ObservableMedia) {
     this.init();
@@ -28,12 +28,9 @@ export class State {
     this.media.asObservable()
       .first()
       .subscribe(change => {
-        // this is a BehaviorSubject so we can get breakpoint at startup
-        this.lastBreakpoint = change.mqAlias;
-        console.log('init', change.mqAlias);
+        this.initialBreakpoint = change.mqAlias;
       });
   }
-
 
   getVal(path) {
     return _.get(this, path);
