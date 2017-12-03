@@ -40,7 +40,6 @@ export class LeftnavComponent {
               private route: ActivatedRoute, private appRef: ApplicationRef) {
 
     store.subscribe(state => {
-      console.log(state.leftNavClosed);
       this.leftNavClosed = state.leftNavClosed;
     });
 
