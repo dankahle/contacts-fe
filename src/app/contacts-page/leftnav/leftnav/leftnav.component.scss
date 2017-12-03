@@ -1,9 +1,12 @@
 
 @import '../../../../styles/comp-index';
 
+
+$left-nav-width: 259px;
+
 :host {
   transition: margin-left 200ms;
-  width: 259px;
+  width: $left-nav-width;
   margin-left: 0;
   padding-top: 15px;
   border-right: 1px solid $gray-border;
@@ -11,7 +14,7 @@
 }
 
 :host(.closed) {
-  margin-left: -259px;
+  margin-left: -$left-nav-width;
 }
 
 :host /deep/ .mat-expansion-panel-body {
