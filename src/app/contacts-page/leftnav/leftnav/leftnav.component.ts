@@ -6,9 +6,9 @@ import {Util} from '../../../core/services/util';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {UserService} from '../../../core/services/user-service';
 import {NotImplementedComponent} from '../../../shared/components/not-implemented/not-implemented.component';
-import {EditLabelComponent} from '../edit-label/edit-label.component';
+import {EditLabelComponent} from '../edit-label-modal/edit-label.component';
 import * as _ from 'lodash';
-import {DeleteLabelComponent} from '../delete-label/delete-label.component';
+import {DeleteLabelComponent} from '../delete-label-modal/delete-label.component';
 import {DeleteLabelMode} from '../../../store/enums/deleteLabelMode.enum';
 import {ContactsService} from '../../../core/services/contacts.service';
 

@@ -5,9 +5,9 @@ import {ContactsService} from '../core/services/contacts.service';
 import * as _ from 'lodash';
 import 'rxjs/add/operator/do';
 import {MatDialog, MatDialogConfig} from '@angular/material';
-import {ContactEditComponent} from './main/contact-edit/contact-edit.component';
+import {ContactEditComponent} from './main/contact-edit-modal/contact-edit.component';
 import {Util} from '../core/services/util';
-import {ContactDetailComponent} from './main/contact-detail/contact-detail.component';
+import {ContactDetailComponent} from './main/contact-detail-modal/contact-detail.component';
 import {Observable} from 'rxjs/Observable';
 import {Messages} from '../store/models/messages';
 

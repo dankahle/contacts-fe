@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {DeleteLabelMode} from '../../../store/enums/deleteLabelMode.enum';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {EditLabelComponent} from '../edit-label/edit-label.component';
+import {EditLabelComponent} from '../edit-label-modal/edit-label.component';
 
 @Component({
   selector: 'dk-delete-label',
