@@ -8,6 +8,7 @@ import {UserService} from '../../../core/services/user-service';
 import {ContactsPageService} from '../../contacts-page.service';
 import {ContactDetailComponent} from '../contact-detail/contact-detail.component';
 import {MatDialog, MatDialogConfig} from '@angular/material';
+import {Messages} from '../../../store/models/messages';
 
 @Component({
   selector: 'dk-contact-list',
@@ -49,12 +50,7 @@ export class ContactListComponent {
     if (Util.keydownAndNotEnterOrSpace(event)) {
       return;
     }
-    console.log('edit', contact.name);
-
-    // put up editContactComponent data.mode = mode
-    // .do(contact => this.publishLabelContacts)
-    //  if add contactsService.addContact(contact) else contactsService.updateContact(contact)
-
+    this.contactsPageService.openContactEdit(contact, mode);
   }
 
   openContactDetail(event, contact) {
@@ -62,14 +58,7 @@ export class ContactListComponent {
     if (Util.keydownAndNotEnterOrSpace(event)) {
       return;
     }
-    const config = <MatDialogConfig>{
-      width: '248px',
-      height: '193px',
-      data: {
-        contact: contact
-      }
-    }
-    this.mdDialog.open(ContactDetailComponent, config);
+    this.store.emit(Messages.openContactDetail, contact);
   }
 
 }

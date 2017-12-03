@@ -6,6 +6,7 @@ import 'rxjs/add/operator/startWith';
 import {Store} from '../../../store/store';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {ContactDetailComponent} from '../../main/contact-detail/contact-detail.component';
+import {Messages} from '../../../store/models/messages';
 
 @Component({
   selector: 'dk-contact-search',
@@ -57,23 +58,12 @@ export class ContactSearchComponent implements OnInit {
     console.log(event.option.value.name);
     this.searchVal = '';
     this.searchElem.nativeElement.blur();
-    this.openContactDetail(event.option.value);
+    this.store.emit(Messages.openContactDetail, event.option.value);
   }
 
   clearText() {
     this.searchVal = '';
     this.searchElem.nativeElement.focus();
-  }
-
-  openContactDetail(contact) {
-    const config = <MatDialogConfig>{
-      width: '248px',
-      height: '193px',
-      data: {
-        contact: contact
-      }
-    }
-    this.mdDialog.open(ContactDetailComponent, config);
   }
 
 }

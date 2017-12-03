@@ -2,8 +2,8 @@
 <h3>Contact Detail</h3>
 <h4>{{contact.name}}</h4>
 <br>
-<button (click)="contactsPageService.openContactEdit($event, contact, 'edit')"
-        (keydown)="contactsPageService.openContactEdit($event, contact, 'edit')">edit</button><br><br>
+<button (click)="editContact($event, contact, 'edit')"
+        (keydown)="editContact($event, contact, 'edit')">edit</button><br><br>
 
 <pre>
   {{contact | json}}

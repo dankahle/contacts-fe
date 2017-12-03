@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Contact} from '../../../store/models/contact';
 import {Store} from '../../../store/store';
 import {ContactsPageService} from '../../contacts-page.service';
+import {Util} from '../../../core/services/util';
 
 @Component({
   selector: 'dk-contact-detail',
@@ -26,6 +27,14 @@ export class ContactDetailComponent {
     this.store.publishUpdateLabelCounts();
   }
 
+  editContact(event, contact, mode) {
+    event.stopPropagation();
+    if (Util.keydownAndNotEnterOrSpace(event)) {
+      return;
+    }
+    this.dialogRef.close();
+    this.contactsPageService.openContactEdit(contact, mode);
+  }
 
 
 

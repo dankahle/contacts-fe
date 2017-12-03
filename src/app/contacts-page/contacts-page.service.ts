@@ -9,6 +9,7 @@ import {ContactEditComponent} from './main/contact-edit/contact-edit.component';
 import {Util} from '../core/services/util';
 import {ContactDetailComponent} from './main/contact-detail/contact-detail.component';
 import {Observable} from 'rxjs/Observable';
+import {Messages} from '../store/models/messages';
 
 @Injectable()
 export class ContactsPageService {
@@ -32,11 +33,7 @@ export class ContactsPageService {
     });
   }
 
-  openContactEdit(event, contact, mode) {
-    event.stopPropagation();
-    if (Util.keydownAndNotEnterOrSpace(event)) {
-      return;
-    }
+  openContactEdit(contact, mode) {
 
     const config = <MatDialogConfig>{
       width: '248px',
@@ -50,6 +47,7 @@ export class ContactsPageService {
       .afterClosed().subscribe(_contact => {
       let api$: Observable<any>;
       if (_contact) {
+        // throw new Error('edit submit not implemented');
         if (mode === 'add') {
           api$ = this.contactsService.updateOne(_contact);
         } else {
@@ -57,22 +55,12 @@ export class ContactsPageService {
         }
         // we always open detail after add/edit
         return api$.map(apiContact => {
-          this.openContactDetail(apiContact);
+          this.store.emit(Messages.openContactDetail, apiContact);
         });
+      } else {
+        this.store.emit(Messages.openContactDetail, contact);
       }
     });
   }
-
-  openContactDetail(contact) {
-    const config = <MatDialogConfig>{
-      width: '248px',
-      height: '193px',
-      data: {
-        contact: contact
-      }
-    }
-    this.mdDialog.open(ContactDetailComponent, config);
-  }
-
 
 }
