@@ -1,7 +1,7 @@
 <div style="height:100%;" fxLayout="column">
   <dk-progress fxFlex="0 0 auto"></dk-progress>
   <dk-header fxFlex="0 0 auto"></dk-header>
-  <div fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="start stretch">
+  <div class="nav-and-main" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="start stretch">
       <dk-leftnav *ngIf="store.state.user" fxFlex="0 0 auto"></dk-leftnav>
       <div fxFlex="1 1 auto" fxLayout="column">
         <router-outlet></router-outlet>

@@ -1,4 +1,4 @@
-import {Component, HostBinding, ViewEncapsulation} from '@angular/core';
+import {ApplicationRef, Component, HostBinding, ViewEncapsulation} from '@angular/core';
 import {Store} from '../../../store/store';
 import {Label} from '../../../store/models/label';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -20,6 +20,9 @@ import {ContactsService} from '../../../core/services/contacts.service';
 })
 export class LeftnavComponent {
   @HostBinding('class.closed') leftNavClosed;
+  lastWidth: number;
+  wasClosed = false;
+  leftNavCuttoff = 768;
   labels = {
     contacts: <Label>{id: 'contacts', name: 'Contacts', icon: 'label', noEdit: true},
     arrExtras: [
@@ -34,11 +37,17 @@ export class LeftnavComponent {
 
   constructor(protected store: Store, protected router: Router, private mdDialog: MatDialog,
               private userService: UserService, private contactsService: ContactsService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute, private appRef: ApplicationRef) {
 
     store.subscribe(state => {
+      console.log(state.leftNavClosed);
       this.leftNavClosed = state.leftNavClosed;
     });
+
+    if (window.innerWidth < this.leftNavCuttoff) {
+      store.setVal('leftNavClosed', true);
+    }
+    window.onresize = this.handleResize.bind(this);
   }
 
   showAllContacts(event, label) {
@@ -141,6 +150,32 @@ export class LeftnavComponent {
     this.mdDialog.open(NotImplementedComponent, config);
   }
 
+  handleResize(event) {
+    const currentWidth = window.innerWidth;
+    // what we want is going to cutoff leftnav disappears if it's showing and going from cutoff to bigger, always open it
+    // hmmm we could save if they had it closed going to cutoff and not do it
 
+    if (this.lastWidth === undefined) {
+      if (currentWidth < this.leftNavCuttoff) {
+        this.leftNavClosed = true;
+      }
+    } else {
+      if (this.lastWidth > this.leftNavCuttoff && currentWidth < this.leftNavCuttoff) {
+        // to  cutoff from big !closed >> closed and closed stays closed
+        this.wasClosed = this.leftNavClosed;
+        this.store.setVal('leftNavClosed', true);
+        this.appRef.tick();
+        // if leftnav does not have closed class, add it
+      } else if (this.lastWidth < this.leftNavCuttoff && currentWidth > this.leftNavCuttoff) {
+        // to big from cutoff closed >> !closed (unless was closed going in) and open stays same
+        if (!this.wasClosed) {
+          this.wasClosed = false;
+          this.store.setVal('leftNavClosed', false);
+          this.appRef.tick();
+        }
+      }
+    }
+    this.lastWidth = currentWidth;
+  }
 
 }

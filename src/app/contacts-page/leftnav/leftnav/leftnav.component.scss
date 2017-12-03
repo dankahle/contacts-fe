@@ -5,16 +5,26 @@
 $left-nav-width: 259px;
 
 :host {
-  transition: margin-left 200ms;
+  transition: margin-left, left 200ms;
   width: $left-nav-width;
   margin-left: 0;
   padding-top: 15px;
   border-right: 1px solid $gray-border;
   overflow-y: auto;
+  @media (max-width: 768px) {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 }
 
 :host(.closed) {
   margin-left: -$left-nav-width;
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    left: -$left-nav-width;
+  }
 }
 
 :host /deep/ .mat-expansion-panel-body {

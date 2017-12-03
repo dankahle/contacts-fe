@@ -7,7 +7,7 @@ export class State {
   user?: User;
   contacts: Contact[] = [];
   initialized = false;
-  leftNavClosed = false;
+  leftNavClosed = window.innerWidth < 768 ? true : false;
   selectedLabel?: Label;
 
   getVal(path) {
