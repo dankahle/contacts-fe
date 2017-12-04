@@ -20,10 +20,8 @@ import {BreakpointChange, BreakpointDirection, BreakpointService} from '../../..
   encapsulation: ViewEncapsulation.Emulated
 })
 export class LeftnavComponent {
-  @HostBinding('class.closed') leftNavClosed;
   wasClosed = false;
   hideLeftNav = false;
-  lastBreakpoint: string;
   labels = {
     contacts: <Label>{id: 'contacts', name: 'Contacts', icon: 'label', noEdit: true},
     arrExtras: [
@@ -37,7 +35,7 @@ export class LeftnavComponent {
 
   constructor(protected store: Store, protected router: Router, private mdDialog: MatDialog,
               private userService: UserService, private contactsService: ContactsService,
-              private route: ActivatedRoute, private appRef: ApplicationRef, breakpointService: BreakpointService) {
+              private route: ActivatedRoute, private appRef: ApplicationRef, private breakpointService: BreakpointService) {
 
     breakpointService
       .subscribe(change => {
@@ -47,9 +45,7 @@ export class LeftnavComponent {
     // hack: the @HostBinding above requires a local var, but we want to use global, so have to subscribe to global
     // to get the local required.
     store.subscribe(state => {
-      this.leftNavClosed = state.leftNavClosed;
       if (breakpointService.isActive('gt-sm')) {
-        console.log('wasclosed set to:', state.leftNavClosed)
         this.wasClosed = state.leftNavClosed;
       }
     });
@@ -59,7 +55,7 @@ export class LeftnavComponent {
       // initially. Not sure the answer to that then. Hide it on start for a sec if xs
       this.hideLeftNavFast();
     }
-  }
+  } // end constructor
 
   showAllContacts(event, label) {
     if (Util.keydownAndNotEnterOrSpace(event)) {
@@ -163,9 +159,10 @@ export class LeftnavComponent {
 
   handleBreakpoints(change: BreakpointChange) {
 
-    if (change.breakpoint === 'sm' && change.direction === BreakpointDirection.fromAbove) {
+    if ((change.breakpoint === 'xs' || change.breakpoint === 'sm') && change.direction === BreakpointDirection.fromAbove) {
       this.store.setVal('leftNavClosed', true);
-    } else if (change.breakpoint === 'md' && change.direction === BreakpointDirection.fromBelow &&
+    } else if ((change.breakpoint === 'md' || change.breakpoint === 'lg' || change.breakpoint === 'xl') &&
+      (this.breakpointService.lastBreakpoint === 'xs' || this.breakpointService.lastBreakpoint === 'sm') &&
     this.wasClosed === false) {
       this.store.setVal('leftNavClosed', false);
     }

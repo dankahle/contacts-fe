@@ -1,5 +1,5 @@
 
-<div [hidden]="hideLeftNav">
+<div class="leftnav" [hidden]="hideLeftNav" [class.closed]="store.state.leftNavClosed">
 
   <dk-leftnav-label [label]="labels.contacts" (click)="showAllContacts($event, labels.contacts)" (keydown)="showAllContacts($event, labels.contacts)"
                     [class.active]="!store.state.selectedLabel"></dk-leftnav-label>

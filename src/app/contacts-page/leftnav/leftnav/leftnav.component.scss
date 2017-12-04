@@ -4,7 +4,7 @@
 
 $left-nav-width: 259px;
 
-:host {
+.leftnav {
   transition: margin-left, left 200ms;
   width: $left-nav-width;
   margin-left: 0;
@@ -14,27 +14,31 @@ $left-nav-width: 259px;
   overflow-x: hidden;
   padding-bottom: 1px;
   z-index: 100;
-  @media (max-width: $breakpoint-sm) {
+
+  @media (max-width: $breakpoint-md) {
     position: absolute;
     top: 0;
     left: 0;
   }
-}
 
-:host(.closed) {
-  margin-left: -$left-nav-width;
+  &.closed {
+    margin-left: -$left-nav-width;
 
-  @media (max-width: $breakpoint-sm) {
-    margin-left: 0;
-    left: -$left-nav-width;
+    @media (max-width: $breakpoint-md) {
+      margin-left: 0;
+      left: -$left-nav-width;
+    }
   }
+
+  & /deep/ .mat-expansion-panel-body {
+    padding-left: 0;
+  }
+
+  & mat-expansion-panel.labels {
+    margin-top: -6px;
+  }
+
 }
 
-:host /deep/ .mat-expansion-panel-body {
-  padding-left: 0;
-}
 
-mat-expansion-panel.labels {
-  margin-top: -6px;
-}
 

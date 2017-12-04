@@ -40,7 +40,6 @@ import {BreakpointService} from './services/breakpoint.service';
     {
       provide : BREAKPOINTS,
       useFactory : function customizeBreakPoints() {
-        console.log('here');
         return validateSuffixes(CONTACTS_DEFAULT_BREAKPOINTS);
       }
     }
