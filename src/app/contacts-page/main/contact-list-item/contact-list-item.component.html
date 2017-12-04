@@ -1,3 +1,20 @@
-<div tabindex="0" class="item">
-  {{contact.name}} <a href="javascript:void(0)" (click)="parent.editContact($event, contact, 'edit')">edit</a>
+<div tabindex="0" class="item" fxLayout="row" fxLayoutAlign="space-around center">
+  <div>{{contact.name || contact.company}}</div>
+
+  <div fxHide.lt-sm *ngIf="contact.emails && contact.emails.length > 0">
+    <span>{{contact.emails[0]?.email}}</span>
+  </div>
+  <div fxHide.lt-sm *ngIf="!contact.emails || contact.emails.length === 0"></div>
+
+  <div fxHide.lt-lg *ngIf="contact.phones && contact.phones.length > 0">
+    <span *ngIf="contact.phones[0].country">{{contact.phones[0].country}} - </span>
+    <span>{{contact.phones[0]?.phone}}</span>
+  </div>
+  <div fxHide.lt-lg *ngIf="!contact.phones || contact.phones.length ===0"></div>
+
+  <div fxHide.lt-xl>{{contact.notes}}</div>
+  <div class="icons">
+    <i class="material-icons" (click)="parent.editContact($event, contact, 'edit')">edit</i>
+  </div>
 </div>
+

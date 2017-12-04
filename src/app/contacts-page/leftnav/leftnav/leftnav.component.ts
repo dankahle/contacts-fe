@@ -167,15 +167,15 @@ console.log(`${this.lastBreakpoint} >> ${breakpoint}`);
     switch (breakpoint) {
       case 'sm':
         // entering xs we close leftnav
-        if (this.lastBreakpoint === 'md') {
+        if (this.lastBreakpoint === 'md' || this.lastBreakpoint === 'lg' || this.lastBreakpoint === 'xl') {
           this.wasClosed = this.leftNavClosed;
+          console.log('wasclosed set to: ', this.wasClosed);
           this.store.setVal('leftNavClosed', true);
-          this.hideLeftNavFast();
         }
         break;
       case 'md':
         // entering
-        if (this.lastBreakpoint === 'sm' && !this.wasClosed) {
+        if ((this.lastBreakpoint === 'xs' || this.lastBreakpoint === 'sm') && !this.wasClosed) {
           this.wasClosed = false;
           this.store.setVal('leftNavClosed', false);
           this.appRef.tick();

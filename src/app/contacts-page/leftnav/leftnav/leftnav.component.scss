@@ -14,7 +14,7 @@ $left-nav-width: 259px;
   overflow-x: hidden;
   padding-bottom: 1px;
   z-index: 100;
-  @media (max-width: $breakpoint-md) {
+  @media (max-width: $breakpoint-sm) {
     position: absolute;
     top: 0;
     left: 0;
@@ -24,7 +24,7 @@ $left-nav-width: 259px;
 :host(.closed) {
   margin-left: -$left-nav-width;
 
-  @media (max-width: 768px) {
+  @media (max-width: $breakpoint-sm) {
     margin-left: 0;
     left: -$left-nav-width;
   }

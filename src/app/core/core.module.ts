@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {Inject, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Store} from '../store/store';
 import {ProgressService} from './services/progress.service';
@@ -17,6 +17,8 @@ import {ErrorStateMatcher} from '@angular/material';
 import {CustomErrorStateMatcher} from './custom-error-state-matcher';
 import {ContactsService} from './services/contacts.service';
 import {StoreModule} from '../store/store.module';
+import {BREAKPOINTS, DEFAULT_BREAKPOINTS, validateSuffixes} from '@angular/flex-layout';
+import {CONTACTS_DEFAULT_BREAKPOINTS} from './breakpoints-contacts';
 
 @NgModule({
   imports: [
@@ -33,8 +35,17 @@ import {StoreModule} from '../store/store.module';
     {provide: HTTP_INTERCEPTORS, useClass: ModifyRequestInterceptor, multi: true},
     ValidateService,
     InitializationGuard, AuthGuard,
-    {provide: ErrorStateMatcher, useClass: CustomErrorStateMatcher}
+    {provide: ErrorStateMatcher, useClass: CustomErrorStateMatcher},
+    {
+      provide : BREAKPOINTS,
+      useFactory : function customizeBreakPoints() {
+        console.log('here');
+        return validateSuffixes(CONTACTS_DEFAULT_BREAKPOINTS);
+      }
+    }
   ]
 })
 export class CoreModule {
+  constructor(@Inject(BREAKPOINTS) breakpoints) {
+  }
 }
