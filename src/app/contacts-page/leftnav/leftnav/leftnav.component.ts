@@ -158,13 +158,10 @@ export class LeftnavComponent {
   }
 
   handleBreakpoints(change: BreakpointChange) {
-
-    if ((change.breakpoint === 'xs' || change.breakpoint === 'sm') && change.direction === BreakpointDirection.fromAbove) {
+    if (this.breakpointService.isActive('lt-md') && _.includes(['md', 'lg', 'xl'], this.breakpointService.lastBreakpoint)) {
       this.store.setVal('leftNavClosed', true);
-    } else if ((change.breakpoint === 'md' || change.breakpoint === 'lg' || change.breakpoint === 'xl') &&
-      (this.breakpointService.lastBreakpoint === 'xs' || this.breakpointService.lastBreakpoint === 'sm') &&
-    this.wasClosed === false) {
-      this.store.setVal('leftNavClosed', false);
+    } else if (this.breakpointService.isActive('gt-sm') && _.includes(['xs', 'sm'], this.breakpointService.lastBreakpoint)) {
+        this.store.setVal('leftNavClosed', this.wasClosed);
     }
   }
 
