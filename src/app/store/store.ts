@@ -52,4 +52,8 @@ export class Store extends StoreBase {
     this.updateLabelCounts$.next();
   }
 
+  setLeftNavClosed(val) {
+    this.state.leftNavClosed = val;
+    //dankfix: need to use new breakpoint service
+  }
 }

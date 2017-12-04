@@ -11,7 +11,7 @@ import * as _ from 'lodash';
 import {DeleteLabelComponent} from '../delete-label-modal/delete-label.component';
 import {DeleteLabelMode} from '../../../store/enums/deleteLabelMode.enum';
 import {ContactsService} from '../../../core/services/contacts.service';
-import {MediaChange, ObservableMedia} from '@angular/flex-layout';
+import {BreakpointChange, BreakpointDirection, BreakpointService} from '../../../core/services/breakpoint.service';
 
 @Component({
   selector: 'dk-leftnav',
@@ -37,18 +37,24 @@ export class LeftnavComponent {
 
   constructor(protected store: Store, protected router: Router, private mdDialog: MatDialog,
               private userService: UserService, private contactsService: ContactsService,
-              private route: ActivatedRoute, private appRef: ApplicationRef, media: ObservableMedia) {
+              private route: ActivatedRoute, private appRef: ApplicationRef, breakpointService: BreakpointService) {
 
-    media.asObservable()
-      .subscribe(change => this.handleBreakpoints(change.mqAlias));
+    breakpointService
+      .subscribe(change => {
+        this.handleBreakpoints(change);
+      });
 
     // hack: the @HostBinding above requires a local var, but we want to use global, so have to subscribe to global
     // to get the local required.
     store.subscribe(state => {
       this.leftNavClosed = state.leftNavClosed;
+      if (breakpointService.isActive('gt-sm')) {
+        console.log('wasclosed set to:', state.leftNavClosed)
+        this.wasClosed = state.leftNavClosed;
+      }
     });
 
-    if (media.isActive('xs') || media.isActive('sm')) {
+    if (breakpointService.isActive('xs') || breakpointService.isActive('sm')) {
       // hack: left nav transitions on entry, even though class is closed, if we go "open" class then probably transitions open
       // initially. Not sure the answer to that then. Hide it on start for a sec if xs
       this.hideLeftNavFast();
@@ -155,27 +161,14 @@ export class LeftnavComponent {
     this.mdDialog.open(NotImplementedComponent, config);
   }
 
-  handleBreakpoints(breakpoint) {
-console.log(`${this.lastBreakpoint} >> ${breakpoint}`);
-    switch (breakpoint) {
-      case 'sm':
-        // entering xs we close leftnav
-        if (this.lastBreakpoint === 'md' || this.lastBreakpoint === 'lg' || this.lastBreakpoint === 'xl') {
-          this.wasClosed = this.leftNavClosed;
-          console.log('wasclosed set to: ', this.wasClosed);
-          this.store.setVal('leftNavClosed', true);
-        }
-        break;
-      case 'md':
-        // entering
-        if ((this.lastBreakpoint === 'xs' || this.lastBreakpoint === 'sm') && !this.wasClosed) {
-          this.wasClosed = false;
-          this.store.setVal('leftNavClosed', false);
-          this.appRef.tick();
-        }
-        break;
+  handleBreakpoints(change: BreakpointChange) {
+
+    if (change.breakpoint === 'sm' && change.direction === BreakpointDirection.fromAbove) {
+      this.store.setVal('leftNavClosed', true);
+    } else if (change.breakpoint === 'md' && change.direction === BreakpointDirection.fromBelow &&
+    this.wasClosed === false) {
+      this.store.setVal('leftNavClosed', false);
     }
-    this.lastBreakpoint = breakpoint;
   }
 
   /**

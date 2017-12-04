@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
   apiUrl: 'http://someHerokuLocation/',
-  logState: false
+  logState: false,
+  showBreakpointChanges: false
 };

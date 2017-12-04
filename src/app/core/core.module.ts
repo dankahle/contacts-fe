@@ -19,6 +19,7 @@ import {ContactsService} from './services/contacts.service';
 import {StoreModule} from '../store/store.module';
 import {BREAKPOINTS, DEFAULT_BREAKPOINTS, validateSuffixes} from '@angular/flex-layout';
 import {CONTACTS_DEFAULT_BREAKPOINTS} from './breakpoints-contacts';
+import {BreakpointService} from './services/breakpoint.service';
 
 @NgModule({
   imports: [
@@ -28,7 +29,7 @@ import {CONTACTS_DEFAULT_BREAKPOINTS} from './breakpoints-contacts';
     StoreModule
   ],
   exports: [HttpClientModule, StoreModule],
-  providers: [Store, Init1, Init2, Init3, Init4, Init5, ProgressService, UserService, ContactsService,
+  providers: [Store, Init1, Init2, Init3, Init4, Init5, ProgressService, UserService, ContactsService, BreakpointService,
     {provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: TimingInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
