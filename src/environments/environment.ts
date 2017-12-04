@@ -6,6 +6,5 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:3000/',
-  logState: false,
-  showBreakpointChanges: true
+  logState: false
 };
