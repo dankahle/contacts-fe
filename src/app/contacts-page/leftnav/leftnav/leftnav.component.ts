@@ -40,14 +40,7 @@ export class LeftnavComponent {
               private route: ActivatedRoute, private appRef: ApplicationRef, media: ObservableMedia) {
 
     media.asObservable()
-      // .filter((change: MediaChange) => change.mqAlias === 'xs' || change.mqAlias === 'sm')
-      .subscribe(change => {
-        if (this.lastBreakpoint === undefined) {
-          console.log('initlast', change.mqAlias);
-          this.lastBreakpoint = change.mqAlias;
-        }
-        this.handleBreakpoints(change.mqAlias);
-      });
+      .subscribe(change => this.handleBreakpoints(change.mqAlias));
 
     // hack: the @HostBinding above requires a local var, but we want to use global, so have to subscribe to global
     // to get the local required.
