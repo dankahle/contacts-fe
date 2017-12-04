@@ -33,15 +33,14 @@ export class BreakpointService {
 
   handleBreakpoints(breakpoint) {
     let direction: BreakpointDirection;
-    console.log(`${this.lastBreakpoint} >> ${breakpoint}`);
+    if (environment.showBreakpointChanges) {
+      console.log(`${this.lastBreakpoint} >> ${breakpoint}`);
+    }
 
     if (this.lastBreakpoint === undefined) {
       // hack: how to create a behaviorSubject but you don't have the value till later? Have to create it then
       this.breakpoints$ = new BehaviorSubject<BreakpointChange>(new BreakpointChange(breakpoint, BreakpointDirection.initial));
       this.subscribe = this.breakpoints$.subscribe.bind(this.breakpoints$);
-      if (environment.showBreakpointChanges) {
-        console.log(`breakpoint: ${breakpoint} initial`);
-      }
     } else {
       switch (breakpoint) {
         case 'xs':
@@ -73,9 +72,7 @@ export class BreakpointService {
           break;
       }
       this.breakpoints$.next(new BreakpointChange(breakpoint, direction));
-      if (environment.showBreakpointChanges) {
-        console.log(`breakpoint: ${breakpoint} ${BreakpointDirection[direction]}`);
-      }
+        // console.log(`breakpoint: ${breakpoint} ${BreakpointDirection[direction]}`);
     }
 
     this.lastBreakpoint = breakpoint;

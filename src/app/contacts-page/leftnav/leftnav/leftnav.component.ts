@@ -35,9 +35,9 @@ export class LeftnavComponent {
 
   constructor(protected store: Store, protected router: Router, private mdDialog: MatDialog,
               private userService: UserService, private contactsService: ContactsService,
-              private route: ActivatedRoute, private appRef: ApplicationRef, private breakpointService: BreakpointService) {
+              private route: ActivatedRoute, private appRef: ApplicationRef, private breakpoints: BreakpointService) {
 
-    breakpointService
+    breakpoints
       .subscribe(change => {
         this.handleBreakpoints(change);
       });
@@ -45,12 +45,12 @@ export class LeftnavComponent {
     // hack: the @HostBinding above requires a local var, but we want to use global, so have to subscribe to global
     // to get the local required.
     store.subscribe(state => {
-      if (breakpointService.isActive('gt-sm')) {
+      if (breakpoints.isActive('gt-sm')) {
         this.wasClosed = state.leftNavClosed;
       }
     });
 
-    if (breakpointService.isActive('xs') || breakpointService.isActive('sm')) {
+    if (breakpoints.isActive('xs') || breakpoints.isActive('sm')) {
       // hack: left nav transitions on entry, even though class is closed, if we go "open" class then probably transitions open
       // initially. Not sure the answer to that then. Hide it on start for a sec if xs
       this.hideLeftNavFast();
@@ -158,9 +158,9 @@ export class LeftnavComponent {
   }
 
   handleBreakpoints(change: BreakpointChange) {
-    if (this.breakpointService.isActive('lt-md') && _.includes(['md', 'lg', 'xl'], this.breakpointService.lastBreakpoint)) {
+    if (this.breakpoints.isActive('lt-md') && _.includes(['md', 'lg', 'xl'], this.breakpoints.lastBreakpoint)) {
       this.store.setVal('leftNavClosed', true);
-    } else if (this.breakpointService.isActive('gt-sm') && _.includes(['xs', 'sm'], this.breakpointService.lastBreakpoint)) {
+    } else if (this.breakpoints.isActive('gt-sm') && _.includes(['xs', 'sm'], this.breakpoints.lastBreakpoint)) {
         this.store.setVal('leftNavClosed', this.wasClosed);
     }
   }
