@@ -26,5 +26,4 @@ export class ContactListResolve implements Resolve<Contact[]> {
     }
 
   }
-
 }
