@@ -1,18 +1,26 @@
-<div tabindex="0" class="item" fxLayout="row" fxLayoutAlign="space-around center">
-  <div>{{contact.name || contact.company}}</div>
 
-  <div fxHide.lt-sm *ngIf="contact.emails && contact.emails.length > 0">
-    <span>{{contact.emails[0]?.email}}</span>
+<div tabindex="0" class="item" fxLayout="row" fxLayoutAlign="space-between center">
+
+  <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
+    <div class="pic" fxFlex="0 0 auto">
+      <div class="letter">{{contact.name[0].toUpperCase() || contact.business[0].toUpperCase()}}</div>
+    </div>
+
+    <div fxFlex="1 0 auto">{{contact.name || contact.company}}</div>
+  </div>
+
+  <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center" fxHide.lt-sm *ngIf="contact.emails && contact.emails.length > 0">
+    <div>{{contact.emails[0]?.email}}</div>
   </div>
   <div fxHide.lt-sm *ngIf="!contact.emails || contact.emails.length === 0"></div>
 
-  <div fxHide.lt-lg *ngIf="contact.phones && contact.phones.length > 0">
-    <span *ngIf="contact.phones[0].country">{{contact.phones[0].country}} - </span>
-    <span>{{contact.phones[0]?.phone}}</span>
+  <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center" fxHide.lt-lg *ngIf="contact.phones && contact.phones.length > 0">
+    <div *ngIf="contact.phones[0].country">{{contact.phones[0].country}} - </div>
+    <div>{{contact.phones[0]?.phone}}</div>
   </div>
-  <div fxHide.lt-lg *ngIf="!contact.phones || contact.phones.length ===0"></div>
+  <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center" fxHide.lt-lg *ngIf="!contact.phones || contact.phones.length ===0"></div>
 
-  <div fxHide.lt-xl>{{contact.notes}}</div>
+  <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center" fxHide.lt-xl>{{contact.notes}}</div>
   <div class="icons">
     <i class="material-icons" (click)="parent.editContact($event, contact, 'edit')">edit</i>
   </div>

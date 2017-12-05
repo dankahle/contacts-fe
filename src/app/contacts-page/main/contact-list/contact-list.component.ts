@@ -22,27 +22,10 @@ export class ContactListComponent {
 
   constructor(private route: ActivatedRoute, protected store: Store, protected userService: UserService,
               protected contactsPageService: ContactsPageService, private mdDialog: MatDialog) {
-    store.subscribeContacts(contacts => this.contacts = this.filterByLabel(contacts));
 
-    this.route.params.subscribe(params => {
-      const id = this.route.snapshot.params.id;
-      if (id) {
-        store.setVal('selectedLabel', userService.getLabelById(id));
-      } else {
-        store.deleteVal('selectedLabel');
-      }
+    route.data.subscribe(data => {
+      return this.contacts = data.contacts;
     });
-
-  }
-
-  filterByLabel(contacts) {
-
-    const labelId = this.route.snapshot.params.id;
-    if (labelId) {
-      return contacts.filter(contact => _.find(contact.labels, {id: labelId}));
-    } else {
-      return contacts; // contacts label chosen
-    }
   }
 
   editContact(event, contact, mode) {

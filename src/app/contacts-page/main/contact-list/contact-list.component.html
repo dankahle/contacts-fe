@@ -1,9 +1,10 @@
 
-<h3 *ngIf="store.state.selectedLabel">
+<div class="contact-list">
+  <div class="label-title" *ngIf="store.state.selectedLabel">
   <span class="ghost"></span>
   <span>{{store.state.selectedLabel.name}}</span>
   <span *ngIf="store.state.selectedLabel.numContacts">({{store.state.selectedLabel.numContacts}})</span>
-</h3>
+</div>
 <br>
 <div *ngFor="let contact of contacts">
   <dk-contact-list-item [contact]="contact" (click)="openContactDetail($event, contact)"
@@ -19,3 +20,4 @@
 -->
 
 <button mat-fab color="warn">Accent</button>
+</div>

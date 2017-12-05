@@ -1,19 +1,34 @@
+@import '../../../../styles/comp-index';
 
 :host {
   flex: 1 1 auto;
   overflow-y: auto;
+  margin-left: 20px;
+  padding: 20px 75px 20px 8px;
 }
 
-.book-pic {
-  background-image: url(//ssl.gstatic.com/social/contactsui/images/labels/emptylabelicon_1x.png);
-  background-repeat: no-repeat;
-  height: 182px;
-  margin: auto;
-  width: 230px;
-}
+
+.contact-list {
+
+
+  .label-title {
+    font-size: 14px;
+    color: $gray-link;
+  }
+
+  .book-pic {
+    background-image: url(//ssl.gstatic.com/social/contactsui/images/labels/emptylabelicon_1x.png);
+    background-repeat: no-repeat;
+    height: 182px;
+    margin: auto;
+    width: 230px;
+  }
 
   .mat-button.mat-primary:hover /deep/ .mat-button-focus-overlay {
     opacity: 0;
   }
+
+}
+
 
 

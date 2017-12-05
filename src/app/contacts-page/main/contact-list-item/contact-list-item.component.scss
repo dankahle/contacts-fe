@@ -1,7 +1,29 @@
+@import '../../../../styles/comp-index';
 
 .item {
   position: relative;
-  height: 30px;
+  height: 56px;
+
+
+  .pic {
+    width: 68px;
+    height: 48px;
+    padding: 4px;
+    patting-right: 12px;
+    .letter {
+      color: white;
+      width: 36px;
+      height: 36px;
+      //display: inline-block;
+      font-size: 20px;
+      line-height: 36px;
+      text-align: center;
+      font-weight: 300;
+      background-color: $mat-accent;
+      border: 1px solid $mat-accent;
+      border-radius: 50%;
+    }
+  }
 
   .icons {
     position: absolute;
