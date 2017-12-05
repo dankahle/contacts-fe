@@ -20,11 +20,11 @@ export class ContactDetailComponent {
   }
 
   addLabel(label) {
-    this.store.publishUpdateLabelCounts();
+    this.contactsPageService.updateLabelCounts();//dankfix: a reminder, maybe shoujld be done in the service instead?
   }
 
   deleteLabel(label) {
-    this.store.publishUpdateLabelCounts();
+    this.contactsPageService.updateLabelCounts();
   }
 
   editContact(event, contact, mode) {

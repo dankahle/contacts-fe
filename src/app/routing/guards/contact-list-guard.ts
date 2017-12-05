@@ -9,24 +9,20 @@ import {Store} from '../../store/store';
  * LoginGuard
  * desc - verifies user is logged in
  */
-export class AuthGuard implements CanActivate {
+export class ContactListGuard implements CanActivate {
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(private store: Store, private userService: UserService) {
   }
 
   canActivate(next: ActivatedRouteSnapshot,
               state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.userService.isAuthenticated()) {
-      return true;
+    const labelId = next.params.id;
+    if (labelId) {
+      this.store.setVal('selectedLabel', this.userService.getLabelById(labelId));
     } else {
-      return this.userService.getUser()
-        .map(user => {
-          return true;
-        })
-        .catch(err => {
-          this.router.navigateByUrl('/login');
-          return Observable.of(false);
-        });
+      this.store.deleteVal('selectedLabel');
     }
+    return true;
   }
+
 }

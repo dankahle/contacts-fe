@@ -6,25 +6,19 @@ import {AuthGuard} from './guards/auth.guard';
 import {ContactListComponent} from '../contacts-page/main/contact-list/contact-list.component';
 import {RouterModule, Routes} from '@angular/router';
 import {StoreModule} from '../store/store.module';
-import {ContactListResolve} from './resolves/contactListResolve';
 import {CoreModule} from '../core/core.module';
+import {ContactListGuard} from './guards/contact-list-guard';
 
 const appRoutes: Routes = [
   {
     path: '',
     component: ContactListComponent,
-    canActivate: [AuthGuard, InitializationGuard],
-    resolve: {
-      contacts: ContactListResolve
-    }
+    canActivate: [AuthGuard, InitializationGuard, ContactListGuard],
   },
   {
     path: ':id',
     component: ContactListComponent,
-    canActivate: [AuthGuard, InitializationGuard],
-    resolve: {
-      contacts: ContactListResolve
-    }
+    canActivate: [AuthGuard, InitializationGuard, ContactListGuard],
   },
   {path: '**', component: PageNotFoundComponent}
 ];
@@ -36,7 +30,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes, {enableTracing: false}),
     CoreModule
   ],
-  providers: [ContactListResolve]
+  providers: [ContactListGuard]
 })
 export class RoutingModule {
 }

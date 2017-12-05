@@ -6,6 +6,7 @@ import {Store} from '../../store/store';
 import * as _ from 'lodash';
 import {Observable} from 'rxjs/Observable';
 import {ActivatedRoute, ActivatedRouteSnapshot, Router, RouterModule} from '@angular/router';
+import {ContactsPageService} from '../../contacts-page/contacts-page.service';
 
 @Injectable()
 export class ContactsService {
@@ -23,11 +24,27 @@ export class ContactsService {
   }
 
   addOne(contact: Contact) {
-    return Observable.of(null);
+    return this.http.post<Contact>(`${this.apiUrl}api/contacts`, contact)
+      .do(_contact => {
+        this.store.state.contacts.push(_contact);
+        this.store.setContacts(_.sortBy(this.store.state.contacts, 'name'));
+      });
   }
 
   updateOne(contact: Contact) {
-    return Observable.of(null);
+    return this.http.put<Contact>(`${this.apiUrl}api/contacts/${contact.id}`, contact)
+      .do(_contact => {
+        _.merge(_.find(this.store.state.contacts, {id: contact.id}), contact);
+        this.store.setContacts(_.sortBy(this.store.state.contacts, 'name'));
+      });
+  }
+
+  deleteOne(id: number) {
+    return this.http.delete<Contact>(`${this.apiUrl}api/contacts/${id}`)
+      .do(() => {
+        const index = _.findIndex(this.store.state.contacts, {id: id});
+        this.store.setContacts(this.store.state.contacts.splice(index, 1));
+      });
   }
 
   updateMany(contacts: Contact[]) {

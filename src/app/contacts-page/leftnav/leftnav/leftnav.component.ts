@@ -130,16 +130,16 @@ export class LeftnavComponent {
       }
     }
     this.mdDialog.open(EditLabelComponent, config)
-      .afterClosed().subscribe(results => {
-      if (results) {
+      .afterClosed().subscribe(_label => {
+      if (_label) {
         if (mode === 'add') {
-          this.store.state.user.labels.push(results.label);
+          this.store.state.user.labels.push(_label);
         } else {
-          _.find(this.store.state.user.labels, {id: results.label.id}).name = results.label.name;
+          _.find(this.store.state.user.labels, {id: _label.id}).name = _label.name;
         }
         this.store.state.user.labels = _.sortBy(this.store.state.user.labels, 'name');
         this.userService.updateUser(this.store.state.user)
-          .mergeMap(() => this.contactsService.updateLabelInContacts(this.store.state.contacts, label))
+          .mergeMap(() => this.contactsService.updateLabelInContacts(this.store.state.contacts, _label))
           .subscribe(x => x);
       }
     });

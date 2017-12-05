@@ -5,6 +5,8 @@ import {Label} from '../../../store/models/label';
 import * as _ from 'lodash';
 import {AbstractControl, FormControl, NgModel, ValidatorFn, Validators} from '@angular/forms';
 
+const chance = new Chance();
+
 @Component({
   selector: 'dk-edit-label',
   templateUrl: './edit-label.component.html',
@@ -19,22 +21,23 @@ export class EditLabelComponent implements OnInit {
   addMode = false;
   editMode = false;
   log = console.log;
-
+  label: Label;
 
   constructor(protected dialogRef: MatDialogRef<EditLabelComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
-    const chance = new Chance();
     data.labelNames = data.labelNames.map(name => name.toLowerCase());
     if (data.mode === 'add') {
       this.addMode = true;
       this.placeholder = 'Create label';
-      data.label = <Label>{
+      this.label = <Label>{
         id: chance.guid(),
         name: '',
-        icon: 'label'
+        icon: 'label',
+        numContacts: 0
       };
     } else {
       this.editMode = true;
-      this.orgName = data.label.name;
+      this.label = _.cloneDeep(data.label);
+      this.orgName = this.label.name;
     }
   }
 
@@ -43,9 +46,9 @@ export class EditLabelComponent implements OnInit {
   }
 
   nameAlreadyExists() {
-    if (this.editMode && this.data.label.name.toLowerCase() === this.orgName.toLowerCase()) {
+    if (this.editMode && this.label.name.toLowerCase() === this.orgName.toLowerCase()) {
       return false;
-    } else if (_.includes(this.data.labelNames, this.data.label.name.toLowerCase())) {
+    } else if (_.includes(this.data.labelNames, this.label.name.toLowerCase())) {
        return true;
 
     } else {
@@ -59,9 +62,9 @@ export class EditLabelComponent implements OnInit {
     });
   }
 
-  submit(form, data) {
+  submit(form) {
     if (form.valid) {
-      this.dialogRef.close(data);
+      this.dialogRef.close(this.label);
     }
   }
 

@@ -10,17 +10,25 @@ import {Util} from '../core/services/util';
 import {ContactDetailComponent} from './main/contact-detail-modal/contact-detail.component';
 import {Observable} from 'rxjs/Observable';
 import {Messages} from '../store/models/messages';
+import {Contact} from '../store/models/contact';
 
 @Injectable()
 export class ContactsPageService {
 
   constructor(private store: Store, private userService: UserService, private contactsService: ContactsService,
               private mdDialog: MatDialog) {
+    // this is really only for store, i.e. store is the lowest on the hierarchy of modules, so can't see anything above (core, router, etc)
+    // without there being a circular reference. We'll publish an event to get around that.
     store.subscribeUpdateLabelCounts(contacts => this.updateLabelCounts());
+    store.subscribeContacts(contacts => this.updateLabelCounts());
   }
 
   // add/delete contacts will pass null in here
   updateLabelCounts() {
+    if (!this.store.state.initialized) {
+      return;
+    }
+
     const state = this.store.state;
     const contacts = state.contacts;
     state.user.labels.forEach(label => {
@@ -49,18 +57,21 @@ export class ContactsPageService {
       if (_contact) {
         // throw new Error('edit submit not implemented');
         if (mode === 'add') {
-          api$ = this.contactsService.updateOne(_contact);
-        } else {
           api$ = this.contactsService.addOne(_contact);
+        } else {
+          api$ = this.contactsService.updateOne(_contact);
         }
         // we always open detail after add/edit
-        return api$.map(apiContact => {
+        api$.do(apiContact => {
           this.store.emit(Messages.openContactDetail, apiContact);
-        });
-      } else {
+        })
+          .subscribe(x => x);
+      } else if (mode === 'edit') {
         this.store.emit(Messages.openContactDetail, contact);
       }
     });
   }
+
+
 
 }

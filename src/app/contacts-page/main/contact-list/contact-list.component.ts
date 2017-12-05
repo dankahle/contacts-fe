@@ -26,6 +26,14 @@ export class ContactListComponent {
     route.data.subscribe(data => {
       return this.contacts = data.contacts;
     });
+    this.store.subscribeContacts(contacts => {
+      if (store.state.selectedLabel) {
+        this.contacts = this.store.state.contacts.filter(contact =>
+          _.find(contact.labels, {id: this.store.state.selectedLabel.id}));
+      } else {
+        this.contacts = contacts;
+      }
+    });
   }
 
   editContact(event, contact, mode) {
