@@ -1,31 +1,35 @@
-<div tabindex="0" class="list-item outline" fxFlex="grow" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="12px">
+<div tabindex="0" class="list-item outline" fxFlex="grow" fxLayout>
 
-  <div class="pic" fxFlex="none">
-    <div class="letter outline">{{contact.name[0].toUpperCase() || contact.company[0].toUpperCase()}}</div>
+  <div class="pic outline" fxFlex="none">
+    <div class="letter">{{contact.name[0].toUpperCase() || contact.company[0].toUpperCase()}}</div>
   </div>
 
-  <div class="text-ellipsis outline" fxFlex="1 1 10%">{{contact.name || contact.company}}</div>
+  <div class="flex-cont outline" tabindex="0" fxFlex="grow" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="12px">
 
-  <div class="outline" fxFlex="1 1 10%" fxLayout="row" fxLayoutAlign="start center" fxHide.lt-sm>
-    <div class="text-ellipsis" *ngIf="contact.emails && contact.emails.length > 0">
-      <a class="text-ellipsis outline" href="mailto:{{contact.emails[0].email}}" (click)="$event.stopPropagation()">{{contact.emails[0].email}}</a>
+    <div class="text-ellipsis outline" fxFlex="1 1 10%">{{contact.name || contact.company}}</div>
+
+    <div class="outline" fxFlex="1 1 10%" fxLayout="row" fxLayoutAlign="start center" fxHide.lt-sm>
+      <div class="text-ellipsis" *ngIf="contact.emails && contact.emails.length > 0">
+        <a class="text-ellipsis outline" href="mailto:{{contact.emails[0].email}}" (click)="$event.stopPropagation()">{{contact.emails[0].email}}</a>
+      </div>
+      <div class="text-ellipsis" *ngIf="!contact.emails || !contact.emails.length > 0">&nbsp;</div>
     </div>
-    <div class="text-ellipsis" *ngIf="!contact.emails || !contact.emails.length > 0">&nbsp;</div>
-  </div>
 
-  <div class="outline" fxFlex="1 1 10%" fxLayout="row" fxLayoutAlign="start center" fxHide.lt-lg>
-    <div class="text-ellipsis outline" *ngIf="contact.phones && contact.phones.length > 0">
-      <div class="text-ellipsis" *ngIf="contact.phones[0].country">{{contact.phones[0].country}} - {{contact.phones[0].phone}}</div>
-      <div class="text-ellipsis" *ngIf="!contact.phones[0].country">{{contact.phones[0].phone}}</div>
+    <div class="outline" fxFlex="1 1 10%" fxLayout="row" fxLayoutAlign="start center" fxHide.lt-lg>
+      <div class="text-ellipsis outline" *ngIf="contact.phones && contact.phones.length > 0">
+        <div class="text-ellipsis" *ngIf="contact.phones[0].country">{{contact.phones[0].country}} -
+          {{contact.phones[0].phone}}
+        </div>
+        <div class="text-ellipsis" *ngIf="!contact.phones[0].country">{{contact.phones[0].phone}}</div>
+      </div>
+      <div class="text-ellipsis outline" *ngIf="!contact.phones || !contact.phones.length > 0">&nbsp;</div>
     </div>
-    <div class="text-ellipsis outline" *ngIf="!contact.phones || !contact.phones.length > 0">&nbsp;</div>
-  </div>
 
-  <div class="outline" fxFlex="1 1 10%" fxLayout="row" fxLayoutAlign="start center" fxHide.lt-xl>
-    <div class="text-ellipsis outline" *ngIf="contact.notes"> {{contact.notes}}</div>
-    <div *ngIf="!contact.notes">&nbsp;</div>
+    <div class="outline" fxFlex="1 1 10%" fxLayout="row" fxLayoutAlign="start center" fxHide.lt-xl>
+      <div class="text-ellipsis outline" *ngIf="contact.notes"> {{contact.notes}}</div>
+      <div *ngIf="!contact.notes">&nbsp;</div>
+    </div>
   </div>
-
   <div class="icons">
     <i class="material-icons" (click)="parent.editContact($event, contact, 'edit')">edit</i>
   </div>
