@@ -12,6 +12,7 @@ body {
 *::before,
 *::after {
   box-sizing: border-box; // 1
+  //outline: none;
 }
 
 i {
@@ -21,7 +22,7 @@ i {
 a {
   text-decoration: none;
   &:link, &:visited, &:hover, &:active {
-    color: $active-link !important;
+    color: $link-active !important;
   }
 }
 

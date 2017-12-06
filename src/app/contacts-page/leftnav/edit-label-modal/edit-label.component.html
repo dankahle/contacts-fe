@@ -5,7 +5,7 @@
 
   <form id="form1" name="form" #form="ngForm" (submit)="submit(form)">
     <mat-form-field>
-      <input name="name" matInput #name="ngModel" [(ngModel)]="label.name" [placeholder]="placeholder" tabindex="1" autocomplete="off">
+      <input name="name" matInput #name="ngModel" [(ngModel)]="label.name" [placeholder]="placeholder" autocomplete="off">
       <mat-error *ngIf="name.invalid && name.errors.required">Required!</mat-error>
       <mat-error *ngIf="name.invalid && name.errors.nameAlreadyExists">Name already exists</mat-error>
     </mat-form-field>
@@ -14,7 +14,7 @@
 </div>
 
 <div mat-dialog-actions>
-  <button type="submit" form="form1" mat-button color="primary" [mat-dialog-close]="data" tabindex="3" [disabled]="form.invalid">OK</button>
-  <button mat-button mat-dialog-close tabindex="-1">Cancel</button>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button type="submit" form="form1" mat-button color="primary" [mat-dialog-close]="data" [disabled]="form.invalid">OK</button>
 </div>
 

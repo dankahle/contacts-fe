@@ -1,4 +1,4 @@
-import {Component, Inject, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, ContentChild, Inject, ViewChild, ViewEncapsulation} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Contact} from '../../../store/models/contact';
 import {Store} from '../../../store/store';

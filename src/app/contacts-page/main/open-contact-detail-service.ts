@@ -14,8 +14,8 @@ export class OpenContactDetailService {
 
   openContactDetail(contact) {
     const config = <MatDialogConfig>{
-      width: '248px',
-      height: '193px',
+      width: '400px',
+      height: '400px',
       data: {
         contact: contact
       }

@@ -1,13 +1,29 @@
 
-<h3>Contact Detail</h3>
+<h2 mat-dialog-title="">Contact Detail</h2>
 
-<div>id: {{contact.id}}</div>
-<div>name: {{contact.name}}</div>
+<div mat-dialog-content>
 
-<br>
-<button (click)="editContact($event, contact, 'edit')"
-        (keydown)="editContact($event, contact, 'edit')">edit</button><br><br>
+  <form id="form1">
+    <div>id: {{contact.id}}</div>
+    <div>name: {{contact.name}}</div>
+  </form>
 
-<pre>
+  <br>
+  <button mat-button (click)="editContact($event, contact, 'edit')"
+          (keydown)="editContact($event, contact, 'edit')">edit
+  </button>
+  <br><br>
+
+  <br>
+  <button mat-button (click)="showJson = !showJson">show json</button><br>
+
+  <pre *ngIf="showJson">
   {{contact | json}}
 </pre>
+
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button type="submit" form="form1" mat-button color="primary" [mat-dialog-close]="null">Save</button>
+</div>

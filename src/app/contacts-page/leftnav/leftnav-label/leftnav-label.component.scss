@@ -6,13 +6,13 @@
   position: relative;
   cursor: pointer;
   padding: 0 20px;
-  color: $gray-link;
+  color: $link-gray;
   white-space: nowrap;
   overflow: hidden;
   outline: 0;
   * {
     vertical-align: middle;
-    color: $gray-link;
+    color: $link-gray;
   }
   i {
     font-size: 20px;
@@ -23,11 +23,11 @@
     margin-left: 14px;
   }
   &:hover, &:focus, :host.active > & {
-    background: $light-gray-bg;
+    background: $bg-light-gray;
   }
   :host.active > & {
     * {
-      color: $active-link;
+      color: $link-active;
     }
   }
 
@@ -38,7 +38,7 @@
     right: 3px;
     padding-left: 3px;
     z-index: 10;
-    background: $light-gray-bg;
+    background: $bg-light-gray;
     div {
       display: inline-block;
       padding: 3px;

@@ -1,9 +1,11 @@
 @import '../../../../styles/comp-index';
 
-.item {
+.list-item {
   position: relative;
   height: 56px;
-
+  &:hover {
+    background-color: $bg-light-gray;
+  }
 
   .pic {
     width: 68px;
