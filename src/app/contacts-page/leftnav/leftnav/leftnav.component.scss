@@ -2,11 +2,9 @@
 @import '../../../../styles/comp-index';
 
 
-$left-nav-width: 259px;
-
 .leftnav {
   transition: margin-left, left 200ms;
-  width: $left-nav-width;
+  width: $leftnav-width;
   margin-left: 0;
   padding-top: 15px;
   border-right: 1px solid $border-gray;
@@ -22,11 +20,11 @@ $left-nav-width: 259px;
   }
 
   &.closed {
-    margin-left: -$left-nav-width;
+    margin-left: -$leftnav-width;
 
     @media (max-width: $breakpoint-md) {
       margin-left: 0;
-      left: -$left-nav-width;
+      left: -$leftnav-width;
     }
   }
 

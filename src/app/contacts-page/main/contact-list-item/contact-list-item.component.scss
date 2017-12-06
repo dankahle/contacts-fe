@@ -1,8 +1,12 @@
 @import '../../../../styles/comp-index';
 
+
+
 .list-item {
   position: relative;
   height: 56px;
+  padding: 8px;
+  overflow: hidden;
   &:hover {
     background-color: $bg-light-gray;
   }

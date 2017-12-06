@@ -90,7 +90,7 @@ export class LeftnavComponent {
       }
       this.mdDialog.open(DeleteLabelComponent, config)
         .afterClosed().subscribe(results => {
-        if (results.deleteMode) {
+        if (results) {
           if (results.deleteMode === DeleteLabelMode.keepContacts) {
             this.contactsService.removeLabelFromContacts(this.store.state.contacts, label.id)
               .subscribe(() => this._deleteLabel(label));

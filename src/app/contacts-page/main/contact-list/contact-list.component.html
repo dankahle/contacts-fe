@@ -1,25 +1,26 @@
 
+
 <div class="contact-list">
   <div class="label-title" *ngIf="store.state.selectedLabel">
-  <span class="ghost"></span>
-  <span>{{store.state.selectedLabel.name}}</span>
-  <span *ngIf="store.state.selectedLabel.numContacts">({{store.state.selectedLabel.numContacts}})</span>
-</div>
-<br>
-<div *ngFor="let contact of contacts">
-  <dk-contact-list-item [contact]="contact" (click)="openContactDetail($event, contact)"
-                        (keydown)="openContactDetail($event, contact)"></dk-contact-list-item>
-</div>
+    <span class="ghost"></span>
+    <span>{{store.state.selectedLabel.name}}</span>
+    <span *ngIf="store.state.selectedLabel.numContacts">({{store.state.selectedLabel.numContacts}})</span>
+  </div>
+  <br>
+  <div *ngFor="let contact of contacts">
+    <dk-contact-list-item [contact]="contact" (click)="openContactDetail($event, contact)"
+                          (keydown)="openContactDetail($event, contact)"></dk-contact-list-item>
+  </div>
 
-<!--
-<div  *ngIf="contacts.length === 0" class="no-contacts">
-  <div class="book-pic"><span>sometthing</span></div>
-  <div>no contacts labeled "{{store.state.selectedLabel.name}}"</div>
-  <button mat-button color="primary">Primary</button>
-</div>
--->
+  <!--
+  <div  *ngIf="contacts.length === 0" class="no-contacts">
+    <div class="book-pic"><span>sometthing</span></div>
+    <div>no contacts labeled "{{store.state.selectedLabel.name}}"</div>
+    <button mat-button color="primary">Primary</button>
+  </div>
+  -->
 
-<button class="add-button" mat-fab color="accent" (click)="editContact($event, contact, 'add')">
-  <i class="material-icons">add</i>
-</button>
+  <button class="add-button" mat-fab color="accent" (click)="editContact($event, contact, 'add')">
+    <i class="material-icons">add</i>
+  </button>
 </div>
