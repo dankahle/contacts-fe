@@ -3,7 +3,7 @@
   <dk-header fxFlex="0 0 auto"></dk-header>
   <div class="nav-and-main" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="start stretch">
       <dk-leftnav *ngIf="store.state.user" fxFlex="0 0 auto"></dk-leftnav>
-      <div fxFlex="grow" fxLayout="column" fxLayoutAlign="start stretch">
+      <div class="main" fxFlex="grow" fxLayout="column" fxLayoutAlign="start stretch">
         <router-outlet></router-outlet>
       </div>
   </div>

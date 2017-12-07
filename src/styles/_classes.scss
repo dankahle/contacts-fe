@@ -11,10 +11,12 @@
 }
 
 .text-ellipsis {
+  @include text-ellipsis;
+}
+
+.text-ellipsis-inline {
   display: inline-block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  @include text-ellipsis;
 }
 
 .error-text {

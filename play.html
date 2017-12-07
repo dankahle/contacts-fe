@@ -9,25 +9,70 @@
       padding:0;
       margin:0
     }
+
+    .text-ellipsis {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
     div {
+      box-sizing: border-box;
+    }
+    .outline {
       outline:1px solid;
       outline-offset: -1px;
     }
+    .outer {
+      width: 50%;
+      height: 100%;
+      margin-left: 300px;
+      background-color: rgba(0,0,0,.1);
+    }
+    .wrap {
+      height: 100%;
+      display: flex;
+    }
+    .leftnav {
+      flex: 0 0 100px;
+      margin-right: 10px;
+      outline: 2px solid;
+      outline-color: blue;
+    }
+    .main {
+      position:relative;
+      flex: 1 1 auto;
+      outline-color: red;
+      display: flex;
+      justify-content: space-between;
+      min-width: 0;
+    }
+    .name, .phone {
+      flex: 1 1 30%;
+      max-width: 30%;
+      margin: 0 4px;
+    }
+
   </style>
 </head>
-<body style="display:flex; flex-direction:column; outline: 1px solid red; outline-offset: -1px;">
-<div style="flex: 0 0; height:30px;">lala</div>
-<div style="overflow-y: scroll">
-  <div class="tweetItem" id="tweetItem">toto</div>
-  <div class="tweetItem" id="tweetItem">toto</div>
-  <div class="tweetItem" id="tweetItem">toto</div>
-  <div class="tweetItem" id="tweetItem">toto</div>
-  <div class="tweetItem" id="tweetItem">toto</div>
-  <div class="tweetItem" id="tweetItem">toto</div>
-  <div class="tweetItem" id="tweetItem">toto</div>
-  <div class="tweetItem" id="tweetItem">toto</div>
-  <div class="tweetItem" id="tweetItem">toto</div>
-  <div class="tweetItem" id="tweetItem">toto</div>
+<body>
+<div class="outer">
+
+  <div class="wrap outline">
+    <div class="leftnav outline"></div>
+    <div class="main outline">
+
+      <div class="name outline text-ellipsis">long ass name from hell on earth</div>
+      <div class="phone outline text-ellipsis">111-222-3333dddddddggggggghhhhhhhhhhhhh</div>
+
+
+
+
+    </div>
+  </div>
+
+
 </div>
+
+
 </body>
 </html>

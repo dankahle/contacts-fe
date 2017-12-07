@@ -159,9 +159,9 @@ export class LeftnavComponent {
 
   handleBreakpoints(change: BreakpointChange) {
     if (this.breakpoints.isActive('lt-md') && _.includes(['md', 'lg', 'xl'], this.breakpoints.lastBreakpoint)) {
-      this.store.setVal('leftNavClosed', true);
+      this.store.setLeftNavClosed(true);
     } else if (this.breakpoints.isActive('gt-sm') && _.includes(['xs', 'sm'], this.breakpoints.lastBreakpoint)) {
-        this.store.setVal('leftNavClosed', this.wasClosed);
+      this.store.setLeftNavClosed(this.wasClosed);
     }
   }
 

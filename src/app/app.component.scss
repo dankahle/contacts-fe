@@ -12,6 +12,9 @@
 
 .nav-and-main {
   position: relative;
+  .main {
+    min-width: 0;
+  }
 }
 
 

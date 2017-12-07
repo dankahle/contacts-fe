@@ -23,6 +23,8 @@ export class Store extends StoreBase {
   subscribeContacts = this.contactsState$.subscribe.bind(this.contactsState$);
   updateLabelCounts$ = new Subject();
   subscribeUpdateLabelCounts = this.updateLabelCounts$.subscribe.bind(this.updateLabelCounts$);
+  leftNavClosed$ = new BehaviorSubject(false);
+  subscribeLeftNavClosed = this.leftNavClosed$.subscribe.bind(this.leftNavClosed$);
 
   constructor(state: State) {
     super(state);
@@ -54,6 +56,7 @@ export class Store extends StoreBase {
 
   setLeftNavClosed(val) {
     this.state.leftNavClosed = val;
-    //dankfix: need to use new breakpoint service
+    this.leftNavClosed$.next(val);
+    super.publish();
   }
 }
