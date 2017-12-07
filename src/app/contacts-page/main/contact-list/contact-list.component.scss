@@ -3,13 +3,12 @@
 :host {
   flex: 1 1 auto;
   overflow-y: auto;
-  margin-left: 20px;
   display: flex;
   justify-content: flex-start;
   align-content: stretch;
-  padding: 20px 75px 20px 8px;
+  padding: 20px;
+  padding-right: 74px;
 }
-
 
 .contact-list {
 
@@ -34,8 +33,7 @@
     position: fixed;
     bottom: 0;
     right: 0;
-    margin-bottom: 24px;
-    margin-right: 24px;
+    margin: 9px;
   }
 }
 

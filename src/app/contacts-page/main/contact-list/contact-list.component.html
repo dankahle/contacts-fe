@@ -5,8 +5,9 @@
     <span class="ghost"></span>
     <span>{{store.state.selectedLabel.name}}</span>
     <span *ngIf="store.state.selectedLabel.numContacts">({{store.state.selectedLabel.numContacts}})</span>
+    <br>
   </div>
-  <br>
+
   <div *ngFor="let contact of contacts">
     <dk-contact-list-item [contact]="contact" (click)="openContactDetail($event, contact)"
                           (keydown)="openContactDetail($event, contact)"></dk-contact-list-item>
