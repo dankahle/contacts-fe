@@ -84,6 +84,7 @@ export class LeftnavComponent {
       const config = <MatDialogConfig>{
         width: '336px',
         height: '281px',
+        backdropClass: 'bg-modal-backdrop',
         data: {
           label: {...label}
         }
@@ -122,6 +123,7 @@ export class LeftnavComponent {
     const config = <MatDialogConfig>{
       width: '248px',
       height: '193px',
+      backdropClass: 'bg-modal-backdrop',
       data: {
         mode: mode,
         label: {...label},
@@ -152,6 +154,7 @@ export class LeftnavComponent {
     const config = <MatDialogConfig>{
       width: '248px',
       height: '193px',
+      backdropClass: 'bg-modal-backdrop',
       data: {}
     }
     this.mdDialog.open(NotImplementedComponent, config);

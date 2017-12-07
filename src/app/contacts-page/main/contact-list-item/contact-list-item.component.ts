@@ -11,20 +11,17 @@ import {ContactsPageService} from '../../contacts-page.service';
   encapsulation: ViewEncapsulation.Emulated
 })
 export class ContactListItemComponent {
-  @ViewChild('MoreActionsComponent') moreActions;
   @Input() contact: Contact;
-  hideMoreActions = true;
 
   constructor(protected parent: ContactListComponent, protected contactsPageService: ContactsPageService) {
   }
 
-  moreActions(event, contact, mode) {
+  moreActions(event, contact) {
     event.stopPropagation();
     if (Util.keydownAndNotEnterOrSpace(event)) {
       return;
     }
-    this.hideMoreActions = false;
-    this.moreActions.focus();
+    this.contactsPageService.openMoreActions(event, contact)
   }
 
 }

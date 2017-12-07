@@ -20,4 +20,8 @@ export class Util {
     return event.type === 'keydown' && (event.which === 13 || event.which === 32);
   }
 
+  getModalPosition(width, height, sideOffset, topOffset, openLeft) {
+
+  }
+
 }

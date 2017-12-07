@@ -11,6 +11,7 @@ import {ContactDetailComponent} from './main/contact-detail-modal/contact-detail
 import {Observable} from 'rxjs/Observable';
 import {Messages} from '../store/models/messages';
 import {Contact} from '../store/models/contact';
+import {MoreActionsComponent} from './main/more-actions-modal/more-actions.component';
 
 @Injectable()
 export class ContactsPageService {
@@ -46,6 +47,7 @@ export class ContactsPageService {
     const config = <MatDialogConfig>{
       width: '400px',
       height: '400px',
+      backdropClass: 'bg-modal-backdrop',
       data: {
         mode: mode,
         contact: {...contact},
@@ -72,8 +74,48 @@ export class ContactsPageService {
     });
   }
 
-  moreActions(contact: Contact) {
-    console.log('moreactions', contact.name)
+  openMoreActions(event, contact) {
+    const width = 400,
+      padding = 40,
+      rightOffset = 40,
+      topOffset = 40;
+     let height = 400,
+       top: number,
+        shrink = false;
+
+    if (window.innerHeight < height) {
+      shrink = true;
+      height = window.innerHeight - padding;
+      top = padding/2;
+    } else if (window.innerHeight < event.clientY + height - topOffset) {
+      top = window.innerHeight - height + topOffset;
+    } else {
+      top = event.clientY - topOffset;
+    }
+
+    const config = <MatDialogConfig>{
+      width: width + 'px',
+      height: shrink? height + 'px': (height - topOffset) + 'px',
+      backdropClass: 'bg-modal-backdrop',
+      position: {
+        top: top + 'px',
+        left: (event.clientX - width + rightOffset) + 'px',
+      },
+      data: {
+        contact: {...contact},
+      }
+    }
+    this.mdDialog.open(MoreActionsComponent, config)
+      .afterClosed().subscribe(_contact => {
+      let api$: Observable<any>;
+      if (_contact) {
+        this.contactsService.updateOne(_contact)
+          .do(apiContact => {
+            this.store.publishUpdateLabelCounts();
+          })
+          .subscribe(x => x);
+      }
+    });
   }
 
 

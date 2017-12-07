@@ -25,7 +25,8 @@ export class ContactDetailRouteComponent {
       progressService.hideProgressBar();
       const config = <MatDialogConfig> {
         data: {contact: data.contact},
-        width: '300px'
+        width: '300px',
+        backdropClass: 'bg-modal-backdrop'
       }
       dialog.open(ContactDetailComponent, config)
         .afterClosed()

@@ -26,10 +26,9 @@ import { MoreActionsComponent } from './main/more-actions-modal/more-actions.com
   ],
   declarations: [ContactListComponent, ContactDetailRouteComponent, ContactDetailComponent, ContactListItemComponent,
     LeftnavComponent, HeaderComponent, LeftnavLabelComponent, EditLabelComponent, DeleteLabelComponent, ContactSearchComponent,
-    ContactEditComponent,
-    MoreActionsComponent],
+    ContactEditComponent, MoreActionsComponent],
   exports: [RouterModule, LeftnavComponent, HeaderComponent],
-  entryComponents: [ContactDetailComponent, EditLabelComponent, DeleteLabelComponent, ContactEditComponent],
+  entryComponents: [ContactDetailComponent, EditLabelComponent, DeleteLabelComponent, ContactEditComponent, MoreActionsComponent],
   providers: [ContactsPageService, OpenContactDetailService]
 })
 export class ContactsPageModule {
