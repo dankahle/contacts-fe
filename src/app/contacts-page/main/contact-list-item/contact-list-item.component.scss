@@ -1,7 +1,5 @@
 @import '../../../../styles/comp-index';
 
-
-
 .list-item {
   position: relative;
   height: 56px;
@@ -16,7 +14,6 @@
     height: 56px;
     padding: 4px;
     patting-right: 12px;
-    margin-left: 8px;
     display: flex;
     .letter {
       margin: auto;
@@ -34,13 +31,9 @@
     }
   }
 
-  $width-pic-plus-margin: $width-pic + 8px + 8px;
-  .flex-cont {
-    margin-right: 8px;
-    max-width: calc(100% - #{$width-pic-plus-margin});
+  .columns {
+    min-width: 0;
   }
-
-
 
   .icons {
     position: absolute;

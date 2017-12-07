@@ -39,6 +39,7 @@ export class ContactListComponent {
       }
     });
 
+/*
     this.store.leftNavClosed$.subscribe(leftnavClosed => {
       if (leftnavClosed || breakpoints.isActive('lt-md')) {
         this.hostMaxWidth = '100%';
@@ -46,6 +47,7 @@ export class ContactListComponent {
         this.hostMaxWidth = 'calc(100% - 284px)';
       }
     });
+*/
 
   } // const
 
