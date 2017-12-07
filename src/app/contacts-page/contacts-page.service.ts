@@ -72,6 +72,9 @@ export class ContactsPageService {
     });
   }
 
+  moreActions(contact: Contact) {
+    console.log('moreactions', contact.name)
+  }
 
 
 }

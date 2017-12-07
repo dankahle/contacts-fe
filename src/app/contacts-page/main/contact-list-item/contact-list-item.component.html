@@ -17,7 +17,7 @@
       <div class="text-ellipsis" *ngIf="contact.emails && contact.emails.length > 0">
         <a class="text-ellipsis" href="mailto:{{contact.emails[0].email}}" (click)="$event.stopPropagation()">{{contact.emails[0].email}}</a>
       </div>
-      <div *ngIf="!contact.emails || contact.emails.length === 0">&nbsp&nbsp;</div>
+      <div *ngIf="!contact.emails || contact.emails.length === 0">&nbsp;</div>
     </div>
 
     <div  fxLayout="row" fxLayoutAlign="start center" fxHide.lt-lg fxFlex.lg="0 1 30%" fxFlex.xl="0 1 23%">
@@ -27,19 +27,23 @@
         </div>
         <div class="text-ellipsis" *ngIf="!contact.phones[0].country">{{contact.phones[0].phone}}</div>
       </div>
-      <div  *ngIf="!contact.phones || contact.phones.length === 0">&nbsp&nbsp;</div>
+      <div  *ngIf="!contact.phones || contact.phones.length === 0">&nbsp;</div>
     </div>
 
     <div  fxHide.lt-xl fxFlex.xl="0 1 23%" fxLayout="row" fxLayoutAlign="start center">
       <div class="text-ellipsis" *ngIf="contact.notes"> {{contact.notes}}</div>
-      <div *ngIf="!contact.notes">&nbsp&nbsp;</div>
+      <div *ngIf="!contact.notes">&nbsp;</div>
     </div>
 
 
 
   </div>
+
   <div class="icons">
-    <i class="material-icons" (click)="parent.editContact($event, contact, 'edit')">edit</i>
+    <div class="wrap"><i class="material-icons" (click)="parent.editContact($event, contact, 'edit')">edit</i></div>
+    <div class="wrap"><i class="material-icons" (click)="moreActions($event, contact)">more_vert</i></div>
   </div>
+
+  <dk-more-actions [hidden]="hideMoreActions"></dk-more-actions>
 </div>
 

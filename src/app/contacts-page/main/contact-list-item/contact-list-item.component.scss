@@ -1,17 +1,23 @@
 @import '../../../../styles/comp-index';
 
+  $height: 56px;
+
 .list-item {
   position: relative;
   height: 56px;
   overflow: hidden;
+  outline: none;
   &:hover {
     background-color: $bg-light-gray;
+    .icons {
+      display: flex;
+    }
   }
 
   $width-pic: 68px;
   .pic {
     width: $width-pic;
-    height: 56px;
+    height: $height;
     padding: 4px;
     patting-right: 12px;
     display: flex;
@@ -20,7 +26,6 @@
       color: white;
       width: 36px;
       height: 36px;
-      //display: inline-block;
       font-size: 20px;
       line-height: 36px;
       text-align: center;
@@ -36,9 +41,23 @@
   }
 
   .icons {
+    display: none;
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 0;
+    right: 0;
     z-index: 1;
+    height: $height;
+    background: $bg-light-gray;
+    padding-left: 10px;
+    padding-right: 6px;
+    justify-content: flex-start;
+    align-items: center;
+    .wrap {
+      cursor: pointer;
+      padding: 4px;
+      i {
+        font-size: 20px;
+      }
+    }
   }
 }
