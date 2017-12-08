@@ -20,7 +20,7 @@
     height: $height;
     padding: 4px;
     patting-right: 12px;
-    display: flex;
+    display: block;
     .letter {
       margin: auto;
       color: white;
@@ -49,13 +49,14 @@
     height: $height;
     background: $bg-light-gray;
     padding-left: 10px;
-    padding-right: 6px;
-    justify-content: flex-start;
-    align-items: center;
+    padding-right: 0px;
     .wrap {
       cursor: pointer;
-      padding: 4px;
-      i {
+      padding: 18px 6px;
+      box-sizing: content-box;
+      height: 20px;
+      width: 20px;
+            i {
         font-size: 20px;
       }
     }

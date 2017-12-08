@@ -40,8 +40,8 @@
   </div>
 
   <div class="icons">
-    <div class="wrap"><i class="material-icons" (click)="parent.editContact($event, contact, 'edit')">edit</i></div>
-    <div class="wrap"><i class="material-icons" (click)="moreActions($event, contact)">more_vert</i></div>
+    <div class="wrap" (click)="parent.editContact($event, contact, 'edit')"><i class="material-icons">edit</i></div>
+    <div class="wrap" style="padding-right:10px;" (click)="moreActions($event, contact)"><i class="material-icons">more_vert</i></div>
   </div>
 
 </div>
