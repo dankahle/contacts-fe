@@ -5,22 +5,27 @@
   height: 41px;
   position: relative;
   cursor: pointer;
-  padding: 0 20px;
+  padding-left: 20px;
   color: $link-gray;
   white-space: nowrap;
   overflow: hidden;
   outline: 0;
+  min-width: 0;
   * {
     vertical-align: middle;
     color: $link-gray;
   }
   i {
     font-size: 20px;
+    position: relative;
+    top: 1px;
   }
-  .text {
+  .name {
     position: relative;
     top: 1px;
     margin-left: 14px;
+    margin-right: 3px;
+    max-width: 62%;
   }
   &:hover, &:focus, :host.active > & {
     background: $bg-light-gray;
@@ -34,14 +39,17 @@
   .icons {
     display: none;
     position: absolute;
-    top: 6px;
-    right: 3px;
+    top: 0;
+    right: 0;
     padding-left: 5px;
     z-index: 10;
     background: $bg-light-gray;
-    div {
+    .wrap {
       display: inline-block;
-      padding: 3px;
+      box-sizing: content-box;
+      height: 18px;
+      width: 18px;
+      padding: 9px 3px;
       i {
         font-size: 18px;
       }

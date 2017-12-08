@@ -39,6 +39,7 @@ export class ContactsPageService {
           label.numContacts++;
         }
       });
+      // console.log(label.name, label.numContacts);
     });
   }
 

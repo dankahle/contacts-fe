@@ -21,7 +21,9 @@ export class UserService {
 
   getUser() {
     return this.http.get<User>(environment.apiUrl + 'api/login/current')
-      .do(user => this.store.setUser(user));
+      .do(user => {
+        this.store.setUser(user);
+      })
   }
 
   addUser(user) {

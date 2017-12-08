@@ -8,6 +8,8 @@ import * as _ from 'lodash';
 import {UserService} from '../../core/services/user-service';
 
 
+// not used, save for an example
+/*
 @Injectable()
 export class ContactListResolve implements Resolve<Contact[]> {
 
@@ -27,3 +29,4 @@ export class ContactListResolve implements Resolve<Contact[]> {
 
   }
 }
+*/

@@ -39,6 +39,7 @@ export class InitializationGuard implements CanActivate {
   }
 
   init() {
+    console.log('initguard start');
     if (this.store.state.initialized) {
       return true;
     }
@@ -47,7 +48,6 @@ export class InitializationGuard implements CanActivate {
     return Observable.forkJoin(this.contactsService.getAll(), this.init1.get(), this.init2.get())
       .mergeMap(arr => {
         this.store.setContacts(arr[0]);
-        this.store.publishUpdateLabelCounts();
 
         return Observable.forkJoin(this.init3.get(), this.init4.get());
       })
@@ -57,11 +57,16 @@ export class InitializationGuard implements CanActivate {
       .map(x => {
         // console.log('init guard end');
         this.store.setVal('initialized', true);
-        this.route.params.subscribe(params => {
-          const id = params.id;
-        })
+        this.afterInit();
+        console.log('initguard done');
         return true;
       });
   }
 
+  afterInit() {
+    this.store.publishUpdateLabelCounts();
+    this.route.params.subscribe(params => {
+      const id = params.id;
+    })
+  }
 }
