@@ -7,6 +7,7 @@ import 'rxjs/add/operator/do';
 import {Router} from '@angular/router';
 import {Store} from '../../store/store';
 import * as _ from 'lodash';
+import {Observable} from 'rxjs/Observable';
 
 
 @Injectable()
@@ -23,6 +24,9 @@ export class UserService {
     return this.http.get<User>(environment.apiUrl + 'api/login/current')
       .do(user => {
         this.store.setUser(user);
+      })
+      .catch(e => {
+        return Observable.of(e);
       })
   }
 

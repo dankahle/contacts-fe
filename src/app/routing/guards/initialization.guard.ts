@@ -9,6 +9,7 @@ import {merge} from 'rxjs/observable/merge';
 import {Store} from '../../store/store';
 import {ContactsService} from '../../core/services/contacts.service';
 import {UserService} from '../../core/services/user-service';
+import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 /**
@@ -16,6 +17,7 @@ import {UserService} from '../../core/services/user-service';
  * desc - provide a complex hierarchy of initialization "before" app starts up including dependecies of dependencies
  */
 export class InitializationGuard implements CanActivate {
+  response$ = new Subject<boolean>();
 
   constructor(private store: Store,
               private route: ActivatedRoute,
@@ -26,24 +28,36 @@ export class InitializationGuard implements CanActivate {
               private init3: Init3,
               private init4: Init4,
               private init5: Init5) {
+
   }
 
   canActivate(next: ActivatedRouteSnapshot,
               state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    return this.init();
+    return this.handleCanActivate();
   }
 
   canActivateChild(next: ActivatedRouteSnapshot,
                    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    return this.init();
+    return this.handleCanActivate();
+  }
+
+  handleCanActivate() {
+    if (this.store.state.authenticated && this.store.state.initialized) {
+      return true;
+    } else {
+      const subscription = this.store.subscribeAuthenticated(authenticated => {
+        if (authenticated && !this.store.state.initialized) {
+          this.init();
+          subscription.unsubscribe();
+        }
+      });
+      return this.response$;
+    }
   }
 
   init() {
-    console.log('initguard start');
-    if (this.store.state.initialized) {
-      return true;
-    }
-    // console.log('init guard start');
+    // console.log('initguard start');
+
     // an example of a complex initialization flow with dependencies of dependencies
     return Observable.forkJoin(this.contactsService.getAll(), this.init1.get(), this.init2.get())
       .mergeMap(arr => {
@@ -55,12 +69,17 @@ export class InitializationGuard implements CanActivate {
         return Observable.forkJoin(this.init5.get());
       })
       .map(x => {
-        // console.log('init guard end');
-        this.store.setVal('initialized', true);
+        // console.log('initguard done');
+        this.store.setInitialized(true);
         this.afterInit();
-        console.log('initguard done');
+        this.response$.next(true);
         return true;
-      });
+      })
+      .catch(err => {
+        this.response$.next(false);
+        return Observable.of(false);
+      })
+      .subscribe(x => x);// only need this cause we're not returning this function to canActivate
   }
 
   afterInit() {

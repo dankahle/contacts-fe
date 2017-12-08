@@ -26,20 +26,17 @@ export class ContactListComponent {
               protected contactsPageService: ContactsPageService, private mdDialog: MatDialog,
               private breakpoints: BreakpointService) {
 
-    route.data.subscribe(data => {
-      return this.contacts = data.contacts;
-    });
-
-    this.store.subscribeContacts(contacts => {
-      if (store.state.selectedLabel) {
+    this.store.subscribeSelectedLabel(label => {
+      if (label) {
         this.contacts = this.store.state.contacts.filter(contact =>
-          _.find(contact.labels, {id: this.store.state.selectedLabel.id}));
+          _.find(contact.labels, {id: label.id}));
       } else {
-        this.contacts = contacts;
+        this.contacts = this.store.state.contacts;
       }
     });
 
 /*
+    // an example of a dynamic hostBinding property
     this.store.leftNavClosed$.subscribe(leftnavClosed => {
       if (leftnavClosed || breakpoints.isActive('lt-md')) {
         this.hostMaxWidth = '100%';

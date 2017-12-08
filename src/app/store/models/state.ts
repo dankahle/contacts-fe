@@ -10,6 +10,7 @@ import 'rxjs/add/operator/first'
 export class State {
   user?: User;
   contacts: Contact[] = [];
+  authenticated = false;
   initialized = false;
   leftNavClosed = false;
   selectedLabel?: Label;

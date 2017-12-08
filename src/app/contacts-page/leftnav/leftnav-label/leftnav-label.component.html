@@ -3,8 +3,7 @@
   <div class="name text-ellipsis-inline"  fxFlex="0 0 auto">{{label.name}}</div>
   <div class="counts" fxFlex="0 0 auto">
     <div *ngIf="label.id === 'contacts' && store.state.contacts.length">({{store.state.contacts.length}})</div>
-    <!--<div *ngIf="label.id !== 'contacts' && label.numContacts">({{label.numContacts}})</div>-->
-    <div *ngIf="label.id !== 'contacts' && label.numContacts">(22222)</div>
+    <div *ngIf="label.id !== 'contacts' && label.numContacts">({{label.numContacts}})</div>
   </div>
 
   <div *ngIf="!label.noEdit" class="icons">
