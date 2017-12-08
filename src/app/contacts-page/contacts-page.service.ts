@@ -76,30 +76,19 @@ export class ContactsPageService {
 
   openMoreActions(event, contact) {
     const width = 400,
-      padding = 40,
-      rightOffset = 40,
+      height = 400,
+      sideOffset = 40,
       topOffset = 40;
-     let height = 400,
-       top: number,
-        shrink = false;
 
-    if (window.innerHeight < height) {
-      shrink = true;
-      height = window.innerHeight - padding;
-      top = padding/2;
-    } else if (window.innerHeight < event.clientY + height - topOffset) {
-      top = window.innerHeight - height + topOffset;
-    } else {
-      top = event.clientY - topOffset;
-    }
+    const settings = Util.getModalPosition(event, width, height, sideOffset, topOffset, 'left');
 
     const config = <MatDialogConfig>{
       width: width + 'px',
-      height: shrink? height + 'px': (height - topOffset) + 'px',
+      height: settings.height + 'px',
       backdropClass: 'bg-modal-backdrop',
       position: {
-        top: top + 'px',
-        left: (event.clientX - width + rightOffset) + 'px',
+        top: settings.top + 'px',
+        left: settings.left + 'px',
       },
       data: {
         contact: {...contact},

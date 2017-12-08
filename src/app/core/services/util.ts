@@ -20,8 +20,42 @@ export class Util {
     return event.type === 'keydown' && (event.which === 13 || event.which === 32);
   }
 
-  getModalPosition(width, height, sideOffset, topOffset, openLeft) {
+  /**
+   * getModalPosition
+   * @desc - given these parameters, come back with a top/left position for material's config.position property
+   * this is the first round with this (left), used for opening on left where the will always be room. Needs to be expanded
+   * for not enough room horizontally as well as top/bottom versions, right needs to be tested.
+   * @param event
+   * @param width
+   * @param height
+   * @param sideOffset
+   * @param topOffset
+   * @param openDirection - left/right/top/bottom
+   */
+  static getModalPosition(event, width, height, sideOffset, topOffset, openDirection) {
+    const padding = 40;
+    let top: number,
+      left: number,
+      shrink = false;
 
+    // so far only tested for left, though should just work for right, todo: and bottom
+    if (openDirection === 'left') {
+      left = (event.clientX - width + sideOffset);
+    } else if (openDirection === 'right') {
+      left = (event.clientX - sideOffset);
+    }
+
+    if (window.innerHeight < height + padding) {
+      shrink = true;
+      height = window.innerHeight - padding;
+      top = padding / 2;
+    } else if (window.innerHeight < event.clientY + height - topOffset) {
+      top = window.innerHeight - height - padding/4;
+    } else {
+      top = event.clientY - topOffset;
+    }
+
+    return {top, left, height};
   }
 
 }
