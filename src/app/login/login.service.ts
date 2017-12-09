@@ -23,6 +23,8 @@ export class LoginService {
     return this.http.delete<any>(environment.apiUrl + 'api/login')
       .do(() => {
         this.store.deleteVal('user');
+        this.store.setAuthenticated(false);
+        this.store.setInitialized(false);
         this.router.navigateByUrl('/login');
       });
   }

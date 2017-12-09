@@ -59,7 +59,7 @@ export class InitializationGuard implements CanActivate {
     // console.log('initguard start');
 
     // an example of a complex initialization flow with dependencies of dependencies
-    return Observable.forkJoin(this.contactsService.getAll(), this.init1.get(), this.init2.get())
+    Observable.forkJoin(this.contactsService.getAll(), this.init1.get(), this.init2.get())
       .mergeMap(arr => {
         this.store.setContacts(arr[0]);
 
@@ -77,7 +77,7 @@ export class InitializationGuard implements CanActivate {
       })
       .catch(err => {
         this.response$.next(false);
-        return Observable.of(false);
+        return Observable.throw(err);
       })
       .subscribe(x => x);// only need this cause we're not returning this function to canActivate
   }

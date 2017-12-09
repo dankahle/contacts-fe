@@ -8,16 +8,15 @@ import {RouterModule, Routes} from '@angular/router';
 import {StoreModule} from '../store/store.module';
 import {CoreModule} from '../core/core.module';
 import {ContactListGuard} from './guards/contact-list-guard';
+import {LoginComponent} from '../login/login/login.component';
 
 const appRoutes: Routes = [
-  {
-    path: '',
-    component: ContactListComponent,
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: LoginComponent},
+  {path: '', component: ContactListComponent,
     canActivate: [AuthGuard, InitializationGuard, ContactListGuard],
   },
-  {
-    path: ':id',
-    component: ContactListComponent,
+  {path: ':id', component: ContactListComponent,
     canActivate: [AuthGuard, InitializationGuard, ContactListGuard],
   },
   {path: '**', component: PageNotFoundComponent}

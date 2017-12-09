@@ -14,13 +14,11 @@
                           (keydown)="openContactDetail($event, contact)"></dk-contact-list-item>
   </div>
 
-  <!--
   <div  *ngIf="contacts.length === 0" class="no-contacts">
     <div class="book-pic"><span>sometthing</span></div>
     <div>no contacts labeled "{{store.state.selectedLabel.name}}"</div>
     <button mat-button color="primary">Primary</button>
   </div>
-  -->
 
   <button class="add-button" mat-fab color="primary" (click)="editContact($event, contact, 'add')">
     <i class="material-icons">add</i>

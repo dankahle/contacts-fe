@@ -16,17 +16,13 @@ export class UserService {
   constructor(private http: HttpClient, private store: Store, private router: Router) {
   }
 
-  isAuthenticated() {
-    return !!this.store.state.user;
-  }
-
   getUser() {
     return this.http.get<User>(environment.apiUrl + 'api/login/current')
       .do(user => {
         this.store.setUser(user);
       })
       .catch(e => {
-        return Observable.of(e);
+        return Observable.throw(e);
       })
   }
 

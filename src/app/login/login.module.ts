@@ -8,19 +8,13 @@ import {SharedModule} from '../shared/shared.module';
 import {CoreModule} from '../core/core.module';
 import {LoginService} from './login.service';
 
-export const loginRoutes: Routes = [
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: LoginComponent},
-];
-
-
 @NgModule({
   imports: [
     CommonModule,
     CommonModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forChild(loginRoutes),
+    RouterModule,
     SharedModule,
     CoreModule
   ],
