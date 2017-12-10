@@ -4,6 +4,13 @@
 const _ = require('lodash');
 
 
+console.log(new Date().getFullYear());
+const dt = new Date();
+dt.setFullYear(dt.getFullYear() + 1);
+console.log(dt);
+const i = 5;
+
+/*
 const arr = [
   {id: 1, name: 'dank'},
   {id: 2, name: 'alice'}
@@ -11,6 +18,7 @@ const arr = [
 
 console.log(_.sortBy(arr, 'name'));
 console.log(arr);
+*/
 
 
 /*

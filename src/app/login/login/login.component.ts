@@ -14,6 +14,7 @@ export class LoginComponent {
   userNotFound = false;
   userAlreadyExists = false;
   path: string;
+  stayLoggedIn = false;
 
   constructor(protected route: ActivatedRoute, private loginService: LoginService, private router: Router) {
     route.url
@@ -22,7 +23,7 @@ export class LoginComponent {
 
   login() {
     this.userNotFound = false;
-    this.loginService.login(this.user)
+    this.loginService.login(this.user, this.stayLoggedIn)
       .subscribe(user => {
         this.router.navigateByUrl('/');
       }, err => {

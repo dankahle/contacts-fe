@@ -1,11 +1,13 @@
 <form name="form">
   <div>
-    name: <input name="name" [(ngModel)]="user.name">
+    name: <input name="name" [(ngModel)]="user.name"><br>
+    company: <input name="company" [(ngModel)]="user.company"><br>
     <span style="color:red;" *ngIf="userNotFound">user not found</span>
     <span style="color:red;" *ngIf="userAlreadyExists">user already exists</span>
   </div>
 
   <div *ngIf="path === 'login'">
+    stay logged in? <input name="stayLoggedIn" type="checkbox" [(ngModel)]="stayLoggedIn"><br>
     <button (click)="login()">login</button>
     <br>
     <a routerLink="/register">register</a>
