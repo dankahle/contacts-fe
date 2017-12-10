@@ -1,13 +1,12 @@
 
 
 <form name="form">
-
   <div class="inputs">
     <mat-form-field floatPlaceholder="never">
-      <input #firstInput matInput name="name" [(ngModel)]="user.name" placeholder="Name" autocomplete="off"><br>
+      <input matInput name="name" [(ngModel)]="user.name" placeholder="Name" autocomplete="off">
     </mat-form-field>
     <mat-form-field floatPlaceholder="never">
-      <input matInput name="company" [(ngModel)]="user.company" placeholder="Company" autocomplete="off"><br>
+      <input matInput name="company" [(ngModel)]="user.company" placeholder="Company" autocomplete="off">
     </mat-form-field>
     <div class="error" *ngIf="userNotFound">User not found</div>
     <div class="error" *ngIf="userAlreadyExists">User already exists</div>
@@ -24,6 +23,7 @@
   </div>
 
   <div *ngIf="path === 'register'">
+    <div style="height:24px">&nbsp;</div>
     <div class="button">
       <button type="submit" mat-button  color="primary" (click)="register()">register</button>
     </div>

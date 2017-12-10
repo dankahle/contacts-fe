@@ -1,4 +1,4 @@
-import {Component, NgZone, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {errorCodes} from '../../core/services/error-codes';
 import {LoginService} from '../login.service';
@@ -10,7 +10,6 @@ import {LoginService} from '../login.service';
   encapsulation: ViewEncapsulation.Emulated
 })
 export class LoginComponent {
-  @ViewChild('firstInput') firstInput;
   user = {};
   userNotFound = false;
   userAlreadyExists = false;
@@ -20,10 +19,6 @@ export class LoginComponent {
   constructor(protected route: ActivatedRoute, private loginService: LoginService, private router: Router) {
     route.url
       .subscribe(urlSegmentArr => this.path = urlSegmentArr[0].path);
-  }
-
-  ngAfterViewInit() {
-    this.firstInput.nativeElement.focus();
   }
 
   login() {
