@@ -5,6 +5,7 @@ import {Store} from '../../../store/store';
 import {Contact} from '../../../store/models/contact';
 import {Chance} from 'chance';
 import * as _ from 'lodash';
+import {Label} from '../../../store/models/label';
 
 const chance = new Chance();
 
@@ -22,8 +23,12 @@ contact: Contact;
 
     if (data.mode === 'add') {
       this.contact = <Contact>{
-        id: chance.guid()
+        id: chance.guid(),
       };
+      if (this.store.state.selectedLabel) {
+        const label = this.store.state.selectedLabel;
+        this.contact.labels = [<Label>{id: label.id, name: label.name, icon: 'label'}]
+      }
     } else {
       this.contact = _.cloneDeep(data.contact);
     }
