@@ -65,7 +65,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
         const config = <MatDialogConfig> {
           data: {error: err}, // dankfix: will resp.error be undefined for server errors?
-          width: '300px',
+          width: '500px',
           backdropClass: 'bg-modal-backdrop'
         }
         this.dialog.open(ErrorModalComponent, config)

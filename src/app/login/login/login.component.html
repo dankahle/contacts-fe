@@ -1,22 +1,35 @@
+
+
 <form name="form">
-  <div>
-    name: <input name="name" [(ngModel)]="user.name"><br>
-    company: <input name="company" [(ngModel)]="user.company"><br>
-    <span style="color:red;" *ngIf="userNotFound">user not found</span>
-    <span style="color:red;" *ngIf="userAlreadyExists">user already exists</span>
+
+  <div class="inputs">
+    <mat-form-field floatPlaceholder="never">
+      <input #firstInput matInput name="name" [(ngModel)]="user.name" placeholder="Name" autocomplete="off"><br>
+    </mat-form-field>
+    <mat-form-field floatPlaceholder="never">
+      <input matInput name="company" [(ngModel)]="user.company" placeholder="Company" autocomplete="off"><br>
+    </mat-form-field>
+    <div class="error" *ngIf="userNotFound">User not found</div>
+    <div class="error" *ngIf="userAlreadyExists">User already exists</div>
   </div>
 
   <div *ngIf="path === 'login'">
-    stay logged in? <input name="stayLoggedIn" type="checkbox" [(ngModel)]="stayLoggedIn"><br>
-    <button (click)="login()">login</button>
-    <br>
-    <a routerLink="/register">register</a>
+    <mat-checkbox name="stayLoggedIn" type="checkbox" [(ngModel)]="stayLoggedIn">Stay logged in?</mat-checkbox><br>
+    <div class="button">
+      <button type="submit" mat-button color="primary" (click)="login()">login</button>
+    </div>
+    <div class="link">
+      <a routerLink="/register">register</a>
+    </div>
   </div>
 
   <div *ngIf="path === 'register'">
-    <button (click)="register()">register</button>
-    <br>
-    <a routerLink="/login">login</a>
+    <div class="button">
+      <button type="submit" mat-button  color="primary" (click)="register()">register</button>
+    </div>
+    <div class="link">
+      <a routerLink="/login">login</a>
+    </div>
   </div>
 
 </form>

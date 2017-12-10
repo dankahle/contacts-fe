@@ -1,7 +1,8 @@
 
 
-<div class="contact-list" fxFlex="1 1 100%">
+<div class="contact-list" fxFlex="1 1 100%" fxLayout="">
 
+  <div *ngIf="contacts.length > 0" fxFlexFill>
   <div class="label-title" *ngIf="store.state.selectedLabel">
     <span class="ghost"></span>
     <span>{{store.state.selectedLabel.name}}</span>
@@ -14,11 +15,13 @@
                           (keydown)="openContactDetail($event, contact)"></dk-contact-list-item>
   </div>
 
-  <div  *ngIf="contacts.length === 0" class="no-contacts">
-    <div class="book-pic"><span>sometthing</span></div>
-    <div *ngIf="!store.state.selectedLabel">no contacts</div>
-    <div *ngIf="store.state.selectedLabel">no contacts labeled "{{store.state.selectedLabel.name}}"</div>
-    <button mat-button color="primary">Primary</button>
+</div>
+
+  <div class="no-contacts"  *ngIf="contacts.length === 0" class="no-contacts">
+    <div class="book-pic"></div>
+    <br>
+    <div *ngIf="!store.state.selectedLabel">No contacts</div>
+    <div *ngIf="store.state.selectedLabel">No contacts labeled "{{store.state.selectedLabel.name}}"</div>
   </div>
 
   <button class="add-button" mat-fab color="primary" (click)="editContact($event, contact, 'add')">
