@@ -21,6 +21,12 @@ export class LoginComponent {
       .subscribe(urlSegmentArr => this.path = urlSegmentArr[0].path);
   }
 
+  inputChange() {
+    console.log('onchanges');
+    this.userNotFound = false;
+    this.userAlreadyExists = false;
+  }
+
   login() {
     this.userNotFound = false;
     this.loginService.login(this.user, this.stayLoggedIn)
