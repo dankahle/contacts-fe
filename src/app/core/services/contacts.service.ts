@@ -43,7 +43,8 @@ export class ContactsService {
     return this.http.delete<Contact>(`${this.apiUrl}api/contacts/${id}`)
       .do(() => {
         const index = _.findIndex(this.store.state.contacts, {id: id});
-        this.store.setContacts(this.store.state.contacts.splice(index, 1));
+        this.store.state.contacts.splice(index, 1);
+        this.store.publishContacts();
       });
   }
 
@@ -104,6 +105,31 @@ export class ContactsService {
     } else {
       return Observable.of(null);
     }
+  }
+
+  hasLabel(contact, labelId) {
+    return !!_.find(contact.labels, {id: labelId});
+  }
+
+  toggleLabel(contact, label) {
+    const labels = contact.labels;
+    const index = _.findIndex(labels, {id: label.id});
+    if (index !== -1) {
+      labels.splice(index, 1);
+    } else {
+      labels.push(label);
+      _.sortBy(labels, 'name');
+    }
+  }
+
+  removeLabelFromContact(contact, label) {
+    const labels = contact.labels;
+    const index = _.findIndex(labels, {id: label.id});
+    labels.splice(index, 1);
+    return this.updateOne(contact)
+      .do(contact => {
+        this.store.publishContacts();
+      });
   }
 
 }

@@ -8,3 +8,35 @@ body /deep/ .mat-dialog-actions {
   background-color: rgba(0,0,0,.1);
   //background-color: transparent;
 }
+
+body /deep/ .mat-menu-item {
+  font-size: 14px;
+  padding-right: 30px;
+
+  i.left {
+    font-size: 20px;
+  }
+  i.right {
+    font-size: 26px;
+    position: absolute;
+    top: 10px;
+    right: -13px;
+  }
+}
+
+body /deep/ .mat-menu-content {
+  $color: #757575;
+  .separator {
+    margin: 7px 0;
+    border-top: 1px solid $color;
+  }
+  .label {
+    font-size: 12px;
+    margin-left: 16px;
+    color: $color;
+  }
+
+
+  [mat-menu-item] {
+  }
+}

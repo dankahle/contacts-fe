@@ -6,6 +6,7 @@ import {Subject} from 'rxjs/Subject';
 import {Messages} from './models/messages';
 import {Message} from './models/message';
 import {State} from './models/state';
+import {Contact} from './models/contact';
 
 @Injectable()
 /**
@@ -31,6 +32,8 @@ export class Store extends StoreBase {
   subscribeInitialized = this.initializedState$.subscribe.bind(this.initializedState$);
   selectedLabelState$ = new BehaviorSubject(this.state.selectedLabel);
   subscribeSelectedLabel = this.selectedLabelState$.subscribe.bind(this.selectedLabelState$);
+  moreActionsMenu$ = new Subject();
+  subscribeMoreActionsMenu = this.moreActionsMenu$.subscribe.bind(this.moreActionsMenu$);
 
   constructor(state: State) {
     super(state);
@@ -53,6 +56,7 @@ export class Store extends StoreBase {
 
   publishContacts() {
     this.contactsState$.next(this.state.contacts);
+    this.updateLabelCounts$.next();
     super.publish();
   }
 
@@ -98,6 +102,10 @@ export class Store extends StoreBase {
   publishSelectedLabel() {
     this.selectedLabelState$.next(this.state.selectedLabel);
     super.publish();
+  }
+
+  publishMoreActionsMenu(event: MouseEvent, contact: Contact) {
+    this.moreActionsMenu$.next({event: event, contact: contact});
   }
 
 }

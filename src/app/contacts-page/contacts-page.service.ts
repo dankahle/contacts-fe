@@ -11,7 +11,7 @@ import {ContactDetailComponent} from './main/contact-detail-modal/contact-detail
 import {Observable} from 'rxjs/Observable';
 import {Messages} from '../store/models/messages';
 import {Contact} from '../store/models/contact';
-import {MoreActionsComponent} from './main/more-actions-modal/more-actions.component';
+import {MoreActionsComponent} from '../shared/components/more-actions/more-actions.component';
 
 @Injectable()
 export class ContactsPageService {
@@ -108,5 +108,8 @@ export class ContactsPageService {
     });
   }
 
+  openMoreActionsMenu(event, contact) {
+
+  }
 
 }

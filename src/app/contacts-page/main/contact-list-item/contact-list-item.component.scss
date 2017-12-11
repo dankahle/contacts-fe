@@ -50,6 +50,8 @@
     background: $bg-light-gray;
     padding-left: 10px;
     padding-right: 0px;
+    color: $link-gray;
+
     .wrap {
       cursor: pointer;
       padding: 18px 6px;
@@ -61,4 +63,7 @@
       }
     }
   }
+
 }
+
+

@@ -1,0 +1,44 @@
+
+
+<input #moreActionsTrigger="matMenuTrigger" type=hidden [matMenuTriggerFor]="menu">
+<mat-menu #menu="matMenu" [overlapTrigger]="true">
+  <button mat-menu-item>
+    <i class="material-icons">dialpad</i>
+    <span>Redial</span>
+  </button>
+  <button mat-menu-item disabled>
+    <i class="material-icons">dialpad</i>
+    <span>Check voicemail</span>
+  </button>
+  <button mat-menu-item>
+    <i class="material-icons">dialpad</i>
+    <span>Disable alerts</span>
+  </button>
+</mat-menu>
+
+
+<!--
+
+<div class="more-actions">
+
+  <div class="item" *ngIf="store.state.selectedLabel">
+    <i class="material-icons"> </i>
+    <span>Remove from label</span>
+  </div>
+
+  <div class="item" *ngIf="store.state.selectedLabel">
+    <i class="material-icons"></i>
+    <span>delete</span>
+  </div>
+
+  <div class="item" *ngFor="let label of store.state.user.labels">
+    <i class="material-icons"></i>
+    <span></span>
+  </div>
+
+
+
+
+</div>
+
+-->
