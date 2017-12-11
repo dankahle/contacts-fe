@@ -6,7 +6,7 @@ import {Util} from '../../../core/services/util';
 import * as _ from 'lodash';
 import {UserService} from '../../../core/services/user-service';
 import {ContactsPageService} from '../../contacts-page.service';
-import {ContactDetailComponent} from '../contact-detail-modal/contact-detail.component';
+import {ContactDetailComponent} from '../contact-detail/contact-detail.component';
 import {MatDialog, MatDialogConfig, MatMenuTrigger} from '@angular/material';
 import {Messages} from '../../../store/models/messages';
 import {BreakpointService} from '../../../core/services/breakpoint.service';

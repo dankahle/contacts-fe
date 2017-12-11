@@ -34,7 +34,8 @@ export class ContactsService {
   updateOne(contact: Contact) {
     return this.http.put<Contact>(`${this.apiUrl}api/contacts/${contact.id}`, contact)
       .do(_contact => {
-        _.merge(_.find(this.store.state.contacts, {id: contact.id}), contact);
+        const userContact = _.find(this.store.state.contacts, {id: contact.id});
+        _.merge(userContact, _contact);
         this.store.setContacts(_.sortBy(this.store.state.contacts, 'name'));
       });
   }
@@ -131,5 +132,32 @@ export class ContactsService {
         this.store.publishContacts();
       });
   }
+
+  getLabelsForMenu(contact) {
+    const labels = _.cloneDeep(this.store.state.user.labels);
+    labels.forEach(label => {
+      if (_.find(contact.labels, {id: label.id})) {
+        label.selected = true;
+      } else {
+        label.selected = false;
+      }
+    });
+    return labels;
+  }
+
+  syncLabelsForApi(contact, labels) {
+    labels.forEach(label => {
+      const index = _.findIndex(contact.labels, {id: label.id});
+      // if selected and not there add, if not selected and there, remove
+      if (label.selected && index === -1) {
+        contact.labels.push(label);
+      } else if (!label.selected && index !== -1) {
+        contact.labels.splice(index, 1);
+      }
+    });
+    contact.labels = _.sortBy(contact.labels, 'name');
+    return this.updateOne(contact);
+  }
+
 
 }

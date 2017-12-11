@@ -7,6 +7,9 @@ import {Store} from '../../../store/store';
 import {MatMenu, MatMenuTrigger} from '@angular/material';
 import {ContactsService} from '../../../core/services/contacts.service';
 import * as _ from 'lodash';
+import {Label} from '../../../store/models/label';
+import {UserService} from '../../../core/services/user-service';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'dk-contact-list-item',
@@ -18,7 +21,8 @@ export class ContactListItemComponent {
   @Input() contact: Contact;
   @ViewChild(MatMenu) menu: MatMenu;
   @ViewChild(MatMenuTrigger) menuTrigger: MatMenuTrigger;
-  log = console.log;
+  labels: Label[];
+  deleting: boolean;
 
   constructor(protected parent: ContactListComponent, protected contactsPageService: ContactsPageService,
               protected store: Store, protected contactsService: ContactsService) {
@@ -32,24 +36,46 @@ export class ContactListItemComponent {
   }
 
   menuClose() {
-    this.store.publishUpdateLabelCounts();
+    if (!this.deleting) {
+      this.contactsService.syncLabelsForApi(this.contact, this.labels)
+        .subscribe(x => x);
+    }
+  }
+
+  menuOpen() {
+    this.deleting = false;
+    this.labels = this.contactsService.getLabelsForMenu(this.contact);
   }
 
   removeLabelFromContact(event) {
     event.stopPropagation();
     this.contactsService.removeLabelFromContact(this.contact, this.store.state.selectedLabel)
-      .subscribe(() => this.menuTrigger.closeMenu());
+      .subscribe(() => {
+        // if we remove from label, the label may still be selected, then just gets readded, so we have to deselect it
+        // as the sync runs after this
+        _.find(this.labels, {id: this.store.state.selectedLabel.id}).selected = false;
+        this.menuTrigger.closeMenu();
+      });
   }
 
   deleteContact(event) {
     event.stopPropagation();
-    this.contactsService.deleteOne(this.contact.id)
-      .subscribe(() => this.menuTrigger.closeMenu());
+    this.contactsPageService.verifyContactDelete(this.contact)
+      .subscribe(resp => {
+        if (resp) {
+          this.contactsService.deleteOne(this.contact.id)
+            .subscribe(() => {
+              this.deleting = true;
+              this.menuTrigger.closeMenu();
+            });
+        }
+      });
   }
 
   toggleLabel(event, label) {
     event.stopPropagation();
-    this.contactsService.toggleLabel(this.contact, label);
+    const _label = _.find(this.labels, {id: label.id});
+    _label.selected = !_label.selected;
   }
 
 }

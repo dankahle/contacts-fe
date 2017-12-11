@@ -4,8 +4,8 @@ import {CoreModule} from '../core/core.module';
 import {RouterModule} from '@angular/router';
 import {SharedModule} from '../shared/shared.module';
 import {ContactListComponent} from './main/contact-list/contact-list.component';
-import {ContactDetailComponent} from './main/contact-detail-modal/contact-detail.component';
-import {ContactDetailRouteComponent} from './main/contact-detail-modal/contact-detail-route.component';
+import {ContactDetailComponent} from './main/contact-detail/contact-detail.component';
+import {ContactDetailRouteComponent} from './main/contact-detail/contact-detail-route.component';
 import {ContactListItemComponent} from './main/contact-list-item/contact-list-item.component';
 import {HeaderComponent} from './header/header/header.component';
 import {LeftnavComponent} from './leftnav/leftnav/leftnav.component';
@@ -14,8 +14,9 @@ import {EditLabelComponent} from './leftnav/edit-label-modal/edit-label.componen
 import {DeleteLabelComponent} from './leftnav/delete-label-modal/delete-label.component';
 import {ContactsPageService} from './contacts-page.service';
 import {ContactSearchComponent} from './header/contact-search/contact-search.component';
-import { ContactEditComponent } from './main/contact-edit-modal/contact-edit.component';
+import { ContactEditComponent } from './main/contact-edit/contact-edit.component';
 import {OpenContactDetailService} from './main/open-contact-detail-service';
+import { ContactDeleteComponent } from './main/contact-delete/contact-delete.component';
 
 @NgModule({
   imports: [
@@ -25,9 +26,10 @@ import {OpenContactDetailService} from './main/open-contact-detail-service';
   ],
   declarations: [ContactListComponent, ContactDetailRouteComponent, ContactDetailComponent, ContactListItemComponent,
     LeftnavComponent, HeaderComponent, LeftnavLabelComponent, EditLabelComponent, DeleteLabelComponent, ContactSearchComponent,
-    ContactEditComponent],
+    ContactEditComponent,
+    ContactDeleteComponent],
   exports: [RouterModule, LeftnavComponent, HeaderComponent],
-  entryComponents: [ContactDetailComponent, EditLabelComponent, DeleteLabelComponent, ContactEditComponent],
+  entryComponents: [ContactDetailComponent, EditLabelComponent, DeleteLabelComponent, ContactEditComponent, ContactDeleteComponent],
   providers: [ContactsPageService, OpenContactDetailService]
 })
 export class ContactsPageModule {

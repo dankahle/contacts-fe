@@ -41,7 +41,7 @@
     <div class="wrap" (click)="parent.editContact($event, contact, 'edit')"><i class="material-icons">edit</i></div>
     <!--<div class="wrap" style="padding-right:10px;" (click)="moreActions($event, contact)"><i class="material-icons">more_vert</i></div>-->
     <div class="wrap" style="padding-right:10px;" [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()"
-    (onMenuClose)="menuClose()"><i class="material-icons">more_vert</i></div>
+    (onMenuClose)="menuClose()" (onMenuOpen)="menuOpen()"><i class="material-icons">more_vert</i></div>
   </div>
 
 </div>
@@ -57,10 +57,10 @@
   </button>
   <div class="separator"></div>
   <span class="label">Change labels</span>
-  <button mat-menu-item *ngFor="let label of store.state.user.labels" (click)="toggleLabel($event, label)">
+  <button mat-menu-item *ngFor="let label of labels" (click)="toggleLabel($event, label)">
     <i class="left material-icons mat-icon">label</i>
     <span>{{label.name}}</span>
-    <i class="right material-icons mat-icon" *ngIf="contactsService.hasLabel(contact, label.id)">check</i>
+    <i class="right material-icons mat-icon" *ngIf="label.selected">check</i>
   </button>
 </mat-menu>
 
