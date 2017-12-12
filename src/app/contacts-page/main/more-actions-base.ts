@@ -7,6 +7,8 @@ import {Label} from '../../store/models/label';
 import {Contact} from '../../store/models/contact';
 import {Input, ViewChild} from '@angular/core';
 import * as _ from 'lodash';
+import {Subject} from 'rxjs/Subject';
+import {Observable} from 'rxjs/Observable';
 
 export class MoreActionsBase {
   contact: Contact;
@@ -30,7 +32,8 @@ export class MoreActionsBase {
     this.labels = this.contactsService.getLabelsForMenu(this.contact);
   }
 
-  removeLabelFromContact(event) {
+  removeLabelFromContact(event): Observable<boolean> {
+    const subject = new Subject<boolean>();
     event.stopPropagation();
     this.contactsService.removeLabelFromContact(this.contact, this.store.state.selectedLabel)
       .subscribe(() => {
@@ -38,11 +41,14 @@ export class MoreActionsBase {
         // as the sync runs after this
         _.find(this.labels, {id: this.store.state.selectedLabel.id}).selected = false;
         this.menuTrigger.closeMenu();
+        subject.next(true);
       });
+    return subject;
   }
 
-  deleteContact(event) {
+  deleteContact(event): Observable<boolean> {
     event.stopPropagation();
+    const subject = new Subject<boolean>();
     const config = <MatDialogConfig>{
       height: '169px',
       backdropClass: 'bg-modal-backdrop',
@@ -50,17 +56,21 @@ export class MoreActionsBase {
         contact: this.contact,
       }
     }
-    return this.mdDialog.open(ContactDeleteComponent, config)
+    this.mdDialog.open(ContactDeleteComponent, config)
       .afterClosed()
-      .subscribe(resp => {
-        if (resp) {
+      .subscribe(contact => {
+        if (contact) {
           this.contactsService.deleteOne(this.contact.id)
             .subscribe(() => {
               this.deleting = true;
               this.menuTrigger.closeMenu();
+              subject.next(true);
             });
+        } else {
+          subject.next(false);
         }
       });
+    return subject;
   }
 
   toggleLabel(event, label) {

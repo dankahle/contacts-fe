@@ -6,6 +6,7 @@ import {ContactsPageService} from '../../contacts-page.service';
 import {Util} from '../../../core/services/util';
 import {ContactsService} from '../../../core/services/contacts.service';
 import {MoreActionsBase} from '../more-actions-base';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'dk-contact-detail',
@@ -40,6 +41,23 @@ export class ContactDetailComponent extends MoreActionsBase{
     this.contactsPageService.openContactEdit(contact, mode);
   }
 
+  deleteContact(event) {
+    super.deleteContact(event)
+      .subscribe(deleted => {
+        if (deleted) {
+          this.dialogRef.close();
+        }
+      })
+    return Observable.of(false);
+  }
+
+  removeLabelFromContact(event) {
+    super.removeLabelFromContact(event)
+      .subscribe(done => {
+          this.dialogRef.close();
+      });
+    return Observable.of(null);
+  }
 
 
 }
