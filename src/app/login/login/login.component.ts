@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, ViewChild, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {errorCodes} from '../../core/services/error-codes';
 import {LoginService} from '../login.service';
@@ -10,7 +10,8 @@ import {LoginService} from '../login.service';
   encapsulation: ViewEncapsulation.Emulated
 })
 export class LoginComponent {
-  user = {};
+  @ViewChild('name', {read: ElementRef}) name;
+  user = {name: '', company: ''};
   userNotFound = false;
   userAlreadyExists = false;
   path: string;
@@ -21,6 +22,10 @@ export class LoginComponent {
       .subscribe(urlSegmentArr => this.path = urlSegmentArr[0].path);
   }
 
+  ngAfterViewInit() {
+    this.name.nativeElement.focus();
+  }
+
   inputChange() {
     console.log('onchanges');
     this.userNotFound = false;
@@ -29,6 +34,9 @@ export class LoginComponent {
 
   login() {
     this.userNotFound = false;
+    // I can't believe I have to trim these. ng-model used to trim all input
+    this.user.name = this.user.name.trim();
+    this.user.company = this.user.company.trim();
     this.loginService.login(this.user, this.stayLoggedIn)
       .subscribe(user => {
         this.router.navigateByUrl('/');

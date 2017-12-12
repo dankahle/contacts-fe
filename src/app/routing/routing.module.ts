@@ -9,8 +9,10 @@ import {StoreModule} from '../store/store.module';
 import {CoreModule} from '../core/core.module';
 import {ContactListGuard} from './guards/contact-list-guard';
 import {LoginComponent} from '../login/login/login.component';
+import {SplashComponent} from '../login/splash/splash.component';
 
 const appRoutes: Routes = [
+  {path: 'splash', component: SplashComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: LoginComponent},
   {path: '', component: ContactListComponent,

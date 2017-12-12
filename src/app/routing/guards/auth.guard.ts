@@ -36,7 +36,7 @@ export class AuthGuard implements CanActivate {
         return true;
       })
       .catch(err => {
-        this.router.navigateByUrl('/login');
+        this.router.navigateByUrl('/splash');
         this.response$.next(false);
         return Observable.throw(err);
       })

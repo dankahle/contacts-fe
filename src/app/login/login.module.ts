@@ -7,6 +7,7 @@ import {FormsModule} from '@angular/forms';
 import {SharedModule} from '../shared/shared.module';
 import {CoreModule} from '../core/core.module';
 import {LoginService} from './login.service';
+import {SplashComponent} from './splash/splash.component';
 
 @NgModule({
   imports: [
@@ -18,8 +19,8 @@ import {LoginService} from './login.service';
     SharedModule,
     CoreModule
   ],
-  declarations: [LoginComponent],
-  exports: [LoginComponent],
+  declarations: [LoginComponent, SplashComponent],
+  exports: [LoginComponent, SplashComponent],
   providers: [LoginService]
 })
 export class LoginModule {

@@ -4,7 +4,7 @@
 
     <div fxFlex="1 1 80%" class="left" fxLayout="row" fxLayoutAlign="flex-start center">
 
-      <div class="menu" fxFlex="0 0 auto">
+      <div class="menu" [class.invisible]="!store.state.authenticated" fxFlex="0 0 auto">
         <i class="material-icons" (click)="store.setLeftNavClosed(!store.state.leftNavClosed)">menu</i>
       </div>
 
@@ -14,7 +14,7 @@
         </a>
       </div>
 
-      <div class="search-div" fxFlex="1 1 auto">
+      <div *ngIf="store.state.authenticated" class="search-div" fxFlex="1 1 auto">
         <dk-contact-search></dk-contact-search>
       </div>
     </div>
