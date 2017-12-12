@@ -1,29 +1,56 @@
 
-<h2 mat-dialog-title="">Contact Detail</h2>
+<div class="detail">
 
-<div mat-dialog-content>
+  <h2 mat-dialog-title="">Contact Detail</h2>
 
-  <form id="form1">
-    <div>id: {{contact.id}}</div>
-    <div>name: {{contact.name}}</div>
-  </form>
+  <div mat-dialog-content>
 
-  <br>
-  <button mat-button (click)="editContact($event, contact, 'edit')"
-          (keydown)="editContact($event, contact, 'edit')">edit
-  </button>
-  <br><br>
+    <form id="form1">
+      <div>id: {{contact.id}}</div>
+      <div>name: {{contact.name}}</div>
+    </form>
 
-  <br>
-  <button mat-button (click)="showJson = !showJson">show json</button><br>
+    <br>
+    <button mat-button (click)="editContact($event, contact, 'edit')"
+            (keydown)="editContact($event, contact, 'edit')">edit
+    </button>
+    <br><br>
 
-  <pre *ngIf="showJson">
+    <br>
+    <button mat-button (click)="showJson = !showJson">show json</button>
+    <br>
+
+    <pre *ngIf="showJson">
   {{contact | json}}
 </pre>
 
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+  </div>
+
+
+  <div class="wrap" style="padding-right:10px;" [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()"
+       (onMenuClose)="menuClose()" (onMenuOpen)="menuOpen()"><i class="material-icons">more_vert</i></div>
+
 </div>
 
-<div mat-dialog-actions>
-  <button mat-button mat-dialog-close>Close</button>
-</div>
 
+<mat-menu [overlapTrigger]="true" class="menu-text" xPosition="before" yPosition="below">
+  <button mat-menu-item *ngIf="store.state.selectedLabel" (click)="removeLabelFromContact($event)">
+    <i class="left material-icons mat-icon">cancel</i>
+    <span>Remove from label</span>
+  </button>
+  <button mat-menu-item (click)="deleteContact($event)">
+    <i class="left material-icons mat-icon">delete</i>
+    <span>Delete</span>
+  </button>
+  <div class="separator"></div>
+  <span class="label">Change labels</span>
+  <button mat-menu-item *ngFor="let label of labels" (click)="toggleLabel($event, label)">
+    <i class="left material-icons mat-icon">label</i>
+    <span>{{label.name}}</span>
+    <i class="right material-icons mat-icon" *ngIf="label.selected">check</i>
+  </button>
+</mat-menu>

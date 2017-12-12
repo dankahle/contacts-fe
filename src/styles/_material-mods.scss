@@ -1,7 +1,11 @@
 
+body /deep/ .mat-dialog-content {
+  overflow: unset;
+}
+
 body /deep/ .mat-dialog-actions {
   flex-direction: row-reverse;
-  margin-top: 12px;
+  margin-top: 14px;
 }
 
 .bg-modal-backdrop {

@@ -36,6 +36,7 @@ export class EditLabelComponent implements OnInit {
       };
     } else {
       this.editMode = true;
+      this.placeholder = 'Rename label';
       this.label = _.cloneDeep(data.label);
       this.orgName = this.label.name;
     }

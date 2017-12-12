@@ -83,7 +83,7 @@ export class LeftnavComponent {
 
       const config = <MatDialogConfig>{
         width: '336px',
-        height: '281px',
+        height: '267px',
         backdropClass: 'bg-modal-backdrop',
         data: {
           label: {...label}
@@ -152,8 +152,8 @@ export class LeftnavComponent {
       return;
     }
     const config = <MatDialogConfig>{
-      width: '248px',
-      height: '193px',
+      width: '214px',
+      height: '138px',
       backdropClass: 'bg-modal-backdrop',
       data: {}
     }

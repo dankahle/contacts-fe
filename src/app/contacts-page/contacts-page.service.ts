@@ -76,19 +76,6 @@ export class ContactsPageService {
     });
   }
 
-  verifyContactDelete(contact) {
-    const config = <MatDialogConfig>{
-      width: '248px',
-      height: '193px',
-      backdropClass: 'bg-modal-backdrop',
-      data: {
-        contact: contact,
-      }
-    }
-    return this.mdDialog.open(ContactDeleteComponent, config)
-      .afterClosed();
-  }
-
 /*
 // a roll your own modal with positioning for space issues. Was replaced by MatMenu
   openMoreActions(event, contact) {
