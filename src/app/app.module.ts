@@ -8,6 +8,7 @@ import {LoginModule} from './login/login.module';
 import {Store} from './store/store';
 import {RoutingModule} from './routing/routing.module';
 import {ContactsPageModule} from './contacts-page/contacts-page.module';
+import {Contact} from './store/models/contact';
 
 @NgModule({
   imports: [

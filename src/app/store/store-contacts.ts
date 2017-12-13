@@ -9,7 +9,7 @@ export class StoreContacts extends StoreBase {
   sub = this.con$.subscribe.bind(this.con$);
   contacts: Contact[] = [];
 
-  contacts$ = new BehaviorSubject(this.contacts);
+  contacts$ = new BehaviorSubject<Contact[]>(this.contacts);
   subContacts = this.contacts$.subscribe.bind(this.contacts$);
   openDetail$ = new Subject<Contact>();
   subOpenDetail = this.openDetail$.subscribe.bind(this.openDetail$);

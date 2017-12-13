@@ -8,7 +8,7 @@ export class StoreUser extends StoreBase {
   sub = this.usr$.subscribe.bind(this.usr$);
   user: User;
 
-  user$ = new BehaviorSubject(this.user);
+  user$ = new BehaviorSubject<User>(this.user);
   subUser = this.user$.subscribe.bind(this.user$);
 
   constructor(public store: Store) {

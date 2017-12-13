@@ -55,7 +55,7 @@ export class ContactSearchComponent implements OnInit {
   }
 
   displayContact(event) {
-    console.log(event.option.value.name);
+    // console.log(event.option.value.name);
     this.searchVal = '';
     this.searchElem.nativeElement.blur();
     this.store.con.pubOpenDetail(event.option.value);

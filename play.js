@@ -5,8 +5,10 @@ const _ = require('lodash');
 
 
 
-var a = {};
-a['one.two.three'] = 'crap';
+var a = {one: {two: [4,5,6]}};
+
+_.set(a, 'one.two[2]', 'lala');
+console.log(a)
 
 console.log(a);
 

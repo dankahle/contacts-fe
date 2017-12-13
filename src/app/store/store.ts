@@ -33,15 +33,18 @@ export class Store extends StoreBase {
   initialBreakpoint: string;
   selectedLabel?: Label;
 
+  // localized pub/sub to keep work related to specific changes. Could use subPath for this as well, but this is cleaner
+  // note that some are subjects, these are akin to messages, in that we don't care about a current value
+  // we just want to know when an event happens
   updateLabelCounts$ = new Subject();
   subUpdateLabelCounts = this.updateLabelCounts$.subscribe.bind(this.updateLabelCounts$);
-  leftNavClosed$ = new BehaviorSubject(false);
+  leftNavClosed$ = new BehaviorSubject<boolean>(false);
   subLeftNavClosed = this.leftNavClosed$.subscribe.bind(this.leftNavClosed$);
-  authenticated$ = new BehaviorSubject(this.authenticated);
+  authenticated$ = new BehaviorSubject<boolean>(this.authenticated);
   subAuthenticated = this.authenticated$.subscribe.bind(this.authenticated$);
-  initialized$ = new BehaviorSubject(this.initialized);
+  initialized$ = new BehaviorSubject<boolean>(this.initialized);
   subInitialized = this.initialized$.subscribe.bind(this.initialized$);
-  selectedLabelState$ = new BehaviorSubject(this.selectedLabel);
+  selectedLabelState$ = new BehaviorSubject<Label>(this.selectedLabel);
   subSelectedLabel = this.selectedLabelState$.subscribe.bind(this.selectedLabelState$);
 
   constructor(private media: ObservableMedia) {
@@ -49,15 +52,14 @@ export class Store extends StoreBase {
 
     // setup substores
     this.usr = new StoreUser(this);
-    this.usr.pub();
     this.con = new StoreContacts(this);
-    this.con.pub();
-
     this.init();
+    this.pub();
   }
 
   pub() {
     this.store$.next(this);
+    super.pub();
   }
 
   init() {
@@ -77,7 +79,7 @@ export class Store extends StoreBase {
   pubLeftNavClosed(val) {
     this.leftNavClosed = val;
     this.leftNavClosed$.next(this.leftNavClosed);
-    super.pub();
+    this.pub();
   }
 
   pubUpdateLabelCounts() {
@@ -87,19 +89,19 @@ export class Store extends StoreBase {
   pubAuthenticated(val) {
     this.authenticated = val;
     this.authenticated$.next(this.authenticated);
-    super.pub();
+    this.pub();
   }
 
   pubInitialized(val) {
     this.initialized = val;
     this.initialized$.next(this.initialized);
-    super.pub();
+    this.pub();
   }
 
   pubSelectedLabel(val) {
     this.selectedLabel = val;
     this.selectedLabelState$.next(this.selectedLabel);
-    super.pub();
+    this.pub();
   }
 
 }

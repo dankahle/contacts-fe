@@ -27,7 +27,6 @@ export class LoginComponent {
   }
 
   inputChange() {
-    console.log('onchanges');
     this.userNotFound = false;
     this.userAlreadyExists = false;
   }

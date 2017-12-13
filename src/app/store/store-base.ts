@@ -12,11 +12,9 @@ import {Store} from './store';
 export class StoreBase {
   logState = environment.logState;
   messages$ = new Subject<Message>();
+  store: Store; // set this in the substore constructor, leave it undefined for Store
 
   constructor() {
-    if (this.logState === true) {
-      console.log(this);
-    }
   }
 
   getVal(path: string) {
@@ -35,11 +33,24 @@ export class StoreBase {
   }
 
   pub() {
-/*
     if (this.logState === true) {
-      console.log(this);
+      console.log(this.getPropertiesOnly(this));
     }
-*/
+  }
+
+  getPropertiesOnly(object) {
+    const obj = _.clone(object);
+    for (const prop in obj) {
+      if (typeof obj[prop] === 'function' || prop.indexOf('$') !== -1) {
+        delete obj[prop];
+      } else if (typeof obj[prop] === 'object' && object === this && _.includes(['usr', 'con'], prop)) {
+        try {
+          obj[prop] = this.getPropertiesOnly(obj[prop]);
+        } catch (e) {
+        }
+      }
+    }
+    return obj;
   }
 
   // an example of messaging for less formal pub/sub (no methods or observables required), but the
@@ -52,28 +63,44 @@ export class StoreBase {
     this.messages$.filter(message => message.name === messageName).subscribe(callback);
   }
 
-/*
+  /*
+    // generic pub/sub using path:
+    // both of these work, either the sub or pub will create the behaviorSubject that drives it
+
+    store.subPath<string>('mypath.one')
+      .subscribe(x => console.log('new mypath.one', x));
+    setTimeout(() => store.pubPath<string>('mypath.one', 'lala'));
+    >> undefined, lala, lala (not sure why two instead of one)
+
+    store.pubPath<string>('mypath.one', 'lala');
+    setTimeout(() => {
+      store.subPath<string>('mypath.one')
+        .subscribe(x => console.log('new mypath.one', x));
+    })
+    >> lala (just one)
+*/
+
   subPath<T>(path: string): Observable<T> {
-    const subject = this.getOrCreateSubject<T>(path);
-    // get last section of path after ".", then look for prop: section$ and if not there
-    // add it and initialize to BehaviorSubject<T>
-    return null;
+    return this.getOrCreateSubject<T>(path, _.get(this, path), 'sub');
   }
 
   pubPath<T>(path: string, val: T) {
     _.set(this, path, val);
-    const subject = this.getOrCreateSubject<T>(path);
+    const subject = this.getOrCreateSubject<T>(path, val, 'pub');
     subject.next(val);
-    this.store$.next();
+    if (this.store) {
+      this.store.pub();
+    }
   }
 
-  getOrCreateSubject<T>(path) {
+  getOrCreateSubject<T>(path, val, mode) {
     const varName = path + '$';
     if (!this[varName]) {
-      this[varName] = new BehaviorSubject<T>(undefined);
+      this[varName] = new BehaviorSubject<T>(val);
+    } else if (mode === 'pub') {
+      this[varName].next(val);
     }
     return this[varName];
   }
-*/
 
 }
