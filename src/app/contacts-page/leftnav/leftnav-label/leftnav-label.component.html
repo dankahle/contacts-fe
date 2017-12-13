@@ -2,7 +2,7 @@
   <i class="material-icons" fxFlex="0 0 auto">{{label.icon}}</i>
   <div class="name text-ellipsis-inline"  fxFlex="0 0 auto">{{label.name}}</div>
   <div class="counts" fxFlex="0 0 auto">
-    <div *ngIf="label.id === 'contacts' && store.state.contacts.length">({{store.state.contacts.length}})</div>
+    <div *ngIf="label.id === 'contacts' && store.con.contacts.length">({{store.con.contacts.length}})</div>
     <div *ngIf="label.id !== 'contacts' && label.numContacts">({{label.numContacts}})</div>
   </div>
 

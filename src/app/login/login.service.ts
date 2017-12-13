@@ -21,22 +21,22 @@ export class LoginService {
     }
 
     return this.http.post<any>(environment.apiUrl + 'api/login', user, {params: params})
-      .do(_user => this.store.setUser(_user));
+      .do(_user => this.store.usr.pubUser(_user));
   }
 
   logout() {
     return this.http.delete<any>(environment.apiUrl + 'api/login')
       .do(() => {
         this.store.deleteVal('user');
-        this.store.setAuthenticated(false);
-        this.store.setInitialized(false);
+        this.store.pubAuthenticated(false);
+        this.store.pubInitialized(false);
         this.router.navigateByUrl('/login');
       });
   }
 
   register(user) {
     return this.http.post<any>(environment.apiUrl + 'api/register', user)
-      .do(_user => this.store.setUser(_user));
+      .do(_user => this.store.usr.pubUser(_user));
   }
 
 }

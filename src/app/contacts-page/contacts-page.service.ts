@@ -21,19 +21,18 @@ export class ContactsPageService {
               private mdDialog: MatDialog) {
     // this is really only for store, i.e. store is the lowest on the hierarchy of modules, so can't see anything above (core, router, etc)
     // without there being a circular reference. We'll publish an event to get around that.
-    store.subscribeUpdateLabelCounts(contacts => this.updateLabelCounts());
-    store.subscribeContacts(contacts => this.updateLabelCounts());
+    store.subUpdateLabelCounts(contacts => this.updateLabelCounts());
+    store.con.subContacts(contacts => this.updateLabelCounts());
   }
 
   // add/delete contacts will pass null in here
   updateLabelCounts() {
-    if (!this.store.state.initialized) {
+    if (!this.store.initialized) {
       return;
     }
 
-    const state = this.store.state;
-    const contacts = state.contacts;
-    state.user.labels.forEach(label => {
+    const contacts = this.store.con.contacts;
+    this.store.usr.user.labels.forEach(label => {
       label.numContacts = 0;
       contacts.forEach(contact => {
         if (_.find(contact.labels, {id: label.id})) {
@@ -104,7 +103,7 @@ export class ContactsPageService {
       if (_contact) {
         this.contactsService.updateOne(_contact)
           .do(apiContact => {
-            this.store.publishUpdateLabelCounts();
+            this.store.pubUpdateLabelCounts();
           })
           .subscribe(x => x);
       }

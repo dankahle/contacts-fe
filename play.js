@@ -4,12 +4,21 @@
 const _ = require('lodash');
 
 
+
+var a = {};
+a['one.two.three'] = 'crap';
+
+console.log(a);
+
+
+/*
 function getPhoneNo(value) {
   return value.prefix + value.phone.replace(/[^0-9]+/g, '');
 }
 
 
 console.log(getPhoneNo({prefix: '55', phone: '(319) 1-555.1212'}));
+*/
 
 
 

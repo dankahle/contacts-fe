@@ -36,7 +36,7 @@ export class ContactSearchComponent implements OnInit {
   }
 
   filter(name: string): Contact[] {
-    return this.store.state.contacts.filter(option =>
+    return this.store.con.contacts.filter(option =>
       option.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
   }
 

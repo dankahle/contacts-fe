@@ -26,8 +26,8 @@ export class ContactListComponent {
               protected contactsPageService: ContactsPageService, private mdDialog: MatDialog,
               private breakpoints: BreakpointService) {
 
-    this.store.subscribeSelectedLabel(label => this.syncContacts());
-    this.store.subscribeContacts(label => this.syncContacts());
+    this.store.subSelectedLabel(label => this.syncContacts());
+    this.store.con.subContacts(label => this.syncContacts());
 
 /*
     // an example of a dynamic hostBinding property
@@ -43,11 +43,11 @@ export class ContactListComponent {
   } // const
 
   syncContacts() {
-    if (this.store.state.selectedLabel) {
-      this.contacts = this.store.state.contacts.filter(contact =>
-        _.find(contact.labels, {id: this.store.state.selectedLabel.id}));
+    if (this.store.selectedLabel) {
+      this.contacts = this.store.con.contacts.filter(contact =>
+        _.find(contact.labels, {id: this.store.selectedLabel.id}));
     } else {
-      this.contacts = this.store.state.contacts;
+      this.contacts = this.store.con.contacts;
     }
   }
 

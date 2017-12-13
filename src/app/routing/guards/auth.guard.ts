@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate {
 
   canActivate(next: ActivatedRouteSnapshot,
               state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.store.state.authenticated) {
+    if (this.store.authenticated) {
       return true;
     } else {
       this.doAuth();
@@ -31,7 +31,7 @@ export class AuthGuard implements CanActivate {
     this.userService.getUser()
       .map(user => {
         // console.log('authdone');
-        this.store.setAuthenticated(true);
+        this.store.pubAuthenticated(true);
         this.response$.next(true);
         return true;
       })

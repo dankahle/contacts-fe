@@ -35,11 +35,11 @@ export class MoreActionsBase {
   removeLabelFromContact(event): Observable<boolean> {
     const subject = new Subject<boolean>();
     event.stopPropagation();
-    this.contactsService.removeLabelFromContact(this.contact, this.store.state.selectedLabel)
+    this.contactsService.removeLabelFromContact(this.contact, this.store.selectedLabel)
       .subscribe(() => {
         // if we remove from label, the label may still be selected, then just gets readded, so we have to deselect it
         // as the sync runs after this
-        _.find(this.labels, {id: this.store.state.selectedLabel.id}).selected = false;
+        _.find(this.labels, {id: this.store.selectedLabel.id}).selected = false;
         this.menuTrigger.closeMenu();
         subject.next(true);
       });

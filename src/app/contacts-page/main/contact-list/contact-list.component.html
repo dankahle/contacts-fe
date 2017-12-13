@@ -3,10 +3,10 @@
 <div class="contact-list" fxFlex="1 1 100%" fxLayout="">
 
   <div *ngIf="contacts.length > 0" fxFlexFill>
-  <div class="label-title" *ngIf="store.state.selectedLabel">
+  <div class="label-title" *ngIf="store.selectedLabel">
     <span class="ghost"></span>
-    <span>{{store.state.selectedLabel.name}}</span>
-    <span *ngIf="store.state.selectedLabel.numContacts">({{store.state.selectedLabel.numContacts}})</span>
+    <span>{{store.selectedLabel.name}}</span>
+    <span *ngIf="store.selectedLabel.numContacts">({{store.selectedLabel.numContacts}})</span>
     <br>
   </div>
 
@@ -20,8 +20,8 @@
   <div class="no-contacts"  *ngIf="contacts.length === 0" class="no-contacts">
     <div class="book-pic"></div>
     <br>
-    <div *ngIf="!store.state.selectedLabel">No contacts</div>
-    <div *ngIf="store.state.selectedLabel">No contacts labeled "{{store.state.selectedLabel.name}}"</div>
+    <div *ngIf="!store.selectedLabel">No contacts</div>
+    <div *ngIf="store.selectedLabel">No contacts labeled "{{store.selectedLabel.name}}"</div>
   </div>
 
   <button class="add-button" mat-fab color="primary" (click)="editContact($event, null, 'add')"

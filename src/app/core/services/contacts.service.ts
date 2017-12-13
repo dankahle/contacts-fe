@@ -7,12 +7,15 @@ import * as _ from 'lodash';
 import {Observable} from 'rxjs/Observable';
 import {ActivatedRoute, ActivatedRouteSnapshot, Router, RouterModule} from '@angular/router';
 import {ContactsPageService} from '../../contacts-page/contacts-page.service';
+import {StoreContacts} from '../../store/store-contacts';
 
 @Injectable()
 export class ContactsService {
   apiUrl = environment.apiUrl;
+  con: StoreContacts;
 
   constructor(private http: HttpClient, private store: Store, private route: ActivatedRoute) {
+    this.con = store.con;
   }
 
   getAll() {
@@ -26,26 +29,26 @@ export class ContactsService {
   addOne(contact: Contact) {
     return this.http.post<Contact>(`${this.apiUrl}api/contacts`, contact)
       .do(_contact => {
-        this.store.state.contacts.push(_contact);
-        this.store.setContacts(_.sortBy(this.store.state.contacts, 'name'));
+        this.con.contacts.push(_contact);
+        this.con.pubContacts(_.sortBy(this.con.contacts, 'name'));
       });
   }
 
   updateOne(contact: Contact) {
     return this.http.put<Contact>(`${this.apiUrl}api/contacts/${contact.id}`, contact)
       .do(_contact => {
-        const userContact = _.find(this.store.state.contacts, {id: contact.id});
+        const userContact = _.find(this.con.contacts, {id: contact.id});
         _.merge(userContact, _contact);
-        this.store.setContacts(_.sortBy(this.store.state.contacts, 'name'));
+        this.con.pubContacts(_.sortBy(this.con.contacts, 'name'));
       });
   }
 
   deleteOne(id: number) {
     return this.http.delete<Contact>(`${this.apiUrl}api/contacts/${id}`)
       .do(() => {
-        const index = _.findIndex(this.store.state.contacts, {id: id});
-        this.store.state.contacts.splice(index, 1);
-        this.store.publishContacts();
+        const index = _.findIndex(this.con.contacts, {id: id});
+        this.con.contacts.splice(index, 1);
+        this.con.pubContacts(this.con.contacts);
       });
   }
 
@@ -55,7 +58,7 @@ export class ContactsService {
 
   deleteAllWithLabel(labelId) {
 
-    const contacts = this.store.state.contacts;
+    const contacts = this.con.contacts;
     const deleteContacts = [];
     contacts.forEach(contact => {
       if (_.find(contact.labels, {id: labelId})) {
@@ -69,7 +72,7 @@ export class ContactsService {
 
     const params = new HttpParams().set('label', labelId);
     return this.http.delete<any>(`${this.apiUrl}api/contacts`, {params: params})
-      .do(() => this.store.publishContacts());
+      .do(() => this.con.pubContacts(this.con.contacts));
   }
 
   updateLabelInContacts(contacts: Contact[], label) {
@@ -84,7 +87,7 @@ export class ContactsService {
     });
     if (updateContacts.length > 0) {
       return this.updateMany(updateContacts)
-        .do(() => this.store.publishContacts());
+        .do(() => this.con.pubContacts(this.con.contacts));
     } else {
       return Observable.of(null);
     }
@@ -102,7 +105,7 @@ export class ContactsService {
     });
     if (updateContacts.length > 0) {
       return this.updateMany(updateContacts)
-        .do(resp => this.store.publishContacts());
+        .do(resp => this.con.pubContacts(this.con.contacts));
     } else {
       return Observable.of(null);
     }
@@ -128,13 +131,13 @@ export class ContactsService {
     const index = _.findIndex(labels, {id: label.id});
     labels.splice(index, 1);
     return this.updateOne(contact)
-      .do(contact => {
-        this.store.publishContacts();
+      .do(() => {
+        this.con.pubContacts(this.con.contacts);
       });
   }
 
   getLabelsForMenu(contact) {
-    const labels = _.cloneDeep(this.store.state.user.labels);
+    const labels = _.cloneDeep(this.store.usr.user.labels);
     labels.forEach(label => {
       if (_.find(contact.labels, {id: label.id})) {
         label.selected = true;

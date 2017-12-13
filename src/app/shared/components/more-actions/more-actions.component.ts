@@ -16,12 +16,14 @@ export class MoreActionsComponent {
   contact: Contact;
 
   constructor(protected store: Store) {
+/*
     store.subscribeMoreActionsMenu((event, contact) => {
       this.event = event;
       this.contact = contact;
       // this.menu.position = event.clientX;
       this.trigger.openMenu();
-    })
+    });
+*/
   }
 
 }

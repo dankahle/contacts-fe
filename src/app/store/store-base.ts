@@ -1,46 +1,45 @@
 import {ApplicationRef, Injectable, NgZone} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {environment} from '../../environments/environment';
-import {State} from './models/state';
 import * as _ from 'lodash';
 import {Message} from './models/message';
 import {Messages} from './models/messages';
 import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/filter';
+import {Observable} from 'rxjs/Observable';
+import {Store} from './store';
 
-@Injectable()
 export class StoreBase {
-  state$ = new BehaviorSubject(this.state);
-  subscribe = this.state$.subscribe.bind(this.state$);
   logState = environment.logState;
   messages$ = new Subject<Message>();
 
-  constructor(public state: State) {
+  constructor() {
     if (this.logState === true) {
-      console.log(this.state);
+      console.log(this);
     }
   }
 
-  // or just get it directly: store.state.xxx
   getVal(path: string) {
-    return _.get(this.state, path);
+    return _.get(this, path);
   }
+
   setVal(path: string, val) {
-    _.set(this.state, path, val);
-    this.publish();
-    return this.state;
+    _.set(this, path, val);
+    this.pub();
+    return this;
   }
 
   deleteVal(path: string) {
-    _.set(this.state, path, undefined);
-    this.publish();
+    _.set(this, path, undefined);
+    this.pub();
   }
 
-  publish() {
-    this.state$.next(this.state);
+  pub() {
+/*
     if (this.logState === true) {
-      console.log(this.state);
+      console.log(this);
     }
+*/
   }
 
   emit(messageName: Messages, payload: any) {
@@ -50,5 +49,29 @@ export class StoreBase {
   onMessage(messageName: Messages, callback: (message: Message) => void) {
     this.messages$.filter(message => message.name === messageName).subscribe(callback);
   }
+
+/*
+  subPath<T>(path: string): Observable<T> {
+    const subject = this.getOrCreateSubject<T>(path);
+    // get last section of path after ".", then look for prop: section$ and if not there
+    // add it and initialize to BehaviorSubject<T>
+    return null;
+  }
+
+  pubPath<T>(path: string, val: T) {
+    _.set(this, path, val);
+    const subject = this.getOrCreateSubject<T>(path);
+    subject.next(val);
+    this.store$.next();
+  }
+
+  getOrCreateSubject<T>(path) {
+    const varName = path + '$';
+    if (!this[varName]) {
+      this[varName] = new BehaviorSubject<T>(undefined);
+    }
+    return this[varName];
+  }
+*/
 
 }

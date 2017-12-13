@@ -25,8 +25,8 @@ contact: Contact;
       this.contact = <Contact>{
         id: chance.guid(),
       };
-      if (this.store.state.selectedLabel) {
-        const label = this.store.state.selectedLabel;
+      if (this.store.selectedLabel) {
+        const label = this.store.selectedLabel;
         this.contact.labels = [<Label>{id: label.id, name: label.name, icon: 'label'}]
       }
     } else {

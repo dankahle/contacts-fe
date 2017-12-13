@@ -1,8 +1,8 @@
 
-<div class="leftnav" [hidden]="hideLeftNav" [class.closed]="store.state.leftNavClosed">
+<div class="leftnav" [hidden]="hideLeftNav" [class.closed]="store.leftNavClosed">
 
   <dk-leftnav-label [label]="labels.contacts" (click)="showAllContacts($event, labels.contacts)" (keydown)="showAllContacts($event, labels.contacts)"
-                    [class.active]="!store.state.selectedLabel"></dk-leftnav-label>
+                    [class.active]="!store.selectedLabel"></dk-leftnav-label>
 
   <mat-expansion-panel [expanded]="true" class="labels">
     <mat-expansion-panel-header collapsedHeight="41px" expandedHeight="41px">
@@ -11,9 +11,9 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
 
-    <div *ngFor="let label of store.state.user.labels">
+    <div *ngFor="let label of store.usr.user.labels">
       <dk-leftnav-label [label]="label" (click)="showLabelContacts($event, label)" (keydown)="showLabelContacts($event, label)"
-                        [class.active]="store.state.selectedLabel === label"></dk-leftnav-label>
+                        [class.active]="store.selectedLabel === label"></dk-leftnav-label>
     </div>
 
     <dk-leftnav-label [label]="labels.addLabel" (click)="editLabel($event, labels.addLabel, 'add')"

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {State} from './models/state';
 import {Store} from './store';
 
 @NgModule({
@@ -8,8 +7,17 @@ import {Store} from './store';
     CommonModule
   ],
   declarations: [],
-  providers: [State, Store]
+  providers: [Store]
 })
 export class StoreModule {
+
+  constructor() {
+    this.initStore();
+  }
+
+  initStore() {
+
+  }
+
 
 }

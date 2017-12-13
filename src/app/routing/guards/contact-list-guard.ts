@@ -18,11 +18,11 @@ export class ContactListGuard implements CanActivate {
 
   canActivate(next: ActivatedRouteSnapshot,
               state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.store.state.initialized) {
+    if (this.store.initialized) {
       this.doWork(next, state);
       return true;
     } else {
-      const subscription = this.store.subscribeInitialized(initialized => {
+      const subscription = this.store.subInitialized(initialized => {
         if (initialized) {
           this.doWork(next, state);
           subscription.unsubscribe();
@@ -36,9 +36,9 @@ export class ContactListGuard implements CanActivate {
     // console.log('contactlistguard start');
     const labelId = next.params.id;
     if (labelId) {
-      this.store.setSelectedLabel(this.userService.getLabelById(labelId));
+      this.store.pubSelectedLabel(this.userService.getLabelById(labelId));
     } else {
-      this.store.setSelectedLabel(undefined);
+      this.store.pubSelectedLabel(undefined);
     }
     // console.log('contactlistguard end');
     this.response$.next(true);

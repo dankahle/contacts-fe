@@ -21,17 +21,17 @@
 
 <div class="more-actions">
 
-  <div class="item" *ngIf="store.state.selectedLabel">
+  <div class="item" *ngIf="store.selectedLabel">
     <i class="material-icons"> </i>
     <span>Remove from label</span>
   </div>
 
-  <div class="item" *ngIf="store.state.selectedLabel">
+  <div class="item" *ngIf="store.selectedLabel">
     <i class="material-icons"></i>
     <span>delete</span>
   </div>
 
-  <div class="item" *ngFor="let label of store.state.user.labels">
+  <div class="item" *ngFor="let label of store.usr.user.labels">
     <i class="material-icons"></i>
     <span></span>
   </div>

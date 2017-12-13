@@ -42,11 +42,11 @@ export class InitializationGuard implements CanActivate {
   }
 
   handleCanActivate() {
-    if (this.store.state.authenticated && this.store.state.initialized) {
+    if (this.store.authenticated && this.store.initialized) {
       return true;
     } else {
-      const subscription = this.store.subscribeAuthenticated(authenticated => {
-        if (authenticated && !this.store.state.initialized) {
+      const subscription = this.store.subAuthenticated(authenticated => {
+        if (authenticated && !this.store.initialized) {
           this.init();
           subscription.unsubscribe();
         }
@@ -61,7 +61,7 @@ export class InitializationGuard implements CanActivate {
     // an example of a complex initialization flow with dependencies of dependencies
     Observable.forkJoin(this.contactsService.getAll(), this.init1.get(), this.init2.get())
       .mergeMap(arr => {
-        this.store.setContacts(arr[0]);
+        this.store.con.pubContacts(arr[0]);
 
         return Observable.forkJoin(this.init3.get(), this.init4.get());
       })
@@ -70,7 +70,7 @@ export class InitializationGuard implements CanActivate {
       })
       .map(x => {
         // console.log('initguard done');
-        this.store.setInitialized(true);
+        this.store.pubInitialized(true);
         this.afterInit();
         this.response$.next(true);
         return true;
@@ -83,7 +83,7 @@ export class InitializationGuard implements CanActivate {
   }
 
   afterInit() {
-    this.store.publishUpdateLabelCounts();
+    this.store.pubUpdateLabelCounts();
     this.route.params.subscribe(params => {
       const id = params.id;
     })

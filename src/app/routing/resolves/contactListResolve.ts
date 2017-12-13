@@ -21,10 +21,10 @@ export class ContactListResolve implements Resolve<Contact[]> {
     const labelId = route.params.id;
     if (labelId) {
       this.store.setVal('selectedLabel', this.userService.getLabelById(labelId));
-      return Observable.of(this.store.state.contacts.filter(contact => _.find(contact.labels, {id: labelId})));
+      return Observable.of(this.store.con.contacts.filter(contact => _.find(contact.labels, {id: labelId})));
     } else {
       this.store.deleteVal('selectedLabel');
-      return Observable.of(this.store.state.contacts);
+      return Observable.of(this.store.con.contacts);
     }
 
   }

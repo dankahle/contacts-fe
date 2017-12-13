@@ -12,6 +12,7 @@ import {DeleteLabelComponent} from '../delete-label-modal/delete-label.component
 import {DeleteLabelMode} from '../../../store/enums/deleteLabelMode.enum';
 import {ContactsService} from '../../../core/services/contacts.service';
 import {BreakpointChange, BreakpointDirection, BreakpointService} from '../../../core/services/breakpoint.service';
+import {StoreUser} from '../../../store/store-user';
 
 @Component({
   selector: 'dk-leftnav',
@@ -20,6 +21,7 @@ import {BreakpointChange, BreakpointDirection, BreakpointService} from '../../..
   encapsulation: ViewEncapsulation.Emulated
 })
 export class LeftnavComponent {
+  usr: StoreUser;
   wasClosed = false;
   hideLeftNav = false;
   labels = {
@@ -37,14 +39,13 @@ export class LeftnavComponent {
               private userService: UserService, private contactsService: ContactsService,
               private route: ActivatedRoute, private appRef: ApplicationRef, private breakpoints: BreakpointService) {
 
+    this.usr = this.store.usr;
     breakpoints
       .subscribe(change => {
         this.handleBreakpoints(change);
       });
 
-    // hack: the @HostBinding above requires a local var, but we want to use global, so have to subscribe to global
-    // to get the local required.
-    store.subscribe(state => {
+    store.sub(state => {
       if (breakpoints.isActive('gt-sm')) {
         this.wasClosed = state.leftNavClosed;
       }
@@ -93,7 +94,7 @@ export class LeftnavComponent {
         .afterClosed().subscribe(results => {
         if (results) {
           if (results.deleteMode === DeleteLabelMode.keepContacts) {
-            this.contactsService.removeLabelFromContacts(this.store.state.contacts, label.id)
+            this.contactsService.removeLabelFromContacts(this.store.con.contacts, label.id)
               .subscribe(() => this._deleteLabel(label));
           } else if (results.deleteMode === DeleteLabelMode.deleteContacts) {
             this.contactsService.deleteAllWithLabel(label.id)
@@ -105,10 +106,10 @@ export class LeftnavComponent {
   }
 
   _deleteLabel(label) {
-    this.userService.deleteLabel(this.store.state.user, label)
+    this.userService.deleteLabel(this.usr.user, label)
       .subscribe(x => {
         // if we're deleting the selected label, set "contacts" to selected label
-        if (this.store.state.selectedLabel) {
+        if (this.store.selectedLabel) {
           this.router.navigateByUrl('/');
         }
       });
@@ -128,20 +129,20 @@ export class LeftnavComponent {
         mode: mode,
         label: {...label},
         labelNames:
-          this.store.state.user.labels.map(label => label.name)
+          this.usr.user.labels.map(label => label.name)
       }
     }
     this.mdDialog.open(EditLabelComponent, config)
       .afterClosed().subscribe(_label => {
       if (_label) {
         if (mode === 'add') {
-          this.store.state.user.labels.push(_label);
+          this.usr.user.labels.push(_label);
         } else {
-          _.find(this.store.state.user.labels, {id: _label.id}).name = _label.name;
+          _.find(this.usr.user.labels, {id: _label.id}).name = _label.name;
         }
-        this.store.state.user.labels = _.sortBy(this.store.state.user.labels, 'name');
-        this.userService.updateUser(this.store.state.user)
-          .mergeMap(() => this.contactsService.updateLabelInContacts(this.store.state.contacts, _label))
+        this.usr.user.labels = _.sortBy(this.usr.user.labels, 'name');
+        this.userService.updateUser(this.usr.user)
+          .mergeMap(() => this.contactsService.updateLabelInContacts(this.store.con.contacts, _label))
           .subscribe(x => x);
       }
     });
@@ -162,9 +163,9 @@ export class LeftnavComponent {
 
   handleBreakpoints(change: BreakpointChange) {
     if (this.breakpoints.isActive('lt-md') && _.includes(['md', 'lg', 'xl'], this.breakpoints.lastBreakpoint)) {
-      this.store.setLeftNavClosed(true);
+      this.store.pubLeftNavClosed(true);
     } else if (this.breakpoints.isActive('gt-sm') && _.includes(['xs', 'sm'], this.breakpoints.lastBreakpoint)) {
-      this.store.setLeftNavClosed(this.wasClosed);
+      this.store.pubLeftNavClosed(this.wasClosed);
     }
   }
 

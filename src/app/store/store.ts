@@ -5,8 +5,13 @@ import {StoreBase} from './store-base';
 import {Subject} from 'rxjs/Subject';
 import {Messages} from './models/messages';
 import {Message} from './models/message';
-import {State} from './models/state';
 import {Contact} from './models/contact';
+import {Label} from './models/label';
+import {ObservableMedia} from '@angular/flex-layout';
+import {StoreUser} from './store-user';
+import {StoreContacts} from './store-contacts';
+import * as _ from 'lodash';
+import 'rxjs/add/operator/first';
 
 @Injectable()
 /**
@@ -17,95 +22,84 @@ import {Contact} from './models/contact';
  * but you get the point: don't update contact counts list when all you did was open the left nav.
  */
 export class Store extends StoreBase {
+  store$ = new BehaviorSubject<Store>(this);
+  sub = this.store$.subscribe.bind(this.store$);
+  usr: StoreUser;
+  con: StoreContacts;
 
-  userState$ = new BehaviorSubject(this.state.user);
-  subscribeUser = this.userState$.subscribe.bind(this.userState$);
-  contactsState$ = new BehaviorSubject(this.state.contacts);
-  subscribeContacts = this.contactsState$.subscribe.bind(this.contactsState$);
+  authenticated = false;
+  initialized = false;
+  leftNavClosed = false;
+  initialBreakpoint: string;
+  selectedLabel?: Label;
+
   updateLabelCounts$ = new Subject();
-  subscribeUpdateLabelCounts = this.updateLabelCounts$.subscribe.bind(this.updateLabelCounts$);
+  subUpdateLabelCounts = this.updateLabelCounts$.subscribe.bind(this.updateLabelCounts$);
   leftNavClosed$ = new BehaviorSubject(false);
-  subscribeLeftNavClosed = this.leftNavClosed$.subscribe.bind(this.leftNavClosed$);
-  authenticatedState$ = new BehaviorSubject(this.state.authenticated);
-  subscribeAuthenticated = this.authenticatedState$.subscribe.bind(this.authenticatedState$);
-  initializedState$ = new BehaviorSubject(this.state.initialized);
-  subscribeInitialized = this.initializedState$.subscribe.bind(this.initializedState$);
-  selectedLabelState$ = new BehaviorSubject(this.state.selectedLabel);
-  subscribeSelectedLabel = this.selectedLabelState$.subscribe.bind(this.selectedLabelState$);
-  moreActionsMenu$ = new Subject();
-  subscribeMoreActionsMenu = this.moreActionsMenu$.subscribe.bind(this.moreActionsMenu$);
+  subLeftNavClosed = this.leftNavClosed$.subscribe.bind(this.leftNavClosed$);
+  authenticated$ = new BehaviorSubject(this.authenticated);
+  subAuthenticated = this.authenticated$.subscribe.bind(this.authenticated$);
+  initialized$ = new BehaviorSubject(this.initialized);
+  subInitialized = this.initialized$.subscribe.bind(this.initialized$);
+  selectedLabelState$ = new BehaviorSubject(this.selectedLabel);
+  subSelectedLabel = this.selectedLabelState$.subscribe.bind(this.selectedLabelState$);
 
-  constructor(state: State) {
-    super(state);
+  constructor(private media: ObservableMedia) {
+    super();
+
+    // setup substores
+    this.usr = new StoreUser(this);
+    this.usr.pub();
+    this.con = new StoreContacts(this);
+    this.con.pub();
+
+    this.init();
   }
 
-  setUser(user: User) {
-    this.state.user = user;
-    this.publishUser();
+  pub() {
+    this.store$.next(this);
   }
 
-  publishUser() {
-    this.userState$.next(this.state.user);
-    super.publish();
+  init() {
+
+    // close left nav
+    if (this.media.isActive('xs') || this.media.isActive('sm')) {
+      this.leftNavClosed = true;
+    }
+
+    this.media.asObservable()
+      .first()
+      .subscribe(change => {
+        this.initialBreakpoint = change.mqAlias;
+      });
   }
 
-  setContacts(contacts) {
-    this.state.contacts = contacts;
-    this.publishContacts();
+  pubLeftNavClosed(val) {
+    this.leftNavClosed = val;
+    this.leftNavClosed$.next(this.leftNavClosed);
+    super.pub();
   }
 
-  publishContacts() {
-    this.contactsState$.next(this.state.contacts);
+  pubUpdateLabelCounts() {
     this.updateLabelCounts$.next();
-    super.publish();
   }
 
-  setLeftNavClosed(val) {
-    this.state.leftNavClosed = val;
-    this.publishLeftNavClosed();
+  pubAuthenticated(val) {
+    this.authenticated = val;
+    this.authenticated$.next(this.authenticated);
+    super.pub();
   }
 
-  publishLeftNavClosed() {
-    this.leftNavClosed$.next(this.state.leftNavClosed);
-    super.publish();
+  pubInitialized(val) {
+    this.initialized = val;
+    this.initialized$.next(this.initialized);
+    super.pub();
   }
 
-  publishUpdateLabelCounts() {
-    this.updateLabelCounts$.next();
-  }
-
-  setAuthenticated(val) {
-    this.state.authenticated = val;
-    this.publishAuthenticated();
-  }
-
-  publishAuthenticated() {
-    this.authenticatedState$.next(this.state.authenticated);
-    super.publish();
-  }
-
-  setInitialized(val) {
-    this.state.initialized = val;
-    this.publishInitialized();
-  }
-
-  publishInitialized() {
-    this.initializedState$.next(this.state.initialized);
-    super.publish();
-  }
-
-  setSelectedLabel(val) {
-    this.state.selectedLabel = val;
-    this.publishSelectedLabel();
-  }
-
-  publishSelectedLabel() {
-    this.selectedLabelState$.next(this.state.selectedLabel);
-    super.publish();
-  }
-
-  publishMoreActionsMenu(event: MouseEvent, contact: Contact) {
-    this.moreActionsMenu$.next({event: event, contact: contact});
+  pubSelectedLabel(val) {
+    this.selectedLabel = val;
+    this.selectedLabelState$.next(this.selectedLabel);
+    super.pub();
   }
 
 }

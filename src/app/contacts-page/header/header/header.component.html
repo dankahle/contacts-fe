@@ -4,8 +4,8 @@
 
     <div fxFlex="1 1 80%" class="left" fxLayout="row" fxLayoutAlign="flex-start center">
 
-      <div class="menu" [class.invisible]="!store.state.authenticated" fxFlex="0 0 auto">
-        <i class="material-icons" (click)="store.setLeftNavClosed(!store.state.leftNavClosed)"
+      <div class="menu" [class.invisible]="!store.authenticated" fxFlex="0 0 auto">
+        <i class="material-icons" (click)="store.pubLeftNavClosed(!store.leftNavClosed)"
            matTooltip="Main menu" matTooltipShowDelay="500" matTooltipHideDelay="300">menu</i>
       </div>
 
@@ -15,15 +15,15 @@
         </a>
       </div>
 
-      <div *ngIf="store.state.authenticated" class="search-div" fxFlex="1 1 auto">
+      <div *ngIf="store.authenticated" class="search-div" fxFlex="1 1 auto">
         <dk-contact-search></dk-contact-search>
       </div>
     </div>
 
-    <div class="right" *ngIf="!!store.state.user" fxLayout="row" fxLayoutAlign="flex-end center">
+    <div class="right" *ngIf="!!store.usr.user" fxLayout="row" fxLayoutAlign="flex-end center">
       <div>
-        <span class="pic">{{store.state.user.name[0].toUpperCase()}}</span>
-        <span class="user">{{store.state.user.name}}</span>
+        <span class="pic">{{store.usr.user.name[0].toUpperCase()}}</span>
+        <span class="user">{{store.usr.user.name}}</span>
         <a class="logout" href="javascript:void(0)" (click)="logout()"
            matTooltip="Logout" matTooltipShowDelay="500" matTooltipHideDelay="300">logout</a>
       </div>
