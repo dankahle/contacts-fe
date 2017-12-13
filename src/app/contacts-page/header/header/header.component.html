@@ -5,7 +5,8 @@
     <div fxFlex="1 1 80%" class="left" fxLayout="row" fxLayoutAlign="flex-start center">
 
       <div class="menu" [class.invisible]="!store.state.authenticated" fxFlex="0 0 auto">
-        <i class="material-icons" (click)="store.setLeftNavClosed(!store.state.leftNavClosed)">menu</i>
+        <i class="material-icons" (click)="store.setLeftNavClosed(!store.state.leftNavClosed)"
+           matTooltip="Main menu" matTooltipShowDelay="500" matTooltipHideDelay="300">menu</i>
       </div>
 
       <div class="logo" fxFlex="0 0 auto">
@@ -23,7 +24,8 @@
       <div>
         <span class="pic">{{store.state.user.name[0].toUpperCase()}}</span>
         <span class="user">{{store.state.user.name}}</span>
-        <a class="logout" href="javascript:void(0)" (click)="logout()">logout</a>
+        <a class="logout" href="javascript:void(0)" (click)="logout()"
+           matTooltip="Logout" matTooltipShowDelay="500" matTooltipHideDelay="300">logout</a>
       </div>
     </div>
 

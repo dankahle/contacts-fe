@@ -59,5 +59,29 @@ export class ContactDetailComponent extends MoreActionsBase{
     return Observable.of(null);
   }
 
+  getEncodedAddress(addr) {
+    return 'https://maps.google.com/?q=' + encodeURIComponent(addr);
+  }
+
+  getUrl(website) {
+    if (/^(http:\/\/|https:\/\/)/.test(website)) {
+      return website;
+    } else {
+      return 'http://' + website;
+    }
+  }
+
+  getNotes(notes) {
+    const str = notes.replace(/\n/g, '<br>');
+    return str;
+  }
+
+  getPhoneDisplay(value) {
+    return value.prefix === '1' ? value.phone : value.prefix + '-' + value.phone;
+  }
+
+  getPhoneNo(value) {
+    return value.prefix + value.phone.replace(/[^0-9]+/g, '');
+  }
 
 }

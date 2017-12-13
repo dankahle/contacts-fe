@@ -1,42 +1,122 @@
 
-<div class="detail">
+<div class="dialog">
 
-  <h2 mat-dialog-title="">Contact Detail</h2>
+  <div class="header" fxLayout="row" fxLayoutAlign="space-between center">
 
-  <div mat-dialog-content>
+    <div class="left" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="start center">
+      <div class="pic" fxFlex="none">
+        <div class="letter">{{contact.name[0].toUpperCase() || contact.company[0].toUpperCase()}}</div>
+      </div>
 
-    <form id="form1">
-      <div>id: {{contact.id}}</div>
-      <div>name: {{contact.name}}</div>
-    </form>
+      <div class="name-labels" fxFlex="grow">
+        <div class="name-div" fxLayout="column" fxLayoutAlign="end start">
+          <!--<div class="text-ellipsis">{{contact.name || contact.company}}</div>-->
+          <div class="name text-ellipsis">sfsadfsdafdsfasdfsdafasdfadsfasdfasdfasdfasdfasdfasdfasdfasdfasdf</div>
+        </div>
+        <div class="labels">
+          <span class="label text-ellipsis-inline" *ngFor="let label of contact.labels">{{label.name}}</span>
+        </div>
+      </div>
+    </div>
 
-    <br>
-    <button mat-button (click)="editContact($event, contact, 'edit')"
-            (keydown)="editContact($event, contact, 'edit')">edit
-    </button>
-    <br><br>
-
-    <br>
-    <button mat-button (click)="showJson = !showJson">show json</button>
-    <br>
-
-    <pre *ngIf="showJson">
-  {{contact | json}}
-</pre>
-
+    <div class="right" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="end center">
+      <div class="wrap" (click)="editContact($event, contact, 'edit')"><i class="material-icons"
+                                                                          matTooltip="Edit contact"
+                                                                          matTooltipShowDelay="500"
+                                                                          matTooltipHideDelay="300">edit</i></div>
+      <div class="wrap" [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()"
+           (onMenuClose)="menuClose()" (onMenuOpen)="menuOpen()"><i class="material-icons"
+                                                                    matTooltip="More actions" matTooltipShowDelay="500"
+                                                                    matTooltipHideDelay="300">more_vert</i></div>
+      <div class="wrap" (click)="dialogRef.close()"><i class="material-icons"
+                                                       matTooltip="Close" matTooltipShowDelay="500"
+                                                       matTooltipHideDelay="300">close</i></div>
+    </div>
   </div>
 
-  <div mat-dialog-actions>
-    <button mat-button mat-dialog-close>Close</button>
-  </div>
+  <div class="content">
+    <div class="title">Contact details</div>
+
+    <!--company-->
+    <div class="section" fxLayout="row" fxLayoutAlign="start stretch">
+      <div class="icon-div" fxFlex="0 0 63px" fxLayout="row" fxLayoutAlign="center start">
+        <i class="material-icons">business</i>
+      </div>
+      <div class="value-div" fxFlex="1 0 auto">
+        <span class="value-text" *ngIf="contact.jobTitle">{{contact.jobTitle}}, </span>
+        <span class="value-text">{{contact.company}}</span>
+      </div>
+    </div>
+
+    <!--emails-->
+    <div class="section" fxLayout="row" fxLayoutAlign="start stretch">
+      <div class="icon-div" fxFlex="0 0 63px" fxLayout="row" fxLayoutAlign="center start">
+        <i class="material-icons">email</i>
+      </div>
+      <div class="value-div" fxFlex="1 0 auto">
+        <div class="value" *ngFor="let value of contact.emails">
+          <a href="mailto:{{value.email}}" class="value-text" target="_blank">{{value.email}}</a>
+          <span class="value-label" *ngIf="value.label">&nbsp;• &nbsp;{{value.label}}</span>
+        </div>
+      </div>
+    </div>
+
+    <!--phones-->
+    <div class="section" fxLayout="row" fxLayoutAlign="start stretch">
+      <div class="icon-div" fxFlex="0 0 63px" fxLayout="row" fxLayoutAlign="center start">
+        <i class="material-icons">phone</i>
+      </div>
+      <div class="value-div" fxFlex="1 0 auto">
+        <div class="value" *ngFor="let value of contact.phones">
+          <a href="tel:{{getPhoneNo(value)}}" class="value-text" target="_blank">{{getPhoneDisplay(value)}}</a>
+          <span class="value-label" *ngIf="value.label">&nbsp;• &nbsp;{{value.label}}</span>
+        </div>
+      </div>
+    </div>
+
+    <!--addresses-->
+    <div class="section" fxLayout="row" fxLayoutAlign="start stretch">
+      <div class="icon-div" fxFlex="0 0 63px" fxLayout="row" fxLayoutAlign="center start">
+        <i class="material-icons">place</i>
+      </div>
+      <div class="value-div" fxFlex="1 0 auto">
+        <div class="value" *ngFor="let value of contact.addresses">
+          <a [href]="getEncodedAddress(value.address)" class="value-text" target="_blank">{{value.address}}</a>
+          <span class="value-label" *ngIf="value.label">&nbsp;• &nbsp;{{value.label}}</span>
+        </div>
+      </div>
+    </div>
+
+    <!--websites-->
+    <div class="section" fxLayout="row" fxLayoutAlign="start stretch">
+      <div class="icon-div" fxFlex="0 0 63px" fxLayout="row" fxLayoutAlign="center start">
+        <i class="material-icons">link</i>
+      </div>
+      <div class="value-div" fxFlex="1 0 auto">
+        <div class="value" *ngFor="let value of contact.websites">
+          <a [href]="getUrl(value.website)" class="value-text" target="_blank">{{value.website}}</a>
+          <span class="value-label" *ngIf="value.label">&nbsp;• &nbsp;{{value.label}}</span>
+        </div>
+      </div>
+    </div>
+
+    <!--notes-->
+    <div class="section" fxLayout="row" fxLayoutAlign="start stretch">
+      <div class="icon-div" fxFlex="0 0 63px" fxLayout="row" fxLayoutAlign="center start">
+        <i class="material-icons">description</i>
+      </div>
+      <div class="value-div" fxFlex="1 0 auto">
+        <!--<span class="value-text" [innerHTML]="getNotes(contact.notes)"></span>-->
+        <span class="value-text word-break" [innerHTML]="getNotes(contact.notes)"></span>
+      </div>
+    </div>
+
+  </div> <!--content-->
+
+</div> <!-- dialog -->
 
 
-  <div class="wrap" style="padding-right:10px;" [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()"
-       (onMenuClose)="menuClose()" (onMenuOpen)="menuOpen()"><i class="material-icons">more_vert</i></div>
-
-</div>
-
-
+<!--more actions menu-->
 <mat-menu [overlapTrigger]="true" class="menu-text" xPosition="before" yPosition="below">
   <button mat-menu-item *ngIf="store.state.selectedLabel" (click)="removeLabelFromContact($event)">
     <i class="left material-icons mat-icon">cancel</i>

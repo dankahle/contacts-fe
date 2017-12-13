@@ -24,7 +24,8 @@
     <div *ngIf="store.state.selectedLabel">No contacts labeled "{{store.state.selectedLabel.name}}"</div>
   </div>
 
-  <button class="add-button" mat-fab color="primary" (click)="editContact($event, contact, 'add')">
+  <button class="add-button" mat-fab color="primary" (click)="editContact($event, null, 'add')"
+          matTooltip="Add contact" position="left" matTooltipShowDelay="500" matTooltipHideDelay="300">
     <i class="material-icons">add</i>
   </button>
 

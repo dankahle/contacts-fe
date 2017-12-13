@@ -4,11 +4,38 @@
 const _ = require('lodash');
 
 
+function getPhoneNo(value) {
+  return value.prefix + value.phone.replace(/[^0-9]+/g, '');
+}
+
+
+console.log(getPhoneNo({prefix: '55', phone: '(319) 1-555.1212'}));
+
+
+
+/*
+getUrl(website) {
+  if (/^(http:\/\/|https:\/\/)/.test(website)) {
+    return website;
+  } else {
+    return 'http://' + website;
+  }
+}
+
+
+console.log(getUrl('http://lala'));
+console.log(getUrl('https://lala'));
+console.log(getUrl('noprefix'));
+
+*/
+
+/*
 console.log(new Date().getFullYear());
 const dt = new Date();
 dt.setFullYear(dt.getFullYear() + 1);
 console.log(dt);
 const i = 5;
+*/
 
 /*
 const arr = [
