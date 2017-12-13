@@ -64,7 +64,7 @@ export class ContactListComponent {
     if (Util.keydownAndNotEnterOrSpace(event)) {
       return;
     }
-    this.store.emit(Messages.openContactDetail, contact);
+    this.store.con.pubOpenDetail(contact);
   }
 
 }

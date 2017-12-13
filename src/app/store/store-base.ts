@@ -42,6 +42,8 @@ export class StoreBase {
 */
   }
 
+  // an example of messaging for less formal pub/sub (no methods or observables required), but the
+  // formal way is clean and type safe, so stick with that. So easy to implement this with observables.
   emit(messageName: Messages, payload: any) {
     this.messages$.next({name: messageName, payload});
   }

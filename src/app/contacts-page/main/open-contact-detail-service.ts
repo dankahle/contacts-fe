@@ -9,7 +9,7 @@ import {Messages} from '../../store/models/messages';
 export class OpenContactDetailService {
 
   constructor(protected store: Store, private mdDialog: MatDialog) {
-    store.onMessage(Messages.openContactDetail, message => this.openContactDetail(message.payload));
+    store.con.subOpenDetail(contact => this.openContactDetail(contact));
   }
 
   openContactDetail(contact) {

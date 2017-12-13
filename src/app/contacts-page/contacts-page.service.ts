@@ -66,11 +66,11 @@ export class ContactsPageService {
         }
         // we always open detail after add/edit
         api$.do(apiContact => {
-          this.store.emit(Messages.openContactDetail, apiContact);
+          this.store.con.pubOpenDetail(apiContact);
         })
           .subscribe(x => x);
       } else if (mode === 'edit') {
-        this.store.emit(Messages.openContactDetail, contact);
+        this.store.con.pubOpenDetail(contact);
       }
     });
   }

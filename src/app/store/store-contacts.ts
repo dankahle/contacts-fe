@@ -2,6 +2,7 @@ import {Contact} from './models/contact';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Store} from './store';
 import {StoreBase} from './store-base';
+import {Subject} from 'rxjs/Subject';
 
 export class StoreContacts extends StoreBase {
   con$ = new BehaviorSubject<StoreContacts>(this);
@@ -10,7 +11,8 @@ export class StoreContacts extends StoreBase {
 
   contacts$ = new BehaviorSubject(this.contacts);
   subContacts = this.contacts$.subscribe.bind(this.contacts$);
-
+  openDetail$ = new Subject<Contact>();
+  subOpenDetail = this.openDetail$.subscribe.bind(this.openDetail$);
 
   constructor(public store: Store) {
     super();
@@ -27,6 +29,10 @@ export class StoreContacts extends StoreBase {
     this.contacts$.next(this.contacts);
     this.pub();
     this.store.pubUpdateLabelCounts();
+  }
+
+  pubOpenDetail(contact: Contact) {
+    this.openDetail$.next(contact);
   }
 
 }
