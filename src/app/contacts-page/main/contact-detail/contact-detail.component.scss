@@ -1,10 +1,12 @@
 @import '../../../../styles/comp-index';
 
-/deep/ .mat-dialog-container {
-  padding: 0;
+// this changes all of them, not just this one
+:host /deep/ .mat-dialog-container {
+  //padding: 0;
 }
 
 .dialog {
+  margin: -24px; // hack to get past .modal-dialog-container's padding: 24px; Can't just turn it off for this use
 
   $height-header: 110px;
   .header {
