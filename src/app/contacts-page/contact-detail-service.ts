@@ -15,7 +15,7 @@ export class ContactDetailService {
   openContactDetail(contact) {
     const config = <MatDialogConfig>{
       width: '700px',
-      height: '550px',
+      height: '500px',
       backdropClass: 'bg-modal-backdrop',
       panelClass: 'contactDetailCssHack',
       data: {

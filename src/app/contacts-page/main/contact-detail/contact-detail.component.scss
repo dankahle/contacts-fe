@@ -10,7 +10,7 @@
 .dialog {
 
   $height-header: 110px;
-  $height-content: calc(550px - #{$height-header});// 500 is height set in dialog config, keep these in sync
+  $height-content: calc(500px - #{$height-header});// 500 is height set in dialog config, keep these in sync
   .header {
     height: $height-header;
     background-color: $bg-light-gray;
