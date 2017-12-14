@@ -6,6 +6,9 @@ html, body {
 }
 
 body {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(0,0,0,.87);
 }
 
 *,
@@ -22,7 +25,7 @@ i {
 a {
   text-decoration: none;
   &:link, &:visited, &:hover, &:active {
-    color: $link-active !important;
+    color: $color-link !important;
   }
 }
 

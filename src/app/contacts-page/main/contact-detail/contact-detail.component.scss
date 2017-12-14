@@ -55,7 +55,6 @@
           padding-top: 6px;
 
           .label {
-            color: rgba(0, 0, 0, .87);
             background-color: rgb(222, 233, 236);
             padding: 4px;
             margin-top: 3px;
@@ -98,7 +97,7 @@
     .title {
       font-size: 14px;
       font-weight: 500;
-      color: rgba(0,0,0,.87);
+      color: $color-default-text;
     }
 
     .section {
@@ -120,11 +119,12 @@
     }
 
     a:link, a:visited, a:hover, a:active {
-      color: rgb(41, 98, 255) !important;
+      //color: $link-active-lighter !important;
     }
-  }
 
-}
+  }// content
+
+}// dialog
 
 
 

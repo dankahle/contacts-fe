@@ -1,0 +1,129 @@
+@import '../../../../styles/comp-index';
+
+// this changes all of them without the config panelClass=contactDetailCssHack to single it out
+/deep/ .contactDetailCssHack .mat-dialog-container {
+  padding: 0;
+  overflow-y: unset;
+  overflow-x: unset;
+}
+
+.dialog {
+
+  $height-header: 110px;
+  $height-content: calc(500px - #{$height-header});// 500 is height set in dialog config, keep these in sync
+  .header {
+    height: $height-header;
+    background-color: $bg-light-gray;
+    padding: 20px;
+
+    .left {
+      min-width: 0 !important;
+
+      .pic {
+        $height: 47px;
+        padding: 4px;
+        patting-right: 12px;
+        display: block;
+        .letter {
+          margin: auto;
+          color: white;
+          width: $height;
+          height: $height;
+          font-size: 23px;
+          line-height: $height;
+          text-align: center;
+          font-weight: 300;
+          background-color: $mat-warn;
+          border: 1px solid $mat-warn;
+          border-radius: 50%;
+        }
+      }
+
+      .name-labels {
+        padding-left: 20px;
+        padding-right: 14px;
+
+        .name-div {
+          font-size: 24px;
+          height: calc(#{$height-header} * .45);
+          .name {
+            max-width: 485px;
+          }
+        }
+        .labels {
+          height: calc(#{$height-header} * .55);
+          padding-top: 6px;
+
+          .label {
+            background-color: rgb(222, 233, 236);
+            padding: 4px;
+            margin-top: 3px;
+            margin-right: 10px;
+            font-size: 11px;
+            line-height: 1;
+            font-weight: 300;
+            max-width: 100px;
+          }
+        }
+      }
+    }
+
+    .right {
+      padding-left: 10px;
+      color: $link-gray;
+      margin-right: -6px;
+
+      .wrap {
+        cursor: pointer;
+        padding: 6px 6px;
+        box-sizing: content-box;
+        height: 20px;
+        width: 20px;
+        i {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+
+  .content {
+    padding: 20px;
+    color: $link-gray;
+    font-size: 13px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: $height-content;
+
+    .title {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .section {
+      margin-top: 24px;
+
+      .value:not(:first-of-type) {
+        margin-top: 4px;
+      }
+
+      .value-div {
+        max-width: 550px;
+        word-break: break-all;
+
+        a, span {
+          display: inline-block;
+        }
+      }
+
+    }
+
+    a:link, a:visited, a:hover, a:active {
+      color: rgb(41, 98, 255) !important;
+    }
+  }
+
+}
+
+
+
+

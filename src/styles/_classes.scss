@@ -19,6 +19,16 @@
   @include text-ellipsis;
 }
 
+.text-ellipsis-block {
+  @include text-ellipsis;
+  display: block;
+}
+
+.text-ellipsis-inline {
+  display: inline-block;
+  @include text-ellipsis;
+}
+
 .error-text {
   color: red;
 }

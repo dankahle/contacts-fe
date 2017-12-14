@@ -67,7 +67,7 @@
       </div>
       <div class="value-div" fxFlex="1 0 auto">
         <div class="value" *ngFor="let value of contact.phones">
-          <a href="tel:{{getPhoneNo(value)}}" class="value-text" target="_blank">{{getPhoneDisplay(value)}}</a>
+          <a href="tel:{{Util.getPhoneNo(value)}}" class="value-text" target="_blank">{{Util.getPhoneDisplay(value)}}</a>
           <span class="value-label" *ngIf="value.label">&nbsp;• &nbsp;{{value.label}}</span>
         </div>
       </div>
@@ -80,7 +80,7 @@
       </div>
       <div class="value-div" fxFlex="1 0 auto">
         <div class="value" *ngFor="let value of contact.addresses">
-          <a [href]="getEncodedAddress(value.address)" class="value-text" target="_blank">{{value.address}}</a>
+          <a [href]="Util.getEncodedAddress(value.address)" class="value-text" target="_blank">{{value.address}}</a>
           <span class="value-label" *ngIf="value.label">&nbsp;• &nbsp;{{value.label}}</span>
         </div>
       </div>
@@ -93,7 +93,7 @@
       </div>
       <div class="value-div" fxFlex="1 0 auto">
         <div class="value" *ngFor="let value of contact.websites">
-          <a [href]="getUrl(value.website)" class="value-text" target="_blank">{{value.website}}</a>
+          <a [href]="Util.getUrl(value.website)" class="value-text" target="_blank">{{value.website}}</a>
           <span class="value-label" *ngIf="value.label">&nbsp;• &nbsp;{{value.label}}</span>
         </div>
       </div>
@@ -105,8 +105,7 @@
         <i class="material-icons">description</i>
       </div>
       <div class="value-div" fxFlex="1 0 auto">
-        <!--<span class="value-text" [innerHTML]="getNotes(contact.notes)"></span>-->
-        <span class="value-text word-break" [innerHTML]="getNotes(contact.notes)"></span>
+        <span class="value-text word-break" [innerHTML]="Util.getNotes(contact.notes)"></span>
       </div>
     </div>
 

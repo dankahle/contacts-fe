@@ -1,33 +1,32 @@
+
+
 <div tabindex="0" class="list-item" fxFlex="grow" fxLayout>
 
-  <div class="pic" fxFlex="none">
+  <div class="pic" fxFlex="none" fxLayout>
     <div class="letter">{{contact.name[0].toUpperCase() || contact.company[0].toUpperCase()}}</div>
   </div>
 
   <div class="columns" tabindex="0" fxFlex="grow" fxLayout="row" fxLayoutAlign="space-between center">
 
-
-
-    <div class="text-ellipsis"
+    <div class="name text-ellipsis"
          fxFlex.xs="0 1 100%" fxFlex.sm="0 1 46%" fxFlex.md="0 1 46%" fxFlex.lg="0 1 30%" fxFlex.xl="0 1 23%">
       {{contact.name || contact.company}}</div>
 
     <div  fxLayout="row" fxLayoutAlign="start center"
          fxHide.lt-sm fxFlex.sm="0 1 46%" fxFlex.md="0 1 46%" fxFlex.lg="0 1 30%" fxFlex.xl="0 1 23%">
-      <div class="text-ellipsis" *ngIf="contact.emails && contact.emails.length > 0">
-        <a class="text-ellipsis" href="mailto:{{contact.emails[0].email}}" (click)="$event.stopPropagation()">{{contact.emails[0].email}}</a>
+      <div class="text-ellipsis" *ngIf="contact.emails.length > 0">
+        <a class="text-ellipsis" href="mailto:{{contact.emails[0].email}}" (click)="$event.stopPropagation()"
+           (click)="$event.stopPropagation()" target="_blank">{{contact.emails[0].email}}</a>
       </div>
-      <div *ngIf="!contact.emails || contact.emails.length === 0">&nbsp;</div>
+      <div *ngIf="contact.emails.length === 0">&nbsp;</div>
     </div>
 
     <div  fxLayout="row" fxLayoutAlign="start center" fxHide.lt-lg fxFlex.lg="0 1 30%" fxFlex.xl="0 1 23%">
-      <div class="text-ellipsis" *ngIf="contact.phones && contact.phones.length > 0">
-        <div class="text-ellipsis" *ngIf="contact.phones[0].country">{{contact.phones[0].country}} -
-          {{contact.phones[0].phone}}
-        </div>
-        <div class="text-ellipsis" *ngIf="!contact.phones[0].country">{{contact.phones[0].phone}}</div>
+      <div class="text-ellipsis" *ngIf="contact.phones.length > 0">
+        <a href="tel:{{Util.getPhoneNo(contact.phones[0])}}" class="text-ellipsis-block"
+           (click)="$event.stopPropagation()" target="_blank">{{Util.getPhoneDisplay(contact.phones[0])}}</a>
       </div>
-      <div  *ngIf="!contact.phones || contact.phones.length === 0">&nbsp;</div>
+      <div  *ngIf="contact.phones.length === 0">&nbsp;</div>
     </div>
 
     <div  fxHide.lt-xl fxFlex.xl="0 1 23%" fxLayout="row" fxLayoutAlign="start center">

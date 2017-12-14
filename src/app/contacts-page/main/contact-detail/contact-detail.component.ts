@@ -16,6 +16,7 @@ import {Observable} from 'rxjs/Observable';
 })
 export class ContactDetailComponent extends MoreActionsBase{
   contact: Contact;
+  Util = Util;
 
   constructor(public dialogRef: MatDialogRef<ContactDetailComponent>, @Inject(MAT_DIALOG_DATA) data: any,
               protected contactsPageService: ContactsPageService,
@@ -25,7 +26,7 @@ export class ContactDetailComponent extends MoreActionsBase{
   }
 
   addLabel(label) {
-    this.contactsPageService.updateLabelCounts();//dankfix: a reminder, maybe shoujld be done in the service instead?
+    this.contactsPageService.updateLabelCounts();
   }
 
   deleteLabel(label) {
@@ -57,31 +58,6 @@ export class ContactDetailComponent extends MoreActionsBase{
           this.dialogRef.close();
       });
     return Observable.of(null);
-  }
-
-  getEncodedAddress(addr) {
-    return 'https://maps.google.com/?q=' + encodeURIComponent(addr);
-  }
-
-  getUrl(website) {
-    if (/^(http:\/\/|https:\/\/)/.test(website)) {
-      return website;
-    } else {
-      return 'http://' + website;
-    }
-  }
-
-  getNotes(notes) {
-    const str = notes.replace(/\n/g, '<br>');
-    return str;
-  }
-
-  getPhoneDisplay(value) {
-    return value.prefix === '1' ? value.phone : value.prefix + '-' + value.phone;
-  }
-
-  getPhoneNo(value) {
-    return value.prefix + value.phone.replace(/[^0-9]+/g, '');
   }
 
 }

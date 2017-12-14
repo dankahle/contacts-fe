@@ -20,6 +20,7 @@ import {MoreActionsBase} from '../more-actions-base';
 })
 export class ContactListItemComponent extends MoreActionsBase {
   @Input() contact: Contact;
+  Util = Util;
 
   constructor(protected parent: ContactListComponent, protected contactsPageService: ContactsPageService,
               store: Store, contactsService: ContactsService, mdDialog: MatDialog) {

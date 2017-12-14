@@ -58,4 +58,30 @@ export class Util {
     return {top, left, height};
   }
 
+  static getEncodedAddress(addr) {
+    return 'https://maps.google.com/?q=' + encodeURIComponent(addr);
+  }
+
+  static getUrl(website) {
+    if (/^(http:\/\/|https:\/\/)/.test(website)) {
+      return website;
+    } else {
+      return 'http://' + website;
+    }
+  }
+
+  static getNotes(notes) {
+    const str = notes.replace(/\n/g, '<br>');
+    return str;
+  }
+
+  static getPhoneDisplay(value) {
+    return value.prefix === '1' ? value.phone : value.prefix + '-' + value.phone;
+  }
+
+  static getPhoneNo(value) {
+    return value.prefix + value.phone.replace(/[^0-9]+/g, '');
+  }
+
+
 }
