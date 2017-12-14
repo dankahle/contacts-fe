@@ -1,14 +1,16 @@
 @import '../../../../styles/comp-index';
 
-// this changes all of them, not just this one
-:host /deep/ .mat-dialog-container {
-  //padding: 0;
+// this changes all of them without the config panelClass=contactDetailCssHack to single it out
+/deep/ .contactDetailCssHack .mat-dialog-container {
+  padding: 0;
+  overflow-y: unset;
+  overflow-x: unset;
 }
 
 .dialog {
-  margin: -24px; // hack to get past .modal-dialog-container's padding: 24px; Can't just turn it off for this use
 
   $height-header: 110px;
+  $height-content: calc(550px - #{$height-header});// 500 is height set in dialog config, keep these in sync
   .header {
     height: $height-header;
     background-color: $bg-light-gray;
@@ -91,7 +93,7 @@
     font-size: 13px;
     overflow-y: auto;
     overflow-x: hidden;
-    max-width: 100%;
+    height: $height-content;
 
     .title {
       font-size: 14px;

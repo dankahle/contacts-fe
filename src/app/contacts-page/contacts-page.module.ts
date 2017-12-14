@@ -15,8 +15,8 @@ import {DeleteLabelComponent} from './leftnav/delete-label-modal/delete-label.co
 import {ContactsPageService} from './contacts-page.service';
 import {ContactSearchComponent} from './header/contact-search/contact-search.component';
 import { ContactEditComponent } from './main/contact-edit/contact-edit.component';
-import {OpenContactDetailService} from './main/open-contact-detail-service';
 import { ContactDeleteComponent } from './main/contact-delete/contact-delete.component';
+import {ContactDetailService} from './contact-detail-service';
 
 @NgModule({
   imports: [
@@ -30,8 +30,8 @@ import { ContactDeleteComponent } from './main/contact-delete/contact-delete.com
     ContactDeleteComponent],
   exports: [RouterModule, LeftnavComponent, HeaderComponent],
   entryComponents: [ContactDetailComponent, EditLabelComponent, DeleteLabelComponent, ContactEditComponent, ContactDeleteComponent],
-  providers: [ContactsPageService, OpenContactDetailService]
+  providers: [ContactsPageService, ContactDetailService]
 })
 export class ContactsPageModule {
-  constructor(contactsPageService: ContactsPageService, openContactDetailService: OpenContactDetailService) {}
+  constructor(contactsPageService: ContactsPageService, openContactDetailService: ContactDetailService) {}
 }
