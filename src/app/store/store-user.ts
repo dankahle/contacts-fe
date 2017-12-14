@@ -12,8 +12,7 @@ export class StoreUser extends StoreBase {
   subUser = this.user$.subscribe.bind(this.user$);
 
   constructor(public store: Store) {
-    super();
-    this.store = store;
+    super(store);
   }
 
   pub() {

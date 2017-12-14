@@ -15,8 +15,7 @@ export class StoreContacts extends StoreBase {
   subOpenDetail = this.openDetail$.subscribe.bind(this.openDetail$);
 
   constructor(public store: Store) {
-    super();
-    this.store = store;
+    super(store);
   }
 
   pub() {

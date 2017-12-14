@@ -12,9 +12,8 @@ import {Store} from './store';
 export class StoreBase {
   logState = environment.logState;
   messages$ = new Subject<Message>();
-  store: Store; // set this in the substore constructor, leave it undefined for Store
 
-  constructor() {
+  constructor(protected store?: Store) {
   }
 
   getVal(path: string) {
