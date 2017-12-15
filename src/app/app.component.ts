@@ -2,8 +2,10 @@ import {Component, ViewChild, ViewEncapsulation} from '@angular/core';
 import {Store} from './store/store';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/delay';
-import {MatMenuTrigger} from '@angular/material';
+import {MatFormField, MatMenuTrigger} from '@angular/material';
 import {Contact} from './store/models/contact';
+import * as _ from 'lodash';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'dk-root',
@@ -16,4 +18,5 @@ export class AppComponent {
   constructor(protected store: Store) {
 
   }
+
 }

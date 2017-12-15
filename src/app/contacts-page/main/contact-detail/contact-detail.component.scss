@@ -47,7 +47,7 @@
           font-size: 24px;
           height: calc(#{$height-header} * .45);
           .name {
-            max-width: 485px;
+            max-width: 55%;
           }
         }
         .labels {
@@ -108,7 +108,7 @@
       }
 
       .value-div {
-        max-width: 550px;
+        max-width: 86%;
         word-break: break-all;
 
         a, span {

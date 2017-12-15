@@ -17,11 +17,14 @@ const chance = new Chance();
 })
 export class ContactEditComponent {
 contact: Contact;
+  addMode = false;
+  editMode = false;
 
   constructor(protected store: Store, protected dialogRef: MatDialogRef<ContactEditComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
 
     if (data.mode === 'add') {
+      this.addMode = true;
       this.contact = <Contact>{
         id: chance.guid(),
       };
@@ -30,6 +33,7 @@ contact: Contact;
         this.contact.labels = [<Label>{id: label.id, name: label.name, icon: 'label'}]
       }
     } else {
+      this.editMode = true;
       this.contact = _.cloneDeep(data.contact);
     }
   }

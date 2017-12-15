@@ -46,9 +46,10 @@ export class ContactsPageService {
   openContactEdit(contact, mode) {
 
     const config = <MatDialogConfig>{
-      width: '400px',
-      height: '400px',
+      width: '700px',
+      height: '500px',
       backdropClass: 'bg-modal-backdrop',
+      panelClass: 'contactDetailCssHack',
       data: {
         mode: mode,
         contact: {...contact},

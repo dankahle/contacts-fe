@@ -2,7 +2,7 @@
 <br>
 <div mat-dialog-content>
 
-  <form id="form1" name="form" #form="ngForm" (submit)="submit(form)">
+  <form id="form" name="form" #form="ngForm" (submit)="submit(form)">
     <mat-form-field>
       <input name="name" matInput #name="ngModel" [(ngModel)]="label.name" [placeholder]="placeholder" autocomplete="off">
       <mat-error *ngIf="name.invalid && name.errors.required">Required!</mat-error>
@@ -13,7 +13,7 @@
 </div>
 
 <div mat-dialog-actions>
-  <button type="submit" form="form1" mat-button color="primary" [mat-dialog-close]="data" [disabled]="form.invalid">OK</button>
-  <button mat-button mat-dialog-close>Cancel</button>
+  <button type="submit" form="form" mat-button color="primary" [mat-dialog-close]="data" [disabled]="form.invalid">OK</button>
+  <button mat-button mat-dialog-close>CANCEL</button>
 </div>
 

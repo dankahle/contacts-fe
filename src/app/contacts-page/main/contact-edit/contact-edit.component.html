@@ -2,21 +2,76 @@
 <div class="dialog">
 
   <div class="header" fxLayout="row" fxLayoutAlign="space-between center">
-
-        <div class="name-div" fxLayout="column" fxLayoutAlign="end start">
-          <div class="name text-ellipsis">{{contact.name || contact.company}}</div>
-        </div>
+    <div class="name text-ellipsis" *ngIf="addMode">Create contact</div>
+    <div class="name text-ellipsis" *ngIf="editMode">Edit contact</div>
   </div>
 
   <div class="content">
+    <form id="form" name="form" #form="ngForm">
 
-    <div class="footer">
-      <button type="submit" form="form1" mat-button color="primary" [mat-dialog-close]="contact">Save</button>
-      <button mat-button mat-dialog-close>Cancel</button>
-    </div>
 
+
+
+      <!--company-->
+      <div class="section" fxLayout="row" fxLayoutAlign="start stretch">
+        <div class="pic" fxFlex="0 0 55px" fxLayout="row" fxLayoutAlign="center center">
+          <i class="material-icons">business</i>
+        </div>
+        <div class="inputs" fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="30px">
+          <mat-form-field floatPlaceholder="never" fxFlex="1 1 auto">
+            <input matInput #company="ngModel" name=company [(ngModel)]="contact.company" placeholder="Company" autocomplete="off">
+            <mat-error *ngIf="company.invalid && company.errors.nameOrCompanyRequired">Name or Company required</mat-error>
+          </mat-form-field>
+          <mat-form-field floatPlaceholder="never" fxFlex="1 1 auto">
+            <input matInput #jobTitle="ngModel" name=jobTitle [(ngModel)]="contact.jobTitle" placeholder="Job title" autocomplete="off">
+          </mat-form-field>
+        </div>
+        <div class="icons" fxLayout="row" fxLayoutAlign="start center">
+          <div class="wrap" *ngIf="contact.company || contact.jobTitle" (click)="contact.company = contact.jobTitle = ''">
+            <i class="clear material-icons" matTooltip="Remove">cancel</i></div>
+          <!--
+                  <div class="wrap" *ngIf="contact.company || contact.jobTitle" (click)="contacts.emails.push({})">
+                    <i class="add material-icons" matTooltip="add">add_circle</i></div>
+          -->
+        </div>
+      </div>
+
+      <!--<pre>{{contact | json}}</pre>-->
+      <!--company-->
+      <div class="section" fxLayout="row" fxLayoutAlign="start stretch">
+        <div class="pic" fxFlex="0 0 55px" fxLayout="row" fxLayoutAlign="center center">
+          <i class="material-icons">business</i>
+        </div>
+        <div class="inputs" fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="30px">
+          <mat-form-field floatPlaceholder="never" fxFlex="1 1 auto">
+            <input matInput #company="ngModel" name=company [(ngModel)]="contact.company" placeholder="Company" autocomplete="off">
+            <mat-error *ngIf="company.invalid && company.errors.nameOrCompanyRequired">Name or Company required</mat-error>
+          </mat-form-field>
+          <mat-form-field floatPlaceholder="never" fxFlex="1 1 auto">
+            <input matInput #jobTitle="ngModel" name=jobTitle [(ngModel)]="contact.jobTitle" placeholder="Job title" autocomplete="off">
+          </mat-form-field>
+        </div>
+        <div class="icons" fxLayout="row" fxLayoutAlign="start center">
+          <div class="wrap" *ngIf="contact.company || contact.jobTitle" (click)="contact.company = contact.jobTitle = ''">
+            <i class="clear material-icons" matTooltip="Remove">cancel</i></div>
+          <!--
+                  <div class="wrap" *ngIf="contact.company || contact.jobTitle" (click)="contacts.emails.push({})">
+                    <i class="add material-icons" matTooltip="add">add_circle</i></div>
+          -->
+        </div>
+      </div>
+
+      <!--<pre>{{contact | json}}</pre>-->
+
+
+      <div mat-dialog-actions="">
+        <button type="submit" form="form" mat-button color="primary" [mat-dialog-close]="contact"
+        [disabled]="!form.dirty">SAVE</button>
+        <button mat-button mat-dialog-close>CANCEL</button>
+      </div>
+
+    </form>
   </div> <!--content-->
 
 </div> <!-- dialog -->
-
 
