@@ -1,12 +1,5 @@
 @import '../../../../styles/comp-index';
 
-:host {
-
-  & /deep/ mat-toolbar {
-    align-items: center;
-  }
-}
-
 mat-toolbar {
   background-color: #2a56c6 !important;
 }

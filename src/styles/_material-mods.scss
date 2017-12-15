@@ -1,9 +1,28 @@
 
-body /deep/ .mat-dialog-content {
+.mat-toolbar {
+  align-items: center;
+}
+
+mat-expansion-panel.exp-panel-leftnav {
+  margin-top: -6px;
+
+  .mat-expansion-panel-body {
+    padding-left: 0;
+  }
+}
+
+// this changes all of them without the config panelClass=contactDetailCssHack to single it out
+.contactDetailCssHack .mat-dialog-container {
+  padding: 0;
+  overflow-y: unset;
+  overflow-x: unset;
+}
+
+.mat-dialog-content {
   overflow: unset;
 }
 
-body /deep/ .mat-dialog-actions {
+.mat-dialog-actions {
   flex-direction: row-reverse;
   margin-top: 14px;
 }
@@ -13,22 +32,7 @@ body /deep/ .mat-dialog-actions {
   //background-color: transparent;
 }
 
-body /deep/ .mat-menu-item {
-  font-size: 14px;
-  padding-right: 30px;
-
-  i.left {
-    font-size: 20px;
-  }
-  i.right {
-    font-size: 26px;
-    position: absolute;
-    top: 10px;
-    right: -13px;
-  }
-}
-
-body /deep/ .mat-menu-content {
+.mat-menu-content {
   $color: #757575;
   .separator {
     margin: 7px 0;
@@ -40,7 +44,20 @@ body /deep/ .mat-menu-content {
     color: $color;
   }
 
+}
 
-  [mat-menu-item] {
+.more-actions .mat-menu-item {
+  font-size: 14px;
+  padding-right: 30px;
+
+  i.left {
+    font-size: 20px;
+  }
+  i.right {
+    font-size: 26px;
+    position: absolute;
+    top: 10px;
+    right: 5px;
   }
 }
+

@@ -1,12 +1,5 @@
 @import '../../../../styles/comp-index';
 
-// this changes all of them without the config panelClass=contactDetailCssHack to single it out
-/deep/ .contactDetailCssHack .mat-dialog-container {
-  padding: 0;
-  overflow-y: unset;
-  overflow-x: unset;
-}
-
 .dialog {
   $height-header: 70px;
   $height-content: calc(500px - #{$height-header});// 500 is height set in dialog config, keep these in sync
