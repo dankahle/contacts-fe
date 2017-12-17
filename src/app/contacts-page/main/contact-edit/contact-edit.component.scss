@@ -65,21 +65,10 @@
             display: block;
           }
           i.clear {
-            color: rgba(0,0,0,.54);
-            display: none;
+            color: #aaa;
           }
           i.add {
             color: $mat-primary;
-          }
-        }
-      }
-
-      &:hover, &:focus-within {
-        .icons {
-          .wrap {
-            i.clear {
-              display: block;
-            }
           }
         }
       }

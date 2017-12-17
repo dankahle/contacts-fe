@@ -1,4 +1,7 @@
-import {ApplicationRef, Component, Inject, NgZone, OnInit, ViewChildren, ViewEncapsulation} from '@angular/core';
+import {
+  AfterViewInit, ApplicationRef, Component, Inject, NgZone, OnInit, ViewChild, ViewChildren,
+  ViewEncapsulation
+} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Messages} from '../../../store/models/messages';
 import {Store} from '../../../store/store';
@@ -11,6 +14,7 @@ import {Email} from '../../../store/models/email';
 import {Phone} from '../../../store/models/phone';
 import {Address} from '../../../store/models/address';
 import {Website} from '../../../store/models/website';
+import {AbstractControl, NgModel, Validator, ValidatorFn, Validators} from '@angular/forms';
 
 const chance = new Chance();
 
@@ -20,8 +24,10 @@ const chance = new Chance();
   styleUrls: ['./contact-edit.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class ContactEditComponent {
-  Object = Object;
+export class ContactEditComponent implements AfterViewInit {
+  log = console.log;
+  @ViewChild('name') name;
+  @ViewChild('company') company;
   @ViewChildren('emailRef') emailEdits;
   @ViewChildren('email') emails = [];
   contact: Contact;
@@ -33,12 +39,10 @@ export class ContactEditComponent {
 
     if (data.mode === 'add') {
       this.addMode = true;
-      this.contact = <Contact>{
-        id: chance.guid(),
-      };
+      this.contact = <Contact>{id: chance.guid(), labels: [], emails: [], phones: [], addresses: [], websites: []};
       if (this.store.selectedLabel) {
         const label = this.store.selectedLabel;
-        this.contact.labels = [<Label>{id: label.id, name: label.name, icon: 'label'}];
+        this.contact.labels.push(<Label>{id: label.id, name: label.name, icon: 'label'});
       }
     } else {
       this.editMode = true;
@@ -47,17 +51,25 @@ export class ContactEditComponent {
     this.addMissingFields();
   }
 
+  ngAfterViewInit() {
+    this.name.control.setValidators([this.nameOrCompanyValidator()]);
+    this.company.control.setValidators([this.nameOrCompanyValidator()]);
+  }
 
-  /*
-  name
-company jobtitle
-emails
-phones
-address
-websites
-notes
+  updateNameAndCompanyValidation() {
+    this.name.control.updateValueAndValidity();
+    this.company.control.updateValueAndValidity();
+  }
 
-   */
+  nameOrCompanyValidator(): ValidatorFn {
+    return ((control: AbstractControl): {[key: string]: any} => {
+      console.log(this.name.touched, this.name.dirty);
+      const rtn = !(this.contact.name || this.contact.company) &&
+      this.name.touched && this.company.touched ? {'nameOrCompany': {value: control.value}} : null;
+      return rtn;
+    });
+  }
+
   addMissingFields() {
     const c = this.contact;
     if (!c.emails.length) {

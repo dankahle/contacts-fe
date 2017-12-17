@@ -13,7 +13,7 @@ const chance = new Chance();
   styleUrls: ['./edit-label.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class EditLabelComponent implements OnInit {
+export class EditLabelComponent implements AfterViewInit {
   @ViewChild('name') name: NgModel;
   placeholder: string;
   title: string;
@@ -42,7 +42,7 @@ export class EditLabelComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.name.control.setValidators([Validators.required, this.nameAlreadyExistsValidator()]);
   }
 
