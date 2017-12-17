@@ -65,14 +65,19 @@ export class ContactsPageService {
         } else {
           api$ = this.contactsService.updateOne(_contact);
         }
-        // we always open detail after add/edit
+
+        // google's opening of detail after edit is annoying, screw that, but was not easy to do this as the circular
+        // reference issue would only go away if you published the detail modal open
         api$.do(apiContact => {
-          this.store.con.pubOpenDetail(apiContact);
+          // this.store.con.pubOpenDetail(apiContact);
         })
           .subscribe(x => x);
-      } else if (mode === 'edit') {
+      }
+/*
+      else if ((mode === 'edit') {
         this.store.con.pubOpenDetail(contact);
       }
+*/
     });
   }
 
