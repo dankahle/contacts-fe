@@ -5,12 +5,54 @@ const _ = require('lodash');
 
 
 
-var a = {one: {two: [4,5,6]}};
 
-_.set(a, 'one.two[2]', 'lala');
-console.log(a)
+let arr = [4,5,6];
+  arr.forEach((v, i) => {
+    console.log(v, i, arr.length);
+    if (v === 5) {
+      arr.splice(i, 1);
+    }
+  })
+console.log(arr)
 
-console.log(a);
+/*
+let arr = [4,5,6];
+for (let i = 0; i < arr.length; i++) {
+  console.log(i, arr[i], arr.length);
+  if (arr[i] === 4) {
+    arr.splice(i, 1);
+  }
+}
+console.log(arr)
+*/
+
+//console.log('////////////')
+
+/*
+let arr = [4,5,6];
+for (let i = arr.length - 1; i > -1; i--) {
+  console.log(i, arr[i], arr.length);
+  if (arr[i] === 6) {
+    arr.splice(i, 1);
+  }
+}
+console.log(arr)
+*/
+
+/*
+let arr = [4,5,6];
+_.forEachRight(arr, (v,i) => {
+  console.log(i, arr[i], arr.length);
+  if (v === 4) {
+    arr.splice(i, 1);
+  }
+
+})
+console.log(arr)
+*/
+
+
+
 
 
 /*

@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, ViewChild, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {errorCodes} from '../../core/services/error-codes';
 import {LoginService} from '../login.service';
@@ -9,7 +9,7 @@ import {LoginService} from '../login.service';
   styleUrls: ['./login.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class LoginComponent {
+export class LoginComponent implements AfterViewInit {
   @ViewChild('name', {read: ElementRef}) name;
   user = {name: '', company: ''};
   userNotFound = false;
@@ -23,7 +23,8 @@ export class LoginComponent {
   }
 
   ngAfterViewInit() {
-    this.name.nativeElement.focus();
+    // if we set this directly, mat changes some prop and we get a "changed too late" error
+    setTimeout(() => this.name.nativeElement.focus());
   }
 
   inputChange() {
