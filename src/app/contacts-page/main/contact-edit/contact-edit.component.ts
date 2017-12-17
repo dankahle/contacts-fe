@@ -26,10 +26,9 @@ const chance = new Chance();
 })
 export class ContactEditComponent implements AfterViewInit {
   log = console.log;
-  @ViewChild('name') name;
-  @ViewChild('company') company;
-  @ViewChildren('emailRef') emailEdits;
-  @ViewChildren('email') emails = [];
+  @ViewChild('nameNg') nameNg;
+  @ViewChild('companyNg') companyNg;
+  @ViewChildren('emailRef') emailRefs;
   contact: Contact;
   addMode = false;
   editMode = false;
@@ -52,20 +51,19 @@ export class ContactEditComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.name.control.setValidators([this.nameOrCompanyValidator()]);
-    this.company.control.setValidators([this.nameOrCompanyValidator()]);
+    this.nameNg.control.setValidators([this.nameOrCompanyValidator()]);
+    this.companyNg.control.setValidators([this.nameOrCompanyValidator()]);
   }
 
   updateNameAndCompanyValidation() {
-    this.name.control.updateValueAndValidity();
-    this.company.control.updateValueAndValidity();
+    this.nameNg.control.updateValueAndValidity();
+    this.companyNg.control.updateValueAndValidity();
   }
 
   nameOrCompanyValidator(): ValidatorFn {
     return ((control: AbstractControl): {[key: string]: any} => {
-      console.log(this.name.touched, this.name.dirty);
-      const rtn = !(this.contact.name || this.contact.company) &&
-      this.name.touched && this.company.touched ? {'nameOrCompany': {value: control.value}} : null;
+      const rtn = !((this.contact.name && this.contact.name.trim()) || (this.contact.company && this.contact.company.trim())) &&
+      this.nameNg.touched && this.companyNg.touched ? {'nameOrCompany': {value: control.value}} : null;
       return rtn;
     });
   }
@@ -122,7 +120,7 @@ export class ContactEditComponent implements AfterViewInit {
   addEmail() {
     this.contact.emails.push(<Email>{});
     setTimeout(() => {
-      this.emailEdits.last.nativeElement.focus();
+      this.emailRefs.last.nativeElement.focus();
     });
   }
 
