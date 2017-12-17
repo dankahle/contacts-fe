@@ -7,7 +7,7 @@
   </div>
 
   <div class="content">
-    <form id="form" name="form" #form="ngForm" autocomplete="off">
+    <form id="form" name="form" #form="ngForm" autocomplete="off" (submit)="submit(form)">
 
       <!--name-->
       <div class="section" fxLayout="row" fxLayoutAlign="start stretch">
@@ -15,11 +15,10 @@
           <div class="wrap name"><i class="material-icons">person</i></div>
         </div>
         <div class="inputs" fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="30px">
-          <mat-form-field floatPlaceholder="never" fxFlex="1 1 auto">
-            <input matInput #nameNg="ngModel" name="name" [(ngModel)]="contact.name"
+          <mat-form-field fxFlex="1 1 auto">
+            <input matInput #nameRef #nameNg="ngModel" name="name" [(ngModel)]="contact.name"
                    (input)="updateNameAndCompanyValidation()" (blur)="updateNameAndCompanyValidation()"
                    placeholder="Name" autocomplete="noway">
-            <mat-error *ngIf="nameNg.invalid && nameNg.errors.required">required</mat-error>
             <mat-error *ngIf="nameNg.invalid && nameNg.errors.nameOrCompany">Name or company required</mat-error>
           </mat-form-field>
         </div>
@@ -35,12 +34,12 @@
           <i class="material-icons">business</i>
         </div>
         <div class="inputs" fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="30px">
-          <mat-form-field floatPlaceholder="never" fxFlex="1 1 auto">
+          <mat-form-field fxFlex="1 1 auto">
             <input matInput #companyNg="ngModel" name="company" [(ngModel)]="contact.company"
                    placeholder="Company" autocomplete="noway" (input)="updateNameAndCompanyValidation()" (blur)="updateNameAndCompanyValidation()">
             <mat-error *ngIf="companyNg.invalid && companyNg.errors.nameOrCompany">Name or company required</mat-error>
           </mat-form-field>
-          <mat-form-field floatPlaceholder="never" fxFlex="1 1 auto">
+          <mat-form-field fxFlex="1 1 auto">
             <input matInput #jobTitle="ngModel" name=jobTitle [(ngModel)]="contact.jobTitle" placeholder="Job title">
           </mat-form-field>
         </div>
@@ -50,49 +49,19 @@
         </div>
       </div>
 
-
-<!--
-      <div class="section" fxLayout="row" fxLayoutAlign="start stretch" *ngFor="let email of contact.emails; index as idx">
-        <div class="pic" fxFlex="0 0 55px" *ngIf="idx === 0" fxLayout="row" fxLayoutAlign="center center">
-          <i class="material-icons">email</i>
-        </div>
-        <div class="pic" fxFlex="0 0 55px" *ngIf="idx !== 0">&nbsp;</div>
-        <div class="inputs" fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="30px">
-            <input #emailRef #email="ngModel" name="email{{idx}}"
-                   [(ngModel)]="email.email" placeholder="Email" autocomplete="noway" pattern=" *[\w-\.]+@([\w-]+\.)+[\w-]{2,4} *">
-            <span *ngIf="email.touched && email.invalid &&  email.errors.pattern">Invalid email</span>
-            <input name="emailLabel{{idx}}" #emailLabel="ngModel" name=emailLabel{{idx}} [(ngModel)]="email.label" placeholder="Label" autocomplete="noway">
-        </div>
-
-        <div class="icons" fxLayout="row" fxLayoutAlign="start center">
-          <div class="wrap" (click)="contact.emails.length === 1? email.email = email.label = '': contact.emails.splice(idx, 1)">
-            <i class="clear material-icons">cancel</i></div>
-          <div class="wrap" *ngIf="idx === contact.emails.length - 1" (click)="addEmail()">
-            <i class="add material-icons">add_circle</i></div>
-        </div>
-      </div>
--->
-
-
-
-
-
-
-
-
-
       <!--emails-->
       <div class="section" fxLayout="row" fxLayoutAlign="start stretch" *ngFor="let email of contact.emails; index as idx">
         <div class="pic" fxFlex="0 0 55px" fxLayout="row" fxLayoutAlign="center center">
           <i class="material-icons" *ngIf="idx === 0">email</i>
         </div>
         <div class="inputs" fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="30px">
-          <mat-form-field floatPlaceholder="never" fxFlex="1 1 auto">
-            <input matInput #emailRef #emailNg="ngModel" [ngModelOptions]="{updateOn:'blur'}" name="email{{idx}}" (input)="validateEmail(emailNg)"
-                   [(ngModel)]="email.email" placeholder="Email" autocomplete="noway" pattern=" *[\w-\.]+@([\w-]+\.)+[\w-]{2,4} *">
-              <mat-error *ngIf="emailNg.touched && emailNg.invalid &&  emailNg.errors.pattern">Invalid email</mat-error>
+          <mat-form-field fxFlex="1 1 auto">
+            <input matInput #emailRef #emailNg="ngModel" name="email{{idx}}"
+                   [(ngModel)]="email.email" [ngModelOptions]="{updateOn:'change'}" placeholder="Email" autocomplete="noway"
+                   pattern=" *[\w-\.]+@([\w-]+\.)+[\w-]{2,4} *">
+              <mat-error *ngIf="emailNg.invalid &&  emailNg.errors.pattern">Invalid email</mat-error>
           </mat-form-field>
-          <mat-form-field floatPlaceholder="never" fxFlex="1 1 auto">
+          <mat-form-field fxFlex="1 1 auto">
             <input matInput name="emailLabel{{idx}}" #emailLabel="ngModel" name=emailLabel{{idx}} [(ngModel)]="email.label" placeholder="Label" autocomplete="noway">
           </mat-form-field>
         </div>
@@ -116,7 +85,7 @@
       <!--<pre>{{contact | json}}</pre>-->
 
       <div mat-dialog-actions="">
-        <button type="submit" form="form" mat-button color="primary" [mat-dialog-close]="contact"
+        <button type="submit" form="form" mat-button color="primary" (click)="submit(form)"
         [disabled]="form.invalid">SAVE</button>
         <button mat-button mat-dialog-close>CANCEL</button>
       </div>

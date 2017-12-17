@@ -26,12 +26,15 @@ const chance = new Chance();
 })
 export class ContactEditComponent implements AfterViewInit {
   log = console.log;
+  @ViewChild('form') form;
+  @ViewChild('nameRef') nameRef;
   @ViewChild('nameNg') nameNg;
   @ViewChild('companyNg') companyNg;
   @ViewChildren('emailRef') emailRefs;
   contact: Contact;
   addMode = false;
   editMode = false;
+
 
   constructor(protected store: Store, protected dialogRef: MatDialogRef<ContactEditComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -55,6 +58,16 @@ export class ContactEditComponent implements AfterViewInit {
     this.companyNg.control.setValidators([this.nameOrCompanyValidator()]);
   }
 
+  // this didn't work. The idea was: hold off validation till blur (ngModelOptions.updateOn=blur), and on (input)
+  // call this, but this doesn't set validity for some reason. Ng parses out the validation on element and forces
+  // it to blur only somehow. I figure if I added validators manually, it would work (like nameOrCompany above, but
+  // these are dynamic, so a hassle to do.
+  validateEmail(emailNg) {
+    if (emailNg.touched) {
+      emailNg.control.updateValueAndValidity();
+    }
+  }
+
   updateNameAndCompanyValidation() {
     this.nameNg.control.updateValueAndValidity();
     this.companyNg.control.updateValueAndValidity();
@@ -62,10 +75,14 @@ export class ContactEditComponent implements AfterViewInit {
 
   nameOrCompanyValidator(): ValidatorFn {
     return ((control: AbstractControl): {[key: string]: any} => {
-      const rtn = !((this.contact.name && this.contact.name.trim()) || (this.contact.company && this.contact.company.trim())) &&
+      const rtn = !this.hasNameOrCompany() &&
       this.nameNg.touched && this.companyNg.touched ? {'nameOrCompany': {value: control.value}} : null;
       return rtn;
     });
+  }
+
+  hasNameOrCompany() {
+    return ((this.contact.name && this.contact.name.trim()) || (this.contact.company && this.contact.company.trim()));
   }
 
   addMissingFields() {
@@ -124,8 +141,15 @@ export class ContactEditComponent implements AfterViewInit {
     });
   }
 
-
   submit(form) {
+    if (!this.hasNameOrCompany()) {
+      this.nameNg.control.markAsTouched();
+      this.companyNg.control.markAsTouched();
+      this.nameNg.control.updateValueAndValidity();
+      this.companyNg.control.updateValueAndValidity();
+      return;
+    }
+
     if (form.valid) {
       this.removeEmptyFields();
       this.dialogRef.close(this.contact);
