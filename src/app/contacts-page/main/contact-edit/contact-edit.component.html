@@ -7,7 +7,7 @@
   </div>
 
   <div class="content">
-    <form id="form" name="form" #form="ngForm" autocomplete="off" (submit)="submit(form)">
+    <form id="form" name="form" #form="ngForm" autocomplete="off">
 
       <!--name-->
       <div class="section" fxLayout="row" fxLayoutAlign="start stretch">
@@ -64,12 +64,12 @@
             <mat-error *ngIf="emailNg.invalid &&  emailNg.errors.pattern">Invalid email</mat-error>
           </mat-form-field>
           <mat-form-field fxFlex="1 1 auto">
-            <input matInput name="emailLabel{{idx}}" #emailLabel="ngModel" name=emailLabel{{idx}} [(ngModel)]="email.label"
+            <input matInput name="emailLabel{{idx}}" #emailLabelNg="ngModel" name=emailLabel{{idx}} [(ngModel)]="email.label"
                    placeholder="Label" autocomplete="noway" [matAutocomplete]="autoEmail">
             <mat-autocomplete #autoEmail="matAutocomplete">
-              <mat-option value="Home">Home</mat-option>
-              <mat-option value="Work">Work</mat-option>
-              <mat-option value ="Other">Other</mat-option>
+              <mat-option *ngFor="let label of _emailLabels | async" [value]="label">
+                {{ label }}
+              </mat-option>
             </mat-autocomplete>
           </mat-form-field>
         </div>
@@ -93,7 +93,7 @@
                       [(ngModel)]="addr.address" [ngModelOptions]="{updateOn:'change'}" placeholder="Address" autocomplete="noway"></textarea>
           </mat-form-field>
           <mat-form-field fxFlex="1 1 auto">
-            <input matInput name="addrLabel{{idx}}" #addrLabel="ngModel" name=addrLabel{{idx}} [(ngModel)]="addr.label" placeholder="Label" autocomplete="noway">
+            <input matInput name="addrLabel{{idx}}" #addrLabelNg="ngModel" name=addrLabel{{idx}} [(ngModel)]="addr.label" placeholder="Label" autocomplete="noway">
           </mat-form-field>
         </div>
 
@@ -107,7 +107,8 @@
 
 
 
-
+      <a href="" (click)="$event.preventDefault(); showJson = !showJson">show json</a><br>
+      <pre *ngIf="showJson">{{contact|json}}</pre>
 
 
 
@@ -116,9 +117,9 @@
       <!--<pre>{{contact | json}}</pre>-->
 
       <div mat-dialog-actions="">
-        <button type="submit" form="form" mat-button color="primary" (click)="submit(form)"
+        <button type="button" form="form" mat-button color="primary" (click)="save(form)"
         [disabled]="form.invalid">SAVE</button>
-        <button mat-button mat-dialog-close>CANCEL</button>
+        <button type="button" mat-button mat-dialog-close>CANCEL</button>
       </div>
 
     </form>
