@@ -8,9 +8,11 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [BrowserAnimationsModule, MatButtonModule, MatProgressBarModule, MatDialogModule, MatInputModule, MatExpansionModule,
-    MatToolbarModule, MatDialogModule, MatRadioModule, MatAutocompleteModule, MatCheckboxModule, MatMenuModule, MatTooltipModule],
+    MatToolbarModule, MatDialogModule, MatRadioModule, MatAutocompleteModule, MatCheckboxModule, MatMenuModule, MatTooltipModule,
+    MatMenuModule],
   exports: [BrowserAnimationsModule, MatButtonModule, MatProgressBarModule, MatDialogModule, MatInputModule, MatExpansionModule,
-    MatToolbarModule, MatDialogModule, MatRadioModule, MatAutocompleteModule, MatCheckboxModule, MatMenuModule, MatTooltipModule],
+    MatToolbarModule, MatDialogModule, MatRadioModule, MatAutocompleteModule, MatCheckboxModule, MatMenuModule, MatTooltipModule,
+    MatMenuModule],
 })
 export class MaterialIndexModule {
 }

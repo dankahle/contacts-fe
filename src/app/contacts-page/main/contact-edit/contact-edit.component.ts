@@ -15,6 +15,7 @@ import {Phone} from '../../../store/models/phone';
 import {Address} from '../../../store/models/address';
 import {Website} from '../../../store/models/website';
 import {AbstractControl, NgModel, Validator, ValidatorFn, Validators} from '@angular/forms';
+import {Observable} from 'rxjs/Observable';
 
 const chance = new Chance();
 
@@ -31,10 +32,12 @@ export class ContactEditComponent implements AfterViewInit {
   @ViewChild('nameNg') nameNg;
   @ViewChild('companyNg') companyNg;
   @ViewChildren('emailRef') emailRefs;
+  @ViewChildren('addrRef') addrRefs;
   contact: Contact;
   addMode = false;
   editMode = false;
-
+  emailLabels = ['Home', 'Work', 'Other'];
+  _emailLabels: Observable<string[]>;
 
   constructor(protected store: Store, protected dialogRef: MatDialogRef<ContactEditComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -56,9 +59,21 @@ export class ContactEditComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.nameNg.control.setValidators([this.nameOrCompanyValidator()]);
     this.companyNg.control.setValidators([this.nameOrCompanyValidator()]);
+
+    this._emailLabels = this.searchCtrl.control.valueChanges
+      .startWith(null)
+      .map(contact => contact && typeof contact === 'object' ? contact.name : contact)
+      .map(name => name ? this.filter(name) : []);
   }
 
-  // this didn't work. The idea was: hold off validation till blur (ngModelOptions.updateOn=blur), and on (input)
+  filter(name: string): Contact[] {
+    return this.store.con.contacts.filter(option =>
+      option.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
+  }
+
+
+
+  // this didn't work. The idea was: hold off initial (input) validation till blur (ngModelOptions.updateOn=blur), and on (input)
   // call this, but this doesn't set validity for some reason. Ng parses out the validation on element and forces
   // it to blur only somehow. I figure if I added validators manually, it would work (like nameOrCompany above, but
   // these are dynamic, so a hassle to do.
@@ -135,9 +150,16 @@ export class ContactEditComponent implements AfterViewInit {
   }
 
   addEmail() {
-    this.contact.emails.push(<Email>{});
+    this.contact.emails.push(new Email());
     setTimeout(() => {
       this.emailRefs.last.nativeElement.focus();
+    });
+  }
+
+  addAddress() {
+    this.contact.addresses.push(new Address());
+    setTimeout(() => {
+      this.addrRefs.last.nativeElement.focus();
     });
   }
 

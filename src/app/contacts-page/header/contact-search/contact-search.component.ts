@@ -20,13 +20,10 @@ export class ContactSearchComponent implements OnInit {
   searchVal = '';
   log = console.log;
   hideInput = true;
+  filteredContacts: Observable<Contact[]>;
 
   constructor(protected store: Store, private mdDialog: MatDialog) {
   }
-
-  myControl = new FormControl();
-
-  filteredContacts: Observable<Contact[]>;
 
   ngOnInit() {
     this.filteredContacts = this.searchCtrl.control.valueChanges

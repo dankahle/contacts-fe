@@ -50,7 +50,9 @@
       </div>
 
       <!--emails-->
+
       <div class="section" fxLayout="row" fxLayoutAlign="start stretch" *ngFor="let email of contact.emails; index as idx">
+
         <div class="pic" fxFlex="0 0 55px" fxLayout="row" fxLayoutAlign="center center">
           <i class="material-icons" *ngIf="idx === 0">email</i>
         </div>
@@ -59,10 +61,16 @@
             <input matInput #emailRef #emailNg="ngModel" name="email{{idx}}"
                    [(ngModel)]="email.email" [ngModelOptions]="{updateOn:'change'}" placeholder="Email" autocomplete="noway"
                    pattern=" *[\w-\.]+@([\w-]+\.)+[\w-]{2,4} *">
-              <mat-error *ngIf="emailNg.invalid &&  emailNg.errors.pattern">Invalid email</mat-error>
+            <mat-error *ngIf="emailNg.invalid &&  emailNg.errors.pattern">Invalid email</mat-error>
           </mat-form-field>
           <mat-form-field fxFlex="1 1 auto">
-            <input matInput name="emailLabel{{idx}}" #emailLabel="ngModel" name=emailLabel{{idx}} [(ngModel)]="email.label" placeholder="Label" autocomplete="noway">
+            <input matInput name="emailLabel{{idx}}" #emailLabel="ngModel" name=emailLabel{{idx}} [(ngModel)]="email.label"
+                   placeholder="Label" autocomplete="noway" [matAutocomplete]="autoEmail">
+            <mat-autocomplete #autoEmail="matAutocomplete">
+              <mat-option value="Home">Home</mat-option>
+              <mat-option value="Work">Work</mat-option>
+              <mat-option value ="Other">Other</mat-option>
+            </mat-autocomplete>
           </mat-form-field>
         </div>
 
@@ -70,6 +78,29 @@
           <div class="wrap" (click)="contact.emails.length === 1? email.email = email.label = '': contact.emails.splice(idx, 1)">
             <i class="clear material-icons">cancel</i></div>
           <div class="wrap" *ngIf="idx === contact.emails.length - 1" (click)="addEmail()">
+            <i class="add material-icons">add_circle</i></div>
+        </div>
+      </div>
+
+      <!--addresses-->
+      <div class="section" fxLayout="row" fxLayoutAlign="start stretch" *ngFor="let addr of contact.addresses; index as idx">
+        <div class="pic" fxFlex="0 0 55px" fxLayout="row" fxLayoutAlign="center center">
+          <i class="material-icons" *ngIf="idx === 0">place</i>
+        </div>
+        <div class="inputs" fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="30px">
+          <mat-form-field fxFlex="1 1 auto">
+            <textarea matInput #addrRef #addrNg="ngModel" name="addr{{idx}}"
+                      [(ngModel)]="addr.address" [ngModelOptions]="{updateOn:'change'}" placeholder="Address" autocomplete="noway"></textarea>
+          </mat-form-field>
+          <mat-form-field fxFlex="1 1 auto">
+            <input matInput name="addrLabel{{idx}}" #addrLabel="ngModel" name=addrLabel{{idx}} [(ngModel)]="addr.label" placeholder="Label" autocomplete="noway">
+          </mat-form-field>
+        </div>
+
+        <div class="icons" fxLayout="row" fxLayoutAlign="start center">
+          <div class="wrap" (click)="contact.addresses.length === 1? addr.address = addr.label = '': contact.addresses.splice(idx, 1)">
+            <i class="clear material-icons">cancel</i></div>
+          <div class="wrap" *ngIf="idx === contact.addresses.length - 1" (click)="addAddress()">
             <i class="add material-icons">add_circle</i></div>
         </div>
       </div>
@@ -94,4 +125,8 @@
   </div> <!--content-->
 
 </div> <!-- dialog -->
+
+
+<!--email menu-->
+
 

@@ -14,9 +14,11 @@ import * as $ from 'jquery';
   encapsulation: ViewEncapsulation.Emulated
 })
 export class AppComponent {
+val: string;
 
   constructor(protected store: Store) {
-
   }
+
+
 
 }
