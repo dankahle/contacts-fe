@@ -41,8 +41,8 @@ export class ContactEditComponent implements AfterViewInit {
   addMode = false;
   editMode = false;
   emailAddrLabels = ['Home', 'Work', 'Other'];
-  filteredEmailLabels = Observable.of(this.emailAddrLabels);
-  filteredAddrLabels = Observable.of(this.emailAddrLabels);
+  filteredEmailLabels: Observable<string[]> = Observable.of([]);
+  filteredAddrLabels: Observable<string[]> = Observable.of([]);
 
   constructor(protected store: Store, protected dialogRef: MatDialogRef<ContactEditComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -59,23 +59,31 @@ export class ContactEditComponent implements AfterViewInit {
       this.contact = _.cloneDeep(data.contact);
     }
     this.addMissingFields();
+
+    // hack: ng bitches about props being changed in your AfterViewInit code, so you set them the same here
+    // not gonna matter in prod (ng won't error there), but don't like a console. with errors in it
+    this.contact.emails.forEach((v, i) => {
+      this.filteredEmailLabels[i] = Observable.of(this.emailAddrLabels);
+    });
+
+    this.contact.addresses.forEach((v, i) => {
+      this.filteredAddrLabels[i] = Observable.of(this.emailAddrLabels);
+    });
   }
 
   ngAfterViewInit() {
     this.nameNg.control.setValidators([this.nameOrCompanyValidator()]);
     this.companyNg.control.setValidators([this.nameOrCompanyValidator()]);
 
-    this.emailLabelNgs.forEach(ng => {
-      this.filteredEmailLabels = ng.control.valueChanges
+    this.emailLabelNgs.forEach((ng, i) => {
+      this.filteredEmailLabels[i] = ng.control.valueChanges
         .startWith(null)
-        .do(val => console.log('email', val))
         .map(val => val ? this.filterEmailAddrLabels(val) : this.emailAddrLabels);
     });
 
-    this.addrLabelNgs.forEach(ng => {
-      this.filteredAddrLabels = ng.control.valueChanges
+    this.addrLabelNgs.forEach((ng, i) => {
+      this.filteredAddrLabels[i] = ng.control.valueChanges
         .startWith(null)
-        .do(val => console.log('addr', val))
         .map(val => val ? this.filterEmailAddrLabels(val) : this.emailAddrLabels);
     });
   }
@@ -169,9 +177,8 @@ export class ContactEditComponent implements AfterViewInit {
     this.contact.emails.push(new Email());
     setTimeout(() => {
       this.emailRefs.last.nativeElement.focus();
-      this.filteredEmailLabels = this.emailLabelNgs.last.control.valueChanges
+      this.filteredEmailLabels[this.emailRefs.length - 1] = this.emailLabelNgs.last.control.valueChanges
         .startWith(null)
-        .do(val => console.log('email', val))
         .map(val => val ? this.filterEmailAddrLabels(val) : this.emailAddrLabels);
 
     });
@@ -181,9 +188,8 @@ export class ContactEditComponent implements AfterViewInit {
     this.contact.addresses.push(new Address());
     setTimeout(() => {
       this.addrRefs.last.nativeElement.focus();
-      this.filteredAddrLabels = this.addrLabelNgs.last.control.valueChanges
+      this.filteredAddrLabels[this.addrRefs.length - 1] = this.addrLabelNgs.last.control.valueChanges
         .startWith(null)
-        .do(val => console.log('addr', val))
         .map(val => val ? this.filterEmailAddrLabels(val) : this.emailAddrLabels);
     });
   }

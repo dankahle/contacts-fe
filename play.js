@@ -1,17 +1,16 @@
-
-
-
 const _ = require('lodash');
 
 
-const regex = /\n/g;
 
-const a = `one
-two
-three`;
+let a = [4,5,6];
+for(let p in a) {
+  console.log(typeof p, p, a[p]);
+}
 
-const b = a.replace(regex, ' ');
-debugger;
+
+
+
+
 
 /*
 let arr = [4,5,6];

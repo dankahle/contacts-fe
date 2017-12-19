@@ -1,5 +1,5 @@
 
-<div class="dialog">
+<div class="contact-edit-dialog">
 
   <div class="header" fxLayout="row" fxLayoutAlign="space-between center">
     <div class="name text-ellipsis" *ngIf="addMode">Create contact</div>
@@ -67,7 +67,7 @@
             <input matInput name="emailLabel{{idx}}" #emailLabelNg="ngModel" name=emailLabel{{idx}} [(ngModel)]="email.label"
                    placeholder="Label" autocomplete="noway" [matAutocomplete]="autoEmail">
             <mat-autocomplete #autoEmail="matAutocomplete">
-              <mat-option *ngFor="let labelEmail of filteredEmailLabels | async" [value]="labelEmail">
+              <mat-option class="email-option" *ngFor="let labelEmail of filteredEmailLabels && filteredEmailLabels[idx] | async" [value]="labelEmail">
                 {{ labelEmail }}
               </mat-option>
             </mat-autocomplete>
@@ -95,7 +95,7 @@
             <input matInput name="addrLabel{{idx}}" #addrLabelNg="ngModel" name=addrLabel{{idx}} [(ngModel)]="addr.label"
                    placeholder="Label" autocomplete="noway" [matAutocomplete]="autoAddr">
             <mat-autocomplete #autoAddr="matAutocomplete">
-              <mat-option *ngFor="let labelAddr of filteredAddrLabels | async" [value]="labelAddr">
+              <mat-option class="addr-option" *ngFor="let labelAddr of filteredAddrLabels && filteredAddrLabels[idx] | async" [value]="labelAddr">
                 {{ labelAddr }}
               </mat-option>
             </mat-autocomplete>

@@ -1,4 +1,21 @@
 
+/*
+though not much examples of it here, this is where we have to do the specific material overrides in viewEncapsulation
+emulated mode. I.e. in emulated, if we try to do: mat-dialog {} angular will change this to mat-dialog[xxx]
+when they tag all elements and css classes with host and component attribute ids for isolation. Whereas this might work
+for a mat-dialog (should) what you really wanted is: mat-dialog .mat-dialog-content. Here angular will tag "both" these
+classes with [xxx] and since the latter is in the material component, it won't have xxx attribute so fails. In that
+light you 2 solutions: 1) namespace the css in your component, then come up here (global where things don't get tagged)
+and do: .namespace .mat-dialog-content. The other solution is to follow material's lead and just use ViewEncapsulation.None
+then all css is global and no tagging and then you need to namespace all your component css to keep it from bleeding
+into global, but this is how things have always been so no biggy.
+
+In the end, you were on the fence for emulated vs none and decided the css encapsulation of emulated and the fact it's
+their default mode (must have wanted that, albeit angular/cli generator defaults to None), so you went with emulated.
+I figure probably cleaner to just use None and keep the specific css in each component instead of overrides up here. Then
+again, there's an advantage to having all material overrides in one place.
+ */
+
 .mat-toolbar {
   align-items: center;
 }

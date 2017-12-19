@@ -1,6 +1,6 @@
 @import '../../../../styles/comp-index';
 
-.dialog {
+.contact-edit-dialog {
   $height-header: 70px;
   $height-content: calc(500px - #{$height-header});// 500 is height set in dialog config, keep these in sync
 
