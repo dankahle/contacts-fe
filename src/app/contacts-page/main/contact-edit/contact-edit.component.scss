@@ -49,6 +49,7 @@
       .inputs {
         max-width: 80%;
         padding: 0 20px;
+        min-width: 0 !important;
 
         textarea {
           resize: none;

@@ -14,7 +14,7 @@
         <div class="pic" fxFlex="0 0 55px" fxLayout="row" fxLayoutAlign="center center">
           <div class="wrap name"><i class="material-icons">person</i></div>
         </div>
-        <div class="inputs" fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="30px">
+        <div class="inputs" fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="space-between center">
           <mat-form-field fxFlex="1 1 auto">
             <input matInput #nameRef #nameNg="ngModel" name="name" [(ngModel)]="contact.name"
                    (input)="updateNameAndCompanyValidation()" (blur)="updateNameAndCompanyValidation()"
@@ -33,13 +33,13 @@
         <div class="pic" fxFlex="0 0 55px" fxLayout="row" fxLayoutAlign="center center">
           <i class="material-icons">business</i>
         </div>
-        <div class="inputs" fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="30px">
-          <mat-form-field fxFlex="1 1 auto">
+        <div class="inputs" fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="space-between center">
+          <mat-form-field fxFlex="1 1 60%">
             <input matInput #companyNg="ngModel" name="company" [(ngModel)]="contact.company"
                    placeholder="Company" autocomplete="noway" (input)="updateNameAndCompanyValidation()" (blur)="updateNameAndCompanyValidation()">
             <mat-error *ngIf="companyNg.invalid && companyNg.errors.nameOrCompany">Name or company required</mat-error>
           </mat-form-field>
-          <mat-form-field fxFlex="1 1 auto">
+          <mat-form-field fxFlex="1 1 35%">
             <input matInput #jobTitle="ngModel" name=jobTitle [(ngModel)]="contact.jobTitle" placeholder="Job title">
           </mat-form-field>
         </div>
@@ -56,14 +56,14 @@
         <div class="pic" fxFlex="0 0 55px" fxLayout="row" fxLayoutAlign="center center">
           <i class="material-icons" *ngIf="idx === 0">email</i>
         </div>
-        <div class="inputs" fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="30px">
-          <mat-form-field fxFlex="1 1 auto">
+        <div class="inputs" fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="space-between center">
+          <mat-form-field fxFlex="1 1 60%">
             <input matInput #emailRef #emailNg="ngModel" name="email{{idx}}"
                    [(ngModel)]="email.email" [ngModelOptions]="{updateOn:'change'}" placeholder="Email" autocomplete="noway"
                    pattern=" *[\w-\.]+@([\w-]+\.)+[\w-]{2,4} *">
             <mat-error *ngIf="emailNg.invalid &&  emailNg.errors.pattern">Invalid email</mat-error>
           </mat-form-field>
-          <mat-form-field fxFlex="1 1 auto">
+          <mat-form-field fxFlex="1 1 35%">
             <input matInput name="emailLabel{{idx}}" #emailLabelNg="ngModel" name=emailLabel{{idx}} [(ngModel)]="email.label"
                    placeholder="Label" autocomplete="noway" [matAutocomplete]="autoEmail">
             <mat-autocomplete #autoEmail="matAutocomplete">
@@ -87,10 +87,10 @@
         <div class="pic" fxFlex="0 0 55px" fxLayout="row" fxLayoutAlign="center center">
           <i class="material-icons" *ngIf="idx === 0">link</i>
         </div>
-        <div class="inputs" fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="30px">
-          <div fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="start center">
-            <mat-form-field fxFlex="1 1 30%" style="margin-right:5px;">
-              <mat-select placeholder="Country">
+        <div class="inputs" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="space-between center">
+          <div fxFlex="1 1 60%" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+            <mat-form-field fxFlex="1 1 30%">
+              <mat-select [(ngModel)]="phn.prefix" name="prefix{{idx}}" placeholder="Country">
                 <mat-option data-countryCode="GB" value="44" Selected>UK (+44)</mat-option>
                 <mat-option data-countryCode="US" value="1">USA (+1)</mat-option>
                 <mat-optgroup label="Other countries">
@@ -311,11 +311,11 @@
                 </mat-optgroup>
               </mat-select>
             </mat-form-field >
-            <mat-form-field fxFlex="fxFlex=1 1 70%">
-              <input matInput #phoneRef name="phn{{idx}}" [(ngModel)]="phn.phone" placeholder="Phone" autocomplete="noway">
+            <mat-form-field fxFlex="fxFlex=1 1 67%">
+              <input matInput #phoneRef name="phone{{idx}}" [(ngModel)]="phn.phone" placeholder="Phone" autocomplete="noway">
             </mat-form-field>
           </div>
-          <mat-form-field fxFlex="1 1 auto">
+          <mat-form-field fxFlex="1 1 35%">
             <input matInput name="phoneLabel{{idx}}" #phoneLabelNg="ngModel" name=phoneLabel{{idx}} [(ngModel)]="phn.label"
                    placeholder="Label" autocomplete="noway" [matAutocomplete]="autoPhone">
             <mat-autocomplete #autoPhone="matAutocomplete">
@@ -339,11 +339,11 @@
         <div class="pic" fxFlex="0 0 55px" fxLayout="row" fxLayoutAlign="center center">
           <i class="material-icons" *ngIf="idx === 0">place</i>
         </div>
-        <div class="inputs" fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="30px">
-          <mat-form-field fxFlex="1 1 auto">
+        <div class="inputs" fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="space-between center">
+          <mat-form-field fxFlex="1 1 60%">
             <textarea [rows]="addr.address.split('\n').length" matInput #addrRef name="addr{{idx}}" [(ngModel)]="addr.address" placeholder="Address" autocomplete="noway"></textarea>
           </mat-form-field>
-          <mat-form-field fxFlex="1 1 auto">
+          <mat-form-field fxFlex="1 1 35%">
             <input matInput name="addrLabel{{idx}}" #addrLabelNg="ngModel" name=addrLabel{{idx}} [(ngModel)]="addr.label"
                    placeholder="Label" autocomplete="noway" [matAutocomplete]="autoAddr">
             <mat-autocomplete #autoAddr="matAutocomplete">
@@ -367,11 +367,11 @@
         <div class="pic" fxFlex="0 0 55px" fxLayout="row" fxLayoutAlign="center center">
           <i class="material-icons" *ngIf="idx === 0">link</i>
         </div>
-        <div class="inputs" fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="30px">
-          <mat-form-field fxFlex="1 1 auto">
+        <div class="inputs" fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="space-between center">
+          <mat-form-field fxFlex="1 1 60%">
             <input matInput #webRef name="web{{idx}}" [(ngModel)]="web.website" placeholder="Website" autocomplete="noway">
           </mat-form-field>
-          <mat-form-field fxFlex="1 1 auto">
+          <mat-form-field fxFlex="1 1 35%">
             <input matInput name="webLabel{{idx}}" #webLabelNg="ngModel" name=webLabel{{idx}} [(ngModel)]="web.label"
                    placeholder="Label" autocomplete="noway" [matAutocomplete]="autoWeb">
             <mat-autocomplete #autoWeb="matAutocomplete">
