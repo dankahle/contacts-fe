@@ -58,17 +58,8 @@ export class ContactEditComponent implements AfterViewInit {
       this.editMode = true;
       this.contact = _.cloneDeep(data.contact);
     }
+
     this.addMissingFields();
-
-    // hack: ng bitches about props being changed in your AfterViewInit code, so you set them the same here
-    // not gonna matter in prod (ng won't error there), but don't like a console. with errors in it
-    this.contact.emails.forEach((v, i) => {
-      this.filteredEmailLabels[i] = Observable.of(this.emailAddrLabels);
-    });
-
-    this.contact.addresses.forEach((v, i) => {
-      this.filteredAddrLabels[i] = Observable.of(this.emailAddrLabels);
-    });
   }
 
   ngAfterViewInit() {
@@ -77,13 +68,11 @@ export class ContactEditComponent implements AfterViewInit {
 
     this.emailLabelNgs.forEach((ng, i) => {
       this.filteredEmailLabels[i] = ng.control.valueChanges
-        .startWith(null)
         .map(val => val ? this.filterEmailAddrLabels(val) : this.emailAddrLabels);
     });
 
     this.addrLabelNgs.forEach((ng, i) => {
       this.filteredAddrLabels[i] = ng.control.valueChanges
-        .startWith(null)
         .map(val => val ? this.filterEmailAddrLabels(val) : this.emailAddrLabels);
     });
   }
