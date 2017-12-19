@@ -1,12 +1,31 @@
 const _ = require('lodash');
 
+const urlRegex = require('url-regex');
+
+console.log(urlRegex)
 
 
-let a = [4,5,6];
-for(let p in a) {
-  console.log(typeof p, p, a[p]);
-}
 
+
+
+
+
+
+
+
+/*
+var equal = require('deep-equal');
+console.dir([
+  equal(
+    { a : [ 2, null ], b : [ 4 ] },
+    { a : [ 2, null ], b : [ 4 ] }
+  ),
+  equal(
+    { x : 5, y : [6] },
+    { x : 5, y : 6 }
+  )
+]);
+*/
 
 
 

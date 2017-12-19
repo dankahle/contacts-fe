@@ -35,14 +35,22 @@ export class ContactEditComponent implements AfterViewInit {
   @ViewChild('companyNg') companyNg;
   @ViewChildren('emailRef') emailRefs;
   @ViewChildren('emailLabelNg') emailLabelNgs;
+  @ViewChildren('phoneRef') phoneRefs;
+  @ViewChildren('phoneLabelNg') phoneLabelNgs;
   @ViewChildren('addrRef') addrRefs;
   @ViewChildren('addrLabelNg') addrLabelNgs;
+  @ViewChildren('webRef') webRefs;
+  @ViewChildren('webLabelNg') webLabelNgs;
   contact: Contact;
   addMode = false;
   editMode = false;
   emailAddrLabels = ['Home', 'Work', 'Other'];
+  phoneLabels = ['Home', 'Work', 'Other', 'Mobile', 'Main', 'Home Fax', 'Work Fax', 'Google Voice', 'Pager'];
+  webLabels = ['Profile', 'Blog', 'Home Page', 'Work'];
   filteredEmailLabels: Observable<string[]> = Observable.of([]);
+  filteredPhoneLabels: Observable<string[]> = Observable.of([]);
   filteredAddrLabels: Observable<string[]> = Observable.of([]);
+  filteredWebLabels: Observable<string[]> = Observable.of([]);
 
   constructor(protected store: Store, protected dialogRef: MatDialogRef<ContactEditComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -71,14 +79,32 @@ export class ContactEditComponent implements AfterViewInit {
         .map(val => val ? this.filterEmailAddrLabels(val) : this.emailAddrLabels);
     });
 
+    this.phoneLabelNgs.forEach((ng, i) => {
+      this.filteredPhoneLabels[i] = ng.control.valueChanges
+        .map(val => val ? this.filterPhoneLabels(val) : this.phoneLabels);
+    });
+
     this.addrLabelNgs.forEach((ng, i) => {
       this.filteredAddrLabels[i] = ng.control.valueChanges
         .map(val => val ? this.filterEmailAddrLabels(val) : this.emailAddrLabels);
+    });
+
+    this.webLabelNgs.forEach((ng, i) => {
+      this.filteredWebLabels[i] = ng.control.valueChanges
+        .map(val => val ? this.filterWebLabels(val) : this.webLabels);
     });
   }
 
   filterEmailAddrLabels(val: string): string[] {
     return this.emailAddrLabels.filter(label => label.toLowerCase().indexOf(val.toLowerCase()) === 0);
+  }
+
+  filterPhoneLabels(val: string): string[] {
+    return this.phoneLabels.filter(label => label.toLowerCase().indexOf(val.toLowerCase()) === 0);
+  }
+
+  filterWebLabels(val: string): string[] {
+    return this.webLabels.filter(label => label.toLowerCase().indexOf(val.toLowerCase()) === 0);
   }
 
   // this didn't work. The idea was: hold off initial (input) validation (email) till blur (ngModelOptions.updateOn=blur), and on (input)
@@ -173,6 +199,17 @@ export class ContactEditComponent implements AfterViewInit {
     });
   }
 
+  addPhone() {
+    this.contact.phones.push(new Phone());
+    setTimeout(() => {
+      this.phoneRefs.last.nativeElement.focus();
+      this.filteredPhoneLabels[this.phoneRefs.length - 1] = this.phoneLabelNgs.last.control.valueChanges
+        .startWith(null)
+        .map(val => val ? this.filterPhoneLabels(val) : this.phoneLabels);
+
+    });
+  }
+
   addAddress() {
     this.contact.addresses.push(new Address());
     setTimeout(() => {
@@ -180,6 +217,17 @@ export class ContactEditComponent implements AfterViewInit {
       this.filteredAddrLabels[this.addrRefs.length - 1] = this.addrLabelNgs.last.control.valueChanges
         .startWith(null)
         .map(val => val ? this.filterEmailAddrLabels(val) : this.emailAddrLabels);
+    });
+  }
+
+  addWebsite() {
+    this.contact.websites.push(new Website());
+    setTimeout(() => {
+      this.webRefs.last.nativeElement.focus();
+      this.filteredWebLabels[this.webRefs.length - 1] = this.webLabelNgs.last.control.valueChanges
+        .startWith(null)
+        .map(val => val ? this.filterWebLabels(val) : this.webLabels);
+
     });
   }
 

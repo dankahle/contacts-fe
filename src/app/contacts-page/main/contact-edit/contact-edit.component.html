@@ -110,6 +110,34 @@
         </div>
       </div>
 
+      <!--websites-->
+      <div class="section" fxLayout="row" fxLayoutAlign="start stretch" *ngFor="let web of contact.websites; index as idx">
+        <div class="pic" fxFlex="0 0 55px" fxLayout="row" fxLayoutAlign="center center">
+          <i class="material-icons" *ngIf="idx === 0">link</i>
+        </div>
+        <div class="inputs" fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="30px">
+          <mat-form-field fxFlex="1 1 auto">
+            <input matInput #webRef name="web{{idx}}" [(ngModel)]="web.website" placeholder="Website" autocomplete="noway">
+          </mat-form-field>
+          <mat-form-field fxFlex="1 1 auto">
+            <input matInput name="webLabel{{idx}}" #webLabelNg="ngModel" name=webLabel{{idx}} [(ngModel)]="web.label"
+                   placeholder="Label" autocomplete="noway" [matAutocomplete]="autoWeb">
+            <mat-autocomplete #autoWeb="matAutocomplete">
+              <mat-option class="web-option" *ngFor="let labelWeb of filteredWebLabels && filteredWebLabels[idx] | async" [value]="labelWeb">
+                {{ labelWeb }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+
+        <div class="icons" fxLayout="row" fxLayoutAlign="start center">
+          <div class="wrap" (click)="contact.websites.length === 1? web.website = web.label = '': contact.websites.splice(idx, 1)">
+            <i class="clear material-icons">cancel</i></div>
+          <div class="wrap" *ngIf="idx === contact.websites.length - 1" (click)="addWebsite()">
+            <i class="add material-icons">add_circle</i></div>
+        </div>
+      </div>
+
 
 
       <a href="" (click)="$event.preventDefault(); showJson = !showJson">show json</a><br>
