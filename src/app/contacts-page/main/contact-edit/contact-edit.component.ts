@@ -17,6 +17,7 @@ import {Website} from '../../../store/models/website';
 import {AbstractControl, NgModel, Validator, ValidatorFn, Validators} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/do';
 
 const chance = new Chance();
 
@@ -35,11 +36,13 @@ export class ContactEditComponent implements AfterViewInit {
   @ViewChildren('emailRef') emailRefs;
   @ViewChildren('emailLabelNg') emailLabelNgs;
   @ViewChildren('addrRef') addrRefs;
+  @ViewChildren('addrLabelNg') addrLabelNgs;
   contact: Contact;
   addMode = false;
   editMode = false;
-  emailLabels = ['Home', 'Work', 'Other'];
-  _emailLabels = Observable.of(this.emailLabels);
+  emailAddrLabels = ['Home', 'Work', 'Other'];
+  filteredEmailLabels = Observable.of(this.emailAddrLabels);
+  filteredAddrLabels = Observable.of(this.emailAddrLabels);
 
   constructor(protected store: Store, protected dialogRef: MatDialogRef<ContactEditComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -63,14 +66,22 @@ export class ContactEditComponent implements AfterViewInit {
     this.companyNg.control.setValidators([this.nameOrCompanyValidator()]);
 
     this.emailLabelNgs.forEach(ng => {
-      this._emailLabels = ng.control.valueChanges
+      this.filteredEmailLabels = ng.control.valueChanges
         .startWith(null)
-        .map(val => val ? this.filter(val) : this.emailLabels);
+        .do(val => console.log('email', val))
+        .map(val => val ? this.filterEmailAddrLabels(val) : this.emailAddrLabels);
+    });
+
+    this.addrLabelNgs.forEach(ng => {
+      this.filteredAddrLabels = ng.control.valueChanges
+        .startWith(null)
+        .do(val => console.log('addr', val))
+        .map(val => val ? this.filterEmailAddrLabels(val) : this.emailAddrLabels);
     });
   }
 
-  filter(val: string): string[] {
-    return this.emailLabels.filter(label => label.toLowerCase().indexOf(val.toLowerCase()) === 0);
+  filterEmailAddrLabels(val: string): string[] {
+    return this.emailAddrLabels.filter(label => label.toLowerCase().indexOf(val.toLowerCase()) === 0);
   }
 
   // this didn't work. The idea was: hold off initial (input) validation (email) till blur (ngModelOptions.updateOn=blur), and on (input)
@@ -104,6 +115,9 @@ export class ContactEditComponent implements AfterViewInit {
 
   addMissingFields() {
     const c = this.contact;
+    c.name = c.name || '';
+    c.company = c.company || '';
+    c.jobTitle = c.jobTitle || '';
     if (!c.emails.length) {
       c.emails.push(new Email());
     }
@@ -155,9 +169,10 @@ export class ContactEditComponent implements AfterViewInit {
     this.contact.emails.push(new Email());
     setTimeout(() => {
       this.emailRefs.last.nativeElement.focus();
-      this._emailLabels = this.emailLabelNgs.last.control.valueChanges
+      this.filteredEmailLabels = this.emailLabelNgs.last.control.valueChanges
         .startWith(null)
-        .map(val => val ? this.filter(val) : this.emailLabels);
+        .do(val => console.log('email', val))
+        .map(val => val ? this.filterEmailAddrLabels(val) : this.emailAddrLabels);
 
     });
   }
@@ -166,6 +181,10 @@ export class ContactEditComponent implements AfterViewInit {
     this.contact.addresses.push(new Address());
     setTimeout(() => {
       this.addrRefs.last.nativeElement.focus();
+      this.filteredAddrLabels = this.addrLabelNgs.last.control.valueChanges
+        .startWith(null)
+        .do(val => console.log('addr', val))
+        .map(val => val ? this.filterEmailAddrLabels(val) : this.emailAddrLabels);
     });
   }
 

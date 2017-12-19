@@ -83,5 +83,18 @@ export class Util {
     return value.prefix + value.phone.replace(/[^0-9]+/g, '');
   }
 
+  static replaceNewLinesWithSpace(arr, property) {
+    const regex = /\n/g;
+    const space = ' ';
+    if (typeof arr === 'string') {
+      return arr.replace(regex, space);
+    } else if (property) { // then array
+      return arr.map(v => {
+        v[property].replace(regex, space);
+        return v;
+      });
+    }
+  }
 
 }
+

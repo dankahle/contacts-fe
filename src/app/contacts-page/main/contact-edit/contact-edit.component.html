@@ -67,8 +67,8 @@
             <input matInput name="emailLabel{{idx}}" #emailLabelNg="ngModel" name=emailLabel{{idx}} [(ngModel)]="email.label"
                    placeholder="Label" autocomplete="noway" [matAutocomplete]="autoEmail">
             <mat-autocomplete #autoEmail="matAutocomplete">
-              <mat-option *ngFor="let label of _emailLabels | async" [value]="label">
-                {{ label }}
+              <mat-option *ngFor="let labelEmail of filteredEmailLabels | async" [value]="labelEmail">
+                {{ labelEmail }}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
@@ -89,11 +89,16 @@
         </div>
         <div class="inputs" fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="30px">
           <mat-form-field fxFlex="1 1 auto">
-            <textarea matInput #addrRef #addrNg="ngModel" name="addr{{idx}}"
-                      [(ngModel)]="addr.address" [ngModelOptions]="{updateOn:'change'}" placeholder="Address" autocomplete="noway"></textarea>
+            <textarea [rows]="addr.address.split('\n').length" matInput #addrRef name="addr{{idx}}" [(ngModel)]="addr.address" placeholder="Address" autocomplete="noway"></textarea>
           </mat-form-field>
           <mat-form-field fxFlex="1 1 auto">
-            <input matInput name="addrLabel{{idx}}" #addrLabelNg="ngModel" name=addrLabel{{idx}} [(ngModel)]="addr.label" placeholder="Label" autocomplete="noway">
+            <input matInput name="addrLabel{{idx}}" #addrLabelNg="ngModel" name=addrLabel{{idx}} [(ngModel)]="addr.label"
+                   placeholder="Label" autocomplete="noway" [matAutocomplete]="autoAddr">
+            <mat-autocomplete #autoAddr="matAutocomplete">
+              <mat-option *ngFor="let labelAddr of filteredAddrLabels | async" [value]="labelAddr">
+                {{ labelAddr }}
+              </mat-option>
+            </mat-autocomplete>
           </mat-form-field>
         </div>
 

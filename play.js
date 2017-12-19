@@ -4,16 +4,14 @@
 const _ = require('lodash');
 
 
+const regex = /\n/g;
 
+const a = `one
+two
+three`;
 
-let arr = [4,5,6];
-  arr.forEach((v, i) => {
-    console.log(v, i, arr.length);
-    if (v === 5) {
-      arr.splice(i, 1);
-    }
-  })
-console.log(arr)
+const b = a.replace(regex, ' ');
+debugger;
 
 /*
 let arr = [4,5,6];

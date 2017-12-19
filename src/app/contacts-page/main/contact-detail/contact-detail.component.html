@@ -79,7 +79,7 @@
         <i class="material-icons">place</i>
       </div>
       <div class="value-div" fxFlex="1 0 auto">
-        <div class="value" *ngFor="let value of contact.addresses">
+        <div class="value" *ngFor="let value of Util.replaceNewLinesWithSpace(contact.addresses, 'address')">
           <a [href]="Util.getEncodedAddress(value.address)" class="value-text" target="_blank">{{value.address}}</a>
           <span class="value-label" *ngIf="value.label">&nbsp;• &nbsp;{{value.label}}</span>
         </div>
