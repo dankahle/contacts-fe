@@ -2,7 +2,7 @@ import {
   AfterViewInit, ApplicationRef, Component, Inject, NgZone, OnInit, ViewChild, ViewChildren,
   ViewEncapsulation
 } from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
 import {Messages} from '../../../store/models/messages';
 import {Store} from '../../../store/store';
 import {Contact} from '../../../store/models/contact';
@@ -18,6 +18,11 @@ import {AbstractControl, NgModel, Validator, ValidatorFn, Validators} from '@ang
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/do';
+import {Util} from '../../../core/services/util';
+import {DeleteLabelMode} from '../../../store/enums/deleteLabelMode.enum';
+import {DeleteLabelComponent} from '../../leftnav/delete-label-modal/delete-label.component';
+import * as equal from 'deep-equal';
+import {EditCloseComponent} from '../edit-close/edit-close.component';
 
 const chance = new Chance();
 
@@ -42,6 +47,7 @@ export class ContactEditComponent implements AfterViewInit {
   @ViewChildren('webRef') webRefs;
   @ViewChildren('webLabelNg') webLabelNgs;
   contact: Contact;
+  originalContact: Contact;
   addMode = false;
   editMode = false;
   emailAddrLabels = ['Home', 'Work', 'Other'];
@@ -53,7 +59,13 @@ export class ContactEditComponent implements AfterViewInit {
   filteredWebLabels: Observable<string[]> = Observable.of([]);
 
   constructor(protected store: Store, protected dialogRef: MatDialogRef<ContactEditComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) {
+              @Inject(MAT_DIALOG_DATA) public data: any, private mdDialog: MatDialog) {
+
+    this.dialogRef.backdropClick()
+      .subscribe(() => this.backdropClickOrEscapeKey());
+
+    this.dialogRef.keydownEvents()
+      .subscribe(event => this.backdropClickOrEscapeKey(event));
 
     if (data.mode === 'add') {
       this.addMode = true;
@@ -107,6 +119,33 @@ export class ContactEditComponent implements AfterViewInit {
     return this.webLabels.filter(label => label.toLowerCase().indexOf(val.toLowerCase()) === 0);
   }
 
+  backdropClickOrEscapeKey(event?) {
+    // !event will be backdropClick and event will be keydownEvent, we get keydown events from all keydown interaction
+    // in the dialog (grrr), we'll just look for escape then. This whole thing is a bug as dialogRef.beforeClose event
+    // should have a means of saying "don't close", what's the point of "beforeClose" if you don't get a cancel option?
+    if (!event || (event.type === 'keydown' && Util.isEscapeKeyEvent(event))) {
+      // if no changes just close
+      if (equal(this.contact, this.originalContact)) {
+        this.dialogRef.close();
+        return;
+      }
+
+      const config = <MatDialogConfig>{
+        width: '323px',
+        height: '146px',
+        backdropClass: 'bg-modal-backdrop'
+      }
+      this.mdDialog.open(EditCloseComponent, config)
+        .afterClosed().subscribe(results => {
+        if (results) {
+          this.save();
+        } else {
+          this.dialogRef.close();
+        }
+      });
+    }
+  }
+
   // this didn't work. The idea was: hold off initial (input) validation (email) till blur (ngModelOptions.updateOn=blur), and on (input)
   // call this, but this doesn't set validity for some reason. Ng parses out the validation on element and forces
   // it to blur only somehow. I figure if I added validators manually, it would work (like nameOrCompany above, but
@@ -153,6 +192,7 @@ export class ContactEditComponent implements AfterViewInit {
     if (!c.websites.length) {
       c.websites.push(new Website());
     }
+    this.originalContact = _.cloneDeep(this.contact);
   }
 
   removeEmptyFields() {
@@ -231,7 +271,7 @@ export class ContactEditComponent implements AfterViewInit {
     });
   }
 
-  save(form) {
+  save() {
     if (!this.hasNameOrCompany()) {
       this.nameNg.control.markAsTouched();
       this.companyNg.control.markAsTouched();
@@ -240,7 +280,7 @@ export class ContactEditComponent implements AfterViewInit {
       return;
     }
 
-    if (form.valid) {
+    if (this.form.valid) {
       this.removeEmptyFields();
       this.dialogRef.close(this.contact);
     }

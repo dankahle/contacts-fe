@@ -20,6 +20,10 @@ export class Util {
     return event.type === 'keydown' && (event.which === 13 || event.which === 32);
   }
 
+  static isEscapeKeyEvent(event) {
+    return event.which === 27;
+  }
+
   /**
    * getModalPosition
    * @desc - given these parameters, come back with a top/left position for material's config.position property

@@ -17,6 +17,7 @@ import {ContactSearchComponent} from './header/contact-search/contact-search.com
 import { ContactEditComponent } from './main/contact-edit/contact-edit.component';
 import { ContactDeleteComponent } from './main/contact-delete/contact-delete.component';
 import {ContactDetailService} from './contact-detail-service';
+import { EditCloseComponent } from './main/edit-close/edit-close.component';
 
 @NgModule({
   imports: [
@@ -27,9 +28,10 @@ import {ContactDetailService} from './contact-detail-service';
   declarations: [ContactListComponent, ContactDetailRouteComponent, ContactDetailComponent, ContactListItemComponent,
     LeftnavComponent, HeaderComponent, LeftnavLabelComponent, EditLabelComponent, DeleteLabelComponent, ContactSearchComponent,
     ContactEditComponent,
-    ContactDeleteComponent],
+    ContactDeleteComponent,
+    EditCloseComponent],
   exports: [RouterModule, LeftnavComponent, HeaderComponent],
-  entryComponents: [ContactDetailComponent, EditLabelComponent, DeleteLabelComponent, ContactEditComponent, ContactDeleteComponent],
+  entryComponents: [ContactDetailComponent, EditLabelComponent, DeleteLabelComponent, ContactEditComponent, ContactDeleteComponent, EditCloseComponent],
   providers: [ContactsPageService, ContactDetailService]
 })
 export class ContactsPageModule {

@@ -50,9 +50,10 @@ export class ContactsPageService {
       height: '500px',
       backdropClass: 'bg-modal-backdrop',
       panelClass: 'contactDetailCssHack',
+      disableClose: true,
       data: {
         mode: mode,
-        contact: {...contact},
+        contact: {...contact}
       }
     }
     this.mdDialog.open(ContactEditComponent, config)

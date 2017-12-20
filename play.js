@@ -1,11 +1,13 @@
 const _ = require('lodash');
 
-const urlRegex = require('url-regex');
+var equal = require('deep-equal');
 
-console.log(urlRegex)
+const contact = {"id":"cc9da4cc-e4b9-5d81-81c3-4000af2204ae","labels":[{"id":"c62dac5b-97d8-53a5-9989-cb2f779bc5e3","name":"label3","icon":"label"}],"emails":[{"email":"","label":""}],"phones":[{"prefix":"","phone":"","label":""}],"addresses":[{"address":"","label":""}],"websites":[{"website":"","label":""}],"name":"","company":"","jobTitle":""};
 
+const original = {"id":"cc9da4cc-e4b9-5d81-81c3-4000af2204ae","labels":[{"id":"c62dac5b-97d8-53a5-9989-cb2f779bc5e3","name":"label3","icon":"label"}],"emails":[{"email":"","label":""}],"phones":[{"prefix":"","phone":"","label":""}],"addresses":[{"address":"","label":""}],"websites":[{"website":"","label":""}],"name":"","company":"","jobTitle":""};
 
-
+const eq = equal(contact, original);
+console.log(eq);
 
 
 
