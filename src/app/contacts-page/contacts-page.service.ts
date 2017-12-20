@@ -53,7 +53,7 @@ export class ContactsPageService {
       disableClose: true,
       data: {
         mode: mode,
-        contact: {...contact}
+        contact: contact
       }
     }
     this.mdDialog.open(ContactEditComponent, config)
@@ -119,3 +119,4 @@ export class ContactsPageService {
 */
 
 }
+

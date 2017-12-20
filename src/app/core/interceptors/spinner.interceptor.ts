@@ -14,7 +14,7 @@ export class SpinnerInterceptor implements HttpInterceptor {
     if (req.params.get('hideSpinner') !== 'true') {
       this.progressService.showProgressBar();
     }
-    let nextReq = req.clone({params: req.params.delete('hideSpinner')});
+    const nextReq = req.clone({params: req.params.delete('hideSpinner')});
 
     return next
       .handle(nextReq)
