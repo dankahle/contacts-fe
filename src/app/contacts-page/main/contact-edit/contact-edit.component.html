@@ -18,13 +18,13 @@
           <mat-form-field fxFlex="1 1 auto">
             <input matInput #nameRef #nameNg="ngModel" name="name" [(ngModel)]="contact.name"
                    (input)="updateNameAndCompanyValidation()" (blur)="updateNameAndCompanyValidation()"
-                   placeholder="Name" autocomplete="noway">
+                   placeholder="Name" autocomplete="noway" spellcheck="false">
             <mat-error *ngIf="nameNg.invalid && nameNg.errors.nameOrCompany">Name or company required</mat-error>
           </mat-form-field>
         </div>
         <div class="icons" fxLayout="row" fxLayoutAlign="start center" fxFlex="0 0 64px">
           <div class="wrap" (click)="contact.name = ''">
-            <i class="clear material-icons">cancel</i></div>
+            <i class="clear material-icons" [matTooltip]="clearTooltip" matTooltipShowDelay="500" matTooltipHideDelay="300">cancel</i></div>
         </div>
       </div>
 
@@ -36,16 +36,17 @@
         <div class="inputs" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="space-between center">
           <mat-form-field fxFlex="1 1 60%">
             <input matInput #companyNg="ngModel" name="company" [(ngModel)]="contact.company"
-                   placeholder="Company" autocomplete="noway" (input)="updateNameAndCompanyValidation()" (blur)="updateNameAndCompanyValidation()">
+                   placeholder="Company" autocomplete="noway" (input)="updateNameAndCompanyValidation()"
+                   (blur)="updateNameAndCompanyValidation()" spellcheck="false">
             <mat-error *ngIf="companyNg.invalid && companyNg.errors.nameOrCompany">Name or company required</mat-error>
           </mat-form-field>
           <mat-form-field fxFlex="1 1 35%">
-            <input matInput #jobTitle="ngModel" name=jobTitle [(ngModel)]="contact.jobTitle" placeholder="Job title">
+            <input matInput #jobTitle="ngModel" name=jobTitle [(ngModel)]="contact.jobTitle" placeholder="Job title" spellcheck="false">
           </mat-form-field>
         </div>
         <div class="icons" fxLayout="row" fxLayoutAlign="start center" fxFlex="0 0 64px">
           <div class="wrap" (click)="contact.company = contact.jobTitle = ''">
-            <i class="clear material-icons">cancel</i></div>
+            <i class="clear material-icons" [matTooltip]="clearTooltip" matTooltipShowDelay="500" matTooltipHideDelay="300">cancel</i></div>
         </div>
       </div>
 
@@ -60,12 +61,12 @@
           <mat-form-field fxFlex="1 1 60%">
             <input matInput #emailRef #emailNg="ngModel" name="email{{idx}}"
                    [(ngModel)]="email.email" [ngModelOptions]="{updateOn:'change'}" placeholder="Email" autocomplete="noway"
-                   pattern=" *[\w-\.]+@([\w-]+\.)+[\w-]{2,4} *">
+                   pattern=" *[\w-\.]+@([\w-]+\.)+[\w-]{2,4} *" spellcheck="false">
             <mat-error *ngIf="emailNg.invalid &&  emailNg.errors.pattern">Invalid email</mat-error>
           </mat-form-field>
           <mat-form-field fxFlex="1 1 35%">
             <input matInput name="emailLabel{{idx}}" #emailLabelNg="ngModel" name=emailLabel{{idx}} [(ngModel)]="email.label"
-                   placeholder="Label" autocomplete="noway" [matAutocomplete]="autoEmail">
+                   placeholder="Label" autocomplete="noway" [matAutocomplete]="autoEmail" spellcheck="false">
             <mat-autocomplete #autoEmail="matAutocomplete">
               <mat-option class="email-option" *ngFor="let labelEmail of filteredEmailLabels && filteredEmailLabels[idx] | async" [value]="labelEmail">
                 {{ labelEmail }}
@@ -76,9 +77,9 @@
 
         <div class="icons" fxLayout="row" fxLayoutAlign="start center" fxFlex="0 0 64px">
           <div class="wrap" (click)="contact.emails.length === 1? email.email = email.label = '': contact.emails.splice(idx, 1)">
-            <i class="clear material-icons">cancel</i></div>
+            <i class="clear material-icons" [matTooltip]="getClearTooltip(contact.emails.length)" matTooltipShowDelay="500" matTooltipHideDelay="300">cancel</i></div>
           <div class="wrap" *ngIf="idx === contact.emails.length - 1" (click)="addEmail()">
-            <i class="add material-icons">add_circle</i></div>
+            <i class="add material-icons" [matTooltip]="addTooltip" matTooltipShowDelay="500" matTooltipHideDelay="300">add_circle</i></div>
         </div>
       </div>
 
@@ -103,12 +104,12 @@
               </mat-select>
             </mat-form-field >
             <mat-form-field fxFlex="fxFlex=1 1 67%">
-              <input matInput #phoneRef name="phone{{idx}}" [(ngModel)]="phn.phone" placeholder="Phone" autocomplete="noway">
+              <input matInput #phoneRef name="phone{{idx}}" [(ngModel)]="phn.phone" placeholder="Phone" autocomplete="noway" spellcheck="false">
             </mat-form-field>
           </div>
           <mat-form-field fxFlex="1 1 35%">
             <input matInput name="phoneLabel{{idx}}" #phoneLabelNg="ngModel" name=phoneLabel{{idx}} [(ngModel)]="phn.label"
-                   placeholder="Label" autocomplete="noway" [matAutocomplete]="autoPhone">
+                   placeholder="Label" autocomplete="noway" [matAutocomplete]="autoPhone" spellcheck="false">
             <mat-autocomplete #autoPhone="matAutocomplete">
               <mat-option class="phn-option" *ngFor="let labelPhone of filteredPhoneLabels && filteredPhoneLabels[idx] | async" [value]="labelPhone">
                 {{ labelPhone }}
@@ -119,9 +120,9 @@
 
         <div class="icons" fxLayout="row" fxLayoutAlign="start center" fxFlex="0 0 64px">
           <div class="wrap" (click)="contact.phones.length === 1? phn.phone = phn.label = '': contact.phones.splice(idx, 1)">
-            <i class="clear material-icons">cancel</i></div>
+            <i class="clear material-icons" [matTooltip]="getClearTooltip(contact.phones.length)" matTooltipShowDelay="500" matTooltipHideDelay="300">cancel</i></div>
           <div class="wrap" *ngIf="idx === contact.phones.length - 1" (click)="addPhone()">
-            <i class="add material-icons">add_circle</i></div>
+            <i class="add material-icons" [matTooltip]="addTooltip" matTooltipShowDelay="500" matTooltipHideDelay="300">add_circle</i></div>
         </div>
       </div>
 
@@ -132,11 +133,11 @@
         </div>
         <div class="inputs" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="space-between center">
           <mat-form-field fxFlex="1 1 60%">
-            <textarea [rows]="addr.address.split('\n').length" matInput #addrRef name="addr{{idx}}" [(ngModel)]="addr.address" placeholder="Address" autocomplete="noway"></textarea>
+            <textarea [rows]="addr.address.split('\n').length" matInput #addrRef name="addr{{idx}}" [(ngModel)]="addr.address" placeholder="Address" autocomplete="noway" spellcheck="false"></textarea>
           </mat-form-field>
           <mat-form-field fxFlex="1 1 35%">
             <input matInput name="addrLabel{{idx}}" #addrLabelNg="ngModel" name=addrLabel{{idx}} [(ngModel)]="addr.label"
-                   placeholder="Label" autocomplete="noway" [matAutocomplete]="autoAddr">
+                   placeholder="Label" autocomplete="noway" [matAutocomplete]="autoAddr" spellcheck="false">
             <mat-autocomplete #autoAddr="matAutocomplete">
               <mat-option class="addr-option" *ngFor="let labelAddr of filteredAddrLabels && filteredAddrLabels[idx] | async" [value]="labelAddr">
                 {{ labelAddr }}
@@ -147,9 +148,9 @@
 
         <div class="icons" fxLayout="row" fxLayoutAlign="start center" fxFlex="0 0 64px">
           <div class="wrap" (click)="contact.addresses.length === 1? addr.address = addr.label = '': contact.addresses.splice(idx, 1)">
-            <i class="clear material-icons">cancel</i></div>
+            <i class="clear material-icons" [matTooltip]="getClearTooltip(contact.addresses.length)" matTooltipShowDelay="500" matTooltipHideDelay="300">cancel</i></div>
           <div class="wrap" *ngIf="idx === contact.addresses.length - 1" (click)="addAddress()">
-            <i class="add material-icons">add_circle</i></div>
+            <i class="add material-icons" [matTooltip]="addTooltip" matTooltipShowDelay="500" matTooltipHideDelay="300">add_circle</i></div>
         </div>
       </div>
 
@@ -160,11 +161,11 @@
         </div>
         <div class="inputs" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="space-between center">
           <mat-form-field fxFlex="1 1 60%">
-            <input matInput #webRef name="web{{idx}}" [(ngModel)]="web.website" placeholder="Website" autocomplete="noway">
+            <input matInput #webRef name="web{{idx}}" [(ngModel)]="web.website" placeholder="Website" autocomplete="noway" spellcheck="false">
           </mat-form-field>
           <mat-form-field fxFlex="1 1 35%">
             <input matInput name="webLabel{{idx}}" #webLabelNg="ngModel" name=webLabel{{idx}} [(ngModel)]="web.label"
-                   placeholder="Label" autocomplete="noway" [matAutocomplete]="autoWeb">
+                   placeholder="Label" autocomplete="noway" [matAutocomplete]="autoWeb" spellcheck="false">
             <mat-autocomplete #autoWeb="matAutocomplete">
               <mat-option class="web-option" *ngFor="let labelWeb of filteredWebLabels && filteredWebLabels[idx] | async" [value]="labelWeb">
                 {{ labelWeb }}
@@ -175,9 +176,9 @@
 
         <div class="icons" fxLayout="row" fxLayoutAlign="start center" fxFlex="0 0 64px">
           <div class="wrap" (click)="contact.websites.length === 1? web.website = web.label = '': contact.websites.splice(idx, 1)">
-            <i class="clear material-icons">cancel</i></div>
+            <i class="clear material-icons" [matTooltip]="getClearTooltip(contact.websites.length)" matTooltipShowDelay="500" matTooltipHideDelay="300">cancel</i></div>
           <div class="wrap" *ngIf="idx === contact.websites.length - 1" (click)="addWebsite()">
-            <i class="add material-icons">add_circle</i></div>
+            <i class="add material-icons" [matTooltip]="addTooltip" matTooltipShowDelay="500" matTooltipHideDelay="300">add_circle</i></div>
         </div>
       </div>
 

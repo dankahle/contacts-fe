@@ -5,7 +5,7 @@
   <div class="prefix" fxFlex="0 0 auto" (click)="searchElem.nativeElement.focus()"><i class="material-icons">search</i></div>
 
   <input class="input blur" fxFlex="1 0 auto" name="search" type="text" [(ngModel)]="searchVal" #searchCtrl="ngModel" placeholder="Search"
-         [matAutocomplete]="auto" (focus)="hideInput = false" (blur)="hideInput = true" [class.hide-input]="hideInput">
+         [matAutocomplete]="auto" (focus)="hideInput = false" (blur)="hideInput = true" [class.hide-input]="hideInput" spellcheck="false">
 
   <mat-autocomplete #auto="matAutocomplete" [displayWith]="getDisplayName" (optionSelected)="displayContact($event)">
     <mat-option *ngFor="let contact of filteredContacts | async" [value]="contact">

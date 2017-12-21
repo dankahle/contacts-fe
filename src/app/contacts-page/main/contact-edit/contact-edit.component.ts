@@ -57,6 +57,8 @@ export class ContactEditComponent implements AfterViewInit {
   filteredPhoneLabels: Observable<string[]> = Observable.of([]);
   filteredAddrLabels: Observable<string[]> = Observable.of([]);
   filteredWebLabels: Observable<string[]> = Observable.of([]);
+  clearTooltip = 'Clear';
+  addTooltip = 'Add';
 
   constructor(protected store: Store, protected dialogRef: MatDialogRef<ContactEditComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any, private mdDialog: MatDialog) {
@@ -286,4 +288,7 @@ export class ContactEditComponent implements AfterViewInit {
     }
   }
 
+  getClearTooltip(length) {
+    return length > 1 ? 'Remove' : 'Clear';
+  }
 }

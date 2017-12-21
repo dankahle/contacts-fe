@@ -1,5 +1,28 @@
 const _ = require('lodash');
 
+
+
+
+const a = { type: 'number',
+  maxLength: 9999,
+  pattern: '.*',
+  format: 'email',
+  messages:
+  { comments: '',
+    type: 'Email must be a number',
+    maxLength: 'Email is too long',
+    pattern: 'Email must start with \'dank\'',
+    format: 'Invalid email address' }
+}
+
+const val = ['type'];
+console.log(a.messages && a.messages[val]);
+
+
+
+
+
+/*
 var equal = require('deep-equal');
 
 const contact = {"id":"cc9da4cc-e4b9-5d81-81c3-4000af2204ae","labels":[{"id":"c62dac5b-97d8-53a5-9989-cb2f779bc5e3","name":"label3","icon":"label"}],"emails":[{"email":"","label":""}],"phones":[{"prefix":"","phone":"","label":""}],"addresses":[{"address":"","label":""}],"websites":[{"website":"","label":""}],"name":"","company":"","jobTitle":""};
@@ -8,6 +31,7 @@ const original = {"id":"cc9da4cc-e4b9-5d81-81c3-4000af2204ae","labels":[{"id":"c
 
 const eq = equal(contact, original);
 console.log(eq);
+*/
 
 
 
