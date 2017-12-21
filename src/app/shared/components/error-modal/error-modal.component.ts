@@ -12,7 +12,7 @@ export class ErrorModalComponent {
   constructor(public dialogRef: MatDialogRef<ErrorModalComponent>, @Inject(MAT_DIALOG_DATA) data: any) {
     this.error = data.error;
     if (this.error.status >= 500) {
-      this.error = {message: 'Well, this is embarrassing.'}
+      this.error = {message: 'Well, this is embarrassing.'};
     }
   }
 

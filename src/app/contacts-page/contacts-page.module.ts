@@ -31,7 +31,8 @@ import { EditCloseComponent } from './main/edit-close/edit-close.component';
     ContactDeleteComponent,
     EditCloseComponent],
   exports: [RouterModule, LeftnavComponent, HeaderComponent],
-  entryComponents: [ContactDetailComponent, EditLabelComponent, DeleteLabelComponent, ContactEditComponent, ContactDeleteComponent, EditCloseComponent],
+  entryComponents: [ContactDetailComponent, EditLabelComponent, DeleteLabelComponent, ContactEditComponent,
+    ContactDeleteComponent, EditCloseComponent],
   providers: [ContactsPageService, ContactDetailService]
 })
 export class ContactsPageModule {

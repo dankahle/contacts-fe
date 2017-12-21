@@ -13,7 +13,7 @@ import {Subject} from 'rxjs/Subject';
 export class ContactListGuard implements CanActivate {
   response$ = new Subject<boolean>();
 
-  constructor(private store: Store, private userService: UserService) {
+  constructor(private store: Store, private userService: UserService, private router: Router) {
   }
 
   canActivate(next: ActivatedRouteSnapshot,
@@ -36,7 +36,16 @@ export class ContactListGuard implements CanActivate {
     // console.log('contactlistguard start');
     const labelId = next.params.id;
     if (labelId) {
-      this.store.pubSelectedLabel(this.userService.getLabelById(labelId));
+      const label = this.userService.getLabelById(labelId);
+      // if someone hacks your label url... throw them back to root
+      if (!label) {
+        this.router.navigateByUrl('/');
+        this.store.pubSelectedLabel(undefined);
+        this.response$.next(false);
+        return;
+      } else {
+        this.store.pubSelectedLabel(label);
+      }
     } else {
       this.store.pubSelectedLabel(undefined);
     }

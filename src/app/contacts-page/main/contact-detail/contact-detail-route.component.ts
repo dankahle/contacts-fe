@@ -5,6 +5,12 @@ import {ContactDetailComponent} from './contact-detail.component';
 import {ProgressService} from '../../../core/services/progress.service';
 import {ValidateService} from '../../../core/services/validate.service';
 
+
+/**
+ * ContactDetailRouteComponent
+ * @desc - no longer used, initially you were putting up contact detail dialog on route change: /:contactId
+ * so needed a router component for the router to create, that then put up the dialog.
+ */
 @Component({
   selector: 'dk-contact-detail-route',
   template: '<router-outlet></router-outlet>',
@@ -27,11 +33,10 @@ export class ContactDetailRouteComponent {
         data: {contact: data.contact},
         width: '300px',
         backdropClass: 'bg-modal-backdrop'
-      }
+      };
       dialog.open(ContactDetailComponent, config)
         .afterClosed()
         .subscribe(result => {
-          // dankfix: update contact list with new value??
           router.navigateByUrl('/');
         });
     });

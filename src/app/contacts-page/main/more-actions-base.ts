@@ -55,7 +55,7 @@ export class MoreActionsBase {
       data: {
         contact: this.contact,
       }
-    }
+    };
     this.mdDialog.open(ContactDeleteComponent, config)
       .afterClosed()
       .subscribe(contact => {

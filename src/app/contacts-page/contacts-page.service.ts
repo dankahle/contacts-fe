@@ -55,7 +55,7 @@ export class ContactsPageService {
         mode: mode,
         contact: contact
       }
-    }
+    };
     this.mdDialog.open(ContactEditComponent, config)
       .afterClosed().subscribe(_contact => {
       let api$: Observable<any>;

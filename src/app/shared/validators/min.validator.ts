@@ -10,7 +10,7 @@ export function minValidator(min: number): ValidatorFn {
 }
 
 @Directive({
-  selector: '[min]',
+  selector: '[dkMin]',
   providers: [{provide: NG_VALIDATORS, useExisting: MinValidator, multi: true}]
 })
 export class MinValidator implements Validator {

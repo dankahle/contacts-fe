@@ -5,5 +5,5 @@ export interface Label {
   icon: string;
   numContacts?: number;
   noEdit?: boolean;
-  selected?: boolean
+  selected?: boolean;
 }

@@ -8,7 +8,7 @@ export function forbiddenNameValidator(name: string): ValidatorFn {
 }
 
 @Directive({
-  selector: '[forbiddenName]',
+  selector: '[dkForbiddenName]',
   providers: [{provide: NG_VALIDATORS, useExisting: ForbiddenNameValidator, multi: true}]
 })
 export class ForbiddenNameValidator implements Validator {

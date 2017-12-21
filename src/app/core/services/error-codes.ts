@@ -19,4 +19,4 @@ export const errorCodes = {
   user_cookie_not_found: '0205',
   user_already_exists: '0206'
 
-}
+};

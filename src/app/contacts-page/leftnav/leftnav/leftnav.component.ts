@@ -89,7 +89,7 @@ export class LeftnavComponent {
         data: {
           label: {...label}
         }
-      }
+      };
       this.mdDialog.open(DeleteLabelComponent, config)
         .afterClosed().subscribe(results => {
         if (results) {
@@ -129,9 +129,9 @@ export class LeftnavComponent {
         mode: mode,
         label: {...label},
         labelNames:
-          this.usr.user.labels.map(label => label.name)
+          this.usr.user.labels.map(_label => _label.name)
       }
-    }
+    };
     this.mdDialog.open(EditLabelComponent, config)
       .afterClosed().subscribe(_label => {
       if (_label) {
@@ -157,7 +157,7 @@ export class LeftnavComponent {
       height: '138px',
       backdropClass: 'bg-modal-backdrop',
       data: {}
-    }
+    };
     this.mdDialog.open(NotImplementedComponent, config);
   }
 

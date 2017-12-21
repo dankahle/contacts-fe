@@ -52,7 +52,7 @@ export class ErrorInterceptor implements HttpInterceptor {
               status: resp.status
             },
             errorCode: errorCodes.server_prefix + errorCodes.server_unknown_error
-          }
+          };
         }
 
         if (this.whiteListed(resp, req.method)) {
@@ -64,21 +64,19 @@ export class ErrorInterceptor implements HttpInterceptor {
         }
 
         const config = <MatDialogConfig> {
-          data: {error: err}, // dankfix: will resp.error be undefined for server errors?
+          data: {error: err},
           width: '500px',
           backdropClass: 'bg-modal-backdrop'
-        }
+        };
         this.dialog.open(ErrorModalComponent, config)
           .afterClosed()
           .subscribe(result => {
-            //dankfix: if we have a bad id, might not be able to get out of that route? was a problem with deep linked contacts
-            // maybe not so with labels instead? Watch the resp.error, i.e. that's only for your api, might not be there
             // if (resp.error && resp.error.errorCode === 'xxx-xxxx') {
             //   this.router.navigateByUrl('/');
             // }
-          })
+          });
         return Observable.throw(err);
-      })
+      });
   }
 
   /**
@@ -94,10 +92,10 @@ export class ErrorInterceptor implements HttpInterceptor {
     let found = false;
     this.whiteList
       .forEach(item => {
-        if (resp.status == item.status && _.includes(item.methods, method) && item.url.test(resp.url)) {
+        if (resp.status === item.status && _.includes(item.methods, method) && item.url.test(resp.url)) {
           found = true;
         }
-      })
+      });
     return found;
   }
 

@@ -79,13 +79,13 @@ export class InitializationGuard implements CanActivate {
         this.response$.next(false);
         return Observable.throw(err);
       })
-      .subscribe(x => x);// only need this cause we're not returning this function to canActivate
+      .subscribe(x => x); // only need this cause we're not returning this function to canActivate
   }
 
   afterInit() {
     this.store.pubUpdateLabelCounts();
     this.route.params.subscribe(params => {
       const id = params.id;
-    })
+    });
   }
 }

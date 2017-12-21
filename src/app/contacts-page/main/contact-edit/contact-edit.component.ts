@@ -136,7 +136,7 @@ export class ContactEditComponent implements AfterViewInit {
         width: '323px',
         height: '146px',
         backdropClass: 'bg-modal-backdrop'
-      }
+      };
       this.mdDialog.open(EditCloseComponent, config)
         .afterClosed().subscribe(results => {
         if (results) {

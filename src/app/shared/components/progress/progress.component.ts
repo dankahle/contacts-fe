@@ -25,7 +25,7 @@ export class ProgressComponent {
         this.show = false;
         clearInterval(this.timer);
       }
-    })
+    });
   }
 
 }

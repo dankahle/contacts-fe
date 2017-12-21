@@ -21,7 +21,7 @@ export class ContactDetailService {
       data: {
         contact: contact
       }
-    }
+    };
     this.mdDialog.open(ContactDetailComponent, config);
   }
 

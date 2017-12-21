@@ -69,7 +69,7 @@ export class ContactsService {
 
     deleteContacts.forEach(contact => {
       contacts.splice(_.findIndex(contacts, {id: contact.id}), 1);
-    })
+    });
 
     const params = new HttpParams().set('label', labelId);
     return this.http.delete<any>(`${this.apiUrl}api/contacts`, {params: params})
@@ -80,7 +80,7 @@ export class ContactsService {
     const updateContacts: Contact[] = [];
 
     contacts.forEach(contact => {
-      const index = _.findIndex(contact.labels, {id: label.id})
+      const index = _.findIndex(contact.labels, {id: label.id});
       if (index !== -1) {
         contact.labels[index].name = label.name;
         updateContacts.push(contact);
@@ -98,7 +98,7 @@ export class ContactsService {
     const updateContacts: Contact[] = [];
 
     contacts.forEach(contact => {
-      const index = _.findIndex(contact.labels, {id: labelId})
+      const index = _.findIndex(contact.labels, {id: labelId});
       if (index !== -1) {
         contact.labels.splice(index, 1);
         updateContacts.push(contact);

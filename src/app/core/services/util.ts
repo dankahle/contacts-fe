@@ -54,7 +54,7 @@ export class Util {
       height = window.innerHeight - padding;
       top = padding / 2;
     } else if (window.innerHeight < event.clientY + height - topOffset) {
-      top = window.innerHeight - height - padding/4;
+      top = window.innerHeight - height - padding / 4;
     } else {
       top = event.clientY - topOffset;
     }

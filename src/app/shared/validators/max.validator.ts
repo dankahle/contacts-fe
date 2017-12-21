@@ -10,7 +10,7 @@ export function maxValidator(max: number): ValidatorFn {
 }
 
 @Directive({
-  selector: '[max]',
+  selector: '[dkMax]',
   providers: [{provide: NG_VALIDATORS, useExisting: MaxValidator, multi: true}]
 })
 export class MaxValidator implements Validator {

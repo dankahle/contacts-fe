@@ -14,14 +14,14 @@ import {Observable} from 'rxjs/Observable';
   styleUrls: ['./contact-detail.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class ContactDetailComponent extends MoreActionsBase{
+export class ContactDetailComponent extends MoreActionsBase {
   contact: Contact;
   Util = Util;
 
   constructor(public dialogRef: MatDialogRef<ContactDetailComponent>, @Inject(MAT_DIALOG_DATA) data: any,
               protected contactsPageService: ContactsPageService,
               store: Store, contactsService: ContactsService, mdDialog: MatDialog) {
-    super(store, contactsService, mdDialog)
+    super(store, contactsService, mdDialog);
     this.contact = data.contact;
   }
 
@@ -48,7 +48,7 @@ export class ContactDetailComponent extends MoreActionsBase{
         if (deleted) {
           this.dialogRef.close();
         }
-      })
+      });
     return Observable.of(false);
   }
 
