@@ -26,7 +26,8 @@ export class BreakpointService {
   initialized = false;
 
   constructor(private media: ObservableMedia) {
-    console.log('breakpoint service const');
+    // ObservableMedia calls us 10 times initially, which breaks out handleBreakpoints as it only expects to be
+    // called once initially. We have to do some gymnastics to get it down to one...
     media.asObservable()
       .subscribe(change => {
         if (!this.initialBreakpoint) {
