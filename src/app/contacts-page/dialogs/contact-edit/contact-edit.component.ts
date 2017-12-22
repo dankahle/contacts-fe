@@ -36,7 +36,6 @@ const chance = new Chance();
 export class ContactEditComponent implements AfterViewInit, OnDestroy {
   log = console.log;
   @ViewChild('form') form;
-  @ViewChild('nameRef') nameRef;
   @ViewChild('nameNg') nameNg;
   @ViewChild('companyNg') companyNg;
   @ViewChildren('emailRef') emailRefs;
@@ -190,6 +189,7 @@ export class ContactEditComponent implements AfterViewInit, OnDestroy {
     c.name = c.name || '';
     c.company = c.company || '';
     c.jobTitle = c.jobTitle || '';
+    c.notes = c.notes || '';
     if (!c.emails.length) {
       c.emails.push(new Email());
     }
@@ -215,6 +215,9 @@ export class ContactEditComponent implements AfterViewInit, OnDestroy {
     }
     if (!c.jobTitle.trim()) {
       delete c.jobTitle;
+    }
+    if (!c.notes.trim()) {
+      delete c.notes;
     }
     _.forEachRight(c.emails, (v, i) => {
       if (!v.email.trim()) {
