@@ -163,9 +163,9 @@ export class LeftnavComponent {
 
   handleBreakpoints(change: BreakpointChange) {
     console.log('leftnav', change);
-    if (this.breakpoints.isActive('lt-md') && _.includes(['md', 'lg', 'xl'], this.breakpoints.lastBreakpoint)) {
+    if (this.breakpoints.isActive('lt-md') && _.includes(['md', 'lg', 'xl'], change.lastBreakpoint)) {
       this.store.pubLeftNavClosed(true);
-    } else if (this.breakpoints.isActive('gt-sm') && _.includes(['xs', 'sm'], this.breakpoints.lastBreakpoint)) {
+    } else if (this.breakpoints.isActive('gt-sm') && _.includes(['xs', 'sm'], change.lastBreakpoint)) {
       this.store.pubLeftNavClosed(this.wasClosed);
     }
   }

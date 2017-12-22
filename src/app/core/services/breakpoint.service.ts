@@ -11,19 +11,35 @@ export enum BreakpointDirection {
 }
 
 export class BreakpointChange {
-  constructor(public breakpoint: string, public direction: BreakpointDirection) {}
+  constructor(
+    public breakpoint: string,
+    public lastBreakpoint: string,
+    public direction: BreakpointDirection) {}
 }
 
 @Injectable()
 export class BreakpointService {
-  breakpoints$: BehaviorSubject<BreakpointChange>;
-  subscribe: any;
-  lastBreakpoint: string;
+  breakpoints$ = new BehaviorSubject<BreakpointChange|null>(null);
+  subscribe = this.breakpoints$.subscribe.bind(this.breakpoints$);
+  lastBreakpoint = '';
+  initialBreakpoint;
+  initialized = false;
 
   constructor(private media: ObservableMedia) {
     console.log('breakpoint service const');
     media.asObservable()
       .subscribe(change => {
+        if (!this.initialBreakpoint) {
+          this.initialBreakpoint = change.mqAlias;
+          this.handleBreakpoints(change.mqAlias);
+        }
+        if (!this.initialized) {
+          if (change.mqAlias !== this.initialBreakpoint) {
+            this.initialized = true;
+          } else {
+            return;
+          }
+        }
         this.handleBreakpoints(change.mqAlias);
       });
   }
@@ -32,14 +48,19 @@ export class BreakpointService {
     return this.media.isActive(val);
   }
 
+  /**
+   * handleBreakpoints
+   * @desc - this function is broken for repeated initial calls, which is what ObservableMedia does to us and why
+   * we throttle that down to one (instead of 10) initial calls, say lg >> lg >> lg, then the directions will be:
+   * initial, above, above, etc, which isn't true at all, but with our throttling all will work fine, why we do it.
+   * @param breakpoint
+   */
   handleBreakpoints(breakpoint) {
     let direction: BreakpointDirection;
     // console.log(`${this.lastBreakpoint} >> ${breakpoint}`);
 
-    if (this.lastBreakpoint === undefined) {
-      // hack: how to create a behaviorSubject but you don't have the value till later? Have to create it then
-      this.breakpoints$ = new BehaviorSubject<BreakpointChange>(new BreakpointChange(breakpoint, BreakpointDirection.initial));
-      this.subscribe = this.breakpoints$.subscribe.bind(this.breakpoints$);
+    if (!this.lastBreakpoint) {
+      this.breakpoints$.next(new BreakpointChange(breakpoint, '', BreakpointDirection.initial));
     } else {
       switch (breakpoint) {
         case 'xs':
@@ -70,7 +91,7 @@ export class BreakpointService {
             direction = BreakpointDirection.fromBelow;
           break;
       }
-      this.breakpoints$.next(new BreakpointChange(breakpoint, direction));
+      this.breakpoints$.next(new BreakpointChange(breakpoint, this.lastBreakpoint, direction));
         // console.log(`breakpoint: ${breakpoint} ${BreakpointDirection[direction]}`);
     }
 
