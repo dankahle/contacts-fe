@@ -128,10 +128,10 @@
 
       <!--addresses-->
       <div class="section" fxLayout="row" fxLayoutAlign="start stretch" *ngFor="let addr of contact.addresses; index as idx">
-        <div class="pic" fxFlex="0 0 55px" fxLayout="row" fxLayoutAlign="center center">
+        <div class="pic" fxFlex="0 0 55px" fxLayout="row" fxLayoutAlign="center top">
           <i class="material-icons" *ngIf="idx === 0">place</i>
         </div>
-        <div class="inputs" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="inputs" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="space-between top">
           <mat-form-field fxFlex="1 1 60%">
             <textarea [rows]="addr.address.split('\n').length" matInput #addrRef name="addr{{idx}}" [(ngModel)]="addr.address" placeholder="Address" autocomplete="noway" spellcheck="false"></textarea>
           </mat-form-field>
@@ -146,7 +146,7 @@
           </mat-form-field>
         </div>
 
-        <div class="icons" fxLayout="row" fxLayoutAlign="start center" fxFlex="0 0 64px">
+        <div class="icons" fxLayout="row" fxLayoutAlign="start top" fxFlex="0 0 64px">
           <div class="wrap" (click)="contact.addresses.length === 1? addr.address = addr.label = '': contact.addresses.splice(idx, 1)">
             <i class="clear material-icons" [matTooltip]="getClearTooltip(contact.addresses.length)" matTooltipShowDelay="500" matTooltipHideDelay="300">cancel</i></div>
           <div class="wrap" *ngIf="idx === contact.addresses.length - 1" (click)="addAddress()">
@@ -184,16 +184,16 @@
 
       <!--notes-->
       <div class="section" fxLayout="row" fxLayoutAlign="start stretch">
-        <div class="pic" fxFlex="0 0 55px" fxLayout="row" fxLayoutAlign="center center">
+        <div class="pic" fxFlex="0 0 55px" fxLayout="row" fxLayoutAlign="center top">
           <div class="wrap notes"><i class="material-icons">person</i></div>
         </div>
-        <div class="inputs" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="inputs" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="space-between top">
           <mat-form-field fxFlex="1 1 auto">
             <textarea [rows]="contact.notes.split('\n').length" matInput name="notes" [(ngModel)]="contact.notes"
                       placeholder="Notes" autocomplete="noway" spellcheck="false"></textarea>
           </mat-form-field>
         </div>
-        <div class="icons" fxLayout="row" fxLayoutAlign="start center" fxFlex="0 0 64px">
+        <div class="icons" fxLayout="row" fxLayoutAlign="start top" fxFlex="0 0 64px">
           <div class="wrap" (click)="contact.notes = ''">
             <i class="clear material-icons" [matTooltip]="clearTooltip" matTooltipShowDelay="500" matTooltipHideDelay="300">cancel</i></div>
         </div>
