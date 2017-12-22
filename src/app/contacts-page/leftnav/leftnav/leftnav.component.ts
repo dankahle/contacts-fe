@@ -5,10 +5,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Util} from '../../../core/services/util';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {UserService} from '../../../core/services/user-service';
-import {NotImplementedComponent} from '../../../shared/components/not-implemented/not-implemented.component';
-import {EditLabelComponent} from '../edit-label-modal/edit-label.component';
+import {NotImplementedComponent} from '../../../shared/dialogs/not-implemented/not-implemented.component';
+import {EditLabelComponent} from '../../dialogs/edit-label/edit-label.component';
 import * as _ from 'lodash';
-import {DeleteLabelComponent} from '../delete-label-modal/delete-label.component';
+import {DeleteLabelComponent} from '../../dialogs/delete-label/delete-label.component';
 import {DeleteLabelMode} from '../../../store/enums/deleteLabelMode.enum';
 import {ContactsService} from '../../../core/services/contacts.service';
 import {BreakpointChange, BreakpointDirection, BreakpointService} from '../../../core/services/breakpoint.service';
@@ -162,6 +162,7 @@ export class LeftnavComponent {
   }
 
   handleBreakpoints(change: BreakpointChange) {
+    console.log('leftnav', change);
     if (this.breakpoints.isActive('lt-md') && _.includes(['md', 'lg', 'xl'], this.breakpoints.lastBreakpoint)) {
       this.store.pubLeftNavClosed(true);
     } else if (this.breakpoints.isActive('gt-sm') && _.includes(['xs', 'sm'], this.breakpoints.lastBreakpoint)) {

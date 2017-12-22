@@ -1,7 +1,7 @@
 import {Store} from '../../store/store';
 import {ContactsPageService} from '../contacts-page.service';
 import {ContactsService} from '../../core/services/contacts.service';
-import {ContactDeleteComponent} from './contact-delete/contact-delete.component';
+import {ContactDeleteComponent} from '../dialogs/contact-delete/contact-delete.component';
 import {MatDialog, MatDialogConfig, MatMenu, MatMenuTrigger} from '@angular/material';
 import {Label} from '../../store/models/label';
 import {Contact} from '../../store/models/contact';

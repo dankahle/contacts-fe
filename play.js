@@ -3,6 +3,35 @@ const _ = require('lodash');
 
 
 
+
+
+
+
+/*
+const rx = require('rxjs');
+const Subject = rx.Subject;
+
+const sub = new Subject();
+
+const subscription = sub.subscribe(x => console.log('next', x),
+  err => console.error('error', err),
+  () => console.log('complete'));
+
+sub.next(4);
+sub.next(5);
+sub.next(6);
+console.log('closed?', subscription.closed);
+sub.complete();
+console.log('closed?', subscription.closed);
+sub.next(7);
+*/
+
+
+
+
+
+
+/*
 const a = { type: 'number',
   maxLength: 9999,
   pattern: '.*',
@@ -18,6 +47,7 @@ const a = { type: 'number',
 const val = ['type'];
 console.log(a.messages && a.messages[val]);
 
+*/
 
 
 

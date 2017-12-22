@@ -9,7 +9,7 @@ import {
 import {Observable} from 'rxjs/Observable';
 import {ProgressService} from '../services/progress.service';
 import {MatDialog, MatDialogConfig} from '@angular/material';
-import {ErrorModalComponent} from '../../shared/components/error-modal/error-modal.component';
+import {ErrorModalComponent} from '../../shared/dialogs/error-modal/error-modal.component';
 import {Router} from '@angular/router';
 import {errorCodes} from '../services/error-codes';
 import * as _ from 'lodash';

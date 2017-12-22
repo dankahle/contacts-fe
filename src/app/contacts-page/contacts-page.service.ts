@@ -5,14 +5,14 @@ import {ContactsService} from '../core/services/contacts.service';
 import * as _ from 'lodash';
 import 'rxjs/add/operator/do';
 import {MatDialog, MatDialogConfig} from '@angular/material';
-import {ContactEditComponent} from './main/contact-edit/contact-edit.component';
+import {ContactEditComponent} from './dialogs/contact-edit/contact-edit.component';
 import {Util} from '../core/services/util';
-import {ContactDetailComponent} from './main/contact-detail/contact-detail.component';
+import {ContactDetailComponent} from './dialogs/contact-detail/contact-detail.component';
 import {Observable} from 'rxjs/Observable';
 import {Messages} from '../store/models/messages';
 import {Contact} from '../store/models/contact';
-import {MoreActionsComponent} from '../shared/components/more-actions/more-actions.component';
-import {ContactDeleteComponent} from './main/contact-delete/contact-delete.component';
+import {MoreActionsComponent} from '../shared/dialogs/more-actions/more-actions.component';
+import {ContactDeleteComponent} from './dialogs/contact-delete/contact-delete.component';
 
 @Injectable()
 export class ContactsPageService {

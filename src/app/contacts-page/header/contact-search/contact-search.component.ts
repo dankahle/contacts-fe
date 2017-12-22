@@ -5,7 +5,7 @@ import {Contact} from '../../../store/models/contact';
 import 'rxjs/add/operator/startWith';
 import {Store} from '../../../store/store';
 import {MatDialog, MatDialogConfig} from '@angular/material';
-import {ContactDetailComponent} from '../../main/contact-detail/contact-detail.component';
+import {ContactDetailComponent} from '../../dialogs/contact-detail/contact-detail.component';
 import {Messages} from '../../../store/models/messages';
 
 @Component({

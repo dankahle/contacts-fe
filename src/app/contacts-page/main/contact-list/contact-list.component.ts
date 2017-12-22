@@ -1,4 +1,4 @@
-import {Component, HostBinding, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, HostBinding, OnDestroy, ViewChild, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Contact} from '../../../store/models/contact';
 import {Store} from '../../../store/store';
@@ -6,10 +6,11 @@ import {Util} from '../../../core/services/util';
 import * as _ from 'lodash';
 import {UserService} from '../../../core/services/user-service';
 import {ContactsPageService} from '../../contacts-page.service';
-import {ContactDetailComponent} from '../contact-detail/contact-detail.component';
+import {ContactDetailComponent} from '../../dialogs/contact-detail/contact-detail.component';
 import {MatDialog, MatDialogConfig, MatMenuTrigger} from '@angular/material';
 import {Messages} from '../../../store/models/messages';
 import {BreakpointService} from '../../../core/services/breakpoint.service';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'dk-contact-list',
@@ -17,17 +18,18 @@ import {BreakpointService} from '../../../core/services/breakpoint.service';
   styleUrls: ['./contact-list.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class ContactListComponent {
+export class ContactListComponent implements OnDestroy {
   @HostBinding('style.max-width') hostMaxWidth;
   contacts: Contact[] = [];
   messageCount: number;
+  subs_selectedLabel: Subscription;
+  subs_Contacts: Subscription;
 
   constructor(private route: ActivatedRoute, protected store: Store, protected userService: UserService,
-              protected contactsPageService: ContactsPageService, private mdDialog: MatDialog,
-              private breakpoints: BreakpointService) {
+              protected contactsPageService: ContactsPageService, private mdDialog: MatDialog) {
 
-    this.store.subSelectedLabel(label => this.syncContacts());
-    this.store.con.subContacts(label => this.syncContacts());
+    this.subs_selectedLabel = this.store.subSelectedLabel(label => this.syncContacts());
+    this.subs_Contacts = this.store.con.subContacts(label => this.syncContacts());
 
 /*
     // an example of a dynamic hostBinding property
@@ -41,6 +43,11 @@ export class ContactListComponent {
 */
 
   } // const
+
+  ngOnDestroy() {
+    this.subs_selectedLabel.unsubscribe();
+    this.subs_Contacts.unsubscribe();
+  }
 
   syncContacts() {
     if (this.store.selectedLabel) {

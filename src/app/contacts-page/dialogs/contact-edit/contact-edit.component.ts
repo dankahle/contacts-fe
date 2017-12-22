@@ -1,5 +1,5 @@
 import {
-  AfterViewInit, ApplicationRef, Component, Inject, NgZone, OnInit, ViewChild, ViewChildren,
+  AfterViewInit, ApplicationRef, Component, Inject, NgZone, OnDestroy, OnInit, ViewChild, ViewChildren,
   ViewEncapsulation
 } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
@@ -20,9 +20,10 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/do';
 import {Util} from '../../../core/services/util';
 import {DeleteLabelMode} from '../../../store/enums/deleteLabelMode.enum';
-import {DeleteLabelComponent} from '../../leftnav/delete-label-modal/delete-label.component';
+import {DeleteLabelComponent} from '../delete-label/delete-label.component';
 import * as equal from 'deep-equal';
 import {EditCloseComponent} from '../edit-close/edit-close.component';
+import {Subscription} from 'rxjs/Subscription';
 
 const chance = new Chance();
 
@@ -32,7 +33,7 @@ const chance = new Chance();
   styleUrls: ['./contact-edit.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class ContactEditComponent implements AfterViewInit {
+export class ContactEditComponent implements AfterViewInit, OnDestroy {
   log = console.log;
   @ViewChild('form') form;
   @ViewChild('nameRef') nameRef;
@@ -59,14 +60,16 @@ export class ContactEditComponent implements AfterViewInit {
   filteredWebLabels: Observable<string[]> = Observable.of([]);
   clearTooltip = 'Clear';
   addTooltip = 'Add';
+  subs_backdropClick: Subscription;
+  subs_keydownEvents: Subscription;
 
   constructor(protected store: Store, protected dialogRef: MatDialogRef<ContactEditComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any, private mdDialog: MatDialog) {
 
-    this.dialogRef.backdropClick()
+    this.subs_backdropClick = this.dialogRef.backdropClick()
       .subscribe(() => this.backdropClickOrEscapeKey());
 
-    this.dialogRef.keydownEvents()
+    this.subs_keydownEvents = this.dialogRef.keydownEvents()
       .subscribe(event => this.backdropClickOrEscapeKey(event));
 
     if (data.mode === 'add') {
@@ -107,6 +110,11 @@ export class ContactEditComponent implements AfterViewInit {
       this.filteredWebLabels[i] = ng.control.valueChanges
         .map(val => val ? this.filterWebLabels(val) : this.webLabels);
     });
+  }
+
+  ngOnDestroy() {
+    this.subs_backdropClick.unsubscribe();
+    this.subs_keydownEvents.unsubscribe();
   }
 
   filterEmailAddrLabels(val: string): string[] {

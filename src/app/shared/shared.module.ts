@@ -7,11 +7,11 @@ import {MinValidator} from './validators/min.validator';
 import {MaxValidator} from './validators/max.validator';
 import {MaterialIndexModule} from './material-index/material-index.module';
 import {ProgressComponent} from './components/progress/progress.component';
-import {ErrorModalComponent} from './components/error-modal/error-modal.component';
+import {ErrorModalComponent} from './dialogs/error-modal/error-modal.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {RouterModule} from '@angular/router';
-import { NotImplementedComponent } from './components/not-implemented/not-implemented.component';
-import {MoreActionsComponent} from './components/more-actions/more-actions.component';
+import { NotImplementedComponent } from './dialogs/not-implemented/not-implemented.component';
+import {MoreActionsComponent} from './dialogs/more-actions/more-actions.component';
 
 @NgModule({
   imports: [

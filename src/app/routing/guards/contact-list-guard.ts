@@ -37,7 +37,9 @@ export class ContactListGuard implements CanActivate {
     const labelId = next.params.id;
     if (labelId) {
       const label = this.userService.getLabelById(labelId);
-      // if someone hacks your label url... throw them back to root
+      // this routing sucks, but it's what google has, if it were /contacts/:id all would be cool, but /:id means
+      // that "anything they send" will get here, so /crap comes here, i.e. it doesn't hit "**" cause it falls into
+      // /:id bucket. No matter, we'll look for it's existence in the labels and if not there, send them back to "/"
       if (!label) {
         this.router.navigateByUrl('/');
         this.store.pubSelectedLabel(undefined);

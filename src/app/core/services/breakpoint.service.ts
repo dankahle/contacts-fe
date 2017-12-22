@@ -21,6 +21,7 @@ export class BreakpointService {
   lastBreakpoint: string;
 
   constructor(private media: ObservableMedia) {
+    console.log('breakpoint service const');
     media.asObservable()
       .subscribe(change => {
         this.handleBreakpoints(change.mqAlias);

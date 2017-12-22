@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {Store} from '../store/store';
 import {Util} from '../core/services/util';
-import {ContactDetailComponent} from './main/contact-detail/contact-detail.component';
+import {ContactDetailComponent} from './dialogs/contact-detail/contact-detail.component';
 import {Messages} from '../store/models/messages';
 
 @Injectable()

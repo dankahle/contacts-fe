@@ -5,7 +5,7 @@ import {Store} from '../../../store/store';
 import {ContactsPageService} from '../../contacts-page.service';
 import {Util} from '../../../core/services/util';
 import {ContactsService} from '../../../core/services/contacts.service';
-import {MoreActionsBase} from '../more-actions-base';
+import {MoreActionsBase} from '../../main/more-actions-base';
 import {Observable} from 'rxjs/Observable';
 
 @Component({
