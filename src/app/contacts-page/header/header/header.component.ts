@@ -11,7 +11,7 @@ import {LoginService} from '../../../login/login.service';
 export class HeaderComponent {
   log = console.log;
 
-  constructor(private loginService: LoginService, protected store: Store) {}
+  constructor(private loginService: LoginService, public store: Store) {}
 
   logout() {
     this.loginService.logout()

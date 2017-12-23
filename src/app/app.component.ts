@@ -16,7 +16,7 @@ import * as $ from 'jquery';
 export class AppComponent {
 val: string;
 
-  constructor(protected store: Store) {
+  constructor(public store: Store) {
   }
 
 

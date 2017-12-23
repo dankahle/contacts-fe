@@ -14,7 +14,7 @@ export class LeftnavLabelComponent {
   log = console.log;
 
   constructor(protected elemRef: ElementRef, protected leftnav: LeftnavComponent,
-              protected parent: LeftnavComponent, protected store: Store) {
+              protected parent: LeftnavComponent, public store: Store) {
   }
 
 }

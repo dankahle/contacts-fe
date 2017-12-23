@@ -35,7 +35,7 @@ export class LeftnavComponent {
 
   };
 
-  constructor(protected store: Store, protected router: Router, private mdDialog: MatDialog,
+  constructor(public store: Store, protected router: Router, private mdDialog: MatDialog,
               private userService: UserService, private contactsService: ContactsService,
               private route: ActivatedRoute, private appRef: ApplicationRef, private breakpoints: BreakpointService) {
 

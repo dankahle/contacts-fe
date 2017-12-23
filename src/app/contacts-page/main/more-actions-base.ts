@@ -17,7 +17,7 @@ export class MoreActionsBase {
   labels: Label[];
   deleting: boolean;
 
-  constructor(protected store: Store, protected contactsService: ContactsService, private mdDialog: MatDialog) {
+  constructor(public store: Store, protected contactsService: ContactsService, private mdDialog: MatDialog) {
   }
 
   menuClose() {

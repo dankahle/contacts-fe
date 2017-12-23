@@ -7,7 +7,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
   styleUrls: ['./error-modal.component.scss']
 })
 export class ErrorModalComponent {
-  error: { message: string, status?: number, json?: any };
+  error: { message: string, status?: number, json?: any, data?: any };
 
   constructor(public dialogRef: MatDialogRef<ErrorModalComponent>, @Inject(MAT_DIALOG_DATA) data: any) {
     this.error = data.error;
