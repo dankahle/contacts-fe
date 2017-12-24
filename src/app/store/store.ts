@@ -29,7 +29,7 @@ export class Store extends StoreBase {
 
   authenticated = false;
   initialized = false;
-  leftNavClosed = false;
+  leftNavClosed = true;
   initialBreakpoint: string;
   selectedLabel?: Label;
 
@@ -64,11 +64,6 @@ export class Store extends StoreBase {
   }
 
   init() {
-
-    // close left nav
-    if (this.media.isActive('xs') || this.media.isActive('sm')) {
-      this.leftNavClosed = true;
-    }
 
     this.media.asObservable()
       .first()

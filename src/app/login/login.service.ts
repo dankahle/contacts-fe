@@ -30,6 +30,7 @@ export class LoginService {
         this.store.deleteVal('user');
         this.store.pubAuthenticated(false);
         this.store.pubInitialized(false);
+        this.store.pubLeftNavClosed(true);
         this.router.navigateByUrl('/login');
       });
   }

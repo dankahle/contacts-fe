@@ -10,6 +10,8 @@ import {Store} from '../../store/store';
 import {ContactsService} from '../../core/services/contacts.service';
 import {UserService} from '../../core/services/user-service';
 import {Subject} from 'rxjs/Subject';
+import {BreakpointService} from '../../core/services/breakpoint.service';
+import * as _ from 'lodash';
 
 @Injectable()
 /**
@@ -23,6 +25,7 @@ export class InitializationGuard implements CanActivate {
               private route: ActivatedRoute,
               private userService: UserService,
               private contactsService: ContactsService,
+              private breakpoints: BreakpointService,
               private init1: Init1,
               private init2: Init2,
               private init3: Init3,
@@ -83,6 +86,10 @@ export class InitializationGuard implements CanActivate {
   }
 
   afterInit() {
+    if (this.breakpoints.isActive('gt-sm')) {
+      this.store.pubLeftNavClosed(false);
+    }
+
     this.store.pubUpdateLabelCounts();
     this.route.params.subscribe(params => {
       const id = params.id;
