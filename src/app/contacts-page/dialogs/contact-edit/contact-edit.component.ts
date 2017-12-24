@@ -66,10 +66,10 @@ export class ContactEditComponent implements AfterViewInit, OnDestroy {
               @Inject(MAT_DIALOG_DATA) public data: any, private mdDialog: MatDialog) {
 
     this.subs_backdropClick = this.dialogRef.backdropClick()
-      .subscribe(() => this.backdropClickOrEscapeKey());
+      .subscribe(() => this.cancelDialog());
 
     this.subs_keydownEvents = this.dialogRef.keydownEvents()
-      .subscribe(event => this.backdropClickOrEscapeKey(event));
+      .subscribe(event => this.cancelDialog(event));
 
     if (data.mode === 'add') {
       this.addMode = true;
@@ -128,7 +128,7 @@ export class ContactEditComponent implements AfterViewInit, OnDestroy {
     return this.webLabels.filter(label => label.toLowerCase().indexOf(val.toLowerCase()) === 0);
   }
 
-  backdropClickOrEscapeKey(event?) {
+  cancelDialog(event?) {
     // !event will be backdropClick and event will be keydownEvent, we get keydown events from all keydown interaction
     // in the dialog (grrr), we'll just look for escape then. This whole thing is a bug as dialogRef.beforeClose event
     // should have a means of saying "don't close", what's the point of "beforeClose" if you don't get a cancel option?
@@ -144,14 +144,16 @@ export class ContactEditComponent implements AfterViewInit, OnDestroy {
         height: '146px',
         backdropClass: 'bg-modal-backdrop'
       };
-      this.mdDialog.open(EditCloseComponent, config)
-        .afterClosed().subscribe(results => {
-        if (results) {
-          this.save();
-        } else {
-          this.dialogRef.close();
-        }
-      });
+      const cancelDlgRef = this.mdDialog.open(EditCloseComponent, config);
+      cancelDlgRef.afterClosed()
+        .subscribe(results => {
+          if (results) {
+            cancelDlgRef.close();
+            this.dialogRef.close();
+          } else {
+            cancelDlgRef.close();
+          }
+        });
     }
   }
 

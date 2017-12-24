@@ -14,6 +14,19 @@
       max-width: 100%;
     }
 
+    .wrap {
+      $size: 22px;
+      color: $link-gray;
+      cursor: pointer;
+      padding: 6px 6px;
+      box-sizing: content-box;
+      height: $size;
+      width: $size;
+      i {
+        font-size: $size;
+      }
+    }
+
   }
 
   .content {

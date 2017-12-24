@@ -4,6 +4,9 @@
   <div class="header" fxLayout="row" fxLayoutAlign="space-between center">
     <div class="name text-ellipsis" *ngIf="addMode">Create contact</div>
     <div class="name text-ellipsis" *ngIf="editMode">Edit contact</div>
+    <div class="wrap" (click)="cancelDialog()">
+      <i class="material-icons" matTooltip="Close" matTooltipShowDelay="500" matTooltipHideDelay="300">close</i>
+    </div>
   </div>
 
   <div class="content">
@@ -210,7 +213,7 @@
       <div mat-dialog-actions="">
         <button type="button" form="form" mat-button color="primary" (click)="save()"
         [disabled]="form.invalid">SAVE</button>
-        <button type="button" mat-button mat-dialog-close>CANCEL</button>
+        <button type="button" mat-button  (click)="cancelDialog()">CANCEL</button>
       </div>
 
     </form>
