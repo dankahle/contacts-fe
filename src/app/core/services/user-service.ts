@@ -4,6 +4,7 @@ import {environment} from '../../../environments/environment';
 import {User} from '../../store/models/user';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/catch';
 import {Router} from '@angular/router';
 import {Store} from '../../store/store';
 import * as _ from 'lodash';

@@ -13,6 +13,7 @@ import {DeleteLabelMode} from '../../../store/enums/deleteLabelMode.enum';
 import {ContactsService} from '../../../core/services/contacts.service';
 import {BreakpointChange, BreakpointDirection, BreakpointService} from '../../../core/services/breakpoint.service';
 import {StoreUser} from '../../../store/store-user';
+import 'rxjs/add/operator/mergeMap';
 
 @Component({
   selector: 'dk-leftnav',
