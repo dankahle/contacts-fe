@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LeftnavLabelComponent } from './leftnav-label.component';
 
-describe('LeftnavLabelComponent', () => {
+xdescribe('LeftnavLabelComponent', () => {
   let component: LeftnavLabelComponent;
   let fixture: ComponentFixture<LeftnavLabelComponent>;
 
