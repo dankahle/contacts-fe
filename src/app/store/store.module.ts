@@ -11,13 +11,7 @@ import {Store} from './store';
 })
 export class StoreModule {
 
-  constructor() {
-    this.initStore();
+  constructor(store: Store) {
   }
-
-  initStore() {
-
-  }
-
 
 }

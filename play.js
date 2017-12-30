@@ -2,9 +2,36 @@ const _ = require('lodash');
 
 
 
+/*
+function fcn (...params) {
+  params.forEach(parm => console.log(parm));
+}
+
+fcn(...[4,5,6]);
+*/
 
 
+function inject(arr, fcn) {
+  const servArr = [];
+  arr.forEach(val => {
+    // get val from injector creation and add to servArray
+    servArr.push(val);
+  });
+  return fcn.bind({}, ...servArr);
+}
 
+function test(fcn) {
+  fcn();
+}
+
+test(inject([4,5,6], (...parms) => {
+  parms.forEach(parm => console.log(parm));
+}));
+
+it('lala', async(inject(arr, () => {
+
+
+})));
 
 
 /*

@@ -37,12 +37,12 @@ export class StoreBase {
     }
   }
 
-  getPropertiesOnly(object) {
-    const obj = _.clone(object);
+  getPropertiesOnly(_obj) {
+    const obj = Object.assign({}, _obj);
     for (const prop in obj) {
-      if (typeof obj[prop] === 'function' || prop.indexOf('$') !== -1) {
+      if (typeof obj[prop] === 'function' || prop.indexOf('$') !== -1 || prop === 'media') {
         delete obj[prop];
-      } else if (typeof obj[prop] === 'object' && object === this && _.includes(['usr', 'con'], prop)) {
+      } else if (typeof obj[prop] === 'object' && _obj === this && _.includes(['usr', 'con'], prop)) {
         try {
           obj[prop] = this.getPropertiesOnly(obj[prop]);
         } catch (e) {
@@ -79,6 +79,8 @@ export class StoreBase {
     >> lala (just one)
 */
 
+  // These three are an attempt to simplify all the pub/sub observables into just pub/sub calls, next iteration
+  // (or another branch) we should try to run on these only
   subPath<T>(path: string): Observable<T> {
     return this.getOrCreateSubject<T>(path, _.get(this, path), 'sub');
   }

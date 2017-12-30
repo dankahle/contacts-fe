@@ -49,11 +49,6 @@ export class Store extends StoreBase {
 
   constructor(private media: ObservableMedia) {
     super();
-    this.store = this;
-
-    // setup substores
-    this.usr = new StoreUser(this);
-    this.con = new StoreContacts(this);
     this.init();
     this.pub();
   }
@@ -64,6 +59,9 @@ export class Store extends StoreBase {
   }
 
   init() {
+    this.store = this;
+    this.usr = new StoreUser(this);
+    this.con = new StoreContacts(this);
 
     this.media.asObservable()
       .first()
