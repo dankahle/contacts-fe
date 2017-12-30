@@ -3,7 +3,8 @@
 
 
 .leftnav {
-  transition: margin-left, left 200ms;
+  $speed: 200ms;
+  transition: margin-left $speed, left $speed;
   width: $leftnav-width;
   margin-left: 0;
   padding-top: 15px;
