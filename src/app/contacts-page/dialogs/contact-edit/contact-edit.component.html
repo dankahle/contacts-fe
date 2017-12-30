@@ -27,7 +27,7 @@
         </div>
         <div class="icons" fxLayout="row" fxLayoutAlign="start center" fxFlex="0 0 64px">
           <div class="wrap" (click)="contact.name = ''">
-            <i class="clear material-icons" [matTooltip]="clearTooltip" matTooltipShowDelay="500" matTooltipHideDelay="300">cancel</i></div>
+            <i class="clear material-icons">cancel</i></div>
         </div>
       </div>
 
@@ -49,7 +49,7 @@
         </div>
         <div class="icons" fxLayout="row" fxLayoutAlign="start center" fxFlex="0 0 64px">
           <div class="wrap" (click)="contact.company = contact.jobTitle = ''">
-            <i class="clear material-icons" [matTooltip]="clearTooltip" matTooltipShowDelay="500" matTooltipHideDelay="300">cancel</i></div>
+            <i class="clear material-icons">cancel</i></div>
         </div>
       </div>
 
@@ -80,9 +80,9 @@
 
         <div class="icons" fxLayout="row" fxLayoutAlign="start center" fxFlex="0 0 64px">
           <div class="wrap" (click)="contact.emails.length === 1? email.email = email.label = '': contact.emails.splice(idx, 1)">
-            <i class="clear material-icons" [matTooltip]="getClearTooltip(contact.emails.length)" matTooltipShowDelay="500" matTooltipHideDelay="300">cancel</i></div>
+            <i class="clear material-icons">cancel</i></div>
           <div class="wrap" *ngIf="idx === contact.emails.length - 1" (click)="addEmail()">
-            <i class="add material-icons" [matTooltip]="addTooltip" matTooltipShowDelay="500" matTooltipHideDelay="300">add_circle</i></div>
+            <i class="add material-icons">add_circle</i></div>
         </div>
       </div>
 
@@ -122,10 +122,10 @@
         </div>
 
         <div class="icons" fxLayout="row" fxLayoutAlign="start center" fxFlex="0 0 64px">
-          <div class="wrap" (click)="contact.phones.length === 1? phn.phone = phn.label = '': contact.phones.splice(idx, 1)">
-            <i class="clear material-icons" [matTooltip]="getClearTooltip(contact.phones.length)" matTooltipShowDelay="500" matTooltipHideDelay="300">cancel</i></div>
+          <div class="wrap" (click)="contact.phones.length === 1? phn.prefix = phn.phone = phn.label = '': contact.phones.splice(idx, 1)">
+            <i class="clear material-icons">cancel</i></div>
           <div class="wrap" *ngIf="idx === contact.phones.length - 1" (click)="addPhone()">
-            <i class="add material-icons" [matTooltip]="addTooltip" matTooltipShowDelay="500" matTooltipHideDelay="300">add_circle</i></div>
+            <i class="add material-icons">add_circle</i></div>
         </div>
       </div>
 
@@ -151,9 +151,9 @@
 
         <div class="icons" fxLayout="row" fxLayoutAlign="start top" fxFlex="0 0 64px">
           <div class="wrap" (click)="contact.addresses.length === 1? addr.address = addr.label = '': contact.addresses.splice(idx, 1)">
-            <i class="clear material-icons" [matTooltip]="getClearTooltip(contact.addresses.length)" matTooltipShowDelay="500" matTooltipHideDelay="300">cancel</i></div>
+            <i class="clear material-icons">cancel</i></div>
           <div class="wrap" *ngIf="idx === contact.addresses.length - 1" (click)="addAddress()">
-            <i class="add material-icons" [matTooltip]="addTooltip" matTooltipShowDelay="500" matTooltipHideDelay="300">add_circle</i></div>
+            <i class="add material-icons">add_circle</i></div>
         </div>
       </div>
 
@@ -179,9 +179,9 @@
 
         <div class="icons" fxLayout="row" fxLayoutAlign="start center" fxFlex="0 0 64px">
           <div class="wrap" (click)="contact.websites.length === 1? web.website = web.label = '': contact.websites.splice(idx, 1)">
-            <i class="clear material-icons" [matTooltip]="getClearTooltip(contact.websites.length)" matTooltipShowDelay="500" matTooltipHideDelay="300">cancel</i></div>
+            <i class="clear material-icons">cancel</i></div>
           <div class="wrap" *ngIf="idx === contact.websites.length - 1" (click)="addWebsite()">
-            <i class="add material-icons" [matTooltip]="addTooltip" matTooltipShowDelay="500" matTooltipHideDelay="300">add_circle</i></div>
+            <i class="add material-icons">add_circle</i></div>
         </div>
       </div>
 
@@ -198,12 +198,9 @@
         </div>
         <div class="icons" fxLayout="row" fxLayoutAlign="start top" fxFlex="0 0 64px">
           <div class="wrap" (click)="contact.notes = ''">
-            <i class="clear material-icons" [matTooltip]="clearTooltip" matTooltipShowDelay="500" matTooltipHideDelay="300">cancel</i></div>
+            <i class="clear material-icons">cancel</i></div>
         </div>
       </div>
-
-
-
 
       <!--
             <a href="" (click)="$event.preventDefault(); showJson = !showJson">show json</a><br>

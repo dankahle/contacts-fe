@@ -301,7 +301,4 @@ export class ContactEditComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  getClearTooltip(length) {
-    return length > 1 ? 'Remove' : 'Clear';
-  }
 }
