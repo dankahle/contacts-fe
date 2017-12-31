@@ -1,8 +1,8 @@
 # contacts-fe
 
-This is the angular 5/material/flex-layout frontend of the dk-contacts project. It utilizes the lastest angular/material frameworks.  
+This is the angular 5/material/flex-layout frontend of the dk-contacts project. It utilizes the lastest angular/material frameworks. 
   
-features:  
+###features:  
 * page based architecture that localizes all services/components/etc involved with a specific site section.
 * core and shared directories for common services/components
 * Angular Material components and theme
