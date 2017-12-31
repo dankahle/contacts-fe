@@ -34,6 +34,14 @@ This is the angular 5/material/flex-layout frontend of the dk-contacts project. 
 * karma/jasmine unit testing
 * github pages hosting
  
+### notable
+##### ViewEncapsulation.Emulated is trying at times, ViewEncapsulation.None would be easier/faster.
+Their decoration of all component html and css classes must be costly, and limits what you can do down the css line, as internal components haven't been decorated so css can't reach them. You can hit them with /deep/ but that's deprecated now, and a hack at best anyway. Material uses ViewEncapsulation.None, but that makes sense for a component library. In hindsight, I'd use ViewEncapsulated.None from now on, just easier and you don't get any brownie points by pretending to use a pretend shadowdom, the real thing nowhere in sight.
 
+##### Material is buggy
+It's not that you can't work around it with css hacks and code hacks, but then you have to pull everything out when they fix it. There needs to be much more configurability as well, as they act like they're true web components that should be isolated, yet they use ViewEncapsulation.None and global css. Hardly web components then. The shadowdom is nowhere to be found. I wonder if it will ever exist. I wonder if I would ever want it to exist anyway as the only thing that saved me on this project, was my ability to hack their component css. Without that, I couldn't have completed this project. They'd need much more configurability on their components for them to not require outside css hacks.
+
+##### flex-layout was great
+Unnecessary down the positioning line, I was already very busy in the css, a couple flex properties no big deal. But their responsive directives which worked just like their other directives were very useful. And the fact that you could see all positioning in the html instead of having to go to css to see where things landed (like old time floats), was nice. Just that it junked up the html some. I'll use flex-layout from now on. I was amazed at how I could do all my positioning with flex, not matter how intricate. Very handy for cross-axis positioning as well as main axis positioning. No more games with line-height or ghost classes to get vertical middle, no more floats to get things to go this way or that. Was a breath of fresh air. All my old css positioning tricks, no longer required.
   
 
