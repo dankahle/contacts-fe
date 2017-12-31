@@ -18,7 +18,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "theme": "node-sass src/theme.scss src/theme.css"
+    "theme": "node-sass src/theme.scss src/theme.css",
+    "serve": "node server.js"
   },
   "private": true,
   "dependencies": {

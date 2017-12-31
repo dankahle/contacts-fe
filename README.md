@@ -44,4 +44,25 @@ It's not that you can't work around it with css hacks and code hacks, but then y
 ##### flex-layout was great
 Unnecessary down the positioning line, I was already very busy in the css, a couple flex properties no big deal. But their responsive directives which worked just like their other directives were very useful. And the fact that you could see all positioning in the html instead of having to go to css to see where things landed (like old time floats), was nice. Just that it junked up the html some. I'll use flex-layout from now on. I was amazed at how I could do all my positioning with flex, not matter how intricate. Very handy for cross-axis positioning as well as main axis positioning. No more games with line-height or ghost classes to get vertical middle, no more floats to get things to go this way or that. Was a breath of fresh air. All my old css positioning tricks, no longer required.
   
+### getting started  
 
+**clone the project**
+```
+git clone https://github.com/dankahle/contacts-fe.git
+npm install
+```
+
+**run locally**
+```
+ng serve // serves site on port 4200
+```
+the site expects an api at port 3000, the contacts-be default port (configurable). If the api port is changed, update the environment.ts apiUrl value to reflect this.
+
+**other scripts**
+```
+npm run build // builds to dist directory
+npm run serve // serves dist directory on port 3005
+npm run buildprod // build prod
+npm run lint // tslint
+npm run test // run unit tests
+```
