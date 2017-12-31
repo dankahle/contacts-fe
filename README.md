@@ -1,6 +1,6 @@
 # contacts-fe
 
-This is the angular 5/material/flex-layout frontend of the dk-contacts project. It utilizes the lastest angular/material frameworks. 
+This is the angular 5/material/flex-layout frontend of the dk-contacts project. I went with global state management for global state visibility with an observable pub/sub for dealing with changes that required broadcasting to other components. Angular pulled the watches and messages from angular 1, a mistake I'm thinking. Thier html binding/input/output approach is too constraining, albeit I see the need to reduce digest churn. I found angular and material to be fairly buggy still, especially material, which has a ways to go. I had to update constantly to get the latest bug fixes (1700 for angular and 700 for material). flex-layout was easy to use once you figured out the caveats (for fxFlex, always use all three parameters), and their responsive versions terribly easy to use. It does junk up the html some, but I like that you can see where things will go in the html instead of having to run to css for it.
   
 ###features:  
 * page based architecture that localizes all services/components/etc involved with a specific site section.
