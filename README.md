@@ -16,7 +16,7 @@ This is the angular 5/material/flex-layout frontend of the dk-contacts project. 
 * error dialog for all api errors with json section for additional data
 * synchronized errorcodes between node-base and UI for custom error messages
 * ajax progress bar across the top, that can be turned off/on with params
-* HttpClient interceptors for ajax progress, errors, CORS header addition
+* HttpClient interceptors for ajax progress, errors, cors header addition
 * httpOnly cookie based security, session or extended using backend authentication and cookie handling
 * login/register pages with a splash front for nicer entry
 * global state manager (Store) that presents a pub/sub interface for global data, with separate pub/sub for individual properties for less code churn. Also Substore sections that would go with site sections or pages, to keep things compartmentalized. Message emit/sub interface.
