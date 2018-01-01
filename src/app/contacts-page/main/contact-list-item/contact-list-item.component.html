@@ -3,7 +3,7 @@
 <div tabindex="0" class="list-item" fxFlex="grow" fxLayout>
 
   <div class="pic" fxFlex="none" fxLayout>
-    <div class="letter">{{contact.name[0].toUpperCase() || contact.company[0].toUpperCase()}}</div>
+    <div class="letter">{{(contact.name && contact.name[0].toUpperCase()) || (contact.company && contact.company[0].toUpperCase())}}</div>
   </div>
 
   <div class="columns" tabindex="0" fxFlex="grow" fxLayout="row" fxLayoutAlign="space-between center">

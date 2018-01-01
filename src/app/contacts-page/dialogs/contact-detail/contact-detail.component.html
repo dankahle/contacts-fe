@@ -5,7 +5,7 @@
 
     <div class="left" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="start center">
       <div class="pic" fxFlex="none">
-        <div class="letter">{{contact.name[0].toUpperCase() || contact.company[0].toUpperCase()}}</div>
+        <div class="letter">{{(contact.name && contact.name[0].toUpperCase()) || (contact.company && contact.company[0].toUpperCase())}}</div>
       </div>
 
       <div class="name-labels" fxFlex="grow">
