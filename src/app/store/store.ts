@@ -29,7 +29,7 @@ export class Store extends StoreBase {
 
   authenticated = false;
   initialized = false;
-  leftNavClosed = true;
+  leftNavClosed = false;
   initialBreakpoint: string;
   selectedLabel?: Label;
 
