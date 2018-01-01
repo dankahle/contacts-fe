@@ -52,9 +52,9 @@ export class LeftnavComponent {
       }
     });
 
+    // hide the animation if xs/sm
     if (breakpoints.isActive('xs') || breakpoints.isActive('sm')) {
-      // hack: left nav transitions on entry, even though class is closed, if we go "open" class then probably transitions open
-      // initially. Not sure the answer to that then. Hide it on start for a sec if xs
+      this.store.leftNavClosed = true;
       this.hideLeftNavFast();
     }
   } // end constructor
@@ -167,6 +167,9 @@ export class LeftnavComponent {
       this.store.pubLeftNavClosed(true);
     } else if (this.breakpoints.isActive('gt-sm') && _.includes(['xs', 'sm'], change.lastBreakpoint)) {
       this.store.pubLeftNavClosed(this.wasClosed);
+      if (this.wasClosed) {
+        this.hideLeftNavFast();
+      }
     }
   }
 
