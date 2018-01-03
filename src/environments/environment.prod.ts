@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://obscure-atoll-75647.herokuapp.com/',
+  apiUrl: 'https://dankahle.herokuapp.com/',
   logState: false
 };
