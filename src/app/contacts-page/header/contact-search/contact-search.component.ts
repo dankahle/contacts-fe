@@ -28,13 +28,15 @@ export class ContactSearchComponent implements OnInit {
   ngOnInit() {
     this.filteredContacts = this.searchCtrl.control.valueChanges
       .startWith(null)
-      .map(contact => contact && typeof contact === 'object' ? contact.name : contact)
-      .map(name => name ? this.filter(name) : []);
+      .map(txt => txt ? this.filter(txt) : []);
   }
 
-  filter(name: string): Contact[] {
-    return this.store.con.contacts.filter(option =>
-      option.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
+  filter(txt: string): Contact[] {
+    return this.store.con.contacts.filter(contact => {
+      const val = txt.toLowerCase();
+      return (contact.name && contact.name.toLowerCase().indexOf(val) !== -1) ||
+        (contact.company && contact.company.toLowerCase().indexOf(val) !== -1);
+    });
   }
 
   getDisplayName(contact: Contact): string {
