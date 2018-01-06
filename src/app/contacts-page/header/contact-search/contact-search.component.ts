@@ -28,7 +28,7 @@ export class ContactSearchComponent implements OnInit {
   ngOnInit() {
     this.filteredContacts = this.searchCtrl.control.valueChanges
       .startWith(null)
-      .map(txt => txt ? this.filter(txt) : []);
+      .map(txt => txt && typeof(txt) === 'string' ? this.filter(txt) : []);
   }
 
   filter(txt: string): Contact[] {
