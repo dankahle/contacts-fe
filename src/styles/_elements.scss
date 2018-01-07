@@ -7,6 +7,9 @@ html, body {
 
 body {
   color: rgba(0,0,0,.87);
+  // material sets .mat-typography font to 14px/20px, but this forces you to set line-height every time you change font-size
+  // 14/20 is 1.42, so we'll override to 1.42 (same as boot3), then we can change font-size at will
+  line-height: 1.42 !important;
 }
 
 *,
