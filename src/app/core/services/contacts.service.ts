@@ -19,7 +19,8 @@ export class ContactsService {
   }
 
   getAll() {
-    return this.http.get<Contact[]>(`${this.apiUrl}api/contacts`);
+    return this.http.get<Contact[]>(`${this.apiUrl}api/contacts`)
+      .map(contacts => _.sortBy(contacts, this.sortByNameOrCompany));
   }
 
   getOne(id: number) {
@@ -30,7 +31,7 @@ export class ContactsService {
     return this.http.post<Contact>(`${this.apiUrl}api/contacts`, contact)
       .do(_contact => {
         this.con.contacts.push(_contact);
-        this.con.pubContacts(_.sortBy(this.con.contacts, 'name'));
+        this.con.pubContacts(_.sortBy(this.con.contacts, this.sortByNameOrCompany));
       });
   }
 
@@ -40,7 +41,7 @@ export class ContactsService {
       .do(_contact => {
         const userContact = _.find(this.con.contacts, {id: contact.id});
         _.merge(userContact, _contact);
-        this.con.pubContacts(_.sortBy(this.con.contacts, 'name'));
+        this.con.pubContacts(_.sortBy(this.con.contacts, this.sortByNameOrCompany));
       });
   }
 
@@ -163,5 +164,9 @@ export class ContactsService {
     return this.updateOne(contact);
   }
 
+  sortByNameOrCompany(contact): boolean {
+    return (contact.name && contact.name.toLowerCase()) || (contact.company && contact.company.toLowerCase());
+  }
 
 }
+

@@ -28,6 +28,9 @@ export class ContactSearchComponent implements OnInit {
   ngOnInit() {
     this.filteredContacts = this.searchCtrl.control.valueChanges
       .startWith(null)
+      // bug: somehow they end up setting the searchCtrl to a contact when you select one, there was code for this mind you
+      // but you took it out, and it's still happening, so they're doing it I figure. This crashes the code of course
+      // as it's expecting a string from that input. We'll look for string then
       .map(txt => txt && typeof(txt) === 'string' ? this.filter(txt) : []);
   }
 

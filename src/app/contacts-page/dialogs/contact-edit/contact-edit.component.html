@@ -95,14 +95,33 @@
           <div fxFlex="1 1 60%" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
             <mat-form-field fxFlex="1 1 30%">
               <mat-select [(ngModel)]="phn.prefix" name="prefix{{idx}}" placeholder="Country">
-                <mat-option data-countryCode="GB" value="44" Selected>UK (+44)</mat-option>
                 <mat-option data-countryCode="US" value="1">USA (+1)</mat-option>
                 <mat-optgroup label="Other countries">
                   <mat-option data-countryCode="DZ" value="213">Algeria (+213)</mat-option>
                   <mat-option data-countryCode="AD" value="376">Andorra (+376)</mat-option>
                   <mat-option data-countryCode="AO" value="244">Angola (+244)</mat-option>
-                  <mat-option data-countryCode="ZM" value="260">Zambia (+260)</mat-option>
-                  <mat-option data-countryCode="ZW" value="263">Zimbabwe (+263)</mat-option>
+                  <mat-option data-countryCode="AI" value="1264">Anguilla (+1264)</mat-option>
+                  <mat-option data-countryCode="AG" value="1268">Antigua &amp; Barbuda (+1268)</mat-option>
+                  <mat-option data-countryCode="AR" value="54">Argentina (+54)</mat-option>
+                  <mat-option data-countryCode="AM" value="374">Armenia (+374)</mat-option>
+                  <mat-option data-countryCode="AW" value="297">Aruba (+297)</mat-option>
+                  <mat-option data-countryCode="AU" value="61">Australia (+61)</mat-option>
+                  <mat-option data-countryCode="AT" value="43">Austria (+43)</mat-option>
+                  <mat-option data-countryCode="AZ" value="994">Azerbaijan (+994)</mat-option>
+                  <mat-option data-countryCode="BS" value="1242">Bahamas (+1242)</mat-option>
+                  <mat-option data-countryCode="BH" value="973">Bahrain (+973)</mat-option>
+                  <mat-option data-countryCode="BD" value="880">Bangladesh (+880)</mat-option>
+                  <mat-option data-countryCode="BB" value="1246">Barbados (+1246)</mat-option>
+                  <mat-option data-countryCode="BY" value="375">Belarus (+375)</mat-option>
+                  <mat-option data-countryCode="BE" value="32">Belgium (+32)</mat-option>
+                  <mat-option data-countryCode="BZ" value="501">Belize (+501)</mat-option>
+                  <mat-option data-countryCode="BJ" value="229">Benin (+229)</mat-option>
+                  <mat-option data-countryCode="BM" value="1441">Bermuda (+1441)</mat-option>
+                  <mat-option data-countryCode="BT" value="975">Bhutan (+975)</mat-option>
+                  <mat-option data-countryCode="BO" value="591">Bolivia (+591)</mat-option>
+                  <mat-option data-countryCode="BA" value="387">Bosnia Herzegovina (+387)</mat-option>
+                  <mat-option data-countryCode="BW" value="267">Botswana (+267)</mat-option>
+                  <mat-option data-countryCode="BR" value="55">Brazil (+55)</mat-option>
                 </mat-optgroup>
               </mat-select>
             </mat-form-field >
@@ -192,7 +211,7 @@
         </div>
         <div class="inputs" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="space-between top">
           <mat-form-field fxFlex="1 1 auto">
-            <textarea [rows]="contact.notes.split('\n').length" matInput name="notes" [(ngModel)]="contact.notes"
+            <textarea [rows]="contact.notes && contact.notes.indexOf('\n') !== -1 ? contact.notes.split('\n').length: 1" matInput name="notes" [(ngModel)]="contact.notes"
                       placeholder="Notes" autocomplete="noway" spellcheck="false"></textarea>
           </mat-form-field>
         </div>
