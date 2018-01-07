@@ -1,7 +1,30 @@
 # contacts-fe
 
-This is the angular 5/material/flex-layout frontend of the dk-contacts project. I went with global state management for global state visibility with an observable pub/sub for dealing with changes that required broadcasting to other components. Angular pulled the watches and messages from angular 1, a mistake I'm thinking. Thier html binding/input/output approach is too constraining, albeit I see the need to reduce digest churn. I found angular and material to be fairly buggy still, especially material, which has a ways to go. I had to update constantly to get the latest bug fixes (1700 for angular and 700 for material). flex-layout was easy to use once you figured out the caveats (for fxFlex, always use all three parameters), and their responsive versions terribly easy to use. It does junk up the html some, but I like that you can see where things will go in the html instead of having to run to css for it.
+This is the angular 5/material/flex-layout frontend of the dk-contacts project. I went with global state management for global state visibility with an observable pub/sub for dealing with changes that required broadcasting to other components. Angular pulled the watches and messages from angular 1, a mistake I'm thinking. Thier html binding/input/output approach is too constraining, albeit I see the need to reduce digest churn. I found angular and material to be fairly buggy still, especially material, which has a ways to go. I had to update constantly to get the latest bug fixes (1700 for angular and 700 for material). flex-layout was easy to use once you figured out the caveats, and their responsive versions terribly easy to use. It does junk up the html some, but I like that you can see where things will go in the html instead of having to run to css for it.
   
+  ### getting started  
+  
+  **clone the project**
+  ```
+  git clone https://github.com/dankahle/contacts-fe.git
+  npm install
+  ```
+  
+  **run locally**
+  ```
+  ng serve // serves site on port 4200
+  ```
+  the site expects an api at port 3000, the contacts-be default port (configurable). If the api port is changed, update the environment.ts apiUrl value to reflect this.
+  
+  **other scripts**
+  ```
+  npm run build // builds to dist directory
+  npm run serve // serves dist directory on port 3005
+  npm run buildprod // build prod
+  npm run lint // tslint
+  npm run test // run unit tests
+  ```
+
 ### features:  
 * page based architecture that localizes all services/components/etc involved with a specific site section.
 * core and shared directories for common services/components
@@ -44,25 +67,5 @@ It's not that you can't work around it with css hacks and code hacks, but then y
 ##### flex-layout was great
 Unnecessary down the positioning line, I was already very busy in the css, a couple flex properties no big deal. But their responsive directives which worked just like their other directives were very useful. And the fact that you could see all positioning in the html instead of having to go to css to see where things landed (like old time floats), was nice. Just that it junked up the html some. I'll use flex-layout from now on. I was amazed at how I could do all my positioning with flex, not matter how intricate. Very handy for cross-axis positioning as well as main axis positioning. No more games with line-height or ghost classes to get vertical middle, no more floats to get things to go this way or that. Was a breath of fresh air. All my old css positioning tricks, no longer required.
   
-### getting started  
-
-**clone the project**
-```
-git clone https://github.com/dankahle/contacts-fe.git
-npm install
-```
-
-**run locally**
-```
-ng serve // serves site on port 4200
-```
-the site expects an api at port 3000, the contacts-be default port (configurable). If the api port is changed, update the environment.ts apiUrl value to reflect this.
-
-**other scripts**
-```
-npm run build // builds to dist directory
-npm run serve // serves dist directory on port 3005
-npm run buildprod // build prod
-npm run lint // tslint
-npm run test // run unit tests
-```
+##### Material typography line-heights are a problem
+Bootstrap used to use a number line-height, 1.42 on boot3 and 1.5 on boot4. Material chooses instead to set hard pixels on all their line-heights, the default for body (I put .mat-typography class on the body as it made sense) was 14px/20px for font-size/line-height, which is 1.42, same as boot3. But now, when you want to change the font-size of anything, you also have to set the line-height. Not liking that at all. If you forget, you can get burned as it's character dependent: you set it to 25px and see no problems, deploy to prod and someone enters: g or y and the bottom is cutoff cause your 20px line-height is shorter than your font-size. Not cool.
