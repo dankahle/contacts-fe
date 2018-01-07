@@ -36,7 +36,7 @@ export class ContactsService {
   }
 
   updateOne(contact: Contact) {
-    const params = new HttpParams().set('delay', '1000');
+    const params = new HttpParams().set('delay', '500');
     return this.http.put<Contact>(`${this.apiUrl}api/contacts/${contact.id}`, contact, {params})
       .do(_contact => {
         const userContact = _.find(this.con.contacts, {id: contact.id});
