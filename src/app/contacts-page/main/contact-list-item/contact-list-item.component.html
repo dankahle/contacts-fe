@@ -10,7 +10,7 @@
 
     <div class="name text-ellipsis"
          fxFlex.xs="0 1 100%" fxFlex.sm="0 1 46%" fxFlex.md="0 1 46%" fxFlex.lg="0 1 30%" fxFlex.xl="0 1 23%">
-      {{contact.name || contact.company}}</div>
+      {{contact.name && contact.company ? contact.name + ' - ' + contact.company : contact.name || contact.company}}</div>
 
     <div  fxLayout="row" fxLayoutAlign="start center"
          fxHide.lt-sm fxFlex.sm="0 1 46%" fxFlex.md="0 1 46%" fxFlex.lg="0 1 30%" fxFlex.xl="0 1 23%">
