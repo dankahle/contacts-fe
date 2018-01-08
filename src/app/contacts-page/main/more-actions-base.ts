@@ -47,7 +47,6 @@ export class MoreActionsBase {
   }
 
   deleteContact(event): Observable<boolean> {
-    event.stopPropagation();
     const subject = new Subject<boolean>();
     const config = <MatDialogConfig>{
       height: '169px',
