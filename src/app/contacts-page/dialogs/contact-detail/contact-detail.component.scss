@@ -35,12 +35,13 @@
       .name-labels {
         padding-left: 20px;
         padding-right: 14px;
+        min-width: 0;
 
         .name-div {
           font-size: 24px;
           height: calc(#{$height-header} * .45);
           .name {
-            max-width: 55%;
+            max-width: 100%;
           }
         }
         .labels {
