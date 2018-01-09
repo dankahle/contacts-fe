@@ -4,7 +4,7 @@
   <dk-leftnav-label [label]="labels.contacts" (click)="showAllContacts($event, labels.contacts)" (keydown)="showAllContacts($event, labels.contacts)"
                     [class.active]="!store.selectedLabel"></dk-leftnav-label>
 
-  <mat-expansion-panel  class="exp-panel-leftnav" [expanded]="true">
+  <mat-expansion-panel  class="exp-panel-leftnav" [expanded]="true" style="margin-top:0;">
     <mat-expansion-panel-header collapsedHeight="41px" expandedHeight="41px">
       <mat-panel-title>
         Labels
@@ -20,7 +20,7 @@
                       (keydown)="editLabel($event, null, 'add')"></dk-leftnav-label>
   </mat-expansion-panel>
 
-  <mat-expansion-panel>
+  <mat-expansion-panel  class="exp-panel-leftnav">
     <mat-expansion-panel-header collapsedHeight="41px" expandedHeight="41px">
       <mat-panel-title>
         Extras
