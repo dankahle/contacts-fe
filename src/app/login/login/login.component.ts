@@ -47,6 +47,8 @@ export class LoginComponent implements AfterViewInit {
 
   register() {
     this.userAlreadyExists = false;
+    this.user.name = this.user.name.trim();
+    this.user.company = this.user.company.trim();
     this.loginService.register(this.user)
       .subscribe(user => {
         this.router.navigateByUrl('/');
