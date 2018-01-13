@@ -14,7 +14,7 @@ import * as $ from 'jquery';
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
-  @HostBinding('class.dkhost-app') hostClass = true;
+  @HostBinding('class.dkhost-root') hostClass = true;
   val: string;
 
   constructor(public store: Store) {

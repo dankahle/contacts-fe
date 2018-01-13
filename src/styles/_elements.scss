@@ -37,5 +37,5 @@ a {
 // of host class = dkhost-element-selector, we can enforce this in one place, here. Be hard to override this level of specificity
 // but I'll take the ease of application this brings.
 *[class^="dkhost-"] {
-  display: inline-block;
+  display: block;
 }
