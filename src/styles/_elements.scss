@@ -31,3 +31,11 @@ a {
     color: $color-link !important;
   }
 }
+
+// the css on an inline that contains block element (surely all these comps will contain block elements right) is suspect.
+// the host "must be inline-block or block because of this. With our ViewEncapsulation.None element namespacing standard
+// of host class = dkhost-element-selector, we can enforce this in one place, here. Be hard to override this level of specificity
+// but I'll take the ease of application this brings.
+*[class^="dkhost-"] {
+  display: inline-block;
+}

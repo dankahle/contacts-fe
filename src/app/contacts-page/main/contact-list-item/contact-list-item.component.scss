@@ -1,75 +1,78 @@
 @import '../../../../styles/comp-index';
 
-  $height: 56px;
+$height: 56px;
 
-.list-item {
-  position: relative;
-  height: 56px;
-  overflow: hidden;
-  outline: none;
-  &:hover {
-    background-color: $bg-light-gray;
-    .icons {
-      display: flex;
-    }
-  }
+.dkhost-contact-list-item {
 
-  $width-pic: 68px;
-  .pic {
-    width: $width-pic;
-    height: $height;
-    padding: 4px;
-    patting-right: 12px;
-    display: block;
-    .letter {
-      margin: auto;
-      color: white;
-      width: 36px;
-      height: 36px;
-      font-size: 20px;
-      line-height: 36px;
-      text-align: center;
-      font-weight: 300;
-      background-color: $mat-warn;
-      border: 1px solid $mat-warn;
-      border-radius: 50%;
-    }
-  }
-
-  .columns {
-    min-width: 0;
+  .list-item {
+    position: relative;
+    height: 56px;
+    overflow: hidden;
     outline: none;
-
-    .name {
-      font-size: 13px;
-      font-weight: 500;
-    }
-  }
-
-  .icons {
-    display: none;
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 1;
-    height: $height;
-    background: $bg-light-gray;
-    padding-left: 10px;
-    padding-right: 0px;
-    color: $link-gray;
-
-    .wrap {
-      cursor: pointer;
-      padding: 18px 6px;
-      box-sizing: content-box;
-      height: 20px;
-      width: 20px;
-            i {
-        font-size: 20px;
+    &:hover {
+      background-color: $bg-light-gray;
+      .icons {
+        display: flex;
       }
     }
+
+    $width-pic: 68px;
+    .pic {
+      width: $width-pic;
+      height: $height;
+      padding: 4px;
+      patting-right: 12px;
+      display: block;
+      .letter {
+        margin: auto;
+        color: white;
+        width: 36px;
+        height: 36px;
+        font-size: 20px;
+        line-height: 36px;
+        text-align: center;
+        font-weight: 300;
+        background-color: $mat-warn;
+        border: 1px solid $mat-warn;
+        border-radius: 50%;
+      }
+    }
+
+    .columns {
+      min-width: 0;
+      outline: none;
+
+      .name {
+        font-size: 13px;
+        font-weight: 500;
+      }
+    }
+
+    .icons {
+      display: none;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 1;
+      height: $height;
+      background: $bg-light-gray;
+      padding-left: 10px;
+      padding-right: 0px;
+      color: $link-gray;
+
+      .wrap {
+        cursor: pointer;
+        padding: 18px 6px;
+        box-sizing: content-box;
+        height: 20px;
+        width: 20px;
+        i {
+          font-size: 20px;
+        }
+      }
+    }
+
   }
 
 }
-
 

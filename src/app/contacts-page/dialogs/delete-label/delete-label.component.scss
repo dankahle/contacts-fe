@@ -1,9 +1,13 @@
 
+.dkhost-delete-label {
 
-form {
-  margin-top: 18px;
+  form {
+    margin-top: 18px;
+  }
+
+  mat-radio-button:first-of-type {
+    margin-bottom: 7px;
+  }
+
 }
 
-mat-radio-button:first-of-type {
-  margin-bottom: 7px;
-}

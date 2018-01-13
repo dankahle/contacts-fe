@@ -1,36 +1,40 @@
 
 @import '../../../../styles/comp-index';
 
+.dkhost-leftnav {
 
-.leftnav {
-  $speed: 200ms;
-  transition: margin-left $speed, left $speed;
-  width: $leftnav-width;
-  margin-left: 0;
-  padding-top: 15px;
-  border-right: 1px solid $border-gray;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding-bottom: 1px;
-  background-color: white;
-  z-index: 100;
-
-  @media (max-width: $breakpoint-md) {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  &.closed {
-    margin-left: -$leftnav-width;
+  .leftnav {
+    $speed: 200ms;
+    transition: margin-left $speed, left $speed;
+    width: $leftnav-width;
+    margin-left: 0;
+    padding-top: 15px;
+    border-right: 1px solid $border-gray;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-bottom: 1px;
+    background-color: white;
+    z-index: 100;
 
     @media (max-width: $breakpoint-md) {
-      margin-left: 0;
-      left: -$leftnav-width;
+      position: absolute;
+      top: 0;
+      left: 0;
     }
+
+    &.closed {
+      margin-left: -$leftnav-width;
+
+      @media (max-width: $breakpoint-md) {
+        margin-left: 0;
+        left: -$leftnav-width;
+      }
+    }
+
   }
 
 }
+
 
 
 

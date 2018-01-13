@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ContentChild, Inject, ViewChild, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, ContentChild, HostBinding, Inject, ViewChild, ViewEncapsulation} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {Contact} from '../../../store/models/contact';
 import {Store} from '../../../store/store';
@@ -12,9 +12,10 @@ import {Observable} from 'rxjs/Observable';
   selector: 'dk-contact-detail',
   templateUrl: './contact-detail.component.html',
   styleUrls: ['./contact-detail.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.None
 })
 export class ContactDetailComponent extends MoreActionsBase {
+  @HostBinding('class.dkhost-contact-detail') hostClass = true;
   contact: Contact;
   Util = Util;
 

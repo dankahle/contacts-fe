@@ -1,102 +1,108 @@
 @import '../../../../styles/comp-index';
 
-.contact-edit-dialog {
-  $height-header: 70px;
-  $height-content: calc(500px - #{$height-header});// 500 is height set in dialog config, keep these in sync
 
-  .header {
-    height: $height-header;
-    background-color: $bg-light-gray;
-    padding: 25px;
+.dkhost-contact-edit {
 
-    .name {
-      font-size: 20px;
-      max-width: 100%;
+  .contact-edit-dialog {
+    $height-header: 70px;
+    $height-content: calc(500px - #{$height-header});// 500 is height set in dialog config, keep these in sync
+
+    .header {
+      height: $height-header;
+      background-color: $bg-light-gray;
+      padding: 25px;
+
+      .name {
+        font-size: 20px;
+        max-width: 100%;
+      }
+
+      .wrap {
+        $size: 22px;
+        color: $link-gray;
+        cursor: pointer;
+        padding: 6px 6px;
+        box-sizing: content-box;
+        height: $size;
+        width: $size;
+        i {
+          font-size: $size;
+        }
+      }
+
     }
 
-    .wrap {
-      $size: 22px;
+    .content {
+      padding: 24px;
       color: $link-gray;
-      cursor: pointer;
-      padding: 6px 6px;
-      box-sizing: content-box;
-      height: $size;
-      width: $size;
-      i {
-        font-size: $size;
-      }
-    }
+      font-size: 13px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      height: $height-content;
 
-  }
+      .section {
+        &:not(:first-of-type) {
+          //margin-top: 14px;
+        }
 
-  .content {
-    padding: 24px;
-    color: $link-gray;
-    font-size: 13px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    height: $height-content;
+        .pic {
+          width: 82px;
 
-    .section {
-      &:not(:first-of-type) {
-        //margin-top: 14px;
-      }
-
-      .pic {
-        width: 82px;
-
-        .wrap.name {
-          width: 50px;
-          height: 50px;
-          background-color: #ccc;
-          border-radius: 50%;
-          display: flex;
-          i {
-            margin: auto;
-            font-size: 40px;
-            color: white;
+          .wrap.name {
+            width: 50px;
+            height: 50px;
+            background-color: #ccc;
+            border-radius: 50%;
+            display: flex;
+            i {
+              margin: auto;
+              font-size: 40px;
+              color: white;
+            }
           }
         }
-      }
 
-      .inputs {
-        max-width: 80%;
-        padding: 0 20px;
-        min-width: 0 !important;
+        .inputs {
+          max-width: 80%;
+          padding: 0 20px;
+          min-width: 0 !important;
 
-        textarea {
-          resize: none;
-        }
-      }
-
-      .icons {
-        width: 64px;
-
-        .wrap {
-          padding: 6px;
-          width: 32px;
-          height: 32px;
-          cursor: pointer;
-
-          i {
-            font-size: 20px;
-            display: block;
-          }
-          i.clear {
-            color: #aaa;
-          }
-          i.add {
-            color: $mat-primary;
+          textarea {
+            resize: none;
           }
         }
-      }
 
-    }// section
+        .icons {
+          width: 64px;
+
+          .wrap {
+            padding: 6px;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+
+            i {
+              font-size: 20px;
+              display: block;
+            }
+            i.clear {
+              color: #aaa;
+            }
+            i.add {
+              color: $mat-primary;
+            }
+          }
+        }
+
+      }// section
 
 
-  }// content
+    }// content
 
-}// dialog
+  }// dialog
+
+}
+
 
 
 

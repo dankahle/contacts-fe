@@ -1,63 +1,69 @@
 @import '../../../../styles/comp-index';
 
-.label {
-  width: 259px;
-  height: 41px;
-  position: relative;
-  cursor: pointer;
-  padding-left: 20px;
-  color: $link-gray;
-  white-space: nowrap;
-  overflow: hidden;
-  outline: 0;
-  min-width: 0;
-  * {
-    vertical-align: middle;
-    color: $link-gray;
-  }
-  i {
-    font-size: 20px;
-    position: relative;
-    top: 1px;
-  }
-  .name {
-    position: relative;
-    top: 1px;
-    margin-left: 14px;
-    margin-right: 3px;
-    max-width: 62%;
-  }
-  &:hover, &:focus, :host.active > & {
-    background: $bg-light-gray;
-  }
-  :host.active > & {
-    * {
-      color: $link-active;
-    }
-  }
 
-  .icons {
-    display: none;
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding-left: 5px;
-    z-index: 10;
-    background: $bg-light-gray;
-    .wrap {
-      display: inline-block;
-      box-sizing: content-box;
-      height: 18px;
-      width: 18px;
-      padding: 9px 3px;
-      i {
-        font-size: 18px;
+.dkhost-leftnav-label {
+
+  .label {
+    width: 259px;
+    height: 41px;
+    position: relative;
+    cursor: pointer;
+    padding-left: 20px;
+    color: $link-gray;
+    white-space: nowrap;
+    overflow: hidden;
+    outline: 0;
+    min-width: 0;
+    * {
+      vertical-align: middle;
+      color: $link-gray;
+    }
+    i {
+      font-size: 20px;
+      position: relative;
+      top: 1px;
+    }
+    .name {
+      position: relative;
+      top: 1px;
+      margin-left: 14px;
+      margin-right: 3px;
+      max-width: 62%;
+    }
+    &:hover, &:focus, dkhost-leftnav-label.active > & {
+      background: $bg-light-gray;
+    }
+    dkhost-leftnav-label.active > & {
+      * {
+        color: $link-active;
       }
     }
+
+    .icons {
+      display: none;
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding-left: 5px;
+      z-index: 10;
+      background: $bg-light-gray;
+      .wrap {
+        display: inline-block;
+        box-sizing: content-box;
+        height: 18px;
+        width: 18px;
+        padding: 9px 3px;
+        i {
+          font-size: 18px;
+        }
+      }
+    }
+
+    &:hover .icons {
+      display: block;
+    }
   }
 
-  &:hover .icons {
-    display: block;
-  }
+
 }
 

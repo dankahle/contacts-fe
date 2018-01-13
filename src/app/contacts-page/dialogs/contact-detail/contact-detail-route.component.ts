@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, HostBinding, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, ActivatedRouteSnapshot, Router} from '@angular/router';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {ContactDetailComponent} from './contact-detail.component';
@@ -15,10 +15,9 @@ import {ValidateService} from '../../../core/services/validate.service';
   selector: 'dk-contact-detail-route',
   template: '<router-outlet></router-outlet>',
   styles: [],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.None
 })
 export class ContactDetailRouteComponent {
-
   constructor(route: ActivatedRoute, router: Router, progressService: ProgressService, dialog: MatDialog,
               validate: ValidateService) {
 

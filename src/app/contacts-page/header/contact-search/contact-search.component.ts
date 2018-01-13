@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, HostBinding, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import {Contact} from '../../../store/models/contact';
@@ -12,9 +12,10 @@ import {Messages} from '../../../store/models/messages';
   selector: 'dk-contact-search',
   templateUrl: './contact-search.component.html',
   styleUrls: ['./contact-search.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.None
 })
 export class ContactSearchComponent implements OnInit {
+  @HostBinding('class.dkhost-contact-search') hostClass = true;
   @ViewChild('searchCtrl') searchCtrl;
   @ViewChild('searchCtrl', {read: ElementRef}) searchElem;
   searchVal = '';

@@ -1,40 +1,43 @@
 
 @import "../../../styles/comp-index";
 
-:host {
+
+.dkhost-login {
   margin: auto;
+
+  form {
+    .inputs {
+      margin-bottom: 11px;
+
+      mat-form-field {
+        display: block;
+      }
+    }
+
+    mat-checkbox {
+      font-size: 13px;
+    }
+
+    .error {
+      font-size: 13px;
+      color: $mat-warn;
+    }
+
+    .button {
+      text-align: right;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      [mat-button] {
+        font-size: 20px;
+      }
+    }
+
+    .link {
+      font-size: 16px;
+      text-decoration: underline;
+    }
+
+  }
+
 }
 
-form {
-  .inputs {
-    margin-bottom: 11px;
-
-    mat-form-field {
-      display: block;
-    }
-  }
-
-  mat-checkbox {
-    font-size: 13px;
-  }
-
-  .error {
-    font-size: 13px;
-    color: $mat-warn;
-  }
-
-  .button {
-    text-align: right;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    [mat-button] {
-      font-size: 20px;
-    }
-  }
-
-  .link {
-    font-size: 16px;
-    text-decoration: underline;
-  }
-
-}

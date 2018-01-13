@@ -1,64 +1,70 @@
 @import '../../../../styles/comp-index';
 
-mat-toolbar {
-  background-color: #2a56c6 !important;
-}
 
-a {
-  &:link, &:visited, &:hover, &:active {
-    color: inherit !important;
+.dkhost-header {
+
+  mat-toolbar {
+    background-color: #2a56c6 !important;
   }
-}
 
-.left {
-
-  .menu {
-    height: 32px;
-    padding: 4px;
-    &:hover {
-      cursor: pointer
+  a {
+    &:link, &:visited, &:hover, &:active {
+      color: inherit !important;
     }
   }
 
-  .logo {
-    margin-left: 40px;
-    font-size: 22px;
-    .logo1 {
-      font-weight: 400;
+  .left {
+
+    .menu {
+      height: 32px;
+      padding: 4px;
+      &:hover {
+        cursor: pointer
+      }
     }
-    .logo2 {
-      font-weight: 300;
+
+    .logo {
+      margin-left: 40px;
+      font-size: 22px;
+      .logo1 {
+        font-weight: 400;
+      }
+      .logo2 {
+        font-weight: 300;
+      }
+    }
+
+    .search-div {
+      margin-left: 50px;
+      max-width: 700px;
     }
   }
 
-  .search-div {
-    margin-left: 50px;
-    max-width: 700px;
+  .right {
+    margin-left: 30px;
+    font-weight: 300;
+
+    .pic {
+      $line-height: 35px;
+      display: inline-block;
+      height: $line-height;
+      width: $line-height;
+      text-align: center;
+      color: white;
+      line-height: $line-height;
+      border: 1px solid $mat-primary;
+      background-color: $mat-primary;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
+    .user {
+      font-size: 19px;
+    }
+    .logout {
+      margin-left: 10px;
+      font-size: 15px;
+    }
   }
+
 }
 
-.right {
-  margin-left: 30px;
-  font-weight: 300;
-
-  .pic {
-    $line-height: 35px;
-    display: inline-block;
-    height: $line-height;
-    width: $line-height;
-    text-align: center;
-    color: white;
-    line-height: $line-height;
-    border: 1px solid $mat-primary;
-    background-color: $mat-primary;
-    border-radius: 50%;
-    margin-right: 5px;
-  }
-  .user {
-    font-size: 19px;
-  }
-  .logout {
-    margin-left: 10px;
-    font-size: 15px;
-  }
-}

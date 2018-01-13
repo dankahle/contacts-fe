@@ -1,124 +1,130 @@
 @import '../../../../styles/comp-index';
 
-.dialog {
+.dkhost-contact-detail {
 
-  $height-header: 110px;
-  $height-content: calc(500px - #{$height-header});// 500 is height set in dialog config, keep these in sync
-  .header {
-    height: $height-header;
-    background-color: $bg-light-gray;
-    padding: 20px;
+  .dialog {
 
-    .left {
-      min-width: 0 !important;
+    $height-header: 110px;
+    $height-content: calc(500px - #{$height-header});// 500 is height set in dialog config, keep these in sync
+    .header {
+      height: $height-header;
+      background-color: $bg-light-gray;
+      padding: 20px;
 
-      .pic {
-        $height: 47px;
-        padding: 4px;
-        patting-right: 12px;
-        display: block;
-        .letter {
-          margin: auto;
-          color: white;
-          width: $height;
-          height: $height;
-          font-size: 23px;
-          line-height: $height;
-          text-align: center;
-          font-weight: 300;
-          background-color: $mat-warn;
-          border: 1px solid $mat-warn;
-          border-radius: 50%;
-        }
-      }
+      .left {
+        min-width: 0 !important;
 
-      .name-labels {
-        padding-left: 20px;
-        padding-right: 14px;
-        min-width: 0;
-
-        .name-div {
-          font-size: 24px;
-          height: calc(#{$height-header} * .45);
-          .name {
-            max-width: 100%;
-          }
-        }
-        .labels {
-          height: calc(#{$height-header} * .55);
-          padding-top: 6px;
-
-          .label {
-            background-color: rgb(222, 233, 236);
-            padding: 4px;
-            margin-top: 3px;
-            margin-right: 10px;
-            font-size: 11px;
-            line-height: 1;
+        .pic {
+          $height: 47px;
+          padding: 4px;
+          patting-right: 12px;
+          display: block;
+          .letter {
+            margin: auto;
+            color: white;
+            width: $height;
+            height: $height;
+            font-size: 23px;
+            line-height: $height;
+            text-align: center;
             font-weight: 300;
-            max-width: 100px;
+            background-color: $mat-warn;
+            border: 1px solid $mat-warn;
+            border-radius: 50%;
+          }
+        }
+
+        .name-labels {
+          padding-left: 20px;
+          padding-right: 14px;
+          min-width: 0;
+
+          .name-div {
+            font-size: 24px;
+            height: calc(#{$height-header} * .45);
+            .name {
+              max-width: 100%;
+            }
+          }
+          .labels {
+            height: calc(#{$height-header} * .55);
+            padding-top: 6px;
+
+            .label {
+              background-color: rgb(222, 233, 236);
+              padding: 4px;
+              margin-top: 3px;
+              margin-right: 10px;
+              font-size: 11px;
+              line-height: 1;
+              font-weight: 300;
+              max-width: 100px;
+            }
+          }
+        }
+      }
+
+      .right {
+        padding-left: 10px;
+        color: $link-gray;
+        margin-right: -6px;
+
+        .wrap {
+          cursor: pointer;
+          padding: 6px 6px;
+          box-sizing: content-box;
+          height: 20px;
+          width: 20px;
+          i {
+            font-size: 20px;
           }
         }
       }
     }
 
-    .right {
-      padding-left: 10px;
+    .content {
+      padding: 20px;
       color: $link-gray;
-      margin-right: -6px;
+      font-size: 13px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      height: $height-content;
 
-      .wrap {
-        cursor: pointer;
-        padding: 6px 6px;
-        box-sizing: content-box;
-        height: 20px;
-        width: 20px;
-        i {
-          font-size: 20px;
+      .title {
+        font-size: 14px;
+        font-weight: 500;
+        color: $color-default-text;
+      }
+
+      .section {
+        margin-top: 24px;
+
+        .value:not(:first-of-type) {
+          margin-top: 4px;
         }
-      }
-    }
-  }
 
-  .content {
-    padding: 20px;
-    color: $link-gray;
-    font-size: 13px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    height: $height-content;
+        .value-div {
+          max-width: 86%;
+          word-break: break-all;
 
-    .title {
-      font-size: 14px;
-      font-weight: 500;
-      color: $color-default-text;
-    }
-
-    .section {
-      margin-top: 24px;
-
-      .value:not(:first-of-type) {
-        margin-top: 4px;
-      }
-
-      .value-div {
-        max-width: 86%;
-        word-break: break-all;
-
-        a, span {
-          display: inline-block;
+          a, span {
+            display: inline-block;
+          }
         }
+
       }
 
-    }
+      a:link, a:visited, a:hover, a:active {
+        //color: $link-active-lighter !important;
+      }
 
-    a:link, a:visited, a:hover, a:active {
-      //color: $link-active-lighter !important;
-    }
+    }// content
 
-  }// content
+  }// dialog
 
-}// dialog
+
+}
+
 
 
 

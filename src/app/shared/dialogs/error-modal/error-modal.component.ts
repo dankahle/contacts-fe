@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, HostBinding, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 @Component({
@@ -7,6 +7,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
   styleUrls: ['./error-modal.component.scss']
 })
 export class ErrorModalComponent {
+  @HostBinding('class.dkhost-error-modal') hostClass = true;
   error: { message: string, status?: number, json?: any, data?: any };
 
   constructor(public dialogRef: MatDialogRef<ErrorModalComponent>, @Inject(MAT_DIALOG_DATA) data: any) {

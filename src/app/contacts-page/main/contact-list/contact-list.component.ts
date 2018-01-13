@@ -16,9 +16,10 @@ import {Subscription} from 'rxjs/Subscription';
   selector: 'dk-contact-list',
   templateUrl: './contact-list.component.html',
   styleUrls: ['./contact-list.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.None
 })
 export class ContactListComponent implements OnDestroy {
+  @HostBinding('class.dkhost-contact-list') hostClass = true;
   @HostBinding('style.max-width') hostMaxWidth;
   contacts: Contact[] = [];
   messageCount: number;

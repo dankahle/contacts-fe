@@ -56,7 +56,7 @@
   "defaults": {
     "styleExt": "scss",
     "component": {
-      "viewEncapsulation": "Emulated"
+      "viewEncapsulation": "None"
     }
   }
 }

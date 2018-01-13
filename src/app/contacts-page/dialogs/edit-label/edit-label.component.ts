@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Inject, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, HostBinding, Inject, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Chance} from 'chance';
 import {Label} from '../../../store/models/label';
@@ -11,9 +11,10 @@ const chance = new Chance();
   selector: 'dk-edit-label',
   templateUrl: './edit-label.component.html',
   styleUrls: ['./edit-label.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.None
 })
 export class EditLabelComponent implements AfterViewInit {
+  @HostBinding('class.dkhost-edit-label') hostClass = true;
   @ViewChild('name') name: NgModel;
   placeholder: string;
   title: string;

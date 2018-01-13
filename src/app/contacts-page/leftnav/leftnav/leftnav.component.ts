@@ -19,9 +19,10 @@ import 'rxjs/add/operator/mergeMap';
   selector: 'dk-leftnav',
   templateUrl: './leftnav.component.html',
   styleUrls: ['./leftnav.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.None
 })
 export class LeftnavComponent {
+  @HostBinding('class.dkhost-leftnav') hostClass = true;
   usr: StoreUser;
   wasClosed = false;
   hideLeftNav = false;

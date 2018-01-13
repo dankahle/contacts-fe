@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, ViewChild, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostBinding, ViewChild, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {errorCodes} from '../../core/services/error-codes';
 import {LoginService} from '../login.service';
@@ -7,9 +7,10 @@ import {LoginService} from '../login.service';
   selector: 'dk-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent implements AfterViewInit {
+  @HostBinding('class.dkhost-login') hostClass = true;
   @ViewChild('name', {read: ElementRef}) name;
   user = {name: '', company: ''};
   userNotFound = false;

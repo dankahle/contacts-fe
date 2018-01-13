@@ -1,5 +1,5 @@
 import {
-  AfterViewInit, ApplicationRef, Component, Inject, NgZone, OnDestroy, OnInit, ViewChild, ViewChildren,
+  AfterViewInit, ApplicationRef, Component, HostBinding, Inject, NgZone, OnDestroy, OnInit, ViewChild, ViewChildren,
   ViewEncapsulation
 } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
@@ -31,10 +31,11 @@ const chance = new Chance();
   selector: 'dk-contact-edit',
   templateUrl: './contact-edit.component.html',
   styleUrls: ['./contact-edit.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.None
 })
 export class ContactEditComponent implements AfterViewInit, OnDestroy {
   log = console.log;
+  @HostBinding('class.dkhost-contact-edit') hostClass = true;
   @ViewChild('form') form;
   @ViewChild('nameNg') nameNg;
   @ViewChild('companyNg') companyNg;

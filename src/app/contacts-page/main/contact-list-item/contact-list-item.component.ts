@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, HostBinding, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {Contact} from '../../../store/models/contact';
 import {ContactListComponent} from '../contact-list/contact-list.component';
 import {Util} from '../../../core/services/util';
@@ -16,9 +16,10 @@ import {MoreActionsBase} from '../more-actions-base';
   selector: 'dk-contact-list-item',
   templateUrl: './contact-list-item.component.html',
   styleUrls: ['./contact-list-item.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.None
 })
 export class ContactListItemComponent extends MoreActionsBase {
+  @HostBinding('class.dkhost-contact-list-item') hostClass = true;
   @Input() contact: Contact;
   Util = Util;
 

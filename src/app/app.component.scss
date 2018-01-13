@@ -1,20 +1,24 @@
 
 @import "../styles/comp-index";
 
-// Custom header that uses only the Material `font-size` and `font-family`.
-.head {
-  font-size: mat-font-size($config, headline);
-  font-family: mat-font-family($config);
-}
-:host {
+.dkhost-root {
   height: 100%;
+
+  // Custom header that uses only the Material `font-size` and `font-family`.
+  .head {
+    font-size: mat-font-size($config, headline);
+    font-family: mat-font-family($config);
+  }
+
+  .nav-and-main {
+    position: relative;
+    .main {
+      min-width: 0;
+    }
+  }
+
 }
 
-.nav-and-main {
-  position: relative;
-  .main {
-    min-width: 0;
-  }
-}
+
 
 

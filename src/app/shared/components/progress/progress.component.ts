@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostBinding, OnInit} from '@angular/core';
 import {ProgressService} from '../../../core/services/progress.service';
 
 @Component({
@@ -7,6 +7,7 @@ import {ProgressService} from '../../../core/services/progress.service';
   styleUrls: ['./progress.component.scss']
 })
 export class ProgressComponent {
+  @HostBinding('class.dkhost-progress') hostClass = true;
   show = false;
   value = 0;
   timer = null;

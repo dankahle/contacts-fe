@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, HostBinding, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {Store} from '../../../store/store';
 import {Contact} from '../../../store/models/contact';
 import {MatMenu, MatMenuTrigger} from '@angular/material';
@@ -7,9 +7,10 @@ import {MatMenu, MatMenuTrigger} from '@angular/material';
   selector: 'dk-more-actions',
   templateUrl: './more-actions.component.html',
   styleUrls: ['./more-actions.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.None
 })
 export class MoreActionsComponent {
+  @HostBinding('class.dkhost-more-actions') hostClass = true;
   @ViewChild('moreActionsTrigger') trigger: MatMenuTrigger;
   @ViewChild('MatMenu') menu: MatMenu;
   event: MouseEvent;

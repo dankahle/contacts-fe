@@ -1,6 +1,6 @@
 @import '../../../../styles/comp-index';
 
-:host {
+.dkhost-contact-list {
   flex: 1 1 auto;
   overflow-y: auto;
   display: flex;
@@ -8,39 +8,41 @@
   align-content: stretch;
   padding: 20px;
   padding-right: 74px;
+
+  .contact-list {
+
+    .label-title {
+      font-size: 14px;
+      color: $link-gray;
+      margin-bottom: 20px;
+    }
+
+    .book-pic {
+      //background-image: url(//ssl.gstatic.com/social/contactsui/images/labels/emptylabelicon_1x.png);
+      background-image: url(../../../../assets/no-contacts.png);
+      background-repeat: no-repeat;
+      height: 182px;
+      margin: auto;
+      width: 230px;
+    }
+
+    .add-button {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      margin: 20px;
+    }
+
+    .no-contacts {
+      margin: auto;
+      text-align: center;
+      color: #757575;
+      font: 400 16px/24px
+    }
+  }
+
 }
 
-.contact-list {
-
-  .label-title {
-    font-size: 14px;
-    color: $link-gray;
-    margin-bottom: 20px;
-  }
-
-  .book-pic {
-    //background-image: url(//ssl.gstatic.com/social/contactsui/images/labels/emptylabelicon_1x.png);
-    background-image: url(../../../../assets/no-contacts.png);
-    background-repeat: no-repeat;
-    height: 182px;
-    margin: auto;
-    width: 230px;
-  }
-
-  .add-button {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    margin: 20px;
-  }
-
-  .no-contacts {
-    margin: auto;
-    text-align: center;
-    color: #757575;
-    font: 400 16px/24px
-  }
-}
 
 
 

@@ -1,4 +1,4 @@
-import {Component, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, HostBinding, ViewChild, ViewEncapsulation} from '@angular/core';
 import {Store} from './store/store';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/delay';
@@ -11,10 +11,11 @@ import * as $ from 'jquery';
   selector: 'dk-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
-val: string;
+  @HostBinding('class.dkhost-app') hostClass = true;
+  val: string;
 
   constructor(public store: Store) {
   }
