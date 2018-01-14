@@ -7,6 +7,7 @@
   font-family: mat-font-family($config);
 }
 :host {
+  display: block;
   height: 100%;
 }
 

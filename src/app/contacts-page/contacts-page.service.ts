@@ -47,7 +47,7 @@ export class ContactsPageService {
 
     const config = <MatDialogConfig>{
       width: '700px',
-      height: '500px',
+      height: '540px',
       backdropClass: 'bg-modal-backdrop',
       panelClass: 'contactDetailCssHack',
       disableClose: true,

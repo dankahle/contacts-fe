@@ -32,7 +32,7 @@ export class LeftnavComponent {
       <Label>{id: 'sendFeedback', name: 'Send Feedback', icon: 'sms_failed', noEdit: true},
       <Label>{id: 'help', name: 'Help', icon: 'help', noEdit: true}
     ],
-    addLabel: <Label>{id: 'addLabel', name: 'Create label', icon: 'add'},
+    addLabel: <Label>{id: 'addLabel', name: 'Create label', icon: 'add', noEdit: true},
 
   };
 
