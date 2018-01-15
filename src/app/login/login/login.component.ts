@@ -1,15 +1,19 @@
-import {AfterViewInit, Component, ElementRef, ViewChild, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostBinding, ViewChild, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {errorCodes} from '../../core/services/error-codes';
 import {LoginService} from '../login.service';
+import {routeChangeAnimation} from '../../routing/animations';
 
 @Component({
   selector: 'dk-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
+  animations: [ routeChangeAnimation ]
 })
 export class LoginComponent implements AfterViewInit {
+  @HostBinding('@routeAnimation') routeAnimation = true;
+  @HostBinding('style.display')   display = 'block';
   @ViewChild('name', {read: ElementRef}) name;
   user = {name: '', company: ''};
   userNotFound = false;

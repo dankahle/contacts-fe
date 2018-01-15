@@ -11,14 +11,18 @@ import {MatDialog, MatDialogConfig, MatMenuTrigger} from '@angular/material';
 import {Messages} from '../../../store/models/messages';
 import {BreakpointService} from '../../../core/services/breakpoint.service';
 import {Subscription} from 'rxjs/Subscription';
+import {routeChangeAnimation} from '../../../routing/animations';
 
 @Component({
   selector: 'dk-contact-list',
   templateUrl: './contact-list.component.html',
   styleUrls: ['./contact-list.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
+  animations: [ routeChangeAnimation ]
 })
 export class ContactListComponent implements OnDestroy {
+  @HostBinding('@routeAnimation') routeAnimation = true;
+  @HostBinding('style.display')   display = 'block';
   @HostBinding('style.max-width') hostMaxWidth;
   contacts: Contact[] = [];
   messageCount: number;
