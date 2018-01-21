@@ -32,6 +32,10 @@ export class MoreActionsBase {
     this.labels = this.contactsService.getLabelsForMenu(this.contact);
   }
 
+  hasSelectedLabel() {
+    return this.store.selectedLabel && this.contactsService.hasLabel(this.contact, this.store.selectedLabel.id);
+  }
+
   removeLabelFromContact(event): Observable<boolean> {
     const subject = new Subject<boolean>();
     event.stopPropagation();

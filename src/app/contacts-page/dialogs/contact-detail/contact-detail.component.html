@@ -116,7 +116,7 @@
 
 <!--more actions menu-->
 <mat-menu [overlapTrigger]="true" class="more-actions" xPosition="before" yPosition="below">
-  <button mat-menu-item *ngIf="store.selectedLabel" (click)="removeLabelFromContact($event)">
+  <button mat-menu-item *ngIf="hasSelectedLabel()" (click)="removeLabelFromContact($event)">
     <i class="left material-icons mat-icon">cancel</i>
     <span>Remove from label</span>
   </button>
