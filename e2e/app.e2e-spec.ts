@@ -8,8 +8,9 @@ describe('main-fe App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should land at root', () => {
     browser.get('/')
-    expect(browser.getCurrentUrl()).toBe('/register');
+    // browser.pause();
+    expect(browser.getCurrentUrl()).toBe('http://localhost:4201/');
   });
 });

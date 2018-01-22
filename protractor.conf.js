@@ -1,7 +1,7 @@
-// Protractor configuration file, see link for more information
-// https://github.com/angular/protractor/blob/master/lib/config.ts
+const {SpecReporter} = require('jasmine-spec-reporter'),
+  _server = require('../contacts-be/server');
 
-const { SpecReporter } = require('jasmine-spec-reporter');
+let server;
 
 exports.config = {
   allScriptsTimeout: 11000,
@@ -17,12 +17,22 @@ exports.config = {
   jasmineNodeOpts: {
     showColors: true,
     defaultTimeoutInterval: 30000,
-    print: function() {}
+    print: function () {
+    }
   },
-  onPrepare() {
+  onPrepare: function() {
     require('ts-node').register({
       project: 'e2e/tsconfig.e2e.json'
     });
-    jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
+    jasmine.getEnv().addReporter(new SpecReporter({spec: {displayStacktrace: true}}));
+
+    console.log('onPrepare nodeenv: ', process.env.NODE_ENV);
+    return _server.then((_server_) => {
+      server = _server_;
+      server.on('close', () => console.log('server closed'));
+    });
+  },
+  onComplete: () => {
+    server.close();
   }
 };

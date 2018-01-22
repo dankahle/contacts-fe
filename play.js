@@ -2,6 +2,16 @@ const _ = require('lodash');
 
 
 
+
+
+
+
+
+
+
+
+
+
 /*
 function fcn (...params) {
   params.forEach(parm => console.log(parm));
@@ -10,6 +20,7 @@ function fcn (...params) {
 fcn(...[4,5,6]);
 */
 
+/*
 
 function inject(arr, fcn) {
   const servArr = [];
@@ -32,6 +43,7 @@ it('lala', async(inject(arr, () => {
 
 
 })));
+*/
 
 
 /*
