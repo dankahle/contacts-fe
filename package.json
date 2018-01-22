@@ -8,7 +8,7 @@
   },
   "main": "ng serve",
   "engines": {
-    "node": "8.9.0"
+    "node": "6.12.3"
   },
   "scripts": {
     "ng": "ng",
@@ -17,7 +17,7 @@
     "buildprod": "ng build --prod --output-path docs --base-href /contacts-fe/",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "mongo ../contacts-be/database/createdbunit.js && NODE_ENV=unit ng e2e --port=4201",
+    "e2e": "mongo ../contacts-be/database/createdbunit.js && NODE_ENV=unit ng e2e --port=4201 -e=unit",
     "theme": "node-sass src/theme.scss src/theme.css",
     "serve": "node server.js"
   },
@@ -28,7 +28,7 @@
     "@angular/common": "^5.1.1",
     "@angular/compiler": "^5.1.1",
     "@angular/core": "^5.1.1",
-    "@angular/flex-layout": "^2.0.0-beta.10-4905443",
+    "@angular/flex-layout": "2.0.0-beta.10-4905443",
     "@angular/forms": "^5.1.1",
     "@angular/http": "^5.1.1",
     "@angular/material": "^5.0.1",
