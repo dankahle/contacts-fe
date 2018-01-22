@@ -1,11 +1,11 @@
-import { AppPage } from './app.po';
+import { AppPO } from './app.po';
 import {browser} from 'protractor';
 
 describe('main-fe App', () => {
-  let page: AppPage;
+  let po: AppPO;
 
   beforeEach(() => {
-    page = new AppPage();
+    po = new AppPO();
   });
 
   it('should land at root', () => {
