@@ -4,7 +4,8 @@ import {browser} from 'protractor';
 describe('main-fe App', () => {
   let po: AppPO;
 
-  beforeEach(() => {
+  beforeAll(() => {
+    browser.waitForAngularEnabled(false);
     po = new AppPO();
   });
 

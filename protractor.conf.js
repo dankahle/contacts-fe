@@ -9,10 +9,14 @@ exports.config = {
     './e2e/**/*.e2e-spec.ts'
   ],
   capabilities: {
-    'browserName': 'chrome'
+    'browserName': 'chrome',
+    'chromeOptions': {
+      //'args': ["--headless", "--disable-gpu", "--window-size=1280x800",  "--no-sandbox"]
+      'args': ['show-fps-counter=true']
+    }
   },
   directConnect: true,
-  baseUrl: 'http://localhost:4200/',
+  baseUrl: 'http://localhost:4201/',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
@@ -21,6 +25,7 @@ exports.config = {
     }
   },
   onPrepare: function() {
+    browser.ignoreSynchronization = true; // from angular-starter
     require('ts-node').register({
       project: 'e2e/tsconfig.e2e.json'
     });
@@ -34,5 +39,15 @@ exports.config = {
   },
   onComplete: () => {
     server.close();
-  }
+  },
+
+  /**
+   * Angular 2 configuration - from angular-starter - https://github.com/gdi2290/angular-starter
+   *
+   * useAllAngular2AppRoots: tells Protractor to wait for any angular2 apps on the page instead of just the one matching
+   * `rootEl`
+   */
+  useAllAngular2AppRoots: true,
+
+  SELENIUM_PROMISE_MANAGER: false,
 };

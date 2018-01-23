@@ -9,7 +9,7 @@ export class SearchPO {
   constructor() {
     this.divClear = $('.auto-comp-div .suffix');
     this.input = $('.auto-comp-div .input');
-    this.searchIcon = $('');
+    this.searchIcon = $('.auto-comp-div .prefix');
   }
 
   navRoot() {
@@ -29,8 +29,10 @@ export class SearchPO {
   }
 
   isInputFocused() {
-    const document: any = browser.executeScript('return document');
-    return this.input.equals(document.activeElement);
+    return browser.executeScript('return document')
+      .then((document: any) => {
+        return this.input.equals(document.activeElement);
+      });
   }
 
 }
