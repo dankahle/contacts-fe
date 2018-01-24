@@ -1,15 +1,76 @@
 const _ = require('lodash');
 
 
+function resolveAfter2Seconds(x) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(x);
+    }, 1000);
+  });
+}
 
 
+async function add1(x) {
+  const a = await resolveAfter2Seconds(20);
+  console.log(a);
+  const b = await resolveAfter2Seconds(30);
+  console.log(b);
+  return x + a + b;
+}
+
+function add2(x) {
+  let a;
+  return resolveAfter2Seconds(20)
+    .then(_a => {
+      a = _a;
+      return resolveAfter2Seconds(30);
+    })
+    .then(b => {
+      return x + a + b;
+    });
+}
+
+add2(5).then(v => {
+  console.log(v);  // prints 60 after 4 seconds.
+});
 
 
+/*
+function resolveAfter2Seconds(val) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve('resolved' + val);
+    }, 2000);
+  });
+}
+
+(async function asyncCall() {
+  console.log('calling');
+  var result = await resolveAfter2Seconds(5);
+  console.log(result);
+  throw 'shit';
+  return result;
+  // expected output: "resolved"
+})().then(val => console.log('done', val), err => console.error('myerr', err));
+
+// asyncCall();
+*/
 
 
+/*
+function* foo(index) {
+  while (index <= 5) {
+    yield index++;
+  }
+}
 
+const iterator = foo(0);
 
+for (let val of foo(1)) {
+  console.log(val);
+}
 
+*/
 
 
 /*
@@ -66,10 +127,6 @@ sub.next(7);
 */
 
 
-
-
-
-
 /*
 const a = { type: 'number',
   maxLength: 9999,
@@ -89,8 +146,6 @@ console.log(a.messages && a.messages[val]);
 */
 
 
-
-
 /*
 var equal = require('deep-equal');
 
@@ -101,11 +156,6 @@ const original = {"id":"cc9da4cc-e4b9-5d81-81c3-4000af2204ae","labels":[{"id":"c
 const eq = equal(contact, original);
 console.log(eq);
 */
-
-
-
-
-
 
 
 /*
@@ -121,9 +171,6 @@ console.dir([
   )
 ]);
 */
-
-
-
 
 
 /*
@@ -163,9 +210,6 @@ console.log(arr)
 */
 
 
-
-
-
 /*
 function getPhoneNo(value) {
   return value.prefix + value.phone.replace(/[^0-9]+/g, '');
@@ -174,7 +218,6 @@ function getPhoneNo(value) {
 
 console.log(getPhoneNo({prefix: '55', phone: '(319) 1-555.1212'}));
 */
-
 
 
 /*
@@ -217,7 +260,6 @@ let obj = {};
 _.set(obj, 'addr.street', 'lovell')
 console.log(obj)
 */
-
 
 
 /*

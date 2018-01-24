@@ -1,4 +1,4 @@
-import {$, browser, ElementFinder} from 'protractor';
+import {$, browser, element, by, ElementFinder} from 'protractor';
 
 
 export class SearchPO {
@@ -7,32 +7,36 @@ export class SearchPO {
   searchIcon: ElementFinder;
 
   constructor() {
-    this.divClear = $('.auto-comp-div .suffix');
-    this.input = $('.auto-comp-div .input');
     this.searchIcon = $('.auto-comp-div .prefix');
+    this.input = $('.auto-comp-div .input');
+    this.divClear = $('.auto-comp-div .suffix');
+    // debugger;
   }
 
-  navRoot() {
-    browser.get('/');
+  async navRoot() {
+    await browser.get('/');
   }
 
-  enterText(text) {
-    this.input.sendKeys(text);
+  async enterText(text) {
+    await this.input.sendKeys(text);
   }
 
-  clearClick() {
-    this.divClear.click();
+  async clearClick() {
+    await this.divClear.click();
   }
 
-  searchIconClick() {
-    this.searchIcon.click();
+  async searchIconClick() {
+    await this.searchIcon.click();
   }
 
-  isInputFocused() {
-    return browser.executeScript('return document')
-      .then((document: any) => {
-        return this.input.equals(document.activeElement);
-      });
+  async isInputFocused() {
+    const document: any = await browser.executeScript('return document;');
+    return this.input.id && this.input.id === document.activeElement.id;
+  }
+
+  async getSearchValue() {
+    const val = await this.input.getAttribute('value');
+    return val;
   }
 
 }

@@ -5,7 +5,7 @@ describe('main-fe App', () => {
   let po: AppPO;
 
   beforeAll(() => {
-    browser.waitForAngularEnabled(false);
+    // browser.waitForAngularEnabled(false);
     po = new AppPO();
   });
 
