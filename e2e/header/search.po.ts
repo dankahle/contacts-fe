@@ -2,9 +2,9 @@ import {$, browser, element, by, ElementFinder} from 'protractor';
 
 
 export class SearchPO {
-  divClear: ElementFinder;
-  input: ElementFinder;
   searchIcon: ElementFinder;
+  input: ElementFinder;
+  divClear: ElementFinder;
 
   constructor() {
     this.searchIcon = $('.auto-comp-div .prefix');

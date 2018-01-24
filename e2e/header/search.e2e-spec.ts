@@ -2,29 +2,31 @@ import { SearchPO } from './search.po';
 import {$, browser, ElementFinder} from 'protractor';
 
 describe('search tests', () => {
-  let searchIcon: ElementFinder;
-  let input: ElementFinder;
-  let divClear: ElementFinder;
+  // let searchIcon: ElementFinder;
+  // let input: ElementFinder;
+  // let divClear: ElementFinder;
+  let po: SearchPO;
 
   beforeAll(() => {
+    po = new SearchPO();
     // browser.waitForAngularEnabled(false);
-    searchIcon = $('.auto-comp-div .prefix');
-    input = $('.auto-comp-div .input');
-    divClear = $('.auto-comp-div .suffix');
+    // searchIcon = $('.auto-comp-div .prefix');
+    // input = $('.auto-comp-div .input');
+    // divClear = $('.auto-comp-div .suffix');
   });
 
   describe('root tests', () => {
 
-    beforeAll(() => {
-      browser.get('/');
+    beforeAll(async () => {
+      await po.navRoot();
     });
 
     fit('should clear the text', async () => {
-      await input.sendKeys('lala');
-      let searchVal = await input.getAttribute('value');
+      await po.enterText('lala');
+      let searchVal = await po.getSearchValue();
       expect(searchVal).toBe('lala');
-      await divClear.click();
-      searchVal = await input.getAttribute('value');
+      await po.clearClick();
+      searchVal = await po.getSearchValue();
       expect(searchVal).toBe('');
 /*
       const activeElement = await browser.driver.executeScript('return document.activeElement');
