@@ -8,7 +8,7 @@ export class SearchPO {
 
   constructor() {
     this.searchIcon = $('.auto-comp-div .prefix');
-    this.input = $('.auto-comp-div .input');
+    this.input = $('.auto-comp-div .searchInput');
     this.divClear = $('.auto-comp-div .suffix');
     // debugger;
   }
@@ -30,12 +30,13 @@ export class SearchPO {
   }
 
   async isInputFocused() {
-    const document: any = await browser.executeScript('return document;');
-    return this.input.id && this.input.id === document.activeElement.id;
+    return await $('.searchInput:focus').isPresent();
   }
 
   async getSearchValue() {
+    console.log('getSearchValue start');
     const val = await this.input.getAttribute('value');
+    console.log('getSearchValue', val);
     return val;
   }
 

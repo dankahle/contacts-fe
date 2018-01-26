@@ -1,6 +1,10 @@
 const _ = require('lodash');
 
 
+
+
+
+/*
 function resolveAfter2Seconds(x) {
   return new Promise(resolve => {
     setTimeout(() => {
@@ -33,6 +37,7 @@ function add2(x) {
 add2(5).then(v => {
   console.log(v);  // prints 60 after 4 seconds.
 });
+*/
 
 
 /*
