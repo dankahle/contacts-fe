@@ -11,36 +11,26 @@ describe('search tests', () => {
 
   describe('root tests', () => {
 
-    beforeAll(async () => {
-      await po.navRoot();
+    beforeAll( () => {
+      po.navRoot();
     });
 
-    async function getSearchValue() {
-      console.log('getSearchValue start');
-      // const val = await po.input.getAttribute('value');
-      // console.log('getSearchValue', val);
-      const val =  await po.input.getAttribute('value');
-      return val;
-    }
-
-    fit('should clear the text', async () => {
-      await po.enterText('lala');
-      expect(await po.getSearchValue()).toBe('lala');
-/*
-      await browser.actions()
-        .mouseMove(po.searchIcon)
+    it('should clear the text', () => {
+      po.enterText('lala');
+      expect(po.getSearchValue()).toBe('lala');
+      browser.actions()
+        .mouseMove(po.divClear)
         .click()
         .perform();
-*/
-      await po.clearClick();
-      expect(await po.getSearchValue()).toBe('');
+      // po.clearClick();
+      expect(po.getSearchValue()).toBe('');
     });
 
-    it('should set focus to input when you click on search icon', async () => {
-      await $('body').click();
-      expect(await po.isInputFocused()).toBeFalsy();
-      await po.searchIconClick();
-      expect(await po.isInputFocused()).toBeTruthy();
+    it('should set focus to input when you click on search icon',  () => {
+      $('body').click();
+      expect(po.isInputFocused()).toBeFalsy();
+      po.searchIconClick();
+      expect(po.isInputFocused()).toBeTruthy();
     });
 
   });

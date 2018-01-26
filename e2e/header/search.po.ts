@@ -13,30 +13,28 @@ export class SearchPO {
     // debugger;
   }
 
-  async navRoot() {
-    await browser.get('/');
+  navRoot() {
+    browser.get('/');
   }
 
-  async enterText(text) {
-    await this.input.sendKeys(text);
+  enterText(text) {
+    this.input.sendKeys(text);
   }
 
-  async clearClick() {
-    await this.divClear.click();
+  clearClick() {
+    this.divClear.click();
   }
 
-  async searchIconClick() {
-    await this.searchIcon.click();
+  searchIconClick() {
+    this.searchIcon.click();
   }
 
-  async isInputFocused() {
-    return await $('.searchInput:focus').isPresent();
+  isInputFocused() {
+    return $('.searchInput:focus').isPresent();
   }
 
-  async getSearchValue() {
-    console.log('getSearchValue start');
-    const val = await this.input.getAttribute('value');
-    console.log('getSearchValue', val);
+  getSearchValue() {
+    const val = this.input.getAttribute('value');
     return val;
   }
 

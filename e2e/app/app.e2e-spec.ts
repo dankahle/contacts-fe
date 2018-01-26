@@ -6,8 +6,8 @@ describe('main-fe App', () => {
     // browser.waitForAngularEnabled(false);
   });
 
-  it('should land at root', async () => {
-    await browser.get('/')
-    expect(await browser.getCurrentUrl()).toBe('http://localhost:4201/');
+  it('should land at root',  () => {
+    browser.get('/')
+    expect(browser.getCurrentUrl()).toBe('http://localhost:4201/');
   });
 });

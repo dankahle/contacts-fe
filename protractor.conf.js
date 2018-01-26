@@ -10,10 +10,12 @@ exports.config = {
   ],
   capabilities: {
     'browserName': 'chrome',
+/*
     'chromeOptions': {
       'args': ["--headless", "--disable-gpu", "--window-size=1280x800",  "--no-sandbox"]
       // 'args': ['show-fps-counter=true']
     }
+*/
   },
   directConnect: true,
   baseUrl: 'http://localhost:4201/',
@@ -25,7 +27,7 @@ exports.config = {
     }
   },
   onPrepare: function() {
-    browser.ignoreSynchronization = true; // from angular-starter
+    // browser.ignoreSynchronization = true; // from angular-starter
     require('ts-node').register({
       project: 'e2e/tsconfig.e2e.json'
     });
@@ -49,5 +51,5 @@ exports.config = {
    */
   useAllAngular2AppRoots: true,
 
-  SELENIUM_PROMISE_MANAGER: false,
+  // SELENIUM_PROMISE_MANAGER: false,
 };
