@@ -14,7 +14,6 @@ import * as $ from 'jquery';
   encapsulation: ViewEncapsulation.Emulated
 })
 export class AppComponent {
-val: string;
 
   constructor(public store: Store) {
   }

@@ -2,8 +2,6 @@ const _ = require('lodash');
 
 
 
-
-
 /*
 function resolveAfter2Seconds(x) {
   return new Promise(resolve => {

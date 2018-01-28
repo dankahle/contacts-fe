@@ -1,4 +1,4 @@
-import {$, browser, element, by, ElementFinder} from 'protractor';
+import {$, browser, element, by, ElementFinder, protractor} from 'protractor';
 
 
 export class SearchPO {
@@ -36,6 +36,16 @@ export class SearchPO {
   getSearchValue() {
     const val = this.input.getAttribute('value');
     return val;
+  }
+
+  searchAndOpen(numDownArrows) {
+    this.enterText('n');
+    browser.sleep(0);
+    while (numDownArrows >= 1) {
+      this.input.sendKeys(protractor.Key.ARROW_DOWN);
+      numDownArrows--;
+    }
+    this.input.sendKeys(protractor.Key.ENTER);
   }
 
 }
