@@ -18,6 +18,4 @@ export class AppComponent {
   constructor(public store: Store) {
   }
 
-
-
 }

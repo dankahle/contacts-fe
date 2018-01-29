@@ -17,7 +17,7 @@ import {ContactSearchComponent} from './header/contact-search/contact-search.com
 import { ContactEditComponent } from './dialogs/contact-edit/contact-edit.component';
 import { ContactDeleteComponent } from './dialogs/contact-delete/contact-delete.component';
 import {ContactDetailService} from './contact-detail-service';
-import { EditCloseComponent } from './dialogs/edit-close/edit-close.component';
+import { ContactEditCloseComponent } from './dialogs/contact-edit-close/contact-edit-close.component';
 
 @NgModule({
   imports: [
@@ -29,10 +29,10 @@ import { EditCloseComponent } from './dialogs/edit-close/edit-close.component';
     LeftnavComponent, HeaderComponent, LeftnavLabelComponent, EditLabelComponent, DeleteLabelComponent, ContactSearchComponent,
     ContactEditComponent,
     ContactDeleteComponent,
-    EditCloseComponent],
+    ContactEditCloseComponent],
   exports: [RouterModule, LeftnavComponent, HeaderComponent],
   entryComponents: [ContactDetailComponent, EditLabelComponent, DeleteLabelComponent, ContactEditComponent,
-    ContactDeleteComponent, EditCloseComponent],
+    ContactDeleteComponent, ContactEditCloseComponent],
   providers: [ContactsPageService, ContactDetailService]
 })
 export class ContactsPageModule {

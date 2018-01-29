@@ -22,7 +22,7 @@ import {Util} from '../../../core/services/util';
 import {DeleteLabelMode} from '../../../store/enums/deleteLabelMode.enum';
 import {DeleteLabelComponent} from '../delete-label/delete-label.component';
 import * as equal from 'deep-equal';
-import {EditCloseComponent} from '../edit-close/edit-close.component';
+import {ContactEditCloseComponent} from '../contact-edit-close/contact-edit-close.component';
 import {Subscription} from 'rxjs/Subscription';
 
 const chance = new Chance();
@@ -144,7 +144,7 @@ export class ContactEditComponent implements AfterViewInit, OnDestroy {
         height: '146px',
         backdropClass: 'bg-modal-backdrop'
       };
-      const cancelDlgRef = this.mdDialog.open(EditCloseComponent, config);
+      const cancelDlgRef = this.mdDialog.open(ContactEditCloseComponent, config);
       cancelDlgRef.afterClosed()
         .subscribe(results => {
           if (results) {

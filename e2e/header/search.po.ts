@@ -1,20 +1,15 @@
-import {$, browser, element, by, ElementFinder, protractor} from 'protractor';
+import {$, browser, element, by, ElementFinder, protractor, $$} from 'protractor';
 
+const EC = protractor.ExpectedConditions;
 
 export class SearchPO {
-  searchIcon: ElementFinder;
-  input: ElementFinder;
-  divClear: ElementFinder;
+  searchIcon = $('.auto-comp-div .prefix');
+  input = $('.auto-comp-div .searchInput');
+  divClear = $('.auto-comp-div .suffix');
 
-  constructor() {
-    this.searchIcon = $('.auto-comp-div .prefix');
-    this.input = $('.auto-comp-div .searchInput');
-    this.divClear = $('.auto-comp-div .suffix');
-    // debugger;
-  }
-
-  navRoot() {
-    browser.get('/');
+  async getDropdownChoices() {
+    const arr = await $$('.mat-option-text').getText();
+    return arr;
   }
 
   enterText(text) {
@@ -38,9 +33,9 @@ export class SearchPO {
     return val;
   }
 
-  searchAndOpen(numDownArrows) {
-    this.enterText('n');
-    browser.sleep(0);
+  searchAndOpen(text, numDownArrows) {
+    this.enterText(text);
+    browser.wait(EC.presenceOf($('.mat-option-text')));
     while (numDownArrows >= 1) {
       this.input.sendKeys(protractor.Key.ARROW_DOWN);
       numDownArrows--;

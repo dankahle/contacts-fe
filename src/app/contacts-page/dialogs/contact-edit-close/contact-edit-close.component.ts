@@ -2,11 +2,11 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'dk-edit-close',
-  templateUrl: './edit-close.component.html',
-  styleUrls: ['./edit-close.component.scss'],
+  templateUrl: './contact-edit-close.component.html',
+  styleUrls: ['./contact-edit-close.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class EditCloseComponent implements OnInit {
+export class ContactEditCloseComponent implements OnInit {
 
   constructor() { }
 

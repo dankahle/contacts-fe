@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditCloseComponent } from './edit-close.component';
+import { ContactEditCloseComponent } from './contact-edit-close.component';
 
-xdescribe('EditCloseComponent', () => {
-  let component: EditCloseComponent;
-  let fixture: ComponentFixture<EditCloseComponent>;
+xdescribe('ContactEditCloseComponent', () => {
+  let component: ContactEditCloseComponent;
+  let fixture: ComponentFixture<ContactEditCloseComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditCloseComponent ]
+      declarations: [ ContactEditCloseComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditCloseComponent);
+    fixture = TestBed.createComponent(ContactEditCloseComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
