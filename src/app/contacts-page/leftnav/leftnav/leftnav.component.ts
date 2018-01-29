@@ -54,7 +54,7 @@ export class LeftnavComponent {
 
     // hide the animation if xs/sm
     if (breakpoints.isActive('xs') || breakpoints.isActive('sm')) {
-      this.store.leftNavClosed = true;
+      this.store.pubLeftNavClosed(true);
       this.hideLeftNavFast();
     }
   } // end constructor
