@@ -1,6 +1,34 @@
 const _ = require('lodash');
 
 
+const start = Date.now();
+
+function fcn() {
+  const diff = Date.now() - start;
+  console.log('fcn run', diff);
+  return 'fend' + diff;
+}
+
+tfcn = _.throttle(fcn, 200, {trailing:false});
+
+const timer = setInterval(() => {
+  console.log('run', tfcn());
+}, 100)
+
+
+/*
+const start = Date.now();
+function fcn() {
+  console.log(Date.now() - start);
+}
+const timer = setInterval(_.throttle(fcn, 200, {trailing:false}), 100)
+
+setTimeout(() => {
+  clearInterval(timer);
+}, 300)
+*/
+
+
 
 /*
 function resolveAfter2Seconds(x) {

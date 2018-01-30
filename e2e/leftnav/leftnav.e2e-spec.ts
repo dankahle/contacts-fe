@@ -3,7 +3,7 @@ import {LeftnavPO} from './leftnav.po';
 
 
 
-fdescribe('leftnav', () => {
+describe('leftnav', () => {
   let po: LeftnavPO;
 
   beforeAll(async () => {

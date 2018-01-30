@@ -1,8 +1,9 @@
 import {$, $$, browser, ElementFinder, protractor} from 'protractor';
+import {CommonPO} from '../common.po';
 
 const EC = protractor.ExpectedConditions;
 
-export class LeftnavPO {
+export class LeftnavPO extends CommonPO {
   leftnav = $('.leftnav');
   leftNavButton = $('mat-toolbar .menu');
     innerHeight: number;

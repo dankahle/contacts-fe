@@ -1,7 +1,8 @@
 import {$, $$, browser, ElementFinder, protractor} from 'protractor';
+import {CommonPO} from '../common.po';
 
 
-export class LabelPO {
+export class LabelPO extends CommonPO {
   labelContacts = $('dk-leftnav-label');
   labels = $('mat-expansion-panel:nth-of-type(1) dk-leftnav-label');
   extras = $('mat-expansion-panel:nth-of-type(2) dk-leftnav-label');

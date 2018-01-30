@@ -1,11 +1,15 @@
 import {$, $$, browser, element, by, ElementFinder, protractor} from 'protractor';
-import * as fs from 'fs';
+import * as _ from 'lodash';
+import {CommonPO} from '../common.po';
 
 const EC = protractor.ExpectedConditions;
 
 describe('main-fe App', () => {
+const po = new CommonPO();
+const start = Date.now();
 
-  beforeAll(() => {
+  beforeAll(async () => {
+    po.navigate('/');
   });
 
   xit('explore', () => {
@@ -13,7 +17,6 @@ describe('main-fe App', () => {
   });
 
   it('should land at root',  () => {
-    browser.get('/');
     expect(browser.getCurrentUrl()).toBe('http://localhost:4201/');
   });
 

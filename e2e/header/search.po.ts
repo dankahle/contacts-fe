@@ -1,8 +1,9 @@
 import {$, browser, element, by, ElementFinder, protractor, $$} from 'protractor';
+import {CommonPO} from '../common.po';
 
 const EC = protractor.ExpectedConditions;
 
-export class SearchPO {
+export class SearchPO extends CommonPO {
   searchIcon = $('.auto-comp-div .prefix');
   input = $('.auto-comp-div .searchInput');
   divClear = $('.auto-comp-div .suffix');
