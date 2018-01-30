@@ -4,11 +4,10 @@ import {LeftnavPO} from './leftnav.po';
 
 
 describe('leftnav', () => {
-  let po: LeftnavPO;
+  const po = new LeftnavPO();
 
   beforeAll(async () => {
-    browser.get('/');
-    po = new LeftnavPO();
+    po.navigate('/');
     po.innerHeight = <number> await browser.executeScript('return window.innerHeight');
   });
 
@@ -24,7 +23,7 @@ describe('leftnav', () => {
 
   function openMdLgXlRefresh() {
     openMdLgXl();
-    browser.refresh();
+    po.refresh();
     openMdLgXl();
   }
 
@@ -42,7 +41,7 @@ describe('leftnav', () => {
 
   function closedXsSmRefresh() {
     closedXsSm();
-    browser.refresh();
+    po.refresh();
     closedXsSm();
   }
 
@@ -66,7 +65,7 @@ describe('leftnav', () => {
   });
 
   it('should open and close with header button (md/lg/xl)', () => {
-    browser.refresh();
+    po.refresh();
     po.resizeWindow(1021);
     openMdLgXl();
     po.leftnavButtonClick();
@@ -76,7 +75,7 @@ describe('leftnav', () => {
   });
 
   it('should open and close with header button (xs/sm)', () => {
-    browser.refresh();
+    po.refresh();
     po.resizeWindow(1019);
     closedXsSm();
     po.leftnavButtonClick();
@@ -86,7 +85,7 @@ describe('leftnav', () => {
   });
 
   it('should close on lt-md and reopen md', () => {
-    browser.refresh();
+    po.refresh();
     po.resizeWindow(1980);
     openMdLgXl();
     po.resizeWindow(1019);
@@ -97,7 +96,7 @@ describe('leftnav', () => {
 
   // should stay closed when they size lower than md, then go back to md, if they closed it with button while md+
   it('should stay closed when closed gt-sm, then lt-md, then gt-sm', () => {
-    browser.refresh();
+    po.refresh();
     po.resizeWindow(1980);
     openMdLgXl();
     po.leftnavButtonClick();

@@ -5,12 +5,11 @@ import {LabelPO} from '../leftnav/labels.po';
 const EC = protractor.ExpectedConditions;
 
 describe('search tests', () => {
-  let po: SearchPO;
+  const po = new SearchPO();
   let poLabel: LabelPO;
 
   beforeAll(() => {
-    browser.get('/');
-    po = new SearchPO();
+    po.navigate('/');
     poLabel = new LabelPO();
   });
 
@@ -69,7 +68,7 @@ describe('search tests', () => {
 
   // search isn't limited by what label you've chosen, it always searches all contacts
   it('should have brenda/jane for "n" (in label three view)', async () =>  {
-    browser.get('/c62dac5b-97d8-53a5-9989-cb2f779bc5e3'); // get label three
+    po.navigate('/c62dac5b-97d8-53a5-9989-cb2f779bc5e3'); // get label three
     expect((await po.getDropdownChoices()).length).toBe(0);
     po.enterText('n');
     browser.wait(EC.presenceOf($('.mat-option-text')));
