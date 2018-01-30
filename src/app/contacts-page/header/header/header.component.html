@@ -4,8 +4,8 @@
 
     <div fxFlex="1 1 80%" class="left" fxLayout="row" fxLayoutAlign="flex-start center">
 
-      <div class="menu" [class.invisible]="!store.authenticated" fxFlex="0 0 auto">
-        <i class="material-icons" (click)="store.pubLeftNavClosed(!store.leftNavClosed)"
+      <div class="menu" [class.invisible]="!store.authenticated" fxFlex="0 0 auto" (click)="store.pubLeftNavClosed(!store.leftNavClosed)">
+        <i class="material-icons"
            matTooltip="Main menu" matTooltipShowDelay="500" matTooltipHideDelay="300">menu</i>
       </div>
 

@@ -4,12 +4,17 @@ const EC = protractor.ExpectedConditions;
 
 export class LeftnavPO {
   leftnav = $('.leftnav');
-  innerHeight: number;
+  leftNavButton = $('mat-toolbar .menu');
+    innerHeight: number;
 
   resizeWindow(width) {
     browser.driver.manage().window().setSize(width, this.innerHeight);
-    // browser.executeScript('window.dispatchEvent(new Event(\'resize\'));');
-    // browser.executeScript('window.resizeTo(768, innerHeight);');
+  }
+
+  leftnavButtonClick() {
+    const leftnavTransitionTime = 200;
+    this.leftNavButton.click();
+    browser.sleep(leftnavTransitionTime + 200);
   }
 
 }
