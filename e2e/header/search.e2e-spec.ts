@@ -14,15 +14,16 @@ describe('search tests', () => {
   });
 
   it('should show clear icon when input has text', () => {
-    expect(po.divClear.isDisplayed()).toBeFalsy();
+    browser.explore();
+    expect(po.divClear.isDisplayed()).toBe(false);
     po.enterText('x');
-    expect(po.divClear.isDisplayed()).toBeTruthy();
+    expect(po.divClear.isDisplayed()).toBe(true);
     po.enterText(protractor.Key.BACK_SPACE);
-    expect(po.divClear.isDisplayed()).toBeFalsy();
+    expect(po.divClear.isDisplayed()).toBe(false);
   });
 
   it('should clear the text', async () => {
-    expect(po.divClear.isDisplayed()).toBeFalsy();
+    expect(po.divClear.isDisplayed()).toBe(false);
     po.enterText('lala');
     const sv = po.getSearchValue();
     expect(po.getSearchValue()).toBe('lala');
@@ -36,16 +37,16 @@ describe('search tests', () => {
 
   it('should set focus to input when you click on search icon',  () => {
     $('body').click();
-    expect(po.isInputFocused()).toBeFalsy();
+    expect(po.isInputFocused()).toBe(false);
     po.searchIconClick();
-    expect(po.isInputFocused()).toBeTruthy();
+    expect(po.isInputFocused()).toBe(true);
   });
 
   it('should set focus to input when you click on search icon - switchTo().activeElement()',  () => {
     $('body').click();
-    expect(po.input.equals(browser.driver.switchTo().activeElement())).toBeFalsy();
+    expect(po.input.equals(browser.driver.switchTo().activeElement())).toBe(false);
     po.searchIconClick();
-    expect(po.input.equals(browser.driver.switchTo().activeElement())).toBeTruthy();
+    expect(po.input.equals(browser.driver.switchTo().activeElement())).toBe(true);
   });
 
   it('should only have jane for "j", then nothing for backspace', async () =>  {

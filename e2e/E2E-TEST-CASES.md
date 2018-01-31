@@ -14,9 +14,8 @@
 * close for gt-sm if was closed before going lt-sm
 
 ### labels
-* accordion works for labels
-* accordion works for extras
-* default (contacts) shows all contacts
+*  accordion works for labels/extras
+*  default (contacts) shows all contacts
 * label one shows brenda/jane
 * label two shows martha/jane
 * contacts shows all again

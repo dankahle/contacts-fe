@@ -22,6 +22,19 @@ initialized: boolean;
       500, {leading: true, trailing: false});
   }
 
+  private contactListInitialized() {
+    return _.throttle(() => {
+        return browser.executeScript('return !!window.dkContactListInitialized');
+      },
+      500, {leading: true, trailing: false});
+  }
+
+  hasClass(elem, cls) {
+    return elem.getAttribute('class').then(function (classes) {
+      return classes.split(' ').indexOf(cls) !== -1;
+    });
+  }
+
 }
 
 
