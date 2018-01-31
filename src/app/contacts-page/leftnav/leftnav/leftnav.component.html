@@ -1,7 +1,7 @@
 
 <div class="leftnav" [hidden]="hideLeftNav" [class.closed]="store.leftNavClosed">
 
-  <dk-leftnav-label [label]="labels.contacts" (click)="showAllContacts($event, labels.contacts)" (keydown)="showAllContacts($event, labels.contacts)"
+  <dk-leftnav-label class="contacts" [label]="labels.contacts" (click)="showAllContacts($event, labels.contacts)" (keydown)="showAllContacts($event, labels.contacts)"
                     [class.active]="!store.selectedLabel"></dk-leftnav-label>
 
   <mat-expansion-panel  class="exp-panel-leftnav" [expanded]="true" style="margin-top:0;">

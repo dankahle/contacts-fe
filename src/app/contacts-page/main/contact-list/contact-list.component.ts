@@ -1,4 +1,4 @@
-import {Component, HostBinding, OnDestroy, ViewChild, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, HostBinding, OnDestroy, ViewChild, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Contact} from '../../../store/models/contact';
 import {Store} from '../../../store/store';
@@ -20,7 +20,7 @@ import {routeChangeAnimation} from '../../../routing/animations';
   encapsulation: ViewEncapsulation.Emulated,
   animations: [ routeChangeAnimation ]
 })
-export class ContactListComponent implements OnDestroy {
+export class ContactListComponent implements OnDestroy, AfterViewInit {
   @HostBinding('@routeAnimation') routeAnimation = true;
   @HostBinding('style.display')   display = 'block';
   @HostBinding('style.max-width') hostMaxWidth;
@@ -47,6 +47,11 @@ export class ContactListComponent implements OnDestroy {
 */
 
   } // const
+
+  ngAfterViewInit() {
+    window['dkContactListInitialized'] = true;
+    console.log('list afterviewinit');
+  }
 
   ngOnDestroy() {
     this.subs_selectedLabel.unsubscribe();

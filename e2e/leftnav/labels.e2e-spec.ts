@@ -24,6 +24,7 @@ describe('leftnav labels', () => {
   const active = 'active';
 
   beforeAll(() => {
+    const start = Date.now();
     po.navigate('/');
   });
 
@@ -42,22 +43,19 @@ describe('leftnav labels', () => {
     expect($(po.qExtrasBody).isDisplayed()).toBe(false);
   });
 
-  fit('should default to contacts label, and show correct contacts for chosen labels', () => {
-    expect(true).toBe(true);
-/*
+  fit('should default to contacts label, and show correct contacts for chosen labels', async () => {
     po.refresh();
     expect(po.hasClass(po.labelContacts, active)).toBe(true);
     labelIsActive(-1);
-    expect(poList.names).toBe(['brenda - Brenda Co', 'jane - Jane Co', 'martha - Martha Co']);
+    expect(poList.getNames()).toEqual(['brenda - Brenda Co', 'jane - Jane Co', 'martha - Martha Co']);
     po.labels.get(1).click();
     expect(po.hasClass(po.labelContacts, active)).toBe(false);
     labelIsActive(1);
-    expect(poList.names).toBe(['brenda - Brenda Co', 'jane - Jane Co']);
+    expect(poList.getNames()).toEqual(['brenda - Brenda Co', 'jane - Jane Co']);
     po.labels.get(2).click();
     expect(po.hasClass(po.labelContacts, active)).toBe(false);
     labelIsActive(2);
-    expect(poList.names).toBe([]);
-*/
+    expect(poList.getNames()).toEqual([]);
   });
 
   it('', () => {

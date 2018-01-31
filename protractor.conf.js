@@ -24,7 +24,13 @@ exports.config = {
     }
   },
   onPrepare: function() {
-    // browser.ignoreSynchronization = true; // from angular-starter
+    // this tells protractor to wait for $http and $timeout calls, but doens't do anything for ng2 yet, but doesn't hurt to leave it on I figure.
+    // browser.ignoreSynchronization = false; // from angular-starter
+
+    // $$().map has a bug, it looks for window.angular, which is an ng1 thing. We have to turn that off (waitForAngularEnabled(false)) to get that
+    // to work, otherwise should be one whenever they get around to addressing ng2 for real.
+    browser.waitForAngularEnabled(false);
+
     require('ts-node').register({
       project: 'e2e/tsconfig.e2e.json'
     });
@@ -48,5 +54,6 @@ exports.config = {
    */
   useAllAngular2AppRoots: true,
 
+  // shut down control flow
   // SELENIUM_PROMISE_MANAGER: false,
 };

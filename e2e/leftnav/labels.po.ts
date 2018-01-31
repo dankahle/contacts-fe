@@ -4,7 +4,7 @@ import {CommonPO} from '../common.po';
 const EC = protractor.ExpectedConditions;
 
 export class LabelPO extends CommonPO {
-  labelContacts = $('dk-leftnav-label');
+  labelContacts = $('dk-leftnav-label.contacts');
   labels = $$('mat-expansion-panel:nth-of-type(1) dk-leftnav-label');
   extras = $$('mat-expansion-panel:nth-of-type(2) dk-leftnav-label');
   labelsHeader = $('mat-expansion-panel:nth-of-type(1) mat-expansion-panel-header');

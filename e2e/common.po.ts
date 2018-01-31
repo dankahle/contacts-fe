@@ -6,12 +6,14 @@ initialized: boolean;
 
   navigate(url) {
     browser.get(url);
-    browser.wait(this.appInitialized());
+    browser.wait(this.contactListInitialized());
+    browser.sleep(200); // router animation transition
   }
 
   refresh() {
     browser.refresh();
-    browser.wait(this.appInitialized());
+    browser.wait(this.contactListInitialized());
+    browser.sleep(200); // router animation transition
   }
 
   // throttle will return the last returned value until the function is run again
