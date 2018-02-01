@@ -6,6 +6,7 @@ let server;
 exports.config = {
   allScriptsTimeout: 11000,
   specs: [
+    // './e2e/slow-down-tests.ts',
     './e2e/**/*.e2e-spec.ts'
   ],
   capabilities: {
@@ -19,6 +20,7 @@ exports.config = {
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
+    // defaultTimeoutInterval: 30000,
     defaultTimeoutInterval: 300000,
     print: function () {
     }

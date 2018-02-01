@@ -49,8 +49,8 @@ export class ContactListComponent implements OnDestroy, AfterViewInit {
   } // const
 
   ngAfterViewInit() {
-    window['dkContactListInitialized'] = true;
-    console.log('list afterviewinit');
+    window['dkContactListInitialized'] = true; // for e2e testing
+    // console.log('list afterviewinit');
   }
 
   ngOnDestroy() {

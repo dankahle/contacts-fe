@@ -141,7 +141,7 @@ export class LeftnavComponent {
         } else {
           _.find(this.usr.user.labels, {id: _label.id}).name = _label.name;
         }
-        this.usr.user.labels = _.sortBy(this.usr.user.labels, 'name');
+        this.usr.user.labels = _.sortBy(this.usr.user.labels, lbl => lbl.name.toLowerCase());
         this.userService.updateUser(this.usr.user)
           .mergeMap(() => this.contactsService.updateLabelInContacts(this.store.con.contacts, _label))
           .subscribe(x => x);

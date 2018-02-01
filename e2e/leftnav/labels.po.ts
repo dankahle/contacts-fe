@@ -1,16 +1,20 @@
 import {$, $$, browser, ElementFinder, protractor} from 'protractor';
 import {CommonPO} from '../common.po';
+import * as _ from 'lodash';
 
 const EC = protractor.ExpectedConditions;
 
 export class LabelPO extends CommonPO {
-  labelContacts = $('dk-leftnav-label.contacts');
-  labels = $$('mat-expansion-panel:nth-of-type(1) dk-leftnav-label');
-  extras = $$('mat-expansion-panel:nth-of-type(2) dk-leftnav-label');
-  labelsHeader = $('mat-expansion-panel:nth-of-type(1) mat-expansion-panel-header');
-  qLabelsBody = 'mat-expansion-panel:nth-of-type(1) .mat-expansion-panel-content';
-  extrasHeader = $('mat-expansion-panel:nth-of-type(2) mat-expansion-panel-header');
-  qExtrasBody = 'mat-expansion-panel:nth-of-type(2) .mat-expansion-panel-content';
+  labelContacts = $('dk-leftnav-label.contacts-label');
+  labelAdd = $('dk-leftnav-label.add-label');
+  qlabels = 'dk-leftnav-label.user-label';
+  labels = $$(this.qlabels);
+  extras = $$('dk-leftnav-label.extra-label');
+  labelsHeader = $('mat-expansion-panel.user-labels mat-expansion-panel-header');
+  qLabelsBody = 'mat-expansion-panel.user-labels .mat-expansion-panel-content';
+  extrasHeader = $('mat-expansion-panel.extra-labels mat-expansion-panel-header');
+  qExtrasBody = 'mat-expansion-panel.extra-labels .mat-expansion-panel-content';
+  addedLabel = $$(this.qlabels).get(2); // label one, label two, Label Two2 label zthree, should order case insensitive
 
   clickLabel(section, position) {
     switch (section) {
@@ -54,5 +58,10 @@ export class LabelPO extends CommonPO {
     }
   }
 
+  addedLabelIsPresent(num) {
+    return _.throttle(async () => {
+      return await $$(this.qlabels).count() === num;
+    }, 500);
+  }
 
 }

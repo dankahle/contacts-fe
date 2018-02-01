@@ -36,7 +36,13 @@ export class ContactsService {
   }
 
   updateOne(contact: Contact) {
-    const params = new HttpParams().set('delay', '500');
+    let params;
+    if (environment.apiContactUpdateDelay) {
+      params = new HttpParams().set('delay', '500'); // half sec delay for prod, so show off ajax progress bar
+    } else {
+      params = new HttpParams();
+    }
+
     return this.http.put<Contact>(`${this.apiUrl}api/contacts/${contact.id}`, contact, {params})
       .do(_contact => {
         const userContact = _.find(this.con.contacts, {id: contact.id});

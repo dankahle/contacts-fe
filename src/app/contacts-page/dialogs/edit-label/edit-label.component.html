@@ -13,7 +13,8 @@
 </div>
 
 <div mat-dialog-actions>
-  <button type="submit" form="form" mat-button color="primary" [mat-dialog-close]="data" [disabled]="form.invalid">OK</button>
-  <button mat-button mat-dialog-close>CANCEL</button>
+  <button class="submit" type="submit" form="form" mat-button color="primary" [mat-dialog-close]="data" [disabled]="form.invalid"
+          (click)="submit(form)">OK</button>
+  <button class="cancel" mat-button mat-dialog-close>CANCEL</button>
 </div>
 

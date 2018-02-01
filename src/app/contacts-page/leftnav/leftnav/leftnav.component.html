@@ -1,10 +1,10 @@
 
 <div class="leftnav" [hidden]="hideLeftNav" [class.closed]="store.leftNavClosed">
 
-  <dk-leftnav-label class="contacts" [label]="labels.contacts" (click)="showAllContacts($event, labels.contacts)" (keydown)="showAllContacts($event, labels.contacts)"
+  <dk-leftnav-label class="contacts-label" [label]="labels.contacts" (click)="showAllContacts($event, labels.contacts)" (keydown)="showAllContacts($event, labels.contacts)"
                     [class.active]="!store.selectedLabel"></dk-leftnav-label>
 
-  <mat-expansion-panel  class="exp-panel-leftnav" [expanded]="true" style="margin-top:0;">
+  <mat-expansion-panel  class="exp-panel-leftnav user-labels" [expanded]="true" style="margin-top:0;">
     <mat-expansion-panel-header collapsedHeight="41px" expandedHeight="41px">
       <mat-panel-title>
         Labels
@@ -12,15 +12,15 @@
     </mat-expansion-panel-header>
 
     <div *ngFor="let label of store.usr.user.labels">
-      <dk-leftnav-label [label]="label" (click)="showLabelContacts($event, label)" (keydown)="showLabelContacts($event, label)"
+      <dk-leftnav-label class="user-label" [label]="label" (click)="showLabelContacts($event, label)" (keydown)="showLabelContacts($event, label)"
                         [class.active]="store.selectedLabel === label"></dk-leftnav-label>
     </div>
 
-    <dk-leftnav-label [label]="labels.addLabel" (click)="editLabel($event, labels.addLabel, 'add')"
+    <dk-leftnav-label class="add-label" [label]="labels.addLabel" (click)="editLabel($event, labels.addLabel, 'add')"
                       (keydown)="editLabel($event, null, 'add')"></dk-leftnav-label>
   </mat-expansion-panel>
 
-  <mat-expansion-panel  class="exp-panel-leftnav">
+  <mat-expansion-panel  class="exp-panel-leftnav extra-labels">
     <mat-expansion-panel-header collapsedHeight="41px" expandedHeight="41px">
       <mat-panel-title>
         Extras
@@ -28,7 +28,7 @@
     </mat-expansion-panel-header>
 
     <div *ngFor="let label of labels.arrExtras">
-      <dk-leftnav-label [label]="label" (click)="showNotImplemented($event, label)" (keydown)="showNotImplemented($event, label)"></dk-leftnav-label>
+      <dk-leftnav-label class="extra-label" [label]="label" (click)="showNotImplemented($event, label)" (keydown)="showNotImplemented($event, label)"></dk-leftnav-label>
     </div>
   </mat-expansion-panel>
 

@@ -3,7 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Chance} from 'chance';
 import {Label} from '../../../store/models/label';
 import * as _ from 'lodash';
-import {AbstractControl, FormControl, NgModel, ValidatorFn, Validators} from '@angular/forms';
+import {AbstractControl, FormControl, NgForm, NgModel, ValidatorFn, Validators} from '@angular/forms';
 
 const chance = new Chance();
 

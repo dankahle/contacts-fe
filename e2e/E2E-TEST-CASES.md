@@ -15,10 +15,7 @@
 
 ### labels
 *  accordion works for labels/extras
-*  default (contacts) shows all contacts
-* label one shows brenda/jane
-* label two shows martha/jane
-* contacts shows all again
+*  default (contacts) shows all contacts, label two shows 2, label three shows none
 * create label // dialog
 * edit label // dialog
 * delete label with contacts keep contacts // dialog
@@ -45,13 +42,20 @@ you'd think this could be covered in contact list, but not sure what should be d
 * lost email for ??
 
 ## dialogs
-### contact delete 
 ### contact detail 
-### contact edit 
 ### contact add
-### contact edit close 
-### delete label
-### edit label
+### contact edit 
+### contact edit close
+### contact delete 
+### label add
+* submit enabled/disabled on trimmed input
+* required shows for no text // trimmed or will space work?
+* label exists shows if label already exists
+* cancel doesn't create label
+* submit creates new label
+
+### label edit
+### label delete
 
 
 

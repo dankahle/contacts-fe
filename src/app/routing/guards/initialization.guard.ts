@@ -74,8 +74,8 @@ export class InitializationGuard implements CanActivate {
       .map(x => {
         // console.log('initguard done');
         this.store.pubInitialized(true);
-        window['dkAppInitialized'] = true;
-        console.log('app initialized');
+        window['dkAppInitialized'] = true; // for e2e testing
+        // console.log('app initialized');
         this.afterInit();
         this.response$.next(true);
         return true;
