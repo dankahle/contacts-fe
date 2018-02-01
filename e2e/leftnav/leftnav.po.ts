@@ -15,7 +15,6 @@ export class LeftnavPO extends CommonPO {
   leftnavButtonClick() {
     const leftnavTransitionTime = 200;
     this.leftNavButton.click();
-    browser.sleep(leftnavTransitionTime + 200);
   }
 
 }
