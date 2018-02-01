@@ -14,7 +14,6 @@ describe('search tests', () => {
   });
 
   it('should show clear icon when input has text', () => {
-    browser.explore();
     expect(po.divClear.isDisplayed()).toBe(false);
     po.enterText('x');
     expect(po.divClear.isDisplayed()).toBe(true);
@@ -52,7 +51,6 @@ describe('search tests', () => {
   it('should only have jane for "j", then nothing for backspace', async () =>  {
     expect((await po.getDropdownChoices()).length).toBe(0);
     po.enterText('j');
-    browser.wait(EC.presenceOf($('.mat-option-text')));
     expect(po.getDropdownChoices()).toEqual(['jane - jane1@gmail.com' ]);
     po.enterText(protractor.Key.BACK_SPACE);
     expect((await po.getDropdownChoices()).length).toBe(0);
@@ -61,7 +59,6 @@ describe('search tests', () => {
   it('should have brenda/jane for "n"', async () =>  {
     expect((await po.getDropdownChoices()).length).toBe(0);
     po.enterText('n');
-    browser.wait(EC.presenceOf($('.mat-option-text')));
     expect(po.getDropdownChoices()).toEqual(['brenda - brenda1@gmail.com', 'jane - jane1@gmail.com' ]);
     po.enterText(protractor.Key.BACK_SPACE);
     expect((await po.getDropdownChoices()).length).toBe(0);
@@ -72,7 +69,6 @@ describe('search tests', () => {
     po.navigate('/c62dac5b-97d8-53a5-9989-cb2f779bc5e3'); // get label three
     expect((await po.getDropdownChoices()).length).toBe(0);
     po.enterText('n');
-    browser.wait(EC.presenceOf($('.mat-option-text')));
     expect(await po.getDropdownChoices()).toEqual(['brenda - brenda1@gmail.com', 'jane - jane1@gmail.com' ]);
     po.enterText(protractor.Key.BACK_SPACE);
     expect((await po.getDropdownChoices()).length).toBe(0);

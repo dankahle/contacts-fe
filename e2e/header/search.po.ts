@@ -36,7 +36,6 @@ export class SearchPO extends CommonPO {
 
   searchAndOpen(text, numDownArrows) {
     this.enterText(text);
-    browser.wait(EC.presenceOf($('.mat-option-text')));
     while (numDownArrows >= 1) {
       this.input.sendKeys(protractor.Key.ARROW_DOWN);
       numDownArrows--;
