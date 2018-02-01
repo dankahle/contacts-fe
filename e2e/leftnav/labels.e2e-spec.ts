@@ -49,7 +49,7 @@ describe('leftnav labels', () => {
     expect(poList.getNames()).toEqual(['brenda - Brenda Co', 'jane - Jane Co', 'martha - Martha Co']);
   });
 
-  fit('should create label', () => {
+  it('should create label', () => {
     expect(po.labels.count()).toBe(3);
     po.labelAdd.click();
     expect(poLabelEdit.dialog.isPresent()).toBe(true);

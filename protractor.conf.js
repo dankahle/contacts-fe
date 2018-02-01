@@ -6,13 +6,13 @@ let server;
 exports.config = {
   allScriptsTimeout: 11000,
   specs: [
-    './e2e/slow-down-tests.ts',
+    // './e2e/slow-down-tests.ts',
     './e2e/**/*.e2e-spec.ts'
   ],
   capabilities: {
     'browserName': 'chrome',
     'chromeOptions': {
-      // 'args': ["--headless", "--disable-gpu", "--window-size=1200x1024",  "--no-sandbox"]
+      'args': ["--headless", "--disable-gpu", "--window-size=1200x1024",  "--no-sandbox"]
     }
   },
   directConnect: true,
@@ -26,12 +26,8 @@ exports.config = {
     }
   },
   onPrepare: function() {
-    // this tells protractor to wait for $http and $timeout calls, but doens't do anything for ng2 yet, but doesn't hurt to leave it on I figure.
-    // browser.ignoreSynchronization = false; // from angular-starter
-
-    // $$().map has a bug, it looks for window.angular, which is an ng1 thing. We have to turn that off (waitForAngularEnabled(false)) to get that
-    // to work, otherwise should be one whenever they get around to addressing ng2 for real.
-    browser.waitForAngularEnabled(false);
+    browser.ignoreSynchronization = false; // from angular-starter
+    browser.waitForAngularEnabled(true);
 
     require('ts-node').register({
       project: 'e2e/tsconfig.e2e.json'
