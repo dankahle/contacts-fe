@@ -49,17 +49,15 @@ describe('leftnav labels', () => {
     expect(poList.getNames()).toEqual(['brenda - Brenda Co', 'jane - Jane Co', 'martha - Martha Co']);
   });
 
-/*
-  xit('should create label', () => {
+  fit('should create label', () => {
     expect(po.labels.count()).toBe(3);
     po.labelAdd.click();
     expect(poLabelEdit.dialog.isPresent()).toBe(true);
     poLabelEdit.enterText('Label Two2');
     poLabelEdit.submit.click();
-    browser.wait(po.addedLabelIsPresent(5));
-    expect(po.addedLabel.getText()).toBe('Label Two2');
+    browser.wait(po.addedLabelIsPresent(4));
+    expect(po.labels.get(2).$('.name').getText()).toBe('Label Two2');
   });
-*/
 
   it('', () => {
 
