@@ -5,7 +5,7 @@ import {LabelEditPO} from '../dialogs/label-edit.po';
 
 const EC = protractor.ExpectedConditions;
 
-fdescribe('leftnav labels', () => {
+describe('leftnav labels', () => {
   const po = new LabelPO();
   const poList = new ListPO();
   const poLabelEdit = new LabelEditPO();
@@ -16,7 +16,7 @@ fdescribe('leftnav labels', () => {
     po.navigate('/');
   });
 
-  fit('should open/close accordion sections', () => {
+  it('should open/close accordion sections', () => {
     expect($(po.qLabelsBody).isDisplayed()).toBe(true)
     po.closeAccordHeading('labels');
     expect($(po.qLabelsBody).isDisplayed()).toBe(false);

@@ -35,11 +35,9 @@ export class LabelPO extends CommonPO {
     switch (section) {
       case 'labels':
         this.labelsHeader.click();
-        browser.wait(EC.visibilityOf($(this.qLabelsBody)))
         break;
       case 'extras':
         this.extrasHeader.click();
-        browser.wait(EC.visibilityOf($(this.qExtrasBody)))
         break;
     }
   }
@@ -49,11 +47,9 @@ export class LabelPO extends CommonPO {
     switch (section) {
       case 'labels':
         this.labelsHeader.click();
-        browser.wait(EC.invisibilityOf($(this.qLabelsBody)))
         break;
       case 'extras':
         this.extrasHeader.click();
-        browser.wait(EC.invisibilityOf($(this.qExtrasBody)))
         break;
     }
   }
