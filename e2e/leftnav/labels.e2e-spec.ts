@@ -13,7 +13,7 @@ describe('leftnav labels', () => {
 
   beforeAll(() => {
     const start = Date.now();
-    po.navigate('/');
+    browser.get('/');
   });
 
   it('should open/close accordion sections', () => {

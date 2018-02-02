@@ -9,7 +9,7 @@ const po = new CommonPO();
 const start = Date.now();
 
   beforeAll(async () => {
-    po.navigate('/');
+    browser.get('/');
   });
 
   xit('explore', () => {

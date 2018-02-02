@@ -7,7 +7,7 @@ describe('leftnav', () => {
   const po = new LeftnavPO();
 
   beforeAll(async () => {
-    po.navigate('/');
+    browser.get('/');
     po.innerHeight = <number> await browser.executeScript('return window.innerHeight');
   });
 
@@ -23,7 +23,7 @@ describe('leftnav', () => {
 
   function openMdLgXlRefresh() {
     openMdLgXl();
-    po.refresh();
+    browser.refresh();
     openMdLgXl();
   }
 
@@ -41,7 +41,7 @@ describe('leftnav', () => {
 
   function closedXsSmRefresh() {
     closedXsSm();
-    po.refresh();
+    browser.refresh();
     closedXsSm();
   }
 
@@ -52,20 +52,16 @@ describe('leftnav', () => {
   it('should show and hide on breakpoints', async () => {
     po.resizeWindow(1980);
     openMdLgXlRefresh();
-    po.resizeWindow(1100);
-    openMdLgXlRefresh();
     po.resizeWindow(1021); // 1020 should have worked, but was already position: absolute there
     openMdLgXlRefresh();
     po.resizeWindow(1019);
-    closedXsSmRefresh();
-    po.resizeWindow(900);
     closedXsSmRefresh();
     po.resizeWindow(768);
     closedXsSmRefresh();
   });
 
   it('should open and close with header button (md/lg/xl)', () => {
-    po.refresh();
+    browser.refresh();
     po.resizeWindow(1021);
     openMdLgXl();
     po.leftnavButtonClick();
@@ -75,7 +71,7 @@ describe('leftnav', () => {
   });
 
   it('should open and close with header button (xs/sm)', () => {
-    po.refresh();
+    browser.refresh();
     po.resizeWindow(1019);
     closedXsSm();
     po.leftnavButtonClick();
@@ -85,7 +81,7 @@ describe('leftnav', () => {
   });
 
   it('should close on lt-md and reopen md', () => {
-    po.refresh();
+    browser.refresh();
     po.resizeWindow(1980);
     openMdLgXl();
     po.resizeWindow(1019);
@@ -96,7 +92,7 @@ describe('leftnav', () => {
 
   // should stay closed when they size lower than md, then go back to md, if they closed it with button while md+
   it('should stay closed when closed gt-sm, then lt-md, then gt-sm', () => {
-    po.refresh();
+    browser.refresh();
     po.resizeWindow(1980);
     openMdLgXl();
     po.leftnavButtonClick();

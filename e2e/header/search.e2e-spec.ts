@@ -9,7 +9,7 @@ describe('search tests', () => {
   let poLabel: LabelPO;
 
   beforeAll(() => {
-    po.navigate('/');
+    browser.get('/');
     poLabel = new LabelPO();
   });
 
@@ -66,7 +66,7 @@ describe('search tests', () => {
 
   // search isn't limited by what label you've chosen, it always searches all contacts
   it('should have brenda/jane for "n" (in label three view)', async () =>  {
-    po.navigate('/c62dac5b-97d8-53a5-9989-cb2f779bc5e3'); // get label three
+    browser.get('/c62dac5b-97d8-53a5-9989-cb2f779bc5e3'); // get label three
     expect((await po.getDropdownChoices()).length).toBe(0);
     po.enterText('n');
     expect(await po.getDropdownChoices()).toEqual(['brenda - brenda1@gmail.com', 'jane - jane1@gmail.com' ]);
