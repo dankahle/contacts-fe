@@ -8,10 +8,10 @@
 
   <div *ngIf="!label.noEdit" class="icons">
     <!--keep these together, no space between-->
-    <div class="wrap" (click)="parent.editLabel($event, label, 'edit')"><i class="material-icons"
+    <div class="wrap icon-edit" (click)="parent.editLabel($event, label, 'edit')"><i class="material-icons"
             (keydown)="parent.editLabel($event, label, 'edit')"
              matTooltip="Rename label" matTooltipShowDelay="500" matTooltipHideDelay="300">edit</i></div>
-    <div class="wrap" (click)="parent.deleteLabel($event, label)"><i class="material-icons"
+    <div class="wrap icon-delete" (click)="parent.deleteLabel($event, label)"><i class="material-icons"
           matTooltip="Delete label" matTooltipShowDelay="500" matTooltipHideDelay="300">delete</i></div>
   </div>
 </div>

@@ -16,6 +16,15 @@ export class LabelPO extends CommonPO {
   qExtrasBody = 'mat-expansion-panel.extra-labels .mat-expansion-panel-content';
   addedLabel = $$(this.qlabels).get(2); // label one, label two, Label Two2 label zthree, should order case insensitive
 
+  clickEdit(el) {
+    browser.actions().mouseMove(el).perform();
+    el.$('.icon-edit').click();
+  }
+
+  clickDelete(el) {
+    el.$('.icon-delete').click();
+  }
+
   clickLabel(section, position) {
     switch (section) {
       case 'contacts':

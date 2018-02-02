@@ -49,14 +49,25 @@ describe('leftnav labels', () => {
     expect(poList.getNames()).toEqual(['brenda - Brenda Co', 'jane - Jane Co', 'martha - Martha Co']);
   });
 
-  it('should create label', () => {
+  fit('should create label', () => {
     expect(po.labels.count()).toBe(3);
     po.labelAdd.click();
     expect(poLabelEdit.dialog.isPresent()).toBe(true);
-    poLabelEdit.enterText('Label Two2');
+    poLabelEdit.input.sendKeys('Label Two2');
     poLabelEdit.submit.click();
     browser.wait(po.addedLabelIsPresent(4));
-    expect(po.labels.get(2).$('.name').getText()).toBe('Label Two2');
+    po.addedLabel = po.labels.get(2);
+    expect(po.addedLabel.$('.name').getText()).toBe('Label Two2');
+  });
+
+  fit('should edit label', () => {
+    po.clickEdit(po.addedLabel);
+    expect(poLabelEdit.dialog.isPresent()).toBe(true);
+    poLabelEdit.input.clear();
+    poLabelEdit.input.sendKeys('Label Two3');
+    poLabelEdit.submit.click();
+    browser.wait(EC.stalenessOf(poLabelEdit.dialog));
+    expect(po.addedLabel.$('.name').getText()).toBe('Label Two3');
   });
 
   it('', () => {

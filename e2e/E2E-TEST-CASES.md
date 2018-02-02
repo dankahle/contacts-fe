@@ -16,7 +16,7 @@
 ### labels
 *  accordion works for labels/extras
 *  default (contacts) shows all contacts, label two shows 2, label three shows none
-* create label // dialog
+*  create label // dialog
 * edit label // dialog
 * delete label with contacts keep contacts // dialog
 * delete label with contacts toss contacts // dialog
