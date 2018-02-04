@@ -6,7 +6,7 @@ import {LabelDeletePO} from '../dialogs/label-delete.po';
 
 const EC = protractor.ExpectedConditions;
 
-describe('leftnav labels', () => {
+fdescribe('leftnav labels', () => {
   const po = new LabelPO();
   const poContactList = new ContactListPO();
   const poLabelEdit = new LabelEditPO();

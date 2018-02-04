@@ -32,7 +32,7 @@ export class LabelPO extends CommonPO {
       this.poLabelDelete.radioToss.click();
     }
     this.poLabelDelete.submit.click();
-    browser.wait(async () => await this.labels.count() === 2);
+    this.poLabelDelete.waitForDown();
   }
 
   getLabelText(el) {
@@ -70,7 +70,7 @@ export class LabelPO extends CommonPO {
 
   clickDeleteWithContacts(el) {
     this.clickDeleteNoContacts(el);
-    browser.wait(EC.presenceOf($('dk-delete-label')));
+    this.poLabelDelete.waitForUp();
   }
 
   clickLabel(section, position) {
