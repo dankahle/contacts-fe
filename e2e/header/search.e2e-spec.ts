@@ -9,13 +9,14 @@ describe('search tests', () => {
   let poLabel: LabelPO;
 
   beforeAll(() => {
+    browser.call(po.initDatabase);
     browser.get('/');
     poLabel = new LabelPO();
   });
 
   it('should show clear icon when input has text', () => {
     expect(po.divClear.isDisplayed()).toBe(false);
-    po.enterText('x');
+    po.clearAndEnterText('x');
     expect(po.divClear.isDisplayed()).toBe(true);
     po.enterText(protractor.Key.BACK_SPACE);
     expect(po.divClear.isDisplayed()).toBe(false);
@@ -23,7 +24,7 @@ describe('search tests', () => {
 
   it('should clear the text', async () => {
     expect(po.divClear.isDisplayed()).toBe(false);
-    po.enterText('lala');
+    po.clearAndEnterText('lala');
     const sv = po.getSearchValue();
     expect(po.getSearchValue()).toBe('lala');
     browser.actions()
@@ -48,36 +49,44 @@ describe('search tests', () => {
     expect(po.input.equals(browser.driver.switchTo().activeElement())).toBe(true);
   });
 
+  it('should have Brenda/jane/Martha Co for "a"', async () =>  {
+    expect((await po.getDropdownChoices()).length).toBe(0);
+    po.clearAndEnterText('a');
+    expect(po.getDropdownChoices()).toEqual(['Brenda - brenda1@gmail.com', 'jane - jane1@gmail.com', 'Martha Co - martha1@gmail.com']);
+    po.enterText(protractor.Key.BACK_SPACE);
+    expect((await po.getDropdownChoices()).length).toBe(0);
+  });
+
   it('should only have jane for "j", then nothing for backspace', async () =>  {
     expect((await po.getDropdownChoices()).length).toBe(0);
-    po.enterText('j');
+    po.clearAndEnterText('j');
     expect(po.getDropdownChoices()).toEqual(['jane - jane1@gmail.com' ]);
     po.enterText(protractor.Key.BACK_SPACE);
     expect((await po.getDropdownChoices()).length).toBe(0);
   })
 
-  it('should have brenda/jane for "n"', async () =>  {
+  it('should have Brenda/jane for "n"', async () =>  {
     expect((await po.getDropdownChoices()).length).toBe(0);
-    po.enterText('n');
-    expect(po.getDropdownChoices()).toEqual(['brenda - brenda1@gmail.com', 'jane - jane1@gmail.com' ]);
+    po.clearAndEnterText('n');
+    expect(po.getDropdownChoices()).toEqual(['Brenda - brenda1@gmail.com', 'jane - jane1@gmail.com' ]);
     po.enterText(protractor.Key.BACK_SPACE);
     expect((await po.getDropdownChoices()).length).toBe(0);
   });
 
   // search isn't limited by what label you've chosen, it always searches all contacts
-  it('should have brenda/jane for "n" (in label three view)', async () =>  {
+  it('should have Brenda/jane for "n" (in label three view)', async () =>  {
     browser.get('/c62dac5b-97d8-53a5-9989-cb2f779bc5e3'); // get label three
     expect((await po.getDropdownChoices()).length).toBe(0);
-    po.enterText('n');
-    expect(await po.getDropdownChoices()).toEqual(['brenda - brenda1@gmail.com', 'jane - jane1@gmail.com' ]);
+    po.clearAndEnterText('n');
+    expect(await po.getDropdownChoices()).toEqual(['Brenda - brenda1@gmail.com', 'jane - jane1@gmail.com' ]);
     po.enterText(protractor.Key.BACK_SPACE);
     expect((await po.getDropdownChoices()).length).toBe(0);
   })
 
-  it('should search for brenda/jane and open jane detail', async () => {
+  it('should search for Brenda/jane and open jane detail', async () => {
     po.searchAndOpen('n', 2);
     const name = await $('dk-contact-detail .name-div .name').getText();
-    expect(name).toBe('jane - Jane Co');
+    expect(name).toBe('jane - jane co');
     po.enterText(protractor.Key.BACK_SPACE);
     expect((await po.getDropdownChoices()).length).toBe(0);
   });

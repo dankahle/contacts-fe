@@ -1,6 +1,6 @@
 import {$, $$, browser, ElementFinder, protractor} from 'protractor';
 import {LabelEditPO} from '../dialogs/label-edit.po';
-import {ContactListPO} from '../list/contact-list.po';
+import {ContactListPO} from '../contact-list/contact-list.po';
 import {LabelDeletePO} from '../dialogs/label-delete.po';
 import {LabelPO} from '../leftnav/labels.po';
 

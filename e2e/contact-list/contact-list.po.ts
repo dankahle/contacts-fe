@@ -3,10 +3,8 @@ import {CommonPO} from '../common.po';
 import {ContactEditPO} from '../dialogs/contact-edit.po';
 
 export class ContactListPO extends CommonPO {
-  list = $('dk-contact-list');
-  contacts = $$('dk-contact-list-item');
-  data: object;
-  names = $$('dk-contact-list-item input.name');
+  contacts = $$('dk-contact-list dk-contact-list-item');
+  names = $$('dk-contact-list dk-contact-list-item .name');
   addButton = $('dk-contact-list .add-button');
   poContactEdit = new ContactEditPO();
 

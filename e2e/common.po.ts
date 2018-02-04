@@ -11,7 +11,7 @@ export class CommonPO {
         if (error) {
           reject(error);
         }
-        // console.log(stdout);
+        console.log(stdout);
         resolve(stdout);
       });
 

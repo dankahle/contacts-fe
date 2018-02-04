@@ -13,7 +13,12 @@ export class SearchPO extends CommonPO {
     return arr;
   }
 
-  enterText(text) {
+  enterText(text, clear?) {
+    this.input.sendKeys(text);
+  }
+
+  clearAndEnterText(text, clear?) {
+    this.input.clear();
     this.input.sendKeys(text);
   }
 

@@ -1,7 +1,13 @@
 const _ = require('lodash');
 
 
-
+let arr = [
+  {name: 'dank'},
+  {name: 'carl'},
+]
+const b = _.sortBy(arr, 'name');
+console.log(arr);
+console.log(b);
 
 
 /*

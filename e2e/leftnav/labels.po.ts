@@ -12,6 +12,7 @@ export class LabelPO extends CommonPO {
   labelAdd = $('dk-leftnav dk-leftnav-label.add-label');
   qlabels = 'dk-leftnav dk-leftnav-label.user-label';
   labels = $$(this.qlabels);
+  labelActive = $('dk-leftnav dk-leftnav-label.active');
   extras = $$('dk-leftnav dk-leftnav-label.extra-label');
   labelsHeader = $('dk-leftnav mat-expansion-panel.user-labels mat-expansion-panel-header');
   qLabelsBody = 'dk-leftnav mat-expansion-panel.user-labels .mat-expansion-panel-content';
@@ -24,13 +25,14 @@ export class LabelPO extends CommonPO {
 
 
   deleteLabelWithContacts(label, mode) {
-    this.clickDelete(label); // delete label two, which has brenda/jane
+    this.clickDeleteWithContacts(label); // delete label two, which has brenda/jane
     if (mode === 'keep') {
       this.poLabelDelete.radioKeep.click();
     } else {
       this.poLabelDelete.radioToss.click();
     }
     this.poLabelDelete.submit.click();
+    browser.wait(async () => await this.labels.count() === 2);
   }
 
   getLabelText(el) {
@@ -48,20 +50,27 @@ export class LabelPO extends CommonPO {
   createLabel(text) {
     this.createLabelText = text;
     this.labelAdd.click();
+    poLabelEdit.waitForUp();
     poLabelEdit.input.sendKeys('Label Two2');
     poLabelEdit.submit.click();
-    browser.wait(this.addedLabelIsPresent(4));
+    poLabelEdit.waitForDown();
     this.addedLabel = this.labels.get(2);
   }
 
   clickEdit(el) {
     browser.actions().mouseMove(el).perform();
     el.$('.icon-edit').click();
+    browser.wait(EC.presenceOf($('dk-edit-label')));
   }
 
-  clickDelete(el) {
+  clickDeleteNoContacts(el) {
     browser.actions().mouseMove(el).perform();
     el.$('.icon-delete').click();
+  }
+
+  clickDeleteWithContacts(el) {
+    this.clickDeleteNoContacts(el);
+    browser.wait(EC.presenceOf($('dk-delete-label')));
   }
 
   clickLabel(section, position) {

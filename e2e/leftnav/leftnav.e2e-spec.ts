@@ -7,6 +7,7 @@ describe('leftnav', () => {
   const po = new LeftnavPO();
 
   beforeAll(async () => {
+    const start = Date.now();
     browser.get('/');
     po.innerHeight = <number> await browser.executeScript('return window.innerHeight');
   });

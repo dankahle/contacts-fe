@@ -27,4 +27,8 @@ export class ContactListItemComponent extends MoreActionsBase {
     super(store, contactsService, mdDialog);
   }
 
+  getContactDisplayName(contact) {
+    return contact.name && contact.company ? contact.name + ' - ' + contact.company : contact.name || contact.company;
+  }
+
 }

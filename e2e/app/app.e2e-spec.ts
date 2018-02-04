@@ -9,6 +9,7 @@ const po = new CommonPO();
 const start = Date.now();
 
   beforeAll(async () => {
+    browser.call(po.initDatabase);
     browser.get('/');
   });
 

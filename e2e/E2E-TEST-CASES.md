@@ -1,5 +1,5 @@
 
-### search
+done### search
 * search icon sets focus to input
 * clear icon clears input
 * search text yields correct dropdown results (nothing)
@@ -7,21 +7,22 @@
 * search text yields correct dropdown results (label chosen (still searches all))
 * clear input, results go away
 
-### leftnav
+done### leftnav
 * header button opens/closes
 * responsive: open for gt-sm, closed for lt-sm
 * close for gt-sm if was closed before going lt-sm
 
-### labels
-*  accordion works for labels/extras
-*  default (contacts) shows all contacts, label two shows 2, label three shows none
-*  create label // dialog
-*  edit label // dialog
-*  delete label no contacts deletes
+done ### labels
+* accordion works for labels/extras
+* default (contacts) shows all contacts, label two shows 2, label three shows none
+* create label // dialog
+* edit label // dialog
+* delete label no contacts deletes
 * delete label with contacts keep contacts // dialog
 * delete label with contacts toss contacts // dialog
 
 ### contact list
+* responsive: notes, phone, email disappear at appropriate breakpoints
 * shows appropriate contacts for contactsLabel and other labels
 * shows no contacts when label zthree is picked
 * add contact brings up edit dialog
@@ -32,15 +33,9 @@
 * clicking on link spawns new tab in browser, or maybe just check it's a link with the properties required (href="mailto:.../phone:")
 
  
-### contact list item??
+### contact list item
 you'd think this could be covered in contact list, but not sure what should be done in e2e as opposed to comp tests. 
 
-### responsive
-* all fields shown for xl
-* lose notes for ??
-* lose phone for ??
-* lose menu for ?? // can skip, it's tested in leftnav
-* lost email for ??
 
 ### more actions
 * all labels show up
@@ -68,6 +63,9 @@ you'd think this could be covered in contact list, but not sure what should be d
 ### page not found
 
 
-
+************* need tests for case insensitive ordering of labels and contacts. you're tests broke in be when you went with pascal case
+for brenda, jane, martha, BUT NOT FOR KATE, so must be broken in list then? Maybe it's fine in db get but when you add you don't sort locally? (probably)
+but either way... shouldn't be broken in test right? Maybe put jane lower case so it gets tested in be as well as fe? No, just add a new one with diff case and make 
+sure it lands in correct position (like you do with labels)
 
 
