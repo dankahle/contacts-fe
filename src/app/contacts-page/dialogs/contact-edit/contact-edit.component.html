@@ -19,7 +19,7 @@
         </div>
         <div class="inputs" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="space-between center">
           <mat-form-field fxFlex="1 1 auto">
-            <input matInput #nameNg="ngModel" name="name" [(ngModel)]="contact.name"
+            <input class="po-name" matInput #nameNg="ngModel" name="name" [(ngModel)]="contact.name"
                    (input)="updateNameAndCompanyValidation()" (blur)="updateNameAndCompanyValidation()"
                    placeholder="Name" autocomplete="noway" spellcheck="false">
             <mat-error *ngIf="nameNg.invalid && nameNg.errors.nameOrCompany">Name or company required</mat-error>
@@ -227,9 +227,9 @@
       -->
 
       <div mat-dialog-actions="">
-        <button type="button" form="form" mat-button color="primary" (click)="save()"
+        <button class="button-submit" type="button" form="form" mat-button color="primary" (click)="save()"
         [disabled]="form.invalid">SAVE</button>
-        <button type="button" mat-button  (click)="cancelDialog()">CANCEL</button>
+        <button class="button-cancel" type="button" mat-button  (click)="cancelDialog()">CANCEL</button>
       </div>
 
     </form>

@@ -37,9 +37,9 @@
   </div>
 
   <div class="icons">
-    <div class="wrap" (click)="parent.editContact($event, contact, 'edit')"><i class="material-icons"
+    <div class="wrap icon-edit" (click)="parent.editContact($event, contact, 'edit')"><i class="material-icons"
         matTooltip="Edit contact" matTooltipShowDelay="500" matTooltipHideDelay="300">edit</i></div>
-    <div class="wrap" style="padding-right:10px;" [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()"
+    <div class="wrap icon-more-actions" style="padding-right:10px;" [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()"
     (onMenuClose)="menuClose()" (onMenuOpen)="menuOpen()"><i class="material-icons"
         matTooltip="More actions" matTooltipShowDelay="500" matTooltipHideDelay="300">more_vert</i></div>
   </div>

@@ -17,7 +17,7 @@ const start = Date.now();
   });
 
   it('should land at root',  () => {
-    expect(browser.getCurrentUrl()).toBe('http://localhost:4201/');
+    expect(browser.getCurrentUrl()).toBe(po.rootUrl);
   });
 
 });

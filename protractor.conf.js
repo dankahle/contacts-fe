@@ -6,7 +6,7 @@ let server;
 exports.config = {
   allScriptsTimeout: 11000,
   specs: [
-    // './e2e/slow-down-tests.ts',
+    './e2e/slow-down-tests.ts',
     './e2e/**/*.e2e-spec.ts'
   ],
   capabilities: {

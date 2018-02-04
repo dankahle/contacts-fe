@@ -1,20 +1,58 @@
 import {$, $$, browser, ElementFinder, protractor} from 'protractor';
 import {CommonPO} from '../common.po';
 import * as _ from 'lodash';
+import {LabelEditPO} from '../dialogs/label-edit.po';
+import {LabelDeletePO} from '../dialogs/label-delete.po';
 
 const EC = protractor.ExpectedConditions;
+const poLabelEdit = new LabelEditPO();
 
 export class LabelPO extends CommonPO {
-  labelContacts = $('dk-leftnav-label.contacts-label');
-  labelAdd = $('dk-leftnav-label.add-label');
-  qlabels = 'dk-leftnav-label.user-label';
+  labelContacts = $('dk-leftnav dk-leftnav-label.contacts-label');
+  labelAdd = $('dk-leftnav dk-leftnav-label.add-label');
+  qlabels = 'dk-leftnav dk-leftnav-label.user-label';
   labels = $$(this.qlabels);
-  extras = $$('dk-leftnav-label.extra-label');
-  labelsHeader = $('mat-expansion-panel.user-labels mat-expansion-panel-header');
-  qLabelsBody = 'mat-expansion-panel.user-labels .mat-expansion-panel-content';
-  extrasHeader = $('mat-expansion-panel.extra-labels mat-expansion-panel-header');
-  qExtrasBody = 'mat-expansion-panel.extra-labels .mat-expansion-panel-content';
+  extras = $$('dk-leftnav dk-leftnav-label.extra-label');
+  labelsHeader = $('dk-leftnav mat-expansion-panel.user-labels mat-expansion-panel-header');
+  qLabelsBody = 'dk-leftnav mat-expansion-panel.user-labels .mat-expansion-panel-content';
+  extrasHeader = $('dk-leftnav mat-expansion-panel.extra-labels mat-expansion-panel-header');
+  qExtrasBody = 'dk-leftnav mat-expansion-panel.extra-labels .mat-expansion-panel-content';
   addedLabel = $$(this.qlabels).get(2); // label one, label two, Label Two2 label zthree, should order case insensitive
+  createLabelText;
+  poLabelDelete = new LabelDeletePO;
+
+
+
+  deleteLabelWithContacts(label, mode) {
+    this.clickDelete(label); // delete label two, which has brenda/jane
+    if (mode === 'keep') {
+      this.poLabelDelete.radioKeep.click();
+    } else {
+      this.poLabelDelete.radioToss.click();
+    }
+    this.poLabelDelete.submit.click();
+  }
+
+  getLabelText(el) {
+    return el.$('.name').getText();
+  }
+
+  editLabel(el, text) {
+    this.clickEdit(el);
+    poLabelEdit.input.clear();
+    poLabelEdit.input.sendKeys(text);
+    poLabelEdit.submit.click();
+    browser.wait(EC.stalenessOf(poLabelEdit.dialog));
+  }
+
+  createLabel(text) {
+    this.createLabelText = text;
+    this.labelAdd.click();
+    poLabelEdit.input.sendKeys('Label Two2');
+    poLabelEdit.submit.click();
+    browser.wait(this.addedLabelIsPresent(4));
+    this.addedLabel = this.labels.get(2);
+  }
 
   clickEdit(el) {
     browser.actions().mouseMove(el).perform();
@@ -22,6 +60,7 @@ export class LabelPO extends CommonPO {
   }
 
   clickDelete(el) {
+    browser.actions().mouseMove(el).perform();
     el.$('.icon-delete').click();
   }
 

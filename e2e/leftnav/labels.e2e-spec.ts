@@ -1,14 +1,16 @@
 import {$, $$, browser, ElementFinder, protractor} from 'protractor';
 import {LabelPO} from './labels.po';
-import {ListPO} from '../list/list.po';
 import {LabelEditPO} from '../dialogs/label-edit.po';
+import {ContactListPO} from '../list/contact-list.po';
+import {LabelDeletePO} from '../dialogs/label-delete.po';
 
 const EC = protractor.ExpectedConditions;
 
 describe('leftnav labels', () => {
   const po = new LabelPO();
-  const poList = new ListPO();
+  const poContactList = new ContactListPO();
   const poLabelEdit = new LabelEditPO();
+  const poLabelDelete = new LabelDeletePO;
   const active = 'active';
 
   beforeAll(() => {
@@ -34,47 +36,114 @@ describe('leftnav labels', () => {
   it('should default to contacts label, and show correct contacts for chosen labels', async () => {
     expect(po.hasClass(po.labelContacts, active)).toBe(true);
     labelIsActive(-1);
-    expect(poList.getNames()).toEqual(['brenda - Brenda Co', 'jane - Jane Co', 'martha - Martha Co']);
+    expect(poContactList.getNames()).toEqual(['brenda - Brenda Co', 'jane - Jane Co', 'martha - Martha Co']);
     po.labels.get(1).click();
     expect(po.hasClass(po.labelContacts, active)).toBe(false);
     labelIsActive(1);
-    expect(poList.getNames()).toEqual(['brenda - Brenda Co', 'jane - Jane Co']);
+    expect(poContactList.getNames()).toEqual(['brenda - Brenda Co', 'jane - Jane Co']);
     po.labels.get(2).click();
     expect(po.hasClass(po.labelContacts, active)).toBe(false);
     labelIsActive(2);
-    expect(poList.getNames()).toEqual([]);
+    expect(poContactList.getNames()).toEqual([]);
     po.labelContacts.click();
     expect(po.hasClass(po.labelContacts, active)).toBe(true);
     labelIsActive(-1);
-    expect(poList.getNames()).toEqual(['brenda - Brenda Co', 'jane - Jane Co', 'martha - Martha Co']);
+    expect(poContactList.getNames()).toEqual(['brenda - Brenda Co', 'jane - Jane Co', 'martha - Martha Co']);
   });
 
-  fit('should create label', () => {
+  it('should create label and delete it with no contacts', async () => {
     expect(po.labels.count()).toBe(3);
-    po.labelAdd.click();
-    expect(poLabelEdit.dialog.isPresent()).toBe(true);
-    poLabelEdit.input.sendKeys('Label Two2');
-    poLabelEdit.submit.click();
-    browser.wait(po.addedLabelIsPresent(4));
-    po.addedLabel = po.labels.get(2);
-    expect(po.addedLabel.$('.name').getText()).toBe('Label Two2');
+    expect(po.getLabelText(po.labels.get(0))).toBe('label one');
+    expect(po.getLabelText(po.labels.get(1))).toBe('label two');
+    expect(po.getLabelText(po.labels.get(2))).toBe('label zthree');
+    po.createLabel('Label Two2')
+    expect(po.labels.count()).toBe(4);
+    expect(po.getLabelText(po.labels.get(0))).toBe('label one');
+    expect(po.getLabelText(po.labels.get(1))).toBe('label two');
+    expect(po.getLabelText(po.labels.get(2))).toBe('Label Two2');
+    expect(po.getLabelText(po.labels.get(3))).toBe('label zthree');
+    po.clickDelete(po.labels.get(2));
+    expect(po.labels.count()).toBe(3);
+    expect(po.getLabelText(po.labels.get(0))).toBe('label one');
+    expect(po.getLabelText(po.labels.get(1))).toBe('label two');
+    expect(po.getLabelText(po.labels.get(2))).toBe('label zthree');
   });
 
-  fit('should edit label', () => {
-    po.clickEdit(po.addedLabel);
-    expect(poLabelEdit.dialog.isPresent()).toBe(true);
-    poLabelEdit.input.clear();
-    poLabelEdit.input.sendKeys('Label Two3');
-    poLabelEdit.submit.click();
-    browser.wait(EC.stalenessOf(poLabelEdit.dialog));
-    expect(po.addedLabel.$('.name').getText()).toBe('Label Two3');
+  it('should edit label', () => {
+    po.createLabel('Label Two2')
+    const label = po.labels.get(2);
+    expect(po.getLabelText(label)).toBe('Label Two2')
+    po.editLabel(label, 'Label Two3');
+    expect(po.getLabelText(label)).toBe('Label Two3');
+    po.clickDelete(label);
   });
 
-  it('', () => {
-
+  it('should show the correct number of contacts', async () => {
+    expect(po.labels.get(0).getText()).toContain('label one\n(2)');
+    expect(po.labels.get(1).getText()).toContain('label two\n(2)');
+    const zthreeText = await po.labels.get(2).getText();
+    expect(zthreeText).toContain('label zthree');
+    expect(zthreeText).not.toContain('(');
   });
 
-  it('', () => {
+  fit('should delete label two and keep contacts (in contacts)', async () => {
+    await po.initDatabase();
+    browser.refresh();
+    po.labelContacts.click();
+    expect(po.labels.count()).toBe(3);
+    po.deleteLabelWithContacts(po.labels.get(1), 'keep');
+    browser.sleep(3000);
+    expect(po.labels.count()).toBe(2);
+    expect(po.labels.getText()).not.toContain('label two');
+    expect(browser.getCurrentUrl()).toBe(po.rootUrl);
+    const contactNames = await poContactList.getNames();
+    expect(contactNames).toEqual(['brenda', 'jane', 'martha']);
+  })
+
+  it('should delete label two and keep contacts (in label one)', async () => {
+    await po.initDatabase();
+    po.labelContacts.click();
+    expect(po.labels.count()).toBe(3);
+    po.clickDelete(po.labels.get(1)); // delete label two, which has brenda/jane
+    poLabelDelete.radioKeep.click();
+    poLabelDelete.submit.click();
+    expect(po.labels.count()).toBe(2);
+    expect(po.labels.getText()).not.toContain('label two');
+    const contactNames = await poContactList.getNames();
+    expect(browser.getCurrentUrl()).toBe('/');
+    expect(contactNames).toEqual(['brenda', 'jane', 'martha']);
+  })
+
+  it('should delete label two and keep contacts (in label two)', async () => {
+    await po.initDatabase();
+    po.labelContacts.click();
+    expect(po.labels.count()).toBe(3);
+    po.clickDelete(po.labels.get(1)); // delete label two, which has brenda/jane
+    poLabelDelete.radioKeep.click();
+    poLabelDelete.submit.click();
+    expect(po.labels.count()).toBe(2);
+    expect(po.labels.getText()).not.toContain('label two');
+    const contactNames = await poContactList.getNames();
+    expect(browser.getCurrentUrl()).toBe('/');
+    expect(contactNames).toEqual(['brenda', 'jane', 'martha']);
+  })
+
+  it('should delete label two and toss contacts (in contacts)', async () => {
+    await po.initDatabase();
+    po.labelContacts.click();
+    expect(po.labels.count()).toBe(3);
+    po.clickDelete(po.labels.get(1)); // delete label two, which has brenda/jane
+    poLabelDelete.radioKeep.click();
+    poLabelDelete.submit.click();
+    expect(po.labels.count()).toBe(2);
+    expect(po.labels.getText()).not.toContain('label two');
+    const contactNames = await poContactList.getNames();
+    expect(browser.getCurrentUrl()).toBe('/');
+    expect(contactNames).toEqual(['martha']);
+  });
+
+  it('', async () => {
+    await po.initDatabase();
 
   });
 

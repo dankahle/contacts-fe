@@ -6,6 +6,6 @@ export class LabelEditPO extends CommonPO {
   dialog = $('dk-edit-label');
   submit = $('dk-edit-label button.submit');
   cancel = $('dk-edit-label button.cancel');
-  input = this.dialog.$('input');
+  input = $('dk-edit-label input');
 }
 

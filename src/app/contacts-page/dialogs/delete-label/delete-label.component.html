@@ -13,10 +13,10 @@
 
   <form id="form" #form="ngForm" (submit)="submit(form)">
     <mat-radio-group name="deleteMode" class="example-radio-group" [(ngModel)]="data.deleteMode">
-      <mat-radio-button [value]="keepContacts">
+      <mat-radio-button class="keep" [value]="keepContacts">
         Keep all contacts and delete this label
       </mat-radio-button>
-      <mat-radio-button [value]="deleteContacts">
+      <mat-radio-button class="toss" [value]="deleteContacts">
         Delete all contacts and delete this label
       </mat-radio-button>
     </mat-radio-group>
@@ -24,8 +24,8 @@
 </div>
 
 <div mat-dialog-actions>
-  <button type="submit" form="form" mat-button color="primary" (click)="submit(form)"
+  <button class="submit" type="submit" form="form" mat-button color="primary" (click)="submit(form)"
           [disabled]="form.invalid">DELETE</button>
-  <button mat-button mat-dialog-close>CANCEL</button>
+  <button class="cancel" mat-button mat-dialog-close>CANCEL</button>
 </div>
 

@@ -1,6 +1,46 @@
 const _ = require('lodash');
 
 
+
+
+
+/*
+myrequest(url, options) {
+  return Promise((resolve, reject) => {
+    request(url, options, (err, resp) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(resp);
+      }
+    })
+  })
+}
+
+
+const request = Q.denodeify(require('request'));
+
+class myclass {
+
+  doSomething() {
+    request.bind(this)
+    return request('someurl',options)
+  }
+}
+*/
+
+/*
+const cp = require('child_process');
+  const child = cp.exec('./initdbunit.sh', {cwd: '../contacts-be'}, (error, stdout, stderr) => {
+  if (error) {
+    throw error;
+  }
+  console.log(stdout);
+});
+*/
+
+
+/*
 const start = Date.now();
 
 function fcn() {
@@ -14,6 +54,7 @@ tfcn = _.throttle(fcn, 200, {trailing:false});
 const timer = setInterval(() => {
   console.log('run', tfcn());
 }, 100)
+*/
 
 
 /*
