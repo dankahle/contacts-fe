@@ -16,4 +16,8 @@ const start = Date.now();
     expect(browser.getCurrentUrl()).toBe(po.rootUrl);
   });
 
+  it('title should be DkContacts', () => {
+    expect(browser.getTitle()).toBe('DkContacts');
+  });
+
 });

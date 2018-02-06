@@ -15,7 +15,7 @@
     <div  fxLayout="row" fxLayoutAlign="start center"
          fxHide.lt-sm fxFlex.sm="0 1 46%" fxFlex.md="0 1 46%" fxFlex.lg="0 1 30%" fxFlex.xl="0 1 23%">
       <div class="text-ellipsis" *ngIf="contact.emails.length > 0">
-        <a class="text-ellipsis" href="mailto:{{contact.emails[0].email}}" (click)="$event.stopPropagation()"
+        <a class="email text-ellipsis" href="mailto:{{contact.emails[0].email}}" (click)="$event.stopPropagation()"
            (click)="$event.stopPropagation()" target="_blank">{{contact.emails[0].email}}</a>
       </div>
       <div *ngIf="contact.emails.length === 0">&nbsp;</div>
@@ -23,14 +23,14 @@
 
     <div  fxLayout="row" fxLayoutAlign="start center" fxHide.lt-lg fxFlex.lg="0 1 30%" fxFlex.xl="0 1 23%">
       <div class="text-ellipsis" *ngIf="contact.phones.length > 0">
-        <a href="tel:{{Util.getPhoneNo(contact.phones[0])}}" class="text-ellipsis-block"
+        <a class="phone text-ellipsis-block" href="tel:{{Util.getPhoneNo(contact.phones[0])}}"
            (click)="$event.stopPropagation()" target="_blank">{{Util.getPhoneDisplay(contact.phones[0])}}</a>
       </div>
       <div  *ngIf="contact.phones.length === 0">&nbsp;</div>
     </div>
 
     <div  fxHide.lt-xl fxFlex.xl="0 1 23%" fxLayout="row" fxLayoutAlign="start center">
-      <div class="text-ellipsis" *ngIf="contact.notes"> {{contact.notes}}</div>
+      <div class="notes text-ellipsis" *ngIf="contact.notes"> {{contact.notes}}</div>
       <div *ngIf="!contact.notes">&nbsp;</div>
     </div>
 

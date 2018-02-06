@@ -7,13 +7,16 @@ const poContactEdit = new ContactEditPO();
 const poContactMoreActions = new ContactMoreActionsPO();
 
 export class ContactListItemPO extends CommonPO {
-  listItem;
-  pic;
+  listItem; pic; name; email; phone; notes;
 
   constructor(listItem) {
     super();
     this.listItem = listItem;
     this.pic = listItem.$('.pic');
+    this.name = listItem.$('.name');
+    this.email = listItem.$('.email');
+    this.phone = listItem.$('.phone');
+    this.notes = listItem.$('.notes');
   }
 
   clickEdit() {
