@@ -46,18 +46,18 @@
 
 </div>
 
-<mat-menu [overlapTrigger]="true" class="more-actions" xPosition="before" yPosition="below">
-  <button mat-menu-item *ngIf="hasSelectedLabel()" (click)="removeLabelFromContact($event)">
+<mat-menu [overlapTrigger]="true" class="more-actions list" xPosition="before" yPosition="below">
+  <button class="item-remove-from-label" mat-menu-item *ngIf="hasSelectedLabel()" (click)="removeLabelFromContact($event)">
     <i class="left material-icons mat-icon">cancel</i>
     <span>Remove from label</span>
   </button>
-  <button mat-menu-item (click)="deleteContact($event)">
+  <button class="item-delete" mat-menu-item (click)="deleteContact($event)">
     <i class="left material-icons mat-icon">delete</i>
     <span>Delete</span>
   </button>
   <div class="separator"></div>
-  <span class="label">Change labels</span>
-  <button mat-menu-item *ngFor="let label of labels" (click)="toggleLabel($event, label)">
+  <span class="item-label">Change labels</span>
+  <button class="button-label" mat-menu-item *ngFor="let label of labels" (click)="toggleLabel($event, label)">
     <i class="left material-icons mat-icon">label</i>
     <span>{{label.name}}</span>
     <i class="right material-icons" *ngIf="label.selected">check</i>

@@ -3,12 +3,11 @@ import {LeftnavPO} from './leftnav.po';
 
 
 
-describe('leftnav', () => {
+describe('##### leftnav tests', () => {
   const po = new LeftnavPO();
 
   beforeAll(async () => {
-    const start = Date.now();
-    browser.get('/');
+    po.refreshDbAndSetPage('/');
     po.innerHeight = <number> await browser.executeScript('return window.innerHeight');
   });
 

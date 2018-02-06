@@ -1,3 +1,7 @@
+/*
+// was going to make the moreActions menu a component for resuse, but ran into a snag with the trigger having to be on the page
+// so pulled back on that for now
+
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {Store} from '../../../store/store';
 import {Contact} from '../../../store/models/contact';
@@ -16,14 +20,13 @@ export class MoreActionsComponent {
   contact: Contact;
 
   constructor(protected store: Store) {
-/*
-    store.subscribeMoreActionsMenu((event, contact) => {
-      this.event = event;
-      this.contact = contact;
-      // this.menu.position = event.clientX;
-      this.trigger.openMenu();
-    });
-*/
+    // store.subscribeMoreActionsMenu((event, contact) => {
+    //   this.event = event;
+    //   this.contact = contact;
+    //   // this.menu.position = event.clientX;
+    //   this.trigger.openMenu();
+    // });
   }
 
 }
+*/

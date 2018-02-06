@@ -6,7 +6,7 @@ import {LabelDeletePO} from '../dialogs/label-delete.po';
 
 const EC = protractor.ExpectedConditions;
 
-fdescribe('leftnav labels', () => {
+describe('##### leftnav labels tests', () => {
   const po = new LabelPO();
   const poContactList = new ContactListPO();
   const poLabelEdit = new LabelEditPO();
@@ -14,8 +14,7 @@ fdescribe('leftnav labels', () => {
   const active = 'active';
 
   beforeAll(() => {
-    browser.call(po.initDatabase);
-    browser.get('/');
+    po.refreshDbAndSetPage('/');
   });
 
   it('should open/close accordion sections', () => {
@@ -87,8 +86,7 @@ fdescribe('leftnav labels', () => {
   });
 
   it('should delete label two and keep contacts (in contacts)', async () => {
-    browser.call(po.initDatabase);
-    browser.refresh();
+    po.refreshDbAndPage();
     po.labelContacts.click();
     expect(po.labels.count()).toBe(3);
     po.deleteLabelWithContacts(po.labels.get(1), 'keep');
@@ -101,8 +99,7 @@ fdescribe('leftnav labels', () => {
   })
 
   it('should delete label two and keep contacts (in label one)', async () => {
-    browser.call(po.initDatabase);
-    browser.refresh();
+    po.refreshDbAndPage();
     po.labels.get(0).click();
     expect(po.labels.count()).toBe(3);
     po.deleteLabelWithContacts(po.labels.get(1), 'keep');
@@ -115,8 +112,7 @@ fdescribe('leftnav labels', () => {
   })
 
   it('should delete label two and keep contacts (in label two)', async () => {
-    browser.call(po.initDatabase);
-    browser.refresh();
+    po.refreshDbAndPage();
     po.labels.get(1).click();
     expect(po.labels.count()).toBe(3);
     po.deleteLabelWithContacts(po.labels.get(1), 'keep');
@@ -129,8 +125,7 @@ fdescribe('leftnav labels', () => {
   })
 
   it('should delete label two and toss contacts (in contacts)', async () => {
-    browser.call(po.initDatabase);
-    browser.refresh();
+    po.refreshDbAndPage();
     po.labelContacts.click();
     expect(po.labels.count()).toBe(3);
     po.deleteLabelWithContacts(po.labels.get(1), 'toss');
@@ -143,8 +138,7 @@ fdescribe('leftnav labels', () => {
   })
 
   it('should delete label two and toss contacts (in label one)', async () => {
-    browser.call(po.initDatabase);
-    browser.refresh();
+    po.refreshDbAndPage();
     po.labels.get(0).click();
     expect(po.labels.count()).toBe(3);
     po.deleteLabelWithContacts(po.labels.get(1), 'toss');
@@ -157,8 +151,7 @@ fdescribe('leftnav labels', () => {
   })
 
   it('should delete label two and toss contacts (in label two)', async () => {
-    browser.call(po.initDatabase);
-    browser.refresh();
+    po.refreshDbAndPage();
     po.labels.get(1).click();
     expect(po.labels.count()).toBe(3);
     po.deleteLabelWithContacts(po.labels.get(1), 'toss');

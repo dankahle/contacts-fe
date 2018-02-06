@@ -12,7 +12,7 @@ exports.config = {
   capabilities: {
     'browserName': 'chrome',
     'chromeOptions': {
-      'args': ["--headless", "--disable-gpu", "--window-size=1200x1024",  "--no-sandbox"]
+      // 'args': ["--headless", "--disable-gpu", "--window-size=1200x1024",  "--no-sandbox"]
     }
   },
   directConnect: true,
@@ -21,7 +21,7 @@ exports.config = {
   jasmineNodeOpts: {
     showColors: true,
     // defaultTimeoutInterval: 30000,
-    defaultTimeoutInterval: 30000,
+    defaultTimeoutInterval: 300000,
     print: function () {
     }
   },

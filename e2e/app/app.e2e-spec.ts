@@ -8,13 +8,8 @@ describe('main-fe App', () => {
 const po = new CommonPO();
 const start = Date.now();
 
-  beforeAll(async () => {
-    browser.call(po.initDatabase);
-    browser.get('/');
-  });
-
-  xit('explore', () => {
-    browser.explore();
+  beforeAll(() => {
+    po.refreshDbAndSetPage('/');
   });
 
   it('should land at root',  () => {

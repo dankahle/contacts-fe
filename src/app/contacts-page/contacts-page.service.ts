@@ -11,7 +11,6 @@ import {ContactDetailComponent} from './dialogs/contact-detail/contact-detail.co
 import {Observable} from 'rxjs/Observable';
 import {Messages} from '../store/models/messages';
 import {Contact} from '../store/models/contact';
-import {MoreActionsComponent} from '../shared/dialogs/more-actions/more-actions.component';
 import {ContactDeleteComponent} from './dialogs/contact-delete/contact-delete.component';
 
 @Injectable()

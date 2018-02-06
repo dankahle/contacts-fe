@@ -11,7 +11,6 @@ import {ErrorModalComponent} from './dialogs/error-modal/error-modal.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {RouterModule} from '@angular/router';
 import { NotImplementedComponent } from './dialogs/not-implemented/not-implemented.component';
-import {MoreActionsComponent} from './dialogs/more-actions/more-actions.component';
 
 @NgModule({
   imports: [
@@ -22,11 +21,11 @@ import {MoreActionsComponent} from './dialogs/more-actions/more-actions.componen
     RouterModule
   ],
   declarations: [PageNotFoundComponent, ForbiddenNameValidator, MinValidator, MaxValidator, ProgressComponent, ErrorModalComponent,
-    NotImplementedComponent, MoreActionsComponent],
+    NotImplementedComponent],
   exports: [
     MaterialIndexModule, FlexLayoutModule, RouterModule, FormsModule,
     PageNotFoundComponent, ForbiddenNameValidator, MinValidator, MaxValidator, ProgressComponent, ErrorModalComponent,
-    NotImplementedComponent, MoreActionsComponent],
+    NotImplementedComponent],
   entryComponents: [ErrorModalComponent, NotImplementedComponent],
   providers: []
 })

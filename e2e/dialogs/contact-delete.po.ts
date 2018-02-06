@@ -3,11 +3,10 @@ import {CommonPO} from '../common.po';
 
 const EC = protractor.ExpectedConditions;
 
-export class ContactEditPO extends CommonPO {
-  dialog = $('dk-contact-edit');
-  name = $('dk-contact-edit .po-name');
-  submit = $('dk-contact-edit .button-submit');
-  cancel = $('dk-contact-edit .button-cancel');
+export class ContactDeletePO extends CommonPO {
+  dialog = $('dk-contact-delete');
+  submit = $('dk-contact-delete .button-submit');
+  cancel = $('dk-contact-delete .button-cancel');
 
   waitForUp() {
     browser.wait(EC.presenceOf(this.dialog));

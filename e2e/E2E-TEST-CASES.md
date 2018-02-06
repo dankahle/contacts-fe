@@ -23,12 +23,12 @@ done ### labels
 
 ### contact list
 * responsive: notes, phone, email disappear at appropriate breakpoints
-* shows appropriate contacts for contactsLabel and other labels
-* shows no contacts when label zthree is picked
-* add contact brings up edit dialog
-* click on contact brings up appropriate detail dialog
-* edit icon click brings up edit dialog
-* delete icon click brings up contact delete dialog
+*  in label tests - shows appropriate contacts for contactsLabel and other labels
+*  shows no contacts when label zthree is picked
+*  add contact brings up edit dialog
+*  click on contact brings up appropriate detail dialog
+* >edit icon click brings up edit dialog
+*  delete icon click brings up contact delete dialog
 * contact list item shows all fields for xl
 * clicking on link spawns new tab in browser, or maybe just check it's a link with the properties required (href="mailto:.../phone:")
 
@@ -63,9 +63,11 @@ you'd think this could be covered in contact list, but not sure what should be d
 ### page not found
 
 
-************* need tests for case insensitive ordering of labels and contacts. you're tests broke in be when you went with pascal case
+todo
+* need tests for case insensitive ordering of labels and contacts. you're tests broke in be when you went with pascal case
 for brenda, jane, martha, BUT NOT FOR KATE, so must be broken in list then? Maybe it's fine in db get but when you add you don't sort locally? (probably)
 but either way... shouldn't be broken in test right? Maybe put jane lower case so it gets tested in be as well as fe? No, just add a new one with diff case and make 
 sure it lands in correct position (like you do with labels)
 
+* all your dialog tests just test submit button. What about cancel?? Hmm. Maybe jsut do cancel before submit, check no change, then do submit?
 

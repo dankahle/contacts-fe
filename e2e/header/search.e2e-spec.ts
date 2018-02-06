@@ -4,14 +4,12 @@ import {LabelPO} from '../leftnav/labels.po';
 
 const EC = protractor.ExpectedConditions;
 
-describe('search tests', () => {
+describe('##### search tests', () => {
   const po = new SearchPO();
-  let poLabel: LabelPO;
+  const poLabel = new LabelPO();
 
   beforeAll(() => {
-    browser.call(po.initDatabase);
-    browser.get('/');
-    poLabel = new LabelPO();
+    po.refreshDbAndSetPage('/');
   });
 
   it('should show clear icon when input has text', () => {

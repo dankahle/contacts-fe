@@ -5,6 +5,16 @@ import * as cp from 'child_process';
 export class CommonPO {
   rootUrl = 'http://localhost:4201/';
 
+  refreshDbAndPage() {
+    browser.call(this.initDatabase);
+    browser.refresh();
+  }
+
+  refreshDbAndSetPage(url) {
+    browser.call(this.initDatabase);
+    browser.get(url);
+  }
+
   initDatabase(): Promise<string> {
     return new Promise((resolve, reject) => {
       const child = cp.exec('./initdbunit.sh', {cwd: '../contacts-be'}, (error, stdout, stderr) => {
