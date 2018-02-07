@@ -56,8 +56,8 @@
     <span>Delete</span>
   </button>
   <div class="separator"></div>
-  <span class="item-label">Change labels</span>
-  <button class="button-label" mat-menu-item *ngFor="let label of labels" (click)="toggleLabel($event, label)">
+  <span class="label">Change labels</span>
+  <button class="item-label" mat-menu-item *ngFor="let label of labels" (click)="toggleLabel($event, label)">
     <i class="left material-icons mat-icon">label</i>
     <span>{{label.name}}</span>
     <i class="right material-icons" *ngIf="label.selected">check</i>

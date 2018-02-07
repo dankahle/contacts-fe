@@ -32,14 +32,11 @@ done ### labels
 *  clicking on link spawns new tab in browser, or maybe just check it's a link with the properties required (href="mailto:.../phone:")
 * >responsive test for contact list item name/email/phone/notes 
 
- 
-### contact list item
-done in contact list right?
 
 ### more actions
 * all labels show up
-* remove from label if label is active
-* delete contact
+* remove from label 
+* delete contact // done in contact list tests
 
 ## dialogs
 ### contact detail 

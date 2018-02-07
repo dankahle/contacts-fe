@@ -17,5 +17,10 @@ export class ContactMoreActionsPO extends CommonPO {
     browser.wait(EC.stalenessOf(this.menu));
   }
 
+  takeDown() {
+    $('body').click();
+    this.waitForDown();
+  }
+
 }
 

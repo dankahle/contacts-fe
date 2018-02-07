@@ -15,23 +15,28 @@ let poContactListItem;
 
 describe('##### contact more actions tests', () => {
 
-  describe('contact list item more actions', () => {
+  describe('contact list item', () => {
 
     beforeAll(() => {
       poCommon.refreshDbAndSetPage('/');
       poContactListItem = new ContactListItemPO(poContactList.contacts.get(1));
     });
 
-    it('should be down initially', () => {
+    fit('should show all options (contacts label)', () => {
       expect(po.menu.isPresent()).toBe(false);
       poContactListItem.clickMoreActions();
       expect(po.menu.isPresent()).toBe(true);
+      po.takeDown();
+    });
+
+    it('should show all options (contacts)', () => {
+
     });
 
   });
 
 
-  describe('contact detail more actions', () => {
+  describe('contact detail;', () => {
 
     beforeAll(() => {
       poCommon.refreshDbAndSetPage('/');
