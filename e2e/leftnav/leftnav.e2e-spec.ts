@@ -8,7 +8,6 @@ describe('##### leftnav tests', () => {
 
   beforeAll(async () => {
     po.refreshDbAndSetPage('/');
-    po.innerHeight = <number> await browser.executeScript('return window.innerHeight');
   });
 
   function openMdLgXl() {
@@ -58,6 +57,7 @@ describe('##### leftnav tests', () => {
     closedXsSmRefresh();
     po.resizeWindow(768);
     closedXsSmRefresh();
+    po.resizeWindow(1980);
   });
 
   it('should open and close with header button (md/lg/xl)', () => {
@@ -68,6 +68,7 @@ describe('##### leftnav tests', () => {
     closedMdLgXl();
     po.leftnavButtonClick();
     openMdLgXl();
+    po.resizeWindow(1980);
   });
 
   it('should open and close with header button (xs/sm)', () => {
@@ -78,6 +79,7 @@ describe('##### leftnav tests', () => {
     openXsSm();
     po.leftnavButtonClick();
     closedXsSm();
+    po.resizeWindow(1980);
   });
 
   it('should close on lt-md and reopen md', () => {
@@ -88,6 +90,7 @@ describe('##### leftnav tests', () => {
     closedXsSm();
     po.resizeWindow(1021);
     openMdLgXl();
+    po.resizeWindow(1980);
   });
 
   // should stay closed when they size lower than md, then go back to md, if they closed it with button while md+
@@ -103,6 +106,7 @@ describe('##### leftnav tests', () => {
     closedMdLgXl();
     po.resizeWindow(1980);
     closedMdLgXl();
+    po.resizeWindow(1980);
   });
 
 })

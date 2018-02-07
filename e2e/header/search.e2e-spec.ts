@@ -1,12 +1,14 @@
 import { SearchPO } from './search.po';
 import {$, $$, browser, ElementFinder, protractor} from 'protractor';
 import {LabelPO} from '../leftnav/labels.po';
+import {ContactDetailPO} from '../dialogs/contact-detail.po';
 
 const EC = protractor.ExpectedConditions;
 
 describe('##### search tests', () => {
   const po = new SearchPO();
   const poLabel = new LabelPO();
+  const poContactDetail = new ContactDetailPO();
 
   beforeAll(() => {
     po.refreshDbAndSetPage('/');
@@ -83,8 +85,10 @@ describe('##### search tests', () => {
 
   it('should search for Brenda/jane and open jane detail', async () => {
     po.searchAndOpen('n', 2);
-    const name = await $('dk-contact-detail .name-div .name').getText();
-    expect(name).toBe('jane - jane co');
+    poContactDetail.waitForUp();
+    expect(poContactDetail.name.getText()).toBe('jane - jane co');
+    poContactDetail.close.click();
+    poContactDetail.waitForDown();
     po.enterText(protractor.Key.BACK_SPACE);
     expect((await po.getDropdownChoices()).length).toBe(0);
   });

@@ -5,6 +5,10 @@ import * as cp from 'child_process';
 export class CommonPO {
   rootUrl = 'http://localhost:4201/';
 
+  resizeWindow(width, height?) {
+    browser.driver.manage().window().setSize(width, height || 1024);
+  }
+
   refreshDbAndPage() {
     browser.call(this.initDatabase);
     browser.refresh();

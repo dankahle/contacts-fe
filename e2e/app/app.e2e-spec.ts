@@ -4,7 +4,7 @@ import {CommonPO} from '../common.po';
 
 const EC = protractor.ExpectedConditions;
 
-describe('main-fe App', () => {
+describe('##### main-fe App', () => {
 const po = new CommonPO();
 const start = Date.now();
 

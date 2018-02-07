@@ -63,6 +63,8 @@ describe('##### contact list tests', () => {
     poContactListItem.pic.click();
     poContactDetail.waitForUp();
     expect(poContactDetail.dialog.isPresent()).toBe(true);
+    poContactDetail.close.click();
+    poContactDetail.waitForDown();
   });
 
   it('should edit name', () => {
@@ -73,7 +75,7 @@ describe('##### contact list tests', () => {
     expect(po.getNames()).toEqual(['Brenda', 'jane - jane co', 'Martha Co']);
   });
 
-  fit('should bring up email and phone windows when clicked on', async () => {
+  it('should bring up email and phone windows when clicked on', async () => {
     const poContactListItem = new ContactListItemPO(po.contacts.get(0));
     let handles = await browser.getAllWindowHandles();
     expect(handles.length).toBe(1);
@@ -87,6 +89,31 @@ describe('##### contact list tests', () => {
     browser.wait(async () => (await browser.getAllWindowHandles()).length === 3);
     expect(handles.length).toBe(3);
     browser.switchTo().window(handles[0]);
+  });
+
+  it('should show correct columns per breakpoint', () => {
+    const poContactListItem = new ContactListItemPO(po.contacts.get(2));
+    po.resizeWindow(1980);
+    expect(poContactListItem.name.isDisplayed()).toBe(true);
+    expect(poContactListItem.email.isDisplayed()).toBe(true);
+    expect(poContactListItem.phone.isDisplayed()).toBe(true);
+    expect(poContactListItem.notes.isDisplayed()).toBe(true);
+    po.resizeWindow(1299);
+    expect(poContactListItem.name.isDisplayed()).toBe(true);
+    expect(poContactListItem.email.isDisplayed()).toBe(true);
+    expect(poContactListItem.phone.isDisplayed()).toBe(true);
+    expect(poContactListItem.notes.isDisplayed()).toBe(false);
+    po.resizeWindow(1099);
+    expect(poContactListItem.name.isDisplayed()).toBe(true);
+    expect(poContactListItem.email.isDisplayed()).toBe(true);
+    expect(poContactListItem.phone.isDisplayed()).toBe(false);
+    expect(poContactListItem.notes.isDisplayed()).toBe(false);
+    po.resizeWindow(899);
+    expect(poContactListItem.name.isDisplayed()).toBe(true);
+    expect(poContactListItem.email.isDisplayed()).toBe(false);
+    expect(poContactListItem.phone.isDisplayed()).toBe(false);
+    expect(poContactListItem.notes.isDisplayed()).toBe(false);
+    po.resizeWindow(1980);
   });
 
 });
