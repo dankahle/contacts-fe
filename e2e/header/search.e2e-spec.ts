@@ -87,8 +87,7 @@ describe('##### search tests', () => {
     po.searchAndOpen('n', 2);
     poContactDetail.waitForUp();
     expect(poContactDetail.name.getText()).toBe('jane - jane co');
-    poContactDetail.close.click();
-    poContactDetail.waitForDown();
+    poContactDetail.takeDownClose();
     po.enterText(protractor.Key.BACK_SPACE);
     expect((await po.getDropdownChoices()).length).toBe(0);
   });

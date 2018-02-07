@@ -19,11 +19,11 @@
     </div>
 
     <div class="right" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="end center">
-      <div class="wrap" (click)="editContact($event, contact, 'edit')"><i class="material-icons"
+      <div class="wrap edit" (click)="editContact($event, contact, 'edit')"><i class="material-icons"
                                                                           matTooltip="Edit contact"
                                                                           matTooltipShowDelay="500"
                                                                           matTooltipHideDelay="300">edit</i></div>
-      <div class="wrap" [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()"
+      <div class="wrap more-actions" [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()"
            (onMenuClose)="menuClose()" (onMenuOpen)="menuOpen()"><i class="material-icons"
                                                                     matTooltip="More actions" matTooltipShowDelay="500"
                                                                     matTooltipHideDelay="300">more_vert</i></div>
@@ -116,11 +116,11 @@
 
 <!--more actions menu-->
 <mat-menu [overlapTrigger]="true" class="more-actions detail" xPosition="before" yPosition="below">
-  <button mat-menu-item *ngIf="hasSelectedLabel()" (click)="removeLabelFromContact($event)">
+  <button class="item-remove-from-label" mat-menu-item *ngIf="hasSelectedLabel()" (click)="removeLabelFromContact($event)">
     <i class="left material-icons mat-icon">cancel</i>
     <span>Remove from label</span>
   </button>
-  <button mat-menu-item (click)="deleteContact($event)">
+  <button class="item-delete" mat-menu-item (click)="deleteContact($event)">
     <i class="left material-icons mat-icon">delete</i>
     <span>Delete</span>
   </button>
@@ -128,7 +128,7 @@
   <span class="label">Change labels</span>
   <button mat-menu-item *ngFor="let label of labels" (click)="toggleLabel($event, label)">
     <i class="left material-icons mat-icon">label</i>
-    <span>{{label.name}}</span>
+    <span class="item-label">{{label.name}}</span>
     <i class="right material-icons" *ngIf="label.selected">check</i>
   </button>
 </mat-menu>

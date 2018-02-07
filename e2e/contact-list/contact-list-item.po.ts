@@ -2,7 +2,9 @@ import {$, $$, browser, by, element, ElementFinder, protractor} from 'protractor
 import {CommonPO} from '../common.po';
 import {ContactEditPO} from '../dialogs/contact-edit.po';
 import {ContactMoreActionsPO} from '../dialogs/contact-more-actions.po';
+import {ContactDetailPO} from '../dialogs/contact-detail.po';
 
+const poContactDetail = new ContactDetailPO();
 const poContactEdit = new ContactEditPO();
 const poContactMoreActions = new ContactMoreActionsPO();
 
@@ -17,6 +19,11 @@ export class ContactListItemPO extends CommonPO {
     this.email = listItem.$('.email');
     this.phone = listItem.$('.phone');
     this.notes = listItem.$('.notes');
+  }
+
+  clickDetail() {
+    this.pic.click();
+    poContactDetail.waitForUp();
   }
 
   clickEdit() {

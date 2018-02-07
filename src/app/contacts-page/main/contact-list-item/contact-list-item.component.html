@@ -57,9 +57,9 @@
   </button>
   <div class="separator"></div>
   <span class="label">Change labels</span>
-  <button class="item-label" mat-menu-item *ngFor="let label of labels" (click)="toggleLabel($event, label)">
+  <button mat-menu-item *ngFor="let label of labels" (click)="toggleLabel($event, label)">
     <i class="left material-icons mat-icon">label</i>
-    <span>{{label.name}}</span>
+    <span class="item-label">{{label.name}}</span>
     <i class="right material-icons" *ngIf="label.selected">check</i>
   </button>
 </mat-menu>

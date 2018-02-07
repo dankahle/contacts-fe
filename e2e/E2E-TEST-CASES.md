@@ -23,20 +23,22 @@ done ### labels
 
 ### contact list
 * responsive: notes, phone, email disappear at appropriate breakpoints
-*  in label tests - shows appropriate contacts for contactsLabel and other labels
-*  shows no contacts when label zthree is picked
-*  add contact brings up edit dialog
-*  click on contact brings up appropriate detail dialog
-*  edit icon click brings up edit dialog
-*  delete icon click brings up contact delete dialog
-*  clicking on link spawns new tab in browser, or maybe just check it's a link with the properties required (href="mailto:.../phone:")
-* >responsive test for contact list item name/email/phone/notes 
+* in label tests - shows appropriate contacts for contactsLabel and other labels
+* shows no contacts when label zthree is picked
+* add contact brings up edit dialog
+* click on contact brings up appropriate detail dialog
+* edit icon click brings up edit dialog
+* delete icon click brings up contact delete dialog
+* clicking on link spawns new tab in browser, or maybe just check it's a link with the properties required (href="mailto:.../phone:")
+* responsive test for contact list item name/email/phone/notes 
 
 
 ### more actions
-* all labels show up
-* remove from label 
+* all labels show up (contacts)
+* all labels show up (label picked)
+* remove from label // contact tests or here?
 * delete contact // done in contact list tests
+* update contact's labels
 
 ## dialogs
 ### contact detail 

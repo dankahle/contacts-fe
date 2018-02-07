@@ -60,11 +60,9 @@ describe('##### contact list tests', () => {
 
   it('should bring up detail dialog when clicked on', () => {
     const poContactListItem = new ContactListItemPO(po.contacts.get(0));
-    poContactListItem.pic.click();
-    poContactDetail.waitForUp();
+    poContactListItem.clickDetail();
     expect(poContactDetail.dialog.isPresent()).toBe(true);
-    poContactDetail.close.click();
-    poContactDetail.waitForDown();
+    poContactDetail.takeDownClose();
   });
 
   it('should edit name', () => {
