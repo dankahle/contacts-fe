@@ -47,9 +47,9 @@ export class EditLabelComponent implements AfterViewInit {
   }
 
   nameAlreadyExists() {
-    if (this.editMode && this.label.name.trim().toLowerCase() === this.orgName.toLowerCase()) {
+    if (this.editMode && this.label.name.toLowerCase() === this.orgName.toLowerCase()) {
       return false;
-    } else if (_.includes(this.data.labelNames, this.label.name.trim().toLowerCase())) {
+    } else if (_.includes(this.data.labelNames, this.label.name.toLowerCase())) {
        return true;
 
     } else {
@@ -65,7 +65,6 @@ export class EditLabelComponent implements AfterViewInit {
 
   submit(form) {
     if (form.valid) {
-      this.label.name = this.label.name.trim();
       this.dialogRef.close(this.label);
     }
   }

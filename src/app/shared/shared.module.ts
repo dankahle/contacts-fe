@@ -1,6 +1,6 @@
-import {NgModule} from '@angular/core';
+import {forwardRef, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {FormsModule, NG_VALIDATORS} from '@angular/forms';
+import {FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import {ForbiddenNameValidator} from './validators/forbidden-name.validator';
 import {MinValidator} from './validators/min.validator';
@@ -11,6 +11,7 @@ import {ErrorModalComponent} from './dialogs/error-modal/error-modal.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {RouterModule} from '@angular/router';
 import { NotImplementedComponent } from './dialogs/not-implemented/not-implemented.component';
+import {TrimInputValueDirective} from './accessors/trim-input-value.directive';
 
 @NgModule({
   imports: [
@@ -27,7 +28,11 @@ import { NotImplementedComponent } from './dialogs/not-implemented/not-implement
     PageNotFoundComponent, ForbiddenNameValidator, MinValidator, MaxValidator, ProgressComponent, ErrorModalComponent,
     NotImplementedComponent],
   entryComponents: [ErrorModalComponent, NotImplementedComponent],
-  providers: []
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => TrimInputValueDirective),
+    multi: true
+  }]
 })
 export class SharedModule {
 }

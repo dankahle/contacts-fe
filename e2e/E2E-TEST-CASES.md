@@ -53,6 +53,13 @@ done ### labels
 * cancel doesn't create label
 * submit creates new label
 
+### all input entry
+* trims on submit
+* required takes whitespace into acct
+* any validation takes whitespace into acct (already exists, etc)
+
+
+
 ### label edit
 ### label delete
 
