@@ -222,21 +222,25 @@ export class ContactEditComponent implements AfterViewInit, OnDestroy {
       delete c.notes;
     }
     _.forEachRight(c.emails, (v, i) => {
+      v.label = v.label.trim();
       if (!v.email.trim()) {
         c.emails.splice(i, 1);
       }
     });
     _.forEachRight(c.phones, (v, i) => {
+      v.label = v.label.trim();
       if (!v.phone.trim()) {
         c.phones.splice(i, 1);
       }
     });
     _.forEachRight(c.addresses, (v, i) => {
+      v.label = v.label.trim();
       if (!v.address.trim()) {
         c.addresses.splice(i, 1);
       }
     });
     _.forEachRight(c.websites, (v, i) => {
+      v.label = v.label.trim();
       if (!v.website.trim()) {
         c.websites.splice(i, 1);
       }
