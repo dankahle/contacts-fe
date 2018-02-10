@@ -22,11 +22,11 @@ import {TrimInputValueDirective} from './accessors/trim-input-value.directive';
     RouterModule
   ],
   declarations: [PageNotFoundComponent, ForbiddenNameValidator, MinValidator, MaxValidator, ProgressComponent, ErrorModalComponent,
-    NotImplementedComponent],
+    NotImplementedComponent, TrimInputValueDirective],
   exports: [
     MaterialIndexModule, FlexLayoutModule, RouterModule, FormsModule,
     PageNotFoundComponent, ForbiddenNameValidator, MinValidator, MaxValidator, ProgressComponent, ErrorModalComponent,
-    NotImplementedComponent],
+    NotImplementedComponent, TrimInputValueDirective],
   entryComponents: [ErrorModalComponent, NotImplementedComponent],
   providers: [{
     provide: NG_VALUE_ACCESSOR,

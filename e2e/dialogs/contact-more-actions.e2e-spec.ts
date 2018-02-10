@@ -1,13 +1,13 @@
 import {$, $$, browser, ElementFinder, protractor} from 'protractor';
-import {LabelEditPO} from '../dialogs/label-edit.po';
+import {LabelEditPO} from './po/label-edit.po';
 import {ContactListPO} from '../contact-list/contact-list.po';
-import {LabelDeletePO} from '../dialogs/label-delete.po';
+import {LabelDeletePO} from './po/label-delete.po';
 import {LabelPO} from '../leftnav/label.po';
 import {ContactMoreActionsPO} from './contact-more-actions.po';
 import {CommonPO} from '../common.po';
 import {ContactListItemPO} from '../contact-list/contact-list-item.po';
-import {ContactDetailPO} from './contact-detail.po';
-import {ContactDeletePO} from './contact-delete.po';
+import {ContactDetailPO} from './po/contact-detail.po';
+import {ContactDeletePO} from './po/contact-delete.po';
 
 const EC = protractor.ExpectedConditions;
 const po = new ContactMoreActionsPO();

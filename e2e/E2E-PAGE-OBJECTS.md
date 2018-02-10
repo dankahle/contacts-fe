@@ -1,9 +1,10 @@
 
-It bears mention the hierarchy of page objects. I.e. you have to avoid circular refrence. Say you have a LeftNavPO that adds a label and uses a LabelEditPO, then when you want to test LabelEditComponent, you'd like to use the standup method in LeftnavPO, but this is circular and will get the cryptic message:
-"Error: TypeError: label_po_1.LabelPO is not a constructor" or similar. So we need a heirarchy:
-big page things >> smaller page things (dialog/menu/form?/etc) >> helper page objects
+#### We need to structure the page object hierarchy to avoid circular references
 
-So we'll try helper page objects when we have something that both big and small need to avoid duplicity of code. If both need it, move it to a helper that won't be looking anywhere else, the end of the line. If we look at contact list po, we see this currently:
+We have to avoid circular refrence in page objects. Say you have a LeftNavPO that adds a label and uses a LabelEditPO, then when you want to test LabelEditComponent, you'd like to use the standup method in LeftnavPO, but this is circular and will get the cryptic message:
+"Error: TypeError: label_po_1.LabelPO is not a constructor" or similar. So we need a heirarchy:
+big page things >> smaller page things (dialog/menu/form?/etc) >> helper page objects?
+I.e. maybe we can push stuff lower so it can be shared between po's. For now, just keep dialogs at the bottom. Here's the current contactList po, it's dependencies and their dependencies. This is all getting to be an issue now that we're down to testing dialogs. We'd like the higher level methods to instantiate them, but that would be circular. Pushing instantiation lower to a helper object, just displaces things. Maybe best to duplicate code.
 
 contact list:
 const po = new ContactListPO();
@@ -17,4 +18,3 @@ const po = new ContactListPO();
   const poContactDetail = new ContactDetailPO(); >> none
 
 
-so putting the dialogs/menus at the bottom make sense. Now to get some helpers in there so we can reuse code when testing the dialogs, but maybe not. Dialog testing will flush it out.

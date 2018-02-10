@@ -1,8 +1,8 @@
 import {$, $$, browser, ElementFinder, protractor} from 'protractor';
 import {CommonPO} from '../common.po';
 import * as _ from 'lodash';
-import {LabelEditPO} from '../dialogs/label-edit.po';
-import {LabelDeletePO} from '../dialogs/label-delete.po';
+import {LabelEditPO} from '../dialogs/po/label-edit.po';
+import {LabelDeletePO} from '../dialogs/po/label-delete.po';
 
 const EC = protractor.ExpectedConditions;
 const poLabelEdit = new LabelEditPO();

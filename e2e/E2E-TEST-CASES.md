@@ -49,25 +49,22 @@ done### more actions
 ### contact edit close
 ### contact delete 
 
-### input trim and basic validaton tests (use edit label (add) dialog)
-// this only needs to be done once as all dialogs/forms will work the same with global validation setting and input trim
-* should show required for touched (whitespace NOT entered) 
-* should show required for dirty (whitespace entered) 
-* should disable submit if whitespace only in entry
-* should show "label exist" if label exist "disregarding white space"
+### label add
+// label add is already tested through databse, this is an extension of that testing to the dialog
+// then unit tests will do what? Need to learn which should go where. Label tests handle the big stuff:
+// add/edit/delete. Dialog e2e tests handle the dialog working, OR... should that be done in unit tests? 
+// That's what we have to determine yet, i.e. e2e is better for template manipulation, but not so good for component
+// testing, that's what unit tests are good for. This testing here is maybe out of place, should just be done
+// in unit tests. Fine... we'll figure that out when doing the unit tests for it.
+
+* submit disabled initially
+* should show required for touched (whitespace NOT entered)
+* should show required for dirty (whitespace entered)
+* submit disabled if whitespace only in entry
+* should show "label exists" if label exists "disregarding white space"
 * should submit with no whitespace if whitespace was entered
-
-### >label add
-* submit enabled/disabled on trimmed input
-* required shows for no text // trimmed or will space work?
 * label exists shows if label already exists
-* cancel doesn't create label
-* submit creates new label
 
-### all input entry
-* trims on submit
-* required takes whitespace into acct
-* any validation takes whitespace into acct (already exists, etc)
 
 
 

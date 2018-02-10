@@ -1,8 +1,8 @@
 import {$, $$, browser, ElementFinder, protractor} from 'protractor';
 import {LabelPO} from './label.po';
-import {LabelEditPO} from '../dialogs/label-edit.po';
+import {LabelEditPO} from '../dialogs/po/label-edit.po';
 import {ContactListPO} from '../contact-list/contact-list.po';
-import {LabelDeletePO} from '../dialogs/label-delete.po';
+import {LabelDeletePO} from '../dialogs/po/label-delete.po';
 
 const EC = protractor.ExpectedConditions;
 

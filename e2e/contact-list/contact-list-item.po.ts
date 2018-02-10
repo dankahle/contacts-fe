@@ -1,8 +1,8 @@
 import {$, $$, browser, by, element, ElementFinder, protractor} from 'protractor';
 import {CommonPO} from '../common.po';
-import {ContactEditPO} from '../dialogs/contact-edit.po';
+import {ContactEditPO} from '../dialogs/po/contact-edit.po';
 import {ContactMoreActionsPO} from '../dialogs/contact-more-actions.po';
-import {ContactDetailPO} from '../dialogs/contact-detail.po';
+import {ContactDetailPO} from '../dialogs/po/contact-detail.po';
 
 const poContactDetail = new ContactDetailPO();
 const poContactEdit = new ContactEditPO();

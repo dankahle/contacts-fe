@@ -1,10 +1,10 @@
 import {$, $$, browser, ElementFinder, protractor} from 'protractor';
-import {LabelEditPO} from './label-edit.po';
+import {LabelEditPO} from './po/label-edit.po';
 
 const EC = protractor.ExpectedConditions;
 const po = new LabelEditPO();
 
-xdescribe('##### label edit dialog tests', () => {
+describe('##### label edit dialog tests', () => {
 
   beforeAll(() => {
     po.refreshDbAndSetPage('/');
@@ -21,17 +21,35 @@ xdescribe('##### label edit dialog tests', () => {
   describe('label add tests', () => {
 
     /*
-    * should show required for touched (whitespace NOT entered)
+* submit disabled initially
+* should show required for touched (whitespace NOT entered)
 * should show required for dirty (whitespace entered)
-* should disable submit if whitespace only in entry
-* should show "label exist" if label exist "disregarding white space"
+* submit disabled if whitespace only in entry
+* should show "label exists" if label exists "disregarding white space"
 * should submit with no whitespace if whitespace was entered
+* label exists shows if label already exists
 
      */
 
-    xit('should show no errors originally', () => {
-      expect(po.errorRequired.isPresent).toBe(false);
-      expect(po.errorAlreadyExists.isPresent).toBe(false);
+    it('should show no errors originally', () => {
+      expect(po.errorRequired.isPresent()).toBe(false);
+      expect(po.errorAlreadyExists.isPresent()).toBe(false);
+    });
+
+    fit('should enable/disable submit', () => {
+      expect(po.submit.isEnabled()).toBe(false);
+      po.input.sendKeys('  ');
+      expect(po.submit.isEnabled()).toBe(false);
+      po.input.clear();
+      po.input.sendKeys('x');
+      expect(po.submit.isEnabled()).toBe(true);
+      po.input.sendKeys(protractor.Key.BACK_SPACE);
+      expect(po.submit.isEnabled()).toBe(false);
+    })
+
+
+    it('should enable/disable submit', () => {
+
     });
 
 

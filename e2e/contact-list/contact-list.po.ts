@@ -1,10 +1,10 @@
 import {$, $$, browser, by, element, ElementFinder, protractor} from 'protractor';
 import {CommonPO} from '../common.po';
-import {ContactEditPO} from '../dialogs/contact-edit.po';
+import {ContactEditPO} from '../dialogs/po/contact-edit.po';
 import {ContactListItemPO} from './contact-list-item.po';
-import {ContactDeletePO} from '../dialogs/contact-delete.po';
+import {ContactDeletePO} from '../dialogs/po/contact-delete.po';
 import {ContactMoreActionsPO} from '../dialogs/contact-more-actions.po';
-import {ContactEditClosePO} from '../dialogs/contact-edit-close.po';
+import {ContactEditClosePO} from '../dialogs/po/contact-edit-close.po';
 
 const poContactEdit = new ContactEditPO();
 const poContactDelete = new ContactDeletePO();

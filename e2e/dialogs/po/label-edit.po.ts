@@ -1,5 +1,5 @@
 import {$, browser, element, by, ElementFinder, protractor, $$} from 'protractor';
-import {CommonPO} from '../common.po';
+import {CommonPO} from '../../common.po';
 
 const EC = protractor.ExpectedConditions;
 
@@ -18,7 +18,8 @@ export class LabelEditPO extends CommonPO {
   }
 
   takeDown() {
-    $('body').click();
+    browser.actions().mouseMove($('dk-edit-label button.submit'), {x: 0, y: 100}).perform();
+    browser.actions().click().perform();
     this.waitForDown();
   }
 
