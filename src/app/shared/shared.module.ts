@@ -11,7 +11,7 @@ import {ErrorModalComponent} from './dialogs/error-modal/error-modal.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {RouterModule} from '@angular/router';
 import { NotImplementedComponent } from './dialogs/not-implemented/not-implemented.component';
-import {TrimInputValueDirective} from './accessors/trim-input-value.directive';
+import {TrimInputValueAccessor} from './accessors/trim-input-value.accessor';
 
 @NgModule({
   imports: [
@@ -19,20 +19,15 @@ import {TrimInputValueDirective} from './accessors/trim-input-value.directive';
     MaterialIndexModule,
     FlexLayoutModule,
     FormsModule,
-    RouterModule
+    RouterModule,
   ],
   declarations: [PageNotFoundComponent, ForbiddenNameValidator, MinValidator, MaxValidator, ProgressComponent, ErrorModalComponent,
-    NotImplementedComponent, TrimInputValueDirective],
+    NotImplementedComponent, TrimInputValueAccessor],
   exports: [
     MaterialIndexModule, FlexLayoutModule, RouterModule, FormsModule,
     PageNotFoundComponent, ForbiddenNameValidator, MinValidator, MaxValidator, ProgressComponent, ErrorModalComponent,
-    NotImplementedComponent, TrimInputValueDirective],
-  entryComponents: [ErrorModalComponent, NotImplementedComponent],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => TrimInputValueDirective),
-    multi: true
-  }]
+    NotImplementedComponent, TrimInputValueAccessor],
+  entryComponents: [ErrorModalComponent, NotImplementedComponent]
 })
 export class SharedModule {
 }
