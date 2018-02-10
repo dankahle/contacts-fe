@@ -5,38 +5,32 @@ const EC = protractor.ExpectedConditions;
 const po = new LabelEditPO();
 
 describe('##### label edit dialog tests', () => {
+  let bypassTakedown = false;
 
   beforeAll(() => {
     po.refreshDbAndSetPage('/');
   });
 
   beforeEach(() => {
+    bypassTakedown = false;
     po.putUpAddDialog();
   });
 
   afterEach(() => {
-    po.takeDown();
+    if (!bypassTakedown) {
+      po.takeDown();
+    }
   });
 
   describe('label add tests', () => {
 
-    /*
-* submit disabled initially
-* should show required for touched (whitespace NOT entered)
-* should show required for dirty (whitespace entered)
-* submit disabled if whitespace only in entry
-* should show "label exists" if label exists "disregarding white space"
-* should submit with no whitespace if whitespace was entered
-* label exists shows if label already exists
-
-     */
 
     it('should show no errors originally', () => {
       expect(po.errorRequired.isPresent()).toBe(false);
       expect(po.errorAlreadyExists.isPresent()).toBe(false);
     });
 
-    fit('should enable/disable submit', () => {
+    it('should enable/disable submit', () => {
       expect(po.submit.isEnabled()).toBe(false);
       po.input.sendKeys('  ');
       expect(po.submit.isEnabled()).toBe(false);
@@ -47,11 +41,44 @@ describe('##### label edit dialog tests', () => {
       expect(po.submit.isEnabled()).toBe(false);
     })
 
+    it('input shoudl have focus on entry', () => {
+      browser.wait(EC.presenceOf($('dk-edit-label input:focus')));
+      expect(po.isActiveElement(po.input)).toBe(true);
+    })
 
-    it('should enable/disable submit', () => {
-
+    it('should show required message for touched', () => {
+      expect(po.errorRequired.isPresent()).toBe(false);
+      po.input.sendKeys(protractor.Key.TAB);
+      expect(po.errorRequired.isPresent()).toBe(true);
     });
 
+    it('should show required for dirty', () => {
+      expect(po.errorRequired.isPresent()).toBe(false);
+      po.input.sendKeys('x');
+      po.input.sendKeys(protractor.Key.BACK_SPACE);
+      expect(po.errorRequired.isPresent()).toBe(true);
+    });
+
+    it('should show required for dirty (whitespace entered)', () => {
+      expect(po.errorRequired.isPresent()).toBe(false);
+      po.input.sendKeys(' ');
+      expect(po.errorRequired.isPresent()).toBe(true);
+    });
+
+    it('should show "label exists" if label exists "disregarding white space', () => {
+      expect(po.errorAlreadyExists.isPresent()).toBe(false);
+      po.input.sendKeys('label one  ');
+      expect(po.errorAlreadyExists.isPresent()).toBe(true);
+    });
+
+    fit('should submit with no whitespace if whitespace was entered', () => {
+      po.input.sendKeys('Label Two2  ');
+      po.submit.click();
+      po.waitForDown();
+      browser.refresh();
+      expect($$('dk-leftnav dk-leftnav-label.user-label .name').get(2).getText()).toBe('Label Two2');
+      bypassTakedown = true;
+    });
 
   });
 

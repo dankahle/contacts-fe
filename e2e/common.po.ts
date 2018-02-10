@@ -5,6 +5,10 @@ import * as cp from 'child_process';
 export class CommonPO {
   rootUrl = 'http://localhost:4201/';
 
+  isActiveElement(elem) {
+    return elem.equals(browser.driver.switchTo().activeElement());
+  }
+
   resizeWindow(width, height?) {
     browser.driver.manage().window().setSize(width, height || 1024);
   }
