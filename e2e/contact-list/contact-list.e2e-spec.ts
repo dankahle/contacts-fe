@@ -2,7 +2,7 @@ import {$, $$, browser, ElementFinder, protractor} from 'protractor';
 import {LabelEditPO} from '../dialogs/label-edit.po';
 import {ContactListPO} from '../contact-list/contact-list.po';
 import {LabelDeletePO} from '../dialogs/label-delete.po';
-import {LabelPO} from '../leftnav/labels.po';
+import {LabelPO} from '../leftnav/label.po';
 import {ContactEditPO} from '../dialogs/contact-edit.po';
 import {ContactDetailPO} from '../dialogs/contact-detail.po';
 import {ContactListItemPO} from './contact-list-item.po';
@@ -41,6 +41,8 @@ describe('##### contact list tests', () => {
     expect(po.getNames()).toEqual(['Brenda', 'jane - jane co', 'Martha Co']);
     po.addContactEntryCancelCloseCancel('Karla');
     expect(po.getNames()).toEqual(['Brenda', 'jane - jane co', 'Karla', 'Martha Co']);
+    browser.refresh();
+    expect(po.getNames()).toEqual(['Brenda', 'jane - jane co', 'Karla', 'Martha Co']);
   });
 
   // this test depends on "add" test
@@ -68,6 +70,8 @@ describe('##### contact list tests', () => {
   it('should edit name', () => {
     expect(po.getNames()).toEqual(['Brenda', 'jane - jane co', 'Martha Co']);
     po.editContactName(po.contacts.get(1), 'Jane Two');
+    expect(po.getNames()).toEqual(['Brenda', 'Jane Two - jane co', 'Martha Co']);
+    browser.refresh();
     expect(po.getNames()).toEqual(['Brenda', 'Jane Two - jane co', 'Martha Co']);
     po.editContactName(po.contacts.get(1), 'jane');
     expect(po.getNames()).toEqual(['Brenda', 'jane - jane co', 'Martha Co']);
@@ -107,6 +111,11 @@ describe('##### contact list tests', () => {
     expect(poContactListItem.phone.isDisplayed()).toBe(false);
     expect(poContactListItem.notes.isDisplayed()).toBe(false);
     po.resizeWindow(899);
+    expect(poContactListItem.name.isDisplayed()).toBe(true);
+    expect(poContactListItem.email.isDisplayed()).toBe(false);
+    expect(poContactListItem.phone.isDisplayed()).toBe(false);
+    expect(poContactListItem.notes.isDisplayed()).toBe(false);
+    browser.refresh();
     expect(poContactListItem.name.isDisplayed()).toBe(true);
     expect(poContactListItem.email.isDisplayed()).toBe(false);
     expect(poContactListItem.phone.isDisplayed()).toBe(false);

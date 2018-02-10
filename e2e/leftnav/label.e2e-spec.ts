@@ -1,5 +1,5 @@
 import {$, $$, browser, ElementFinder, protractor} from 'protractor';
-import {LabelPO} from './labels.po';
+import {LabelPO} from './label.po';
 import {LabelEditPO} from '../dialogs/label-edit.po';
 import {ContactListPO} from '../contact-list/contact-list.po';
 import {LabelDeletePO} from '../dialogs/label-delete.po';
@@ -40,6 +40,9 @@ describe('##### leftnav labels tests', () => {
     expect(po.hasClass(po.labelContacts, active)).toBe(false);
     labelIsActive(1);
     expect(poContactList.getNames()).toEqual(['Brenda', 'jane - jane co']);
+    browser.refresh();
+    labelIsActive(1);
+    expect(poContactList.getNames()).toEqual(['Brenda', 'jane - jane co']);
     po.labels.get(2).click();
     expect(po.hasClass(po.labelContacts, active)).toBe(false);
     labelIsActive(2);
@@ -61,6 +64,12 @@ describe('##### leftnav labels tests', () => {
     expect(po.getLabelText(po.labels.get(1))).toBe('label two');
     expect(po.getLabelText(po.labels.get(2))).toBe('Label Two2');
     expect(po.getLabelText(po.labels.get(3))).toBe('label zthree');
+    browser.refresh();
+    expect(po.labels.count()).toBe(4);
+    expect(po.getLabelText(po.labels.get(0))).toBe('label one');
+    expect(po.getLabelText(po.labels.get(1))).toBe('label two');
+    expect(po.getLabelText(po.labels.get(2))).toBe('Label Two2');
+    expect(po.getLabelText(po.labels.get(3))).toBe('label zthree');
     po.clickDeleteNoContacts(po.labels.get(2));
     expect(po.labels.count()).toBe(3);
     expect(po.getLabelText(po.labels.get(0))).toBe('label one');
@@ -70,14 +79,18 @@ describe('##### leftnav labels tests', () => {
 
   it('should edit label', () => {
     po.createLabel('Label Two2')
-    const label = po.labels.get(2);
+    let label = po.labels.get(2);
     expect(po.getLabelText(label)).toBe('Label Two2')
     po.editLabel(label, 'Label Two3');
+    expect(po.getLabelText(label)).toBe('Label Two3');
+    browser.refresh();
+    label = po.labels.get(2);
+    expect(po.labels.count()).toBe(4);
     expect(po.getLabelText(label)).toBe('Label Two3');
     po.clickDeleteNoContacts(label);
   });
 
-  it('should show the correct number of contacts', async () => {
+  it('should show the correct number of contacts in parenthesis (x)', async () => {
     expect(po.labels.get(0).getText()).toContain('label one\n(2)');
     expect(po.labels.get(1).getText()).toContain('label two\n(2)');
     const zthreeText = await po.labels.get(2).getText();
@@ -96,6 +109,10 @@ describe('##### leftnav labels tests', () => {
     expect(browser.getCurrentUrl()).toBe(po.rootUrl);
     const contactNames = await poContactList.getNames();
     expect(contactNames).toEqual(['Brenda', 'jane - jane co', 'Martha Co']);
+    browser.refresh();
+    expect(po.labels.count()).toBe(2);
+    expect(po.labels.getText()).not.toContain('label two');
+    expect(contactNames).toEqual(['Brenda', 'jane - jane co', 'Martha Co']);
   })
 
   it('should delete label two and keep contacts (in label one)', async () => {
@@ -107,8 +124,7 @@ describe('##### leftnav labels tests', () => {
     expect(po.labels.count()).toBe(2);
     expect(po.labels.getText()).not.toContain('label two');
     expect(browser.getCurrentUrl()).toBe(po.rootUrl);
-    const contactNames = await poContactList.getNames();
-    expect(contactNames).toEqual(['Brenda', 'jane - jane co', 'Martha Co']);
+    expect(await poContactList.getNames()).toEqual(['Brenda', 'jane - jane co', 'Martha Co']);
   })
 
   it('should delete label two and keep contacts (in label two)', async () => {
@@ -120,8 +136,7 @@ describe('##### leftnav labels tests', () => {
     expect(po.labels.count()).toBe(2);
     expect(po.labels.getText()).not.toContain('label two');
     expect(browser.getCurrentUrl()).toBe(po.rootUrl);
-    const contactNames = await poContactList.getNames();
-    expect(contactNames).toEqual(['Brenda', 'jane - jane co', 'Martha Co']);
+    expect(await poContactList.getNames()).toEqual(['Brenda', 'jane - jane co', 'Martha Co']);
   })
 
   it('should delete label two and toss contacts (in contacts)', async () => {
@@ -133,8 +148,9 @@ describe('##### leftnav labels tests', () => {
     expect(po.labels.count()).toBe(2);
     expect(po.labels.getText()).not.toContain('label two');
     expect(browser.getCurrentUrl()).toBe(po.rootUrl);
-    const contactNames = await poContactList.getNames();
-    expect(contactNames).toEqual(['Martha Co']);
+    expect(await poContactList.getNames()).toEqual(['Martha Co']);
+    browser.refresh();
+    expect(await poContactList.getNames()).toEqual(['Martha Co']);
   })
 
   it('should delete label two and toss contacts (in label one)', async () => {

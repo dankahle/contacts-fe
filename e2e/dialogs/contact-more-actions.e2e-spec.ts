@@ -2,7 +2,7 @@ import {$, $$, browser, ElementFinder, protractor} from 'protractor';
 import {LabelEditPO} from '../dialogs/label-edit.po';
 import {ContactListPO} from '../contact-list/contact-list.po';
 import {LabelDeletePO} from '../dialogs/label-delete.po';
-import {LabelPO} from '../leftnav/labels.po';
+import {LabelPO} from '../leftnav/label.po';
 import {ContactMoreActionsPO} from './contact-more-actions.po';
 import {CommonPO} from '../common.po';
 import {ContactListItemPO} from '../contact-list/contact-list-item.po';
@@ -206,7 +206,6 @@ describe('##### contact more actions tests', () => {
       checkLabelsJane_removeLabelTwoAddLabelThree();
       browser.refresh();
       checkLabelsJane_removeLabelTwoAddLabelThree();
-      poLabel.labelContacts.click();
     });
 
   });

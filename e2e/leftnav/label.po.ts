@@ -6,6 +6,7 @@ import {LabelDeletePO} from '../dialogs/label-delete.po';
 
 const EC = protractor.ExpectedConditions;
 const poLabelEdit = new LabelEditPO();
+const poLabelDelete = new LabelDeletePO;
 
 export class LabelPO extends CommonPO {
   labelContacts = $('dk-leftnav dk-leftnav-label.contacts-label');
@@ -20,19 +21,16 @@ export class LabelPO extends CommonPO {
   qExtrasBody = 'dk-leftnav mat-expansion-panel.extra-labels .mat-expansion-panel-content';
   addedLabel = $$(this.qlabels).get(2); // label one, label two, Label Two2 label zthree, should order case insensitive
   createLabelText;
-  poLabelDelete = new LabelDeletePO;
-
-
 
   deleteLabelWithContacts(label, mode) {
     this.clickDeleteWithContacts(label); // delete label two, which has brenda/jane
     if (mode === 'keep') {
-      this.poLabelDelete.radioKeep.click();
+      poLabelDelete.radioKeep.click();
     } else {
-      this.poLabelDelete.radioToss.click();
+      poLabelDelete.radioToss.click();
     }
-    this.poLabelDelete.submit.click();
-    this.poLabelDelete.waitForDown();
+    poLabelDelete.submit.click();
+    poLabelDelete.waitForDown();
   }
 
   getLabelText(el) {
@@ -70,7 +68,7 @@ export class LabelPO extends CommonPO {
 
   clickDeleteWithContacts(el) {
     this.clickDeleteNoContacts(el);
-    this.poLabelDelete.waitForUp();
+    poLabelDelete.waitForUp();
   }
 
   clickLabel(section, position) {

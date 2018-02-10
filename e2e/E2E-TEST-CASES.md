@@ -12,7 +12,7 @@ done### leftnav
 * responsive: open for gt-sm, closed for lt-sm
 * close for gt-sm if was closed before going lt-sm
 
-done ### labels
+done### labels
 * accordion works for labels/extras
 * default (contacts) shows all contacts, label two shows 2, label three shows none
 * create label // dialog
@@ -21,7 +21,7 @@ done ### labels
 * delete label with contacts keep contacts // dialog
 * delete label with contacts toss contacts // dialog
 
-### contact list
+done### contact list
 * responsive: notes, phone, email disappear at appropriate breakpoints
 * in label tests - shows appropriate contacts for contactsLabel and other labels
 * shows no contacts when label zthree is picked
@@ -33,12 +33,14 @@ done ### labels
 * responsive test for contact list item name/email/phone/notes 
 
 
-### more actions
+done### more actions
 * all labels show up (contacts)
 * all labels show up (label picked)
 * remove from label // contact tests or here?
 * delete contact // done in contact list tests
 * update contact's labels
+
+
 
 ## dialogs
 ### contact detail 
@@ -46,7 +48,16 @@ done ### labels
 ### contact edit 
 ### contact edit close
 ### contact delete 
-### label add
+
+### input trim and basic validaton tests (use edit label (add) dialog)
+// this only needs to be done once as all dialogs/forms will work the same with global validation setting and input trim
+* should show required for touched (whitespace NOT entered) 
+* should show required for dirty (whitespace entered) 
+* should disable submit if whitespace only in entry
+* should show "label exist" if label exist "disregarding white space"
+* should submit with no whitespace if whitespace was entered
+
+### >label add
 * submit enabled/disabled on trimmed input
 * required shows for no text // trimmed or will space work?
 * label exists shows if label already exists

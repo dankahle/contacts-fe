@@ -5,8 +5,8 @@
   <form id="form" name="form" #form="ngForm" (submit)="submit(form)">
     <mat-form-field>
       <input name="name" matInput #name="ngModel" [(ngModel)]="label.name" [placeholder]="placeholder" autocomplete="off" spellcheck="false">
-      <mat-error *ngIf="name.invalid && name.errors.required">Required!</mat-error>
-      <mat-error *ngIf="name.invalid && name.errors.nameAlreadyExists">Name already exists</mat-error>
+      <mat-error class="required" *ngIf="name.invalid && name.errors.required">Required!</mat-error>
+      <mat-error class="already-exists" *ngIf="name.invalid && name.errors.nameAlreadyExists">Name already exists</mat-error>
     </mat-form-field>
   </form>
 

@@ -1,6 +1,6 @@
 import { SearchPO } from './search.po';
 import {$, $$, browser, ElementFinder, protractor} from 'protractor';
-import {LabelPO} from '../leftnav/labels.po';
+import {LabelPO} from '../leftnav/label.po';
 import {ContactDetailPO} from '../dialogs/contact-detail.po';
 
 const EC = protractor.ExpectedConditions;
