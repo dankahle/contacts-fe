@@ -71,7 +71,7 @@ describe('##### label edit dialog tests', () => {
       expect(po.errorAlreadyExists.isPresent()).toBe(true);
     });
 
-    fit('should submit with no whitespace if whitespace was entered', () => {
+    it('should submit with no whitespace if whitespace was entered', () => {
       po.input.sendKeys('Label Two2  ');
       po.submit.click();
       po.waitForDown();
