@@ -76,6 +76,8 @@ describe('##### label edit dialog tests', () => {
       po.submit.click();
       po.waitForDown();
       browser.refresh();
+      // this doesn't work, even though html will show extra places, they don't show up via getText() for some reason. Can't even check
+      // length of string, they trim it I figure. This will have to be handled in unit tests, but they'll have to include the shared module then
       expect($$('dk-leftnav dk-leftnav-label.user-label .name').get(2).getText()).toBe('Label Two2');
       bypassTakedown = true;
     });
