@@ -3,7 +3,7 @@ import {LabelEditPO} from './po/label-edit.po';
 import {ContactListPO} from '../contact-list/contact-list.po';
 import {LabelDeletePO} from './po/label-delete.po';
 import {LabelPO} from '../leftnav/label.po';
-import {ContactMoreActionsPO} from './contact-more-actions.po';
+import {ContactMoreActionsPO} from './po/contact-more-actions.po';
 import {CommonPO} from '../common.po';
 import {ContactListItemPO} from '../contact-list/contact-list-item.po';
 import {ContactDetailPO} from './po/contact-detail.po';

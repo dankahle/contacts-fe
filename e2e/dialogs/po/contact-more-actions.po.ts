@@ -1,5 +1,5 @@
 import {$, browser, element, by, ElementFinder, protractor, $$} from 'protractor';
-import {CommonPO} from '../common.po';
+import {CommonPO} from '../../common.po';
 
 const EC = protractor.ExpectedConditions;
 

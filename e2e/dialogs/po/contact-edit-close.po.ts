@@ -8,6 +8,21 @@ export class ContactEditClosePO extends CommonPO {
   submit = $('dk-contact-edit-close .button-submit');
   cancel = $('dk-contact-edit-close .button-cancel');
 
+  takeDownBody() {
+    browser.actions().mouseMove(this.submit, {x: 200, y: 0}).click().perform();
+    this.waitForDown();
+  }
+
+  takeDownCancel() {
+    this.cancel.click();
+    this.waitForDown();
+  }
+
+  takeDownSubmit() {
+    this.submit.click();
+    this.waitForDown();
+  }
+
   waitForUp() {
     browser.wait(EC.presenceOf(this.dialog));
   }

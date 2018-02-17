@@ -33,6 +33,17 @@ export class LabelPO extends CommonPO {
     poLabelDelete.waitForDown();
   }
 
+  cancelDeleteWithContacts(label, mode) {
+    this.clickDeleteWithContacts(label); // delete label two, which has brenda/jane
+    if (mode === 'keep') {
+      poLabelDelete.radioKeep.click();
+    } else {
+      poLabelDelete.radioToss.click();
+    }
+    poLabelDelete.cancel.click();
+    poLabelDelete.waitForDown();
+  }
+
   getLabelText(el) {
     return el.$('.name').getText();
   }

@@ -3,7 +3,7 @@ import {CommonPO} from '../common.po';
 import {ContactEditPO} from '../dialogs/po/contact-edit.po';
 import {ContactListItemPO} from './contact-list-item.po';
 import {ContactDeletePO} from '../dialogs/po/contact-delete.po';
-import {ContactMoreActionsPO} from '../dialogs/contact-more-actions.po';
+import {ContactMoreActionsPO} from '../dialogs/po/contact-more-actions.po';
 import {ContactEditClosePO} from '../dialogs/po/contact-edit-close.po';
 
 const poContactEdit = new ContactEditPO();

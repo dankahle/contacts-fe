@@ -18,11 +18,11 @@ import {routeChangeAnimation} from '../../../routing/animations';
   templateUrl: './contact-list.component.html',
   styleUrls: ['./contact-list.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  animations: [ routeChangeAnimation ]
+  animations: [routeChangeAnimation]
 })
 export class ContactListComponent implements OnDestroy, AfterViewInit {
   @HostBinding('@routeAnimation') routeAnimation = true;
-  @HostBinding('style.display')   display = 'block';
+  @HostBinding('style.display') display = 'block';
   @HostBinding('style.max-width') hostMaxWidth;
   contacts: Contact[] = [];
   messageCount: number;
@@ -35,16 +35,16 @@ export class ContactListComponent implements OnDestroy, AfterViewInit {
     this.subs_selectedLabel = this.store.subSelectedLabel(label => this.syncContacts());
     this.subs_Contacts = this.store.con.subContacts(label => this.syncContacts());
 
-/*
-    // an example of a dynamic hostBinding property
-    this.store.leftNavClosed$.subscribe(leftnavClosed => {
-      if (leftnavClosed || breakpoints.isActive('lt-md')) {
-        this.hostMaxWidth = '100%';
-      } else {
-        this.hostMaxWidth = 'calc(100% - 284px)';
-      }
-    });
-*/
+    /*
+        // an example of a dynamic hostBinding property
+        this.store.leftNavClosed$.subscribe(leftnavClosed => {
+          if (leftnavClosed || breakpoints.isActive('lt-md')) {
+            this.hostMaxWidth = '100%';
+          } else {
+            this.hostMaxWidth = 'calc(100% - 284px)';
+          }
+        });
+    */
 
   } // const
 

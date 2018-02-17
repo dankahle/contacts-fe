@@ -1,77 +1,138 @@
 
-done### search
-* search icon sets focus to input
-* clear icon clears input
-* search text yields correct dropdown results (nothing)
-* search text yields correct dropdown results (something)
-* search text yields correct dropdown results (label chosen (still searches all))
-* clear input, results go away
-
-done### leftnav
-* header button opens/closes
-* responsive: open for gt-sm, closed for lt-sm
-* close for gt-sm if was closed before going lt-sm
-
-done### labels
-* accordion works for labels/extras
-* default (contacts) shows all contacts, label two shows 2, label three shows none
-* create label // dialog
-* edit label // dialog
-* delete label no contacts deletes
-* delete label with contacts keep contacts // dialog
-* delete label with contacts toss contacts // dialog
+done### app
+* should land at root
+* title should be DkContacts
+* should redirect to root if label not found
 
 done### contact list
-* responsive: notes, phone, email disappear at appropriate breakpoints
-* in label tests - shows appropriate contacts for contactsLabel and other labels
-* shows no contacts when label zthree is picked
-* add contact brings up edit dialog
-* click on contact brings up appropriate detail dialog
-* edit icon click brings up edit dialog
-* delete icon click brings up contact delete dialog
-* clicking on link spawns new tab in browser, or maybe just check it's a link with the properties required (href="mailto:.../phone:")
-* responsive test for contact list item name/email/phone/notes 
-
+* should show no contacts view when label zthree is selected
+* should NOT add Karla (no entry cancel)
+* should NOT add Karla (entry cancel >> close submit)
+* should add Karla, cancel, cancel close dialog, then submit
+* should delete Karla
+* should add then delete Karla
+* should bring up detail dialog when clicked on
+* should edit name
+* should bring up email and phone windows when clicked on
+* should show correct columns per breakpoint
 
 done### more actions
-* all labels show up (contacts)
-* all labels show up (label picked)
-* remove from label // contact tests or here?
-* delete contact // done in contact list tests
-* update contact's labels
+done##### contact list item
+* should show all options (label contacts)
+* should show all options (label two)
+* should delete jane (contacts)
+* should delete jane (label two)
+* should remove jane from label two
+* should remove jane from label two and add to label zthree
 
+done##### contact details dialog
+* should show all options (label contacts)
+* should show all options (label two)
+* should delete jane (contacts)
+* should delete jane (label two)
+* should remove jane from label two
+* should remove jane from label two and add to label zthree
+
+done### search
+* should show clear icon when input has text
+* should clear the text
+* should set focus to input when you click on search icon
+* should set focus to input when you click on search icon - switchTo().activeElement()
+* should have Brenda/jane/Martha Co for "a"
+* should only have jane for "j", then nothing for backspace
+* should have Brenda/jane for "n"
+* should have Brenda/jane for "n" (in label three view)
+* should search for Brenda/jane and open jane detail
+
+ done### labels
+* should open/close accordion sections
+* should default to contacts label, and show correct contacts for chosen labels
+* should create label and delete it with no contacts
+* should edit label
+* should show the correct number of contacts in parenthesis (x)
+* should do nothing if delete cancelled
+* should delete label two and keep contacts (in contacts)
+* should delete label two and keep contacts (in label one)
+* should delete label two and keep contacts (in label two)
+* should delete label two and toss contacts (in contacts)
+* should delete label two and toss contacts (in label one)
+* should delete label two and toss contacts (in label two)
+
+done### leftnav
+* should show and hide on breakpoints
+* should open and close with header button (md/lg/xl)
+* should open and close with header button (xs/sm)
+* should close on lt-md and reopen md
+* should stay closed when closed gt-sm, then lt-md, then gt-sm
+
+done### label add
+* should show no errors originally
+* should disable submit initially
+* input should have focus on entry
+* should show required message for touched
+* should show required for dirty
+* should show required for dirty (whitespace entered)
+* should show "label exists" if label exists with/without white space
+* should submit with no whitespace if whitespace was entered
+
+done### label edit
+* should show no errors originally
+* should enable submit initially
+* input should have focus on entry
+* should show "label exists" if label exists with/without white space
+* should NOT show "label exists" if label is "label two" with/without whitespace
+* should submit with no whitespace if whitespace was entered
+
+done### label delete
+* should default to keep contacts
+
+done### contact detail
+* should close by close button
+* should go down by body click
+* should show name and/or company for title
+* should show "jobTitle, company" or "company"
+* should show nothing if jobTitle, but no company
+* should show all fields on entry (with/without label)
+* should show only title if nothing else entered
+* should show correct label chips
+* should open edit on edit click, and take down both on edit close
+* should open new windows for email/phone/addr/website click
+
+### contact edit (add) 
+
+### contact edit (add) 
+ * should go down by body click (nothing changed)
+ * should go down by cancel click (nothing changed)
+ * should bring up contact delete on cancel if data changed
+ * should bring up contact delete on body click if data changed
+* should do nothing on cancel // set a name, then cancel and verify name didn't change
+* should show error if no name or company (touched)
+* should show error if no name or company (dirty)
+* should show error if no name or company (submit)
+* should show all fields, and have no data
+* should update all fields when submitted and reopened
+
+### contact edit (edit) 
+* should go down by body click (nothing changed)
+* should go down by cancel click (nothing changed)
+* should bring up contact delete on cancel if data changed
+* should bring up contact delete on body click if data changed
+* should do nothing on cancel // set a name, then cancel and verify name didn't change
+* should show error if no name or company (touched)
+* should show error if no name or company (dirty)
+* should show error if no name or company (submit)
+* should set all fields on entry
+* should update all fields when submitted and reopened
 
 
 ## dialogs
-### contact detail 
 ### contact add
 ### contact edit 
 ### contact edit close
 ### contact delete 
 
-### label add
-// label add is already tested through databse, this is an extension of that testing to the dialog
-// then unit tests will do what? Need to learn which should go where. Label tests handle the big stuff:
-// add/edit/delete. Dialog e2e tests handle the dialog working, OR... should that be done in unit tests? 
-// That's what we have to determine yet, i.e. e2e is better for template manipulation, but not so good for component
-// testing, that's what unit tests are good for. This testing here is maybe out of place, should just be done
-// in unit tests. Fine... we'll figure that out when doing the unit tests for it.
 
-* submit disabled initially
-* should show required for touched (whitespace NOT entered)
-* should show required for dirty (whitespace entered)
-* submit disabled if whitespace only in entry
-* should show "label exists" if label exists "disregarding white space"
-* should submit with no whitespace if whitespace was entered
-* label exists shows if label already exists
-
-
-
-
-### label edit
-### label delete
-
-### error modal
+### error dialog
 ### progress bar
 ### page not found
 

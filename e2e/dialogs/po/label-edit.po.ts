@@ -11,9 +11,17 @@ export class LabelEditPO extends CommonPO {
   errorRequired = $('dk-edit-label mat-error.required');
   errorAlreadyExists = $('dk-edit-label mat-error.already-exists');
   labelAdd = $('dk-leftnav dk-leftnav-label.add-label');
+  qlabels = 'dk-leftnav dk-leftnav-label.user-label';
+  labels = $$(this.qlabels);
 
   putUpAddDialog() {
     this.labelAdd.click();
+    this.waitForUp();
+  }
+
+  putUpEditDialog() {
+    browser.actions().mouseMove(this.labels.get(1)).perform();
+    this.labels.get(1).$('.icon-edit').click(); // edit label two
     this.waitForUp();
   }
 

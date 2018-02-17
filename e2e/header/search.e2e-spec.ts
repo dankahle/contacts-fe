@@ -86,7 +86,7 @@ describe('##### search tests', () => {
   it('should search for Brenda/jane and open jane detail', async () => {
     po.searchAndOpen('n', 2);
     poContactDetail.waitForUp();
-    expect(poContactDetail.name.getText()).toBe('jane - jane co');
+    expect(poContactDetail.title.getText()).toBe('jane - jane co');
     poContactDetail.takeDownClose();
     po.enterText(protractor.Key.BACK_SPACE);
     expect((await po.getDropdownChoices()).length).toBe(0);

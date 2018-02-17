@@ -37,7 +37,7 @@
     <div class="title">Contact details</div>
 
     <!--company-->
-    <div class="section" *ngIf="contact.company" fxLayout="row" fxLayoutAlign="start stretch">
+    <div class="section company" *ngIf="contact.company" fxLayout="row" fxLayoutAlign="start stretch">
       <div class="icon-div" fxFlex="0 0 63px" fxLayout="row" fxLayoutAlign="center start">
         <i class="material-icons">business</i>
       </div>
@@ -48,7 +48,7 @@
     </div>
 
     <!--emails-->
-    <div class="section" *ngIf="contact.emails.length" fxLayout="row" fxLayoutAlign="start stretch">
+    <div class="section emails" *ngIf="contact.emails.length" fxLayout="row" fxLayoutAlign="start stretch">
       <div class="icon-div" fxFlex="0 0 63px" fxLayout="row" fxLayoutAlign="center start">
         <i class="material-icons">email</i>
       </div>
@@ -61,7 +61,7 @@
     </div>
 
     <!--phones-->
-    <div class="section" *ngIf="contact.phones.length" fxLayout="row" fxLayoutAlign="start stretch">
+    <div class="section phones" *ngIf="contact.phones.length" fxLayout="row" fxLayoutAlign="start stretch">
       <div class="icon-div" fxFlex="0 0 63px" fxLayout="row" fxLayoutAlign="center start">
         <i class="material-icons">phone</i>
       </div>
@@ -74,7 +74,7 @@
     </div>
 
     <!--addresses-->
-    <div class="section" *ngIf="contact.addresses.length" fxLayout="row" fxLayoutAlign="start stretch">
+    <div class="section addresses" *ngIf="contact.addresses.length" fxLayout="row" fxLayoutAlign="start stretch">
       <div class="icon-div" fxFlex="0 0 63px" fxLayout="row" fxLayoutAlign="center start">
         <i class="material-icons">place</i>
       </div>
@@ -87,7 +87,7 @@
     </div>
 
     <!--websites-->
-    <div class="section" *ngIf="contact.websites.length" fxLayout="row" fxLayoutAlign="start stretch">
+    <div class="section websites" *ngIf="contact.websites.length" fxLayout="row" fxLayoutAlign="start stretch">
       <div class="icon-div" fxFlex="0 0 63px" fxLayout="row" fxLayoutAlign="center start">
         <i class="material-icons">link</i>
       </div>
@@ -100,7 +100,7 @@
     </div>
 
     <!--notes-->
-    <div class="section" *ngIf="contact.notes" fxLayout="row" fxLayoutAlign="start stretch">
+    <div class="section notes" *ngIf="contact.notes" fxLayout="row" fxLayoutAlign="start stretch">
       <div class="icon-div" fxFlex="0 0 63px" fxLayout="row" fxLayoutAlign="center start">
         <i class="material-icons">description</i>
       </div>
