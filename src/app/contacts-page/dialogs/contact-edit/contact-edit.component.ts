@@ -21,7 +21,6 @@ import 'rxjs/add/operator/do';
 import {Util} from '../../../core/services/util';
 import {DeleteLabelMode} from '../../../store/enums/deleteLabelMode.enum';
 import {DeleteLabelComponent} from '../delete-label/delete-label.component';
-import * as equal from 'deep-equal';
 import {ContactEditCloseComponent} from '../contact-edit-close/contact-edit-close.component';
 import {Subscription} from 'rxjs/Subscription';
 
@@ -134,7 +133,7 @@ export class ContactEditComponent implements AfterViewInit, OnDestroy {
     // should have a means of saying "don't close", what's the point of "beforeClose" if you don't get a cancel option?
     if (!event || (event.type === 'keydown' && Util.isEscapeKeyEvent(event))) {
       // if no changes just close
-      if (equal(this.contact, this.originalContact)) {
+      if (_.isEqual(this.contact, this.originalContact)) {
         this.dialogRef.close();
         return;
       }

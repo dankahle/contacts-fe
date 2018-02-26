@@ -7,12 +7,13 @@ exports.config = {
   allScriptsTimeout: 11000,
   specs: [
     // './e2e/slow-down-tests.ts',
+    './jasmine-matchers.js',
     './e2e/**/*.e2e-spec.ts'
   ],
   capabilities: {
     'browserName': 'chrome',
     'chromeOptions': {
-      // 'args': ["--headless", "--disable-gpu", "--window-size=1200x1024",  "--no-sandbox"]
+      'args': ["--headless", "--disable-gpu", "--window-size=1200x1024",  "--no-sandbox"]
     }
   },
   directConnect: true,

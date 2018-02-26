@@ -98,31 +98,21 @@ done### contact detail
 * should open edit on edit click, and take down both on edit close
 * should open new windows for email/phone/addr/website click
 
-### contact edit (add) 
 
 ### contact edit (add) 
  * should go down by body click (nothing changed)
  * should go down by cancel click (nothing changed)
- * should bring up contact delete on cancel if data changed
- * should bring up contact delete on body click if data changed
-* should do nothing on cancel // set a name, then cancel and verify name didn't change
-* should show error if no name or company (touched)
-* should show error if no name or company (dirty)
-* should show error if no name or company (submit)
-* should show all fields, and have no data
-* should update all fields when submitted and reopened
+ * should have all fields empty
+ * should bring up contact delete on cancel if data changed, and not add if close submit
+ * should bring up contact delete on body click if data changed, and not add if close submit
+ * should show error if no name or company (touched)
+ * should show error if no name or company (dirty)
+ * should show error if no name or company (submit)
+* should add and delete sections, but clear if only one
+* should remove empty emails/phones/addrs/website
+ * should update all fields when submitted and reopened (add)
+* should update all fields when submitted and reopened (edit)
 
-### contact edit (edit) 
-* should go down by body click (nothing changed)
-* should go down by cancel click (nothing changed)
-* should bring up contact delete on cancel if data changed
-* should bring up contact delete on body click if data changed
-* should do nothing on cancel // set a name, then cancel and verify name didn't change
-* should show error if no name or company (touched)
-* should show error if no name or company (dirty)
-* should show error if no name or company (submit)
-* should set all fields on entry
-* should update all fields when submitted and reopened
 
 
 ## dialogs

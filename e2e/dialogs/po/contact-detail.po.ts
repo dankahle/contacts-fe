@@ -28,11 +28,11 @@ export class ContactDetailPO extends CommonPO {
   contacts = $$('dk-contact-list-item')
   addButton = $('dk-contact-list .add-button');
 
+
   addContact(name) {
     this.addButton.click();
     poContactEdit.name.sendKeys(name);
-    poContactEdit.submit.click();
-    poContactEdit.waitForDown();
+    poContactEdit.takeDownSubmit();
   }
 
   putUpDialog(idx) {

@@ -1,13 +1,62 @@
 const _ = require('lodash');
 
 
-let arr = [
-  {name: 'dank'},
-  {name: 'carl'},
-]
-const b = _.sortBy(arr, 'name');
-console.log(arr);
-console.log(b);
+
+
+
+
+compare = (actual, expecteds) => {
+  const result = {
+    pass: false,
+    message: `Expected ${JSON.stringify(actual)} to be one of: ${JSON.stringify(expecteds)}`
+  };
+  if (!_.isArray(actual) && _.isArrayLike(actual)) {
+    actual = _.toArray(actual);
+  }
+  _.forEach(expecteds, expected => {
+    console.log(actual, expected);
+    result.pass = _.isEqual(actual, expected);
+    if (result.pass) {
+      return false;
+    }
+  });
+  return result;
+}
+
+const res = compare(['one'], [
+  ['two'],
+  ['one'],
+  [''],
+  []
+]);
+
+console.log(res)
+
+
+
+
+/*
+var express = require('express');
+var graphqlHTTP = require('express-graphql');
+var { buildSchema } = require('graphql');
+
+var schema = buildSchema(`
+  type Query {
+    hello: String
+  }
+`);
+
+var root = { hello: () => 'Hello world!' };
+
+var app = express();
+app.use('/graphql', graphqlHTTP({
+  schema: schema,
+  rootValue: root,
+  graphiql: true,
+}));
+app.listen(4000, () => console.log('Now browse to localhost:4000/graphql'));
+
+*/
 
 
 /*

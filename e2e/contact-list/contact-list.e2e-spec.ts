@@ -79,17 +79,13 @@ describe('##### contact list tests', () => {
 
   it('should bring up email and phone windows when clicked on', async () => {
     const poContactListItem = new ContactListItemPO(po.contacts.get(0));
-    let handles = await browser.getAllWindowHandles();
-    expect(handles.length).toBe(1);
+    const handles = await browser.getAllWindowHandles();
+    const count = handles.length;
     poContactListItem.email.click();
-    browser.wait(async () => (await browser.getAllWindowHandles()).length === 2);
-    handles = await browser.getAllWindowHandles();
-    expect(handles.length).toBe(2);
+    browser.wait(async () => (await browser.getAllWindowHandles()).length === count + 1);
     browser.switchTo().window(handles[0]);
     poContactListItem.phone.click();
-    handles = await browser.getAllWindowHandles();
-    browser.wait(async () => (await browser.getAllWindowHandles()).length === 3);
-    expect(handles.length).toBe(3);
+    browser.wait(async () => (await browser.getAllWindowHandles()).length === count + 2);
     browser.switchTo().window(handles[0]);
   });
 

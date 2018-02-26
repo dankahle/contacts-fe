@@ -56,6 +56,7 @@ describe('##### contact detail tests', () => {
   it('should show nothing if jobTitle, but no company', () => {
     po.putUpDialog(0);
     expect(po.company.isPresent()).toBe(false);
+    po.takeDownClose();
   });
 
   it('should show all fields on entry (with/without label)', () => {
@@ -109,8 +110,8 @@ describe('##### contact detail tests', () => {
     po.edit.click();
     poContactEdit.waitForUp();
     expect(poContactEdit.dialog.isPresent()).toBe(true);
-    poContactEdit.cancel.click();
-    poContactEdit.waitForDown();
+    poContactEdit.takeDownCancel();
+    po.waitForDown();
     expect(poContactEdit.dialog.isPresent()).toBe(false);
     expect(po.dialog.isPresent()).toBe(false);
   });
@@ -118,21 +119,21 @@ describe('##### contact detail tests', () => {
   it('should open new windows for email/phone/addr/website click', async () => {
     po.putUpDialog(1);
     let handles = await browser.getAllWindowHandles();
-    expect(handles.length).toBe(1);
+    const count = handles.length;
     po.emailsA.get(0).click();
-    browser.wait(async () => (await browser.getAllWindowHandles()).length === 2);
+    browser.wait(async () => (await browser.getAllWindowHandles()).length === count + 1);
     browser.switchTo().window(handles[0]);
     po.phonesA.get(0).click();
     handles = await browser.getAllWindowHandles();
-    browser.wait(async () => (await browser.getAllWindowHandles()).length === 3);
+    browser.wait(async () => (await browser.getAllWindowHandles()).length === count + 2);
     browser.switchTo().window(handles[0]);
     po.addressesA.get(1).click();
     handles = await browser.getAllWindowHandles();
-    browser.wait(async () => (await browser.getAllWindowHandles()).length === 4);
+    browser.wait(async () => (await browser.getAllWindowHandles()).length === count + 3);
     browser.switchTo().window(handles[0]);
     po.websitesA.get(1).click();
     handles = await browser.getAllWindowHandles();
-    browser.wait(async () => (await browser.getAllWindowHandles()).length === 5);
+    browser.wait(async () => (await browser.getAllWindowHandles()).length === count + 4);
     browser.switchTo().window(handles[0]);
     po.takeDownClose();
   });

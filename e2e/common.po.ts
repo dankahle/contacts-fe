@@ -4,6 +4,16 @@ import * as cp from 'child_process';
 
 export class CommonPO {
   rootUrl = 'http://localhost:4201/';
+  selectOptions = $$('mat-option');
+
+
+  clickAutoCompleteOption(val) {
+    $(`mat-option[ng-reflect-value="${val}"]`).click();
+  }
+
+  clickSelectOption(val) {
+    $(`mat-option[value="${val}"]`).click();
+  }
 
   isActiveElement(elem) {
     return elem.equals(browser.driver.switchTo().activeElement());

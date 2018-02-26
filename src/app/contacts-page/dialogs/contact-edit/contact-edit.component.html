@@ -22,7 +22,7 @@
             <input class="po-name" matInput #nameNg="ngModel" name="name" [(ngModel)]="contact.name"
                    (input)="updateNameAndCompanyValidation()" (blur)="updateNameAndCompanyValidation()"
                    placeholder="Name" autocomplete="noway" spellcheck="false">
-            <mat-error *ngIf="nameNg.invalid && nameNg.errors.nameOrCompany">Name or company required</mat-error>
+            <mat-error class="name-error" *ngIf="nameNg.invalid && nameNg.errors.nameOrCompany">Name or company required</mat-error>
           </mat-form-field>
         </div>
         <div class="icons" fxLayout="row" fxLayoutAlign="start center" fxFlex="0 0 64px">
@@ -38,13 +38,13 @@
         </div>
         <div class="inputs" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="space-between center">
           <mat-form-field fxFlex="1 1 60%">
-            <input matInput #companyNg="ngModel" name="company" [(ngModel)]="contact.company"
+            <input class="company" matInput #companyNg="ngModel" name="company" [(ngModel)]="contact.company"
                    placeholder="Company" autocomplete="noway" (input)="updateNameAndCompanyValidation()"
                    (blur)="updateNameAndCompanyValidation()" spellcheck="false">
             <mat-error *ngIf="companyNg.invalid && companyNg.errors.nameOrCompany">Name or company required</mat-error>
           </mat-form-field>
           <mat-form-field fxFlex="1 1 35%">
-            <input matInput #jobTitle="ngModel" name=jobTitle [(ngModel)]="contact.jobTitle" placeholder="Job title" spellcheck="false">
+            <input class="job-title" matInput #jobTitle="ngModel" name=jobTitle [(ngModel)]="contact.jobTitle" placeholder="Job title" spellcheck="false">
           </mat-form-field>
         </div>
         <div class="icons" fxLayout="row" fxLayoutAlign="start center" fxFlex="0 0 64px">
@@ -55,20 +55,20 @@
 
       <!--emails-->
 
-      <div class="section" fxLayout="row" fxLayoutAlign="start stretch" *ngFor="let email of contact.emails; index as idx">
+      <div class="section email" fxLayout="row" fxLayoutAlign="start stretch" *ngFor="let email of contact.emails; index as idx">
 
         <div class="pic" fxFlex="0 0 55px" fxLayout="row" fxLayoutAlign="center center">
           <i class="material-icons" *ngIf="idx === 0">email</i>
         </div>
         <div class="inputs" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="space-between center">
           <mat-form-field fxFlex="1 1 60%">
-            <input matInput #emailRef #emailNg="ngModel" name="email{{idx}}"
+            <input class="email" matInput #emailRef #emailNg="ngModel" name="email{{idx}}"
                    [(ngModel)]="email.email" [ngModelOptions]="{updateOn:'change'}" placeholder="Email" autocomplete="noway"
                    pattern=" *[\w-\.]+@([\w-]+\.)+[\w-]{2,4} *" spellcheck="false">
-            <mat-error *ngIf="emailNg.invalid &&  emailNg.errors.pattern">Invalid email</mat-error>
+            <mat-error class="email-error" *ngIf="emailNg.invalid &&  emailNg.errors.pattern">Invalid email</mat-error>
           </mat-form-field>
           <mat-form-field fxFlex="1 1 35%">
-            <input matInput name="emailLabel{{idx}}" #emailLabelNg="ngModel" name=emailLabel{{idx}} [(ngModel)]="email.label"
+            <input class="email-label" matInput name="emailLabel{{idx}}" #emailLabelNg="ngModel" name=emailLabel{{idx}} [(ngModel)]="email.label"
                    placeholder="Label" autocomplete="noway" [matAutocomplete]="autoEmail" spellcheck="false">
             <mat-autocomplete #autoEmail="matAutocomplete">
               <mat-option class="email-option" *ngFor="let labelEmail of filteredEmailLabels && filteredEmailLabels[idx] | async" [value]="labelEmail">
@@ -87,14 +87,14 @@
       </div>
 
       <!--phones-->
-      <div class="section" fxLayout="row" fxLayoutAlign="start stretch" *ngFor="let phn of contact.phones; index as idx">
+      <div class="section phone" fxLayout="row" fxLayoutAlign="start stretch" *ngFor="let phn of contact.phones; index as idx">
         <div class="pic" fxFlex="0 0 55px" fxLayout="row" fxLayoutAlign="center center">
           <i class="material-icons" *ngIf="idx === 0">phone</i>
         </div>
         <div class="inputs" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="space-between center">
           <div fxFlex="1 1 60%" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
             <mat-form-field fxFlex="1 1 30%">
-              <mat-select [(ngModel)]="phn.prefix" name="prefix{{idx}}" placeholder="Country">
+              <mat-select class="prefix" [(ngModel)]="phn.prefix" name="prefix{{idx}}" placeholder="Country">
                 <mat-option data-countryCode="US" value="1">USA (+1)</mat-option>
                 <mat-optgroup label="Other countries">
                   <mat-option data-countryCode="DZ" value="213">Algeria (+213)</mat-option>
@@ -126,11 +126,11 @@
               </mat-select>
             </mat-form-field >
             <mat-form-field fxFlex="fxFlex=1 1 67%">
-              <input matInput #phoneRef name="phone{{idx}}" [(ngModel)]="phn.phone" placeholder="Phone" autocomplete="noway" spellcheck="false">
+              <input class="phone" matInput #phoneRef name="phone{{idx}}" [(ngModel)]="phn.phone" placeholder="Phone" autocomplete="noway" spellcheck="false">
             </mat-form-field>
           </div>
           <mat-form-field fxFlex="1 1 35%">
-            <input matInput name="phoneLabel{{idx}}" #phoneLabelNg="ngModel" name=phoneLabel{{idx}} [(ngModel)]="phn.label"
+            <input class="phone-label" matInput name="phoneLabel{{idx}}" #phoneLabelNg="ngModel" name=phoneLabel{{idx}} [(ngModel)]="phn.label"
                    placeholder="Label" autocomplete="noway" [matAutocomplete]="autoPhone" spellcheck="false">
             <mat-autocomplete #autoPhone="matAutocomplete">
               <mat-option class="phn-option" *ngFor="let labelPhone of filteredPhoneLabels && filteredPhoneLabels[idx] | async" [value]="labelPhone">
@@ -149,16 +149,16 @@
       </div>
 
       <!--addresses-->
-      <div class="section" fxLayout="row" fxLayoutAlign="start stretch" *ngFor="let addr of contact.addresses; index as idx">
+      <div class="section addr" fxLayout="row" fxLayoutAlign="start stretch" *ngFor="let addr of contact.addresses; index as idx">
         <div class="pic" fxFlex="0 0 55px" fxLayout="row" fxLayoutAlign="center top">
           <i class="material-icons" *ngIf="idx === 0">place</i>
         </div>
         <div class="inputs" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="space-between top">
           <mat-form-field fxFlex="1 1 60%">
-            <textarea [rows]="addr.address.split('\n').length" matInput #addrRef name="addr{{idx}}" [(ngModel)]="addr.address" placeholder="Address" autocomplete="noway" spellcheck="false"></textarea>
+            <textarea class="addr" [rows]="addr.address.split('\n').length" matInput #addrRef name="addr{{idx}}" [(ngModel)]="addr.address" placeholder="Address" autocomplete="noway" spellcheck="false"></textarea>
           </mat-form-field>
           <mat-form-field fxFlex="1 1 35%">
-            <input matInput name="addrLabel{{idx}}" #addrLabelNg="ngModel" name=addrLabel{{idx}} [(ngModel)]="addr.label"
+            <input class="addr-label" matInput name="addrLabel{{idx}}" #addrLabelNg="ngModel" name=addrLabel{{idx}} [(ngModel)]="addr.label"
                    placeholder="Label" autocomplete="noway" [matAutocomplete]="autoAddr" spellcheck="false">
             <mat-autocomplete #autoAddr="matAutocomplete">
               <mat-option class="addr-option" *ngFor="let labelAddr of filteredAddrLabels && filteredAddrLabels[idx] | async" [value]="labelAddr">
@@ -177,16 +177,16 @@
       </div>
 
       <!--websites-->
-      <div class="section" fxLayout="row" fxLayoutAlign="start stretch" *ngFor="let web of contact.websites; index as idx">
+      <div class="section website" fxLayout="row" fxLayoutAlign="start stretch" *ngFor="let web of contact.websites; index as idx">
         <div class="pic" fxFlex="0 0 55px" fxLayout="row" fxLayoutAlign="center center">
           <i class="material-icons" *ngIf="idx === 0">link</i>
         </div>
         <div class="inputs" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="space-between center">
           <mat-form-field fxFlex="1 1 60%">
-            <input matInput #webRef name="web{{idx}}" [(ngModel)]="web.website" placeholder="Website" autocomplete="noway" spellcheck="false">
+            <input class="site" matInput #webRef name="web{{idx}}" [(ngModel)]="web.website" placeholder="Website" autocomplete="noway" spellcheck="false">
           </mat-form-field>
           <mat-form-field fxFlex="1 1 35%">
-            <input matInput name="webLabel{{idx}}" #webLabelNg="ngModel" name=webLabel{{idx}} [(ngModel)]="web.label"
+            <input class="site-label" matInput name="webLabel{{idx}}" #webLabelNg="ngModel" name=webLabel{{idx}} [(ngModel)]="web.label"
                    placeholder="Label" autocomplete="noway" [matAutocomplete]="autoWeb" spellcheck="false">
             <mat-autocomplete #autoWeb="matAutocomplete">
               <mat-option class="web-option" *ngFor="let labelWeb of filteredWebLabels && filteredWebLabels[idx] | async" [value]="labelWeb">
@@ -211,7 +211,7 @@
         </div>
         <div class="inputs" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="space-between top">
           <mat-form-field fxFlex="1 1 auto">
-            <textarea [rows]="contact.notes && contact.notes.indexOf('\n') !== -1 ? contact.notes.split('\n').length: 1" matInput name="notes" [(ngModel)]="contact.notes"
+            <textarea class="notes" [rows]="contact.notes && contact.notes.indexOf('\n') !== -1 ? contact.notes.split('\n').length: 1" matInput name="notes" [(ngModel)]="contact.notes"
                       placeholder="Notes" autocomplete="noway" spellcheck="false"></textarea>
           </mat-form-field>
         </div>
