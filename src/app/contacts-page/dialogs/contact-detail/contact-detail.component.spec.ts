@@ -12,7 +12,7 @@ import {DebugElement, NO_ERRORS_SCHEMA} from '@angular/core';
 import {ContactsPageModule} from '../../contacts-page.module';
 import {ContactsPageService} from '../../contacts-page.service';
 
-describe('ContactDetailComponent', () => {
+fdescribe('ContactDetailComponent', () => {
   let comp: ContactDetailComponent;
   let fixture: ComponentFixture<ContactDetailComponent>;
   let de: DebugElement;
@@ -51,7 +51,7 @@ describe('ContactDetailComponent', () => {
     expect(data).toEqual(dataInitial);
   })
 
-  fit('should set all data to jane model', () => {
+  it('should set all data to jane model', () => {
     const a = data;
     expect(po.title.textContent).toBe('jane - jane co');
     expect(po.company.textContent).toMatch(/Manager,\s+jane co/);
