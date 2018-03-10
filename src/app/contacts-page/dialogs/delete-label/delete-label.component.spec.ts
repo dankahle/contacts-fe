@@ -8,6 +8,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {Form, FormsModule} from '@angular/forms';
 import {DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
+import {providerMocks} from '../../../../testing/mocks/provider-mocks';
 
 describe('DeleteLabelComponent', () => {
   let comp: DeleteLabelComponent;
@@ -22,7 +23,7 @@ describe('DeleteLabelComponent', () => {
     TestBed.configureTestingModule({
       imports: [StoreModule, SharedModule],
       declarations: [DeleteLabelComponent],
-      providers: [{provide: MatDialogRef, useValue: {}}, {provide: MAT_DIALOG_DATA, useValue: dataInitial}]
+      providers: providerMocks.concat([{provide: MAT_DIALOG_DATA, useValue: dataInitial}])
     })
     .compileComponents();
   }));
@@ -32,12 +33,13 @@ describe('DeleteLabelComponent', () => {
     de = fixture.debugElement;
     comp = fixture.componentInstance;
     elem = fixture.nativeElement;
-    data = TestBed.get(MAT_DIALOG_DATA);
+    data = de.injector.get(MAT_DIALOG_DATA);
     fixture.detectChanges();
   });
 
+
   it('should not use initial data object for some reason', () => {
-    expect(data).not.toBe(dataInitial);
+    expect(data).toEqual(dataInitial);
   })
 
   it('should show text for one contact', () => {

@@ -1,10 +1,10 @@
 
-done### app
+### app
 * should land at root
 * title should be DkContacts
 * should redirect to root if label not found
 
-done### contact list
+### contact list
 * should show no contacts view when label zthree is selected
 * should NOT add Karla (no entry cancel)
 * should NOT add Karla (entry cancel >> close submit)
@@ -16,8 +16,7 @@ done### contact list
 * should bring up email and phone windows when clicked on
 * should show correct columns per breakpoint
 
-done### more actions
-done##### contact list item
+##### contact list item
 * should show all options (label contacts)
 * should show all options (label two)
 * should delete jane (contacts)
@@ -25,7 +24,7 @@ done##### contact list item
 * should remove jane from label two
 * should remove jane from label two and add to label zthree
 
-done##### contact details dialog
+##### contact details dialog
 * should show all options (label contacts)
 * should show all options (label two)
 * should delete jane (contacts)
@@ -33,7 +32,7 @@ done##### contact details dialog
 * should remove jane from label two
 * should remove jane from label two and add to label zthree
 
-done### search
+### search
 * should show clear icon when input has text
 * should clear the text
 * should set focus to input when you click on search icon
@@ -44,7 +43,7 @@ done### search
 * should have Brenda/jane for "n" (in label three view)
 * should search for Brenda/jane and open jane detail
 
- done### labels
+ ### labels
 * should open/close accordion sections
 * should default to contacts label, and show correct contacts for chosen labels
 * should create label and delete it with no contacts
@@ -58,14 +57,14 @@ done### search
 * should delete label two and toss contacts (in label one)
 * should delete label two and toss contacts (in label two)
 
-done### leftnav
+### leftnav
 * should show and hide on breakpoints
 * should open and close with header button (md/lg/xl)
 * should open and close with header button (xs/sm)
 * should close on lt-md and reopen md
 * should stay closed when closed gt-sm, then lt-md, then gt-sm
 
-done### label add
+### label add
 * should show no errors originally
 * should disable submit initially
 * input should have focus on entry
@@ -75,7 +74,7 @@ done### label add
 * should show "label exists" if label exists with/without white space
 * should submit with no whitespace if whitespace was entered
 
-done### label edit
+### label edit
 * should show no errors originally
 * should enable submit initially
 * input should have focus on entry
@@ -83,10 +82,10 @@ done### label edit
 * should NOT show "label exists" if label is "label two" with/without whitespace
 * should submit with no whitespace if whitespace was entered
 
-done### label delete
+### label delete
 * should default to keep contacts
 
-done### contact detail
+### contact detail
 * should close by close button
 * should go down by body click
 * should show name and/or company for title
@@ -114,6 +113,8 @@ done### contact detail
 * should update all fields when submitted and reopened (edit)
 
 
+## todo
+### more actions
 
 ## dialogs
 ### contact add
@@ -127,6 +128,3 @@ done### contact detail
 ### page not found
 
 
-todo
-* dialog cancel tests
-done - contact edit and contact edit close

@@ -25,14 +25,6 @@ export class ContactDetailComponent extends MoreActionsBase {
     this.contact = data.contact;
   }
 
-  addLabel(label) {
-    this.contactsPageService.updateLabelCounts();
-  }
-
-  deleteLabel(label) {
-    this.contactsPageService.updateLabelCounts();
-  }
-
   editContact(event, contact, mode) {
     event.stopPropagation();
     if (Util.keydownAndNotEnterOrSpace(event)) {

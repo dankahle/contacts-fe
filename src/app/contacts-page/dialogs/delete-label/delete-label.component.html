@@ -12,7 +12,7 @@
   </div>
 
   <form id="form" #form="ngForm" (submit)="submit(form)">
-    <mat-radio-group name="deleteMode" class="example-radio-group" [(ngModel)]="data.deleteMode">
+    <mat-radio-group name="deleteMode" class="example-radio-group" [(ngModel)]="rtn.deleteMode">
       <mat-radio-button class="keep" [value]="keepContacts">
         Keep all contacts and delete this label
       </mat-radio-button>

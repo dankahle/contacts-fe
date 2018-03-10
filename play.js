@@ -1,10 +1,15 @@
 const _ = require('lodash');
+const Rx = require('rxjs');
 
 
 
+const subj = new Rx.BehaviorSubject(5);
+
+subj.subscribe(x => console.log('sub', x));
+console.log('after')
 
 
-
+/*
 compare = (actual, expecteds) => {
   const result = {
     pass: false,
@@ -32,6 +37,7 @@ const res = compare(['one'], [
 
 console.log(res)
 
+*/
 
 
 

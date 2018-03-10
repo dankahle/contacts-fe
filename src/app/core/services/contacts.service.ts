@@ -8,13 +8,14 @@ import {Observable} from 'rxjs/Observable';
 import {ActivatedRoute, ActivatedRouteSnapshot, Router, RouterModule} from '@angular/router';
 import {ContactsPageService} from '../../contacts-page/contacts-page.service';
 import {StoreContacts} from '../../store/store-contacts';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ContactsService {
   apiUrl = environment.apiUrl;
   con: StoreContacts;
 
-  constructor(private http: HttpClient, private store: Store, private route: ActivatedRoute) {
+  constructor(private http: HttpClient, private store: Store) {
     this.con = store.con;
   }
 
@@ -51,7 +52,7 @@ export class ContactsService {
       });
   }
 
-  deleteOne(id: number) {
+  deleteOne(id: string) {
     return this.http.delete<Contact>(`${this.apiUrl}api/contacts/${id}`)
       .do(() => {
         const index = _.findIndex(this.con.contacts, {id: id});

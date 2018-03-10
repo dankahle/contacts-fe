@@ -5,12 +5,11 @@ import {FlexLayoutModule, ObservableMedia} from '@angular/flex-layout';
 import {Subscription} from 'rxjs/Subscription';
 import {TestBed} from '@angular/core/testing';
 import {StoreModule} from './store.module';
-
+import * as _ from 'lodash';
 
 class MediaChange {
   constructor(public mqAlias: string) {}
 }
-
 
 describe('Store tests', () => {
   let store: Store;
@@ -93,9 +92,9 @@ describe('Store tests', () => {
   });
 
   it('should pub selectedLabel', () => {
-    const val = {};
-    let storeVal: boolean;
-    let substoreVal: boolean;
+    const val = {name: 'my label'};
+    let storeVal;
+    let substoreVal;
     store.sub(x => storeVal = x.selectedLabel);
     store.subSelectedLabel(x => substoreVal = x);
     store.pubSelectedLabel(val);
@@ -120,10 +119,10 @@ describe('Store tests', () => {
   it('getVal, setVal, deleteVal', () => {
     const val = 'lala';
     store.setVal('one.two.three', val);
-    expect(store.one.two.three).toBe(val);
+    expect(_.get(store, 'one.two.three')).toBe(val);
     expect(store.getVal('one.two.three')).toBe(val);
     store.deleteVal('one.two.three');
-    expect(store.one.two.three).toBeUndefined();
+    expect(_.get(store, 'one.two.three')).toBeUndefined();
     expect(store.getVal('one.two.three')).toBeUndefined();
   });
 

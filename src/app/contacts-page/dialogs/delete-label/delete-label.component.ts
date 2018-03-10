@@ -12,9 +12,11 @@ import {EditLabelComponent} from '../edit-label/edit-label.component';
 export class DeleteLabelComponent implements OnInit {
   keepContacts = DeleteLabelMode.keepContacts;
   deleteContacts = DeleteLabelMode.deleteContacts;
+  rtn;
 
   constructor(protected dialogRef: MatDialogRef<DeleteLabelComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
-    data.deleteMode = DeleteLabelMode.keepContacts;
+    this.rtn = Object.assign({}, data);
+    this.rtn.deleteMode = DeleteLabelMode.keepContacts;
   }
 
   ngOnInit() {
@@ -22,7 +24,7 @@ export class DeleteLabelComponent implements OnInit {
 
   submit(form) {
     if (form.valid) {
-      this.dialogRef.close(this.data);
+      this.dialogRef.close(this.rtn);
     }
   }
 }
