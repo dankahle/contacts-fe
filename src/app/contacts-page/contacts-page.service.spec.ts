@@ -35,33 +35,18 @@ describe('ContactsPageService', () => {
     expect(user.labels[2].numContacts).toBe(0);
   });
 
-  fit('testing...', () => {
-    function fcn() {
-      console.log('function');
-      return 5;
-    }
-
-    const spy = createSpy('somename', fcn);
-
-    const rtn = spy('shit');
-    expect(spy.calls.argsFor(0)).toBe('shit');
-    expect(rtn).toBe(5);
-
-
-  })
-
-
-
-  it('openContactEdit (add)', fakeAsync(() => {
+  fit('openContactEdit (add)', fakeAsync(() => {
     const add = 'add';
     const contact = contacts[0];
     matDialog.returnValue = contact;
     svc.openContactEdit(contact, add);
-    // expect(matDialog.open.calls.argsFor(0)).toBe(ContactEditComponent);
-    // expect(matDialog.open.calls.argsFor(1).data.contact).toBe(contact);
-    // expect(matDialog.open.calls.argsFor(1).data.mode).toBe(add);
+    const args = matDialog.open.calls.argsFor(0);
+    expect(args[0]).toBe(ContactEditComponent);
+    expect(args[1].data.contact).toBe(contact);
+    expect(args[1].data.mode).toBe(add);
     tick();
-    expect(contactsService.addOne).toHaveBeenCalledWith(contact);
+    expect(contactsService.addOne).toHaveBeenCalled();
+    // expect(contactsService.addOne).toHaveBeenCalledWith(contact);
   }));
 
 });

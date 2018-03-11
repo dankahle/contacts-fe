@@ -22,13 +22,13 @@ export class MatDialogRefMock {
 export class MatDialogMock {
   returnValue;
 
-  open(): MatDialogRefMock {
+  open: any = createSpy('open').and.callFake(this._open);
+
+  _open(): MatDialogRefMock {
     const ref =  new MatDialogRefMock();
-    setTimeout(ref.close(this.returnValue));
+    setTimeout(() => ref.close(this.returnValue));
     return ref;
   }
-
-  // open: any = createSpy('open', this._open);
 
 }
 
