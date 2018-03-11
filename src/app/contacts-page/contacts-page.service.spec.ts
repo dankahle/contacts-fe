@@ -35,7 +35,7 @@ describe('ContactsPageService', () => {
     expect(user.labels[2].numContacts).toBe(0);
   });
 
-  fit('openContactEdit (add)', fakeAsync(() => {
+  it('openContactEdit (add)', fakeAsync(() => {
     const add = 'add';
     const contact = contacts[0];
     matDialog.returnValue = contact;
@@ -45,8 +45,20 @@ describe('ContactsPageService', () => {
     expect(args[1].data.contact).toBe(contact);
     expect(args[1].data.mode).toBe(add);
     tick();
-    expect(contactsService.addOne).toHaveBeenCalled();
-    // expect(contactsService.addOne).toHaveBeenCalledWith(contact);
+    expect(contactsService.addOne).toHaveBeenCalledWith(contact);
+  }));
+
+  fit('openContactEdit (edit)', fakeAsync(() => {
+    const edit = 'edit';
+    const contact = contacts[0];
+    matDialog.returnValue = contact;
+    svc.openContactEdit(contact, edit);
+    const args = matDialog.open.calls.argsFor(0);
+    expect(args[0]).toBe(ContactEditComponent);
+    expect(args[1].data.contact).toBe(contact);
+    expect(args[1].data.mode).toBe(edit);
+    tick();
+    expect(contactsService.updateOne).toHaveBeenCalledWith(contact);
   }));
 
 });

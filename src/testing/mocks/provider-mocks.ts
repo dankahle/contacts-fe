@@ -22,6 +22,7 @@ export function getProviderMocks(...types): Provider[] {
       'deleteAllWithLabel', 'updateLabelInContacts', 'removeLabelFromContacts', 'hasLabel', 'toggleLabel',
       'removeLabelFromContact', 'getLabelsForMenu', 'syncLabelsForApi']);
   contactsService.addOne.and.returnValue(asyncData(contactsService.addOne.calls.argsFor(0)));
+  contactsService.updateOne.and.returnValue(asyncData(contactsService.addOne.calls.argsFor(0)));
   providerMocks.push({provide: ContactsService, useValue: contactsService});
 
   const userService = jasmine.createSpyObj('UserService',
