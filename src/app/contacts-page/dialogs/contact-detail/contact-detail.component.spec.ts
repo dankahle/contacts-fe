@@ -5,14 +5,14 @@ import {SharedModule} from '../../../shared/shared.module';
 import {Store} from '../../../store/store';
 import {MAT_DIALOG_DATA, MatDialogRef, MatMenuModule} from '@angular/material';
 import {contacts, getContacts} from '../../../../testing/mocks/store-mock';
-import {providerMocks} from '../../../../testing/mocks/provider-mocks';
+import {getProviderMocks} from '../../../../testing/mocks/provider-mocks';
 import {Contact} from '../../../store/models/contact';
 import {ContactDetailPOB} from './contact-detail.pob';
 import {DebugElement, NO_ERRORS_SCHEMA} from '@angular/core';
 import {ContactsPageModule} from '../../contacts-page.module';
 import {ContactsPageService} from '../../contacts-page.service';
 
-fdescribe('ContactDetailComponent', () => {
+describe('ContactDetailComponent', () => {
   let comp: ContactDetailComponent;
   let fixture: ComponentFixture<ContactDetailComponent>;
   let de: DebugElement;
@@ -27,7 +27,7 @@ fdescribe('ContactDetailComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ContactDetailComponent],
-      providers: providerMocks.concat([{provide: MAT_DIALOG_DATA, useValue: dataInitial}]),
+      providers: getProviderMocks().concat([{provide: MAT_DIALOG_DATA, useValue: dataInitial}]),
       schemas: [NO_ERRORS_SCHEMA]
     })
       .compileComponents();

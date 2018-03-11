@@ -179,6 +179,7 @@ export function getUser() {
 
 export function createStore() {
   const store = new Store(<any>new ObservableMediaMock());
+  store.pubInitialized(true);
   store.usr.pubUser(getUser());
   store.con.pubContacts(getContacts());
   return store;

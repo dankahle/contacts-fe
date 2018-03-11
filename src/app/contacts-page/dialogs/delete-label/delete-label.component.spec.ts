@@ -8,7 +8,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {Form, FormsModule} from '@angular/forms';
 import {DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
-import {providerMocks} from '../../../../testing/mocks/provider-mocks';
+import {getProviderMocks} from '../../../../testing/mocks/provider-mocks';
 
 describe('DeleteLabelComponent', () => {
   let comp: DeleteLabelComponent;
@@ -23,7 +23,7 @@ describe('DeleteLabelComponent', () => {
     TestBed.configureTestingModule({
       imports: [StoreModule, SharedModule],
       declarations: [DeleteLabelComponent],
-      providers: providerMocks.concat([{provide: MAT_DIALOG_DATA, useValue: dataInitial}])
+      providers: getProviderMocks().concat([{provide: MAT_DIALOG_DATA, useValue: dataInitial}])
     })
     .compileComponents();
   }));

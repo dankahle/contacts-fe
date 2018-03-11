@@ -1,12 +1,22 @@
 const _ = require('lodash');
-const Rx = require('rxjs');
+const Observable = require('rxjs').Observable;
+
+
+function asyncData(val){
+  return Observable.of(val).delay(0)
+}
+
+asyncData(5).subscribe(x => console.log('next', x), x => console.log('err', x));
+console.log('done')
 
 
 
+/*
 const subj = new Rx.BehaviorSubject(5);
 
 subj.subscribe(x => console.log('sub', x));
 console.log('after')
+*/
 
 
 /*

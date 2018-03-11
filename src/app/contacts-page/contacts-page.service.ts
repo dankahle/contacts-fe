@@ -17,14 +17,13 @@ import {ContactDeleteComponent} from './dialogs/contact-delete/contact-delete.co
 export class ContactsPageService {
 
   constructor(private store: Store, private userService: UserService, private contactsService: ContactsService,
-              private mdDialog: MatDialog) {
+              private matDialog: MatDialog) {
     // this is really only for store, i.e. store is the lowest on the hierarchy of modules, so can't see anything above (core, router, etc)
     // without there being a circular reference. We'll publish an event to get around that.
     store.subUpdateLabelCounts(contacts => this.updateLabelCounts());
     store.con.subContacts(contacts => this.updateLabelCounts());
   }
 
-  // add/delete contacts will pass null in here
   updateLabelCounts() {
     if (!this.store.initialized) {
       return;
@@ -55,7 +54,7 @@ export class ContactsPageService {
         contact: contact
       }
     };
-    this.mdDialog.open(ContactEditComponent, config)
+    this.matDialog.open(ContactEditComponent, config)
       .afterClosed().subscribe(_contact => {
       let api$: Observable<any>;
       if (_contact) {
@@ -103,7 +102,7 @@ export class ContactsPageService {
         contact: {...contact},
       }
     }
-    this.mdDialog.open(MoreActionsComponent, config)
+    this.matDialog.open(MoreActionsComponent, config)
       .afterClosed().subscribe(_contact => {
       let api$: Observable<any>;
       if (_contact) {

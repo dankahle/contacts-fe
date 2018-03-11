@@ -1,6 +1,6 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {AppComponent} from './app.component';
-import {providerMocks} from '../testing/mocks/provider-mocks';
+import {getProviderMocks} from '../testing/mocks/provider-mocks';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {getContacts, getUser} from '../testing/mocks/store-mock';
@@ -13,7 +13,7 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [NoopAnimationsModule],
       declarations: [AppComponent],
-      providers: providerMocks,
+      providers: getProviderMocks(),
       schemas: [NO_ERRORS_SCHEMA]
     })
       .compileComponents();

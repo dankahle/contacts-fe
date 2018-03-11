@@ -1,4 +1,12 @@
 
+
+
+services:
+UserService
+ContactsService
+ContactsPageService
+
+
 ## dialogs
 ### contact detail
 * should show all data
