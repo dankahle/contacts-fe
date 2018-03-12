@@ -12,7 +12,7 @@ import {HttpClientTestingModule, HttpTestingController} from '@angular/common/ht
 import {ModifyRequestInterceptor} from '../interceptors/modify-request.interceptor';
 import * as _ from 'lodash';
 
-fdescribe('ContactsService', () => {
+describe('ContactsService', () => {
   let svc: ContactsService, user: User, contacts: Contact[], store: Store, httpTestingController;
   const apiUrl = 'http://localhost:3001/';
 
