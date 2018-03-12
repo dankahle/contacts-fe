@@ -53,7 +53,7 @@ fdescribe('ContactsService', () => {
     })
     const req = httpTestingController.expectOne(`${apiUrl}api/contacts`);
     expect(req.request.method).toEqual('GET');
-    expect(req.request.withCredentials).toBe(true); // cors settings work
+    expect(req.request.withCredentials).toBe(true); // cors settings work via ModifyRequestInterceptor
     req.flush(contacts);
   });
 
