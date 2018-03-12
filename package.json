@@ -15,7 +15,7 @@
     "start": "ng serve",
     "build": "ng build",
     "buildprod": "ng build --prod --output-path docs --base-href /contacts-fe/",
-    "test": "ng test --reporters=progress",
+    "test": "ng test --reporters=progress --env=unit",
     "testspec": "ng test --reporters=spec",
     "lint": "ng lint",
     "e2e": "NODE_ENV=unit ng e2e --port=4201 --env=unit",

@@ -6,14 +6,16 @@ import {Subject} from 'rxjs/Subject';
 
 
 export class MatDialogRefMock {
+  close = createSpy('close').and.callFake(this._close);
+  afterClosed = createSpy('close').and.callFake(this._afterClosed);
   subj = new Subject();
 
-  close(data) {
+  _close(data) {
     this.subj.next(data);
     this.subj.complete();
   }
 
-  afterClosed() {
+  _afterClosed() {
     return this.subj.asObservable();
   }
 }
