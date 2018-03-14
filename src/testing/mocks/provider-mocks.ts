@@ -10,6 +10,7 @@ import {Provider} from '@angular/core';
 import * as _ from 'lodash';
 import {MatDialogMock, MatDialogRefMock} from './mat-dialog-mock';
 import {asyncData} from '../async-observable-helpers';
+import {MoreActionsBase} from '../../app/contacts-page/main/more-actions-base';
 
 export function getProviderMocks(...types): Provider[] {
 
@@ -23,6 +24,7 @@ export function getProviderMocks(...types): Provider[] {
       'removeLabelFromContact', 'getLabelsForMenu', 'syncLabelsForApi']);
   contactsService.addOne.and.returnValue(asyncData(contactsService.addOne.calls.argsFor(0)));
   contactsService.updateOne.and.returnValue(asyncData(contactsService.addOne.calls.argsFor(0)));
+  contactsService.removeLabelFromContact.and.returnValue(asyncData(true));
   providerMocks.push({provide: ContactsService, useValue: contactsService});
 
   const userService = jasmine.createSpyObj('UserService',
@@ -32,11 +34,16 @@ export function getProviderMocks(...types): Provider[] {
   const contactsPageService = jasmine.createSpyObj(['updateLabelCounts', 'openContactEdit'])
   providerMocks.push({provide: ContactsPageService, useValue: contactsPageService});
 
-  const matDialogRef = jasmine.createSpyObj('MatDialogRef', ['close']);
-  providerMocks.push({provide: MatDialogRef, useValue: matDialogRef});
-
   providerMocks.push({provide: MatDialog, useClass: MatDialogMock});
   providerMocks.push({provide: MatDialogRef, useClass: MatDialogRefMock});
+
+/* DOESN'T WORK. THIS IS A BASE CLASS, SO ALWAYS GETS THE REAL ONE, I.E NOT INJECTED, JUST POINTS TO FILE RIGHT? CAN ONLY OVERRIDE INJECTION
+  const moreActionsBase = jasmine.createSpyObj('MoreActionsBase', ['menuClose', 'menuOpen',
+  'hasSelectedLabel', 'removeLabelFromContact', 'deleteContact', 'toggleLabel']);
+  moreActionsBase.deleteContact.and.returnValue(asyncData(true));
+  moreActionsBase.removeLabelFromContact.and.returnValue(asyncData(true));
+  providerMocks.push({provide: MoreActionsBase, useValue: moreActionsBase});
+*/
 
   /*
     const matDialog = jasmine.createSpyObj('MatDialog', ['open']);

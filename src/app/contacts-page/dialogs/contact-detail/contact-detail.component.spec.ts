@@ -3,14 +3,18 @@ import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/t
 import {ContactDetailComponent} from './contact-detail.component';
 import {SharedModule} from '../../../shared/shared.module';
 import {Store} from '../../../store/store';
-import {MAT_DIALOG_DATA, MatDialogRef, MatMenuModule} from '@angular/material';
-import {contacts, getContacts} from '../../../../testing/mocks/store-mock';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatMenuModule} from '@angular/material';
+import {getContacts} from '../../../../testing/mocks/store-mock';
 import {getProviderMocks} from '../../../../testing/mocks/provider-mocks';
 import {Contact} from '../../../store/models/contact';
 import {ContactDetailPOB} from './contact-detail.pob';
 import {DebugElement, NO_ERRORS_SCHEMA} from '@angular/core';
 import {ContactsPageModule} from '../../contacts-page.module';
 import {ContactsPageService} from '../../contacts-page.service';
+import {Label} from '../../../store/models/label';
+import {asyncData} from '../../../../testing/async-observable-helpers';
+import {MoreActionsBase} from '../../main/more-actions-base';
+import Spy = jasmine.Spy;
 
 describe('ContactDetailComponent', () => {
   let comp: ContactDetailComponent;
@@ -23,6 +27,8 @@ describe('ContactDetailComponent', () => {
   let dialogRef;
   let contactsPageService;
   let store;
+  let contacts;
+  let matDialog;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -40,9 +46,15 @@ describe('ContactDetailComponent', () => {
     de = fixture.debugElement;
     data = de.injector.get(MAT_DIALOG_DATA);
     dialogRef = de.injector.get(MatDialogRef);
+    matDialog = de.injector.get(MatDialog);
     contactsPageService = TestBed.get(ContactsPageService);
     store = TestBed.get(Store);
-    fixture.detectChanges();
+    contacts = store.con.contacts;
+    MoreActionsBase.prototype.deleteContact = spyOn(MoreActionsBase.prototype, 'deleteContact');
+    MoreActionsBase.prototype.removeLabelFromContact = spyOn(MoreActionsBase.prototype, 'removeLabelFromContact');
+    (<Spy>MoreActionsBase.prototype.deleteContact).and.returnValue(asyncData(true));
+    (<Spy>MoreActionsBase.prototype.removeLabelFromContact).and.returnValue(asyncData(true));
+
     fixture.detectChanges();
     po = new ContactDetailPOB(elem); // have ngIfs in template so need to detect changes before seting up po or stuff don't show up
   });
@@ -75,10 +87,22 @@ describe('ContactDetailComponent', () => {
     expect(contactsPageService.openContactEdit).toHaveBeenCalledWith(data.contact, 'edit');
   });
 
-  it('should call correct method/services for edit', () => {
+  it('should call correct method/services for close', () => {
     po.btn_close.click();
     fixture.detectChanges();
     expect(dialogRef.close).toHaveBeenCalled();
   });
+
+  fit('deleteContact', fakeAsync(() => {
+    comp.deleteContact(contacts[0]);
+    tick();
+    expect(dialogRef.close).toHaveBeenCalled();
+  }));
+
+  fit('removeLabelFromContact', fakeAsync(() => {
+    comp.removeLabelFromContact({});
+    tick();
+    expect(dialogRef.close).toHaveBeenCalled();
+  }));
 
 });
