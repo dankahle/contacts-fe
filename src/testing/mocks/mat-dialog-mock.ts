@@ -1,3 +1,4 @@
+/// <reference path="../../../node_modules/@types/jasmine/index.d.ts" />
 import {Observable} from 'rxjs/Observable';
 import {asyncData, asyncError} from '../async-observable-helpers';
 import createSpy = jasmine.createSpy;
