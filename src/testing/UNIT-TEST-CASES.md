@@ -1,10 +1,6 @@
 
 
 
-pass:
-* contactDetails dialog: need to test out the delete/removeFromLabel methods by hitting them manually
-* working on contactsService methods
-* make a comparison of unit to e2e at this point.
 
 
 ### more actions

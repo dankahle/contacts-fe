@@ -61,6 +61,7 @@ describe('ContactDetailComponent', () => {
 
   it('should have the correct dialog data', () => {
     expect(data).toEqual(dataInitial);
+    expect(comp.contact).toEqual(dataInitial.contact);
   })
 
   it('should set all data to jane model', () => {
@@ -93,13 +94,13 @@ describe('ContactDetailComponent', () => {
     expect(dialogRef.close).toHaveBeenCalled();
   });
 
-  fit('deleteContact', fakeAsync(() => {
+  it('deleteContact', fakeAsync(() => {
     comp.deleteContact(contacts[0]);
     tick();
     expect(dialogRef.close).toHaveBeenCalled();
   }));
 
-  fit('removeLabelFromContact', fakeAsync(() => {
+  it('removeLabelFromContact', fakeAsync(() => {
     comp.removeLabelFromContact({});
     tick();
     expect(dialogRef.close).toHaveBeenCalled();

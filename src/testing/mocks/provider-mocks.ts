@@ -37,19 +37,6 @@ export function getProviderMocks(...types): Provider[] {
   providerMocks.push({provide: MatDialog, useClass: MatDialogMock});
   providerMocks.push({provide: MatDialogRef, useClass: MatDialogRefMock});
 
-/* DOESN'T WORK. THIS IS A BASE CLASS, SO ALWAYS GETS THE REAL ONE, I.E NOT INJECTED, JUST POINTS TO FILE RIGHT? CAN ONLY OVERRIDE INJECTION
-  const moreActionsBase = jasmine.createSpyObj('MoreActionsBase', ['menuClose', 'menuOpen',
-  'hasSelectedLabel', 'removeLabelFromContact', 'deleteContact', 'toggleLabel']);
-  moreActionsBase.deleteContact.and.returnValue(asyncData(true));
-  moreActionsBase.removeLabelFromContact.and.returnValue(asyncData(true));
-  providerMocks.push({provide: MoreActionsBase, useValue: moreActionsBase});
-*/
-
-  /*
-    const matDialog = jasmine.createSpyObj('MatDialog', ['open']);
-    providerMocks.push({provide: MatDialog, useValue: matDialog});
-  */
-
   if (types.length) {
     _.pullAllWith(providerMocks, types, provider => {
       if (provider.provide && _.includes(types, provider.provide) || _.includes(types, provider)) {

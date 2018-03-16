@@ -62,7 +62,7 @@ export class ContactEditComponent implements AfterViewInit, OnDestroy {
   subs_keydownEvents: Subscription;
 
   constructor(protected store: Store, protected dialogRef: MatDialogRef<ContactEditComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any, private mdDialog: MatDialog) {
+              @Inject(MAT_DIALOG_DATA) public data: any, private matDialog: MatDialog) {
 
     this.subs_backdropClick = this.dialogRef.backdropClick()
       .subscribe(() => this.cancelDialog());
@@ -143,7 +143,7 @@ export class ContactEditComponent implements AfterViewInit, OnDestroy {
         height: '146px',
         backdropClass: 'bg-modal-backdrop'
       };
-      const cancelDlgRef = this.mdDialog.open(ContactEditCloseComponent, config);
+      const cancelDlgRef = this.matDialog.open(ContactEditCloseComponent, config);
       cancelDlgRef.afterClosed()
         .subscribe(results => {
           if (results) {

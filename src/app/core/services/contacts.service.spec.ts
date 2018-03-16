@@ -50,12 +50,15 @@ describe('ContactsService', () => {
   it('getAll', () => {
     svc.getAll().subscribe(rtn => {
       expect(rtn).toEqual(_.sortBy(contacts, svc.getContactDisplayNameSort));
+      expect(rtn.map(c => c.name || c.company)).toEqual(['Brenda', 'jane', 'Martha Co']);
     })
     const req = httpTestingController.expectOne(`${apiUrl}api/contacts`);
     expect(req.request.method).toEqual('GET');
     expect(req.request.withCredentials).toBe(true); // cors settings work via ModifyRequestInterceptor
     req.flush(contacts);
   });
+
+
 
 
 });
