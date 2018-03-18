@@ -20,15 +20,13 @@ So.. just wrapping more actions isn't enough. So... need to test these two in th
 * all multiple fields extend (add)
 * injected data good (edit mode)
 * all inputs and labels set to correct data (edit mode)
- * all fields clear and delete if multiple
- * filtering menu choices
- * ngOnDestroy unsubscribes to subscriptions (you'll have to manually call it)
- * updateNameAndCompanyValidation() called on (input/blur)
- * hasNameOrCompany
- * addMissingFields
- * removeEmptyFields
+* all fields clear and delete if multiple
+* filtering menu choices
+* ngOnDestroy unsubscribes to subscriptions (you'll have to manually call it)
+* updateNameAndCompanyValidation() called on (input/blur)
+* hasNameOrCompany
+* addMissingFields
+* removeEmptyFields
 * cancelDialog
-* submit (no name or company)
-* submit (name or company invalid)
-* submit (valid)
+* submit
 

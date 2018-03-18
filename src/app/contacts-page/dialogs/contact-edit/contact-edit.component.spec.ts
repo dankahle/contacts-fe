@@ -15,6 +15,8 @@ import {Email} from '../../../store/models/email';
 import {Phone} from '../../../store/models/phone';
 import {Address} from '../../../store/models/address';
 import {Website} from '../../../store/models/website';
+import Spy = jasmine.Spy;
+import Calls = jasmine.Calls;
 
 fdescribe('ContactEditComponent', () => {
   let comp: ContactEditComponent;
@@ -372,7 +374,7 @@ fdescribe('ContactEditComponent', () => {
       expect(c.websites[0].label).toBe('');
     });
 
-    fit('cancelDialog', fakeAsync(() => {
+    it('cancelDialog', fakeAsync(() => {
       comp.cancelDialog({type: 'keydown', which: 28});
       expect(dialogRef.close).toHaveBeenCalledTimes(0);
       comp.cancelDialog({type: 'keydown', which: 27});
@@ -389,10 +391,26 @@ fdescribe('ContactEditComponent', () => {
       expect(matDialog.open).toHaveBeenCalledTimes(1);
       expect(dialogRef.close).toHaveBeenCalledTimes(3); // can't do this
       delete matDialog.returnValue;
+      comp.cancelDialog();
+      expect(dialogRef.close).toHaveBeenCalledTimes(3);
+      tick();
+      expect(matDialog.open).toHaveBeenCalledTimes(2);
+      expect(dialogRef.close).toHaveBeenCalledTimes(3); // can't do this
     }));
 
-    it('', () => {
-
+    fit('submit', () => {
+      // success
+      comp.removeEmptyFields = <Spy>spyOn(comp, 'removeEmptyFields');
+      comp.save();
+      expect(comp.removeEmptyFields).toHaveBeenCalled();
+      expect(dialogRef.close).toHaveBeenCalledTimes(1)
+      // no name or company
+      comp.contact.name = comp.contact.company = '';
+      (<Spy>comp.removeEmptyFields).calls.reset();
+      dialogRef.close.calls.reset();
+      comp.save();
+      expect(comp.removeEmptyFields).not.toHaveBeenCalled();
+      expect(dialogRef.close).not.toHaveBeenCalled();
     });
 
     it('', () => {
