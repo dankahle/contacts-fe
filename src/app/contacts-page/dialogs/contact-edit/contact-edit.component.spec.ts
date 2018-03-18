@@ -380,23 +380,15 @@ fdescribe('ContactEditComponent', () => {
       comp.cancelDialog();
       expect(dialogRef.close).toHaveBeenCalledTimes(2);
 
-      // this is a mess. Your'e mocking dialogRef so you can force a dialog to close automatically with the return value you send in.
-      // Problem is: you're calling dialogRef.close in the afterClosed() subscription so gets stuck in a loop as that forces another
-      // subscription.next and on and on it goes. You made afterClosed observable a first(), but then the tick() line below bitches about
-      // an empty observable (might not be related to that). You get "error in afterAll()" message when it's not fakeAsync as the
-      // setTimeout in the mock doesn't fire. This could take hours to sort out. Just leave it for now. Not sure the solution, just
-      // that it's a separate task that could take hours.
-/*
       expect(matDialog.open).toHaveBeenCalledTimes(0);
       comp.contact.name = comp.contact.name + 'x';
       matDialog.returnValue = true;
       comp.cancelDialog();
-      // tick(); // this causes "no elements in sequence" rxjs error. Probably trying to next() a subject that's already completed
       expect(dialogRef.close).toHaveBeenCalledTimes(2);
+      tick();
       expect(matDialog.open).toHaveBeenCalledTimes(1);
-      // expect(dialogRef.close).toHaveBeenCalledTimes(1); // can't do this
+      expect(dialogRef.close).toHaveBeenCalledTimes(3); // can't do this
       delete matDialog.returnValue;
-*/
     }));
 
     it('', () => {

@@ -11,12 +11,12 @@ export class MatDialogRefMock {
   subjClose = new Subject();
   subjBackdropClick = new Subject();
   subjKeydownEvents = new Subject();
-  close = createSpy('close').and.callFake(this._close);
+  close = createSpy('close');
   afterClosed = createSpy('close').and.callFake(() => this.subjClose.asObservable().first());
   backdropClick = createSpy('backdropClick').and.callFake(() => this.subjBackdropClick.asObservable());
   keydownEvents = createSpy('keydownEvents').and.callFake(() => this.subjKeydownEvents.asObservable());
 
-  _close(val) {
+  doClose(val) {
     this.subjClose.next(val);
     this.subjClose.complete();
   }
@@ -41,7 +41,7 @@ export class MatDialogMock {
   _open(): MatDialogRefMock {
     const ref = new MatDialogRefMock();
     setTimeout(() => {
-      ref.close(this.returnValue);
+      ref.doClose(this.returnValue);
     });
     return ref;
   }
