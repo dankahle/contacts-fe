@@ -1,6 +1,11 @@
 
 
 export class Website {
-  website = '';
-  label = '';
+  website: string;
+  label: string;
+
+  constructor(website?, label?) {
+    this.website = website || '';
+    this.label = label || '';
+  }
 }

@@ -1,3 +1,7 @@
+import {ComponentFixture} from '@angular/core/testing';
+import {ContactEditComponent} from './contact-edit.component';
+import {By} from '@angular/platform-browser';
+import {MatSelect} from '@angular/material';
 
 
 export class ContactEditPOB {
@@ -10,7 +14,8 @@ export class ContactEditPOB {
   emails;
   emailErrors;
   emailLabels;
-  phonePrefixes;
+  phoneSelects;
+  phoneMatSelects = [];
   phones;
   phoneLabels;
   addrs;
@@ -22,12 +27,14 @@ export class ContactEditPOB {
   sectionPhones;
   sectionAddrs;
   sectionWebsites;
+  clearButtons;
+  addButtons;
 
-  constructor(private elem: HTMLElement) {
-    this.init();
+  constructor(private elem: HTMLElement, private fixture: ComponentFixture<ContactEditComponent>) {
+    this.getElements();
   }
 
-  init() {
+  getElements() {
     this.submit = this.elem.querySelector('.button-submit');
     this.cancel = this.elem.querySelector('.button-cancel');
     this.name = this.elem.querySelector('input.po-name');
@@ -37,7 +44,12 @@ export class ContactEditPOB {
     this.emails = this.elem.querySelectorAll('input.email');
     this.emailErrors = this.elem.querySelectorAll('mat-error.email-error');
     this.emailLabels = this.elem.querySelectorAll('input.email-label');
-    this.phonePrefixes = this.elem.querySelectorAll('mat-select.prefix');
+
+    this.phoneSelects = this.fixture.debugElement.queryAll(By.directive(MatSelect));
+    this.phoneSelects.forEach((sel, idx) => {
+      this.phoneMatSelects[idx] = sel.injector.get(MatSelect);
+    });
+
     this.phones = this.elem.querySelectorAll('input.phone');
     this.phoneLabels = this.elem.querySelectorAll('input.phone-label');
     this.addrs = this.elem.querySelectorAll('textarea.addr');
@@ -49,6 +61,8 @@ export class ContactEditPOB {
     this.sectionPhones = this.elem.querySelectorAll('.section.phone');
     this.sectionAddrs = this.elem.querySelectorAll('.section.addr');
     this.sectionWebsites = this.elem.querySelectorAll('.section.website');
+    this.clearButtons = this.elem.querySelectorAll('.clear');
+    this.addButtons = this.elem.querySelectorAll('.add');
   }
 
 }

@@ -1,6 +1,11 @@
 
 
 export class Address {
-  address = '';
-  label = '';
+  address: string;
+  label: string;
+
+  constructor(address?, label?) {
+    this.address = address || '';
+    this.label = label || '';
+  }
 }

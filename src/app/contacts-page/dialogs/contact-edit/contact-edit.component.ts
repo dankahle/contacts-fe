@@ -32,7 +32,7 @@ const chance = new Chance();
   styleUrls: ['./contact-edit.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class ContactEditComponent implements AfterViewInit, OnDestroy {
+export class ContactEditComponent implements OnInit, AfterViewInit, OnDestroy {
   log = console.log;
   @ViewChild('form') form;
   @ViewChild('nameNg') nameNg;
@@ -62,7 +62,9 @@ export class ContactEditComponent implements AfterViewInit, OnDestroy {
   subs_keydownEvents: Subscription;
 
   constructor(protected store: Store, protected dialogRef: MatDialogRef<ContactEditComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any, private matDialog: MatDialog) {
+              @Inject(MAT_DIALOG_DATA) public data: any, private matDialog: MatDialog) {}
+
+  ngOnInit() {
 
     this.subs_backdropClick = this.dialogRef.backdropClick()
       .subscribe(() => this.cancelDialog());
@@ -70,7 +72,7 @@ export class ContactEditComponent implements AfterViewInit, OnDestroy {
     this.subs_keydownEvents = this.dialogRef.keydownEvents()
       .subscribe(event => this.cancelDialog(event));
 
-    if (data.mode === 'add') {
+    if (this.data.mode === 'add') {
       this.addMode = true;
       this.contact = <Contact>{id: chance.guid(), labels: [], emails: [], phones: [], addresses: [], websites: []};
       if (this.store.selectedLabel) {
@@ -79,7 +81,7 @@ export class ContactEditComponent implements AfterViewInit, OnDestroy {
       }
     } else {
       this.editMode = true;
-      this.contact = _.cloneDeep(data.contact);
+      this.contact = _.cloneDeep(this.data.contact);
     }
 
     this.addMissingFields();

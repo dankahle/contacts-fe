@@ -4,6 +4,7 @@ import {asyncData, asyncError} from '../async-observable-helpers';
 import createSpy = jasmine.createSpy;
 import Spy = jasmine.Spy;
 import {Subject} from 'rxjs/Subject';
+import 'rxjs/add/operator/first';
 
 
 export class MatDialogRefMock {
@@ -11,7 +12,7 @@ export class MatDialogRefMock {
   subjBackdropClick = new Subject();
   subjKeydownEvents = new Subject();
   close = createSpy('close').and.callFake(this._close);
-  afterClosed = createSpy('close').and.callFake(() => this.subjClose.asObservable());
+  afterClosed = createSpy('close').and.callFake(() => this.subjClose.asObservable().first());
   backdropClick = createSpy('backdropClick').and.callFake(() => this.subjBackdropClick.asObservable());
   keydownEvents = createSpy('keydownEvents').and.callFake(() => this.subjKeydownEvents.asObservable());
 
@@ -38,8 +39,10 @@ export class MatDialogMock {
   open: any = createSpy('open').and.callFake(this._open);
 
   _open(): MatDialogRefMock {
-    const ref =  new MatDialogRefMock();
-    setTimeout(() => ref.close(this.returnValue));
+    const ref = new MatDialogRefMock();
+    setTimeout(() => {
+      ref.close(this.returnValue);
+    });
     return ref;
   }
 

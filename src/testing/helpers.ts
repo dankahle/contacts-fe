@@ -1,6 +1,6 @@
 import {DebugElement} from '@angular/core';
 import {ComponentFixture, tick} from '@angular/core/testing';
-
+import * as deepEqual from 'deep-equal';
 /** Wait a tick, then detect changes */
 export function advance(f: ComponentFixture<any>): void {
   tick();
@@ -33,4 +33,20 @@ export function click(el: DebugElement | HTMLElement, eventObj: any = ButtonClic
   } else {
     el.triggerEventHandler('click', eventObj);
   }
+}
+
+export function dispatchHtmlEvent(elem: EventTarget, eventName: string) {
+  elem.dispatchEvent(new Event(eventName));
+}
+
+export function toPlainObject(obj) {
+  return JSON.parse(JSON.stringify(obj));
+}
+
+// Thought this would be the way to go as jasmine matcher toEqual can't handle class instances, but this is just gonna return a boolean, whereas toEqual will
+// throw a message stating which property is missing or not equal (better). So we'll just use the toPlainObject helper above to convert to a plain object and
+// .toEqual matcher.
+export function deepEql(val1, val2) {
+  // by default uses == on leafs, strict will force === on leafs
+  return deepEqual(val1, val2, {strict: true});
 }
